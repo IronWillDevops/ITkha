@@ -36,7 +36,7 @@
             <div class="mb-4">
                 <p class="mt-4  text-right text-sm text-text-secondary">
                     Remember your password?
-                    <a href="{{ route('public.auth.login.index') }}" class="link link-hover hover:underline">Log in</a>
+                    <a href="{{ route('login') }}" class="link link-hover hover:underline">Log in</a>
                 </p>
             </div>
 

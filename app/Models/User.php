@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Exceptions\User\CannotDeactivateLastActiveUserException;
 use App\Exceptions\User\CannotDeleteAdminUserException;
 use App\Exceptions\User\CannotDeleteSelfException;
+use App\Notifications\CustomVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -121,5 +122,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Post::class, 'likes')->withTimestamps();
     }
-
 }

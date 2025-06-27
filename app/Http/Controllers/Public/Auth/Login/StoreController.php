@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
+
+
     /**
      * Handle the incoming request.
      */
@@ -22,10 +24,10 @@ class StoreController extends Controller
 
                 $user = Auth::user();
 
-                // if (!$user->hasVerifiedEmail()) {
-                //     Auth::logout();
-                //     throw new EmailNotVerifiedException();
-                // }
+                if (!$user->hasVerifiedEmail()) {
+                    Auth::logout();
+                    throw new EmailNotVerifiedException();
+                }
                 return redirect()->intended(route('public.post.index'));
             }
 
@@ -36,7 +38,7 @@ class StoreController extends Controller
         } catch (EmailNotVerifiedException $ex) {
 
 
-            return redirect()->route('public.auth.login.index')->with('error', $ex->getMessage());
+            return redirect()->route('login')->with('error', $ex->getMessage());
         }
     }
 }

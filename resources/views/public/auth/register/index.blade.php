@@ -129,7 +129,7 @@
 
             <p class="mt-4 text-right text-sm text-text-secondary">
                 Already have an account?
-                <a href="{{ route('public.auth.login.index') }}" class="link link-hover hover:underline">Login</a>
+                <a href="{{ route('login') }}" class="link link-hover hover:underline">Login</a>
             </p>
         </div>
     </div>

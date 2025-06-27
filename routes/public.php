@@ -1,41 +1,48 @@
 <?php
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
- Route::redirect('/', '/posts');
+// Редирект з кореня на /posts
+Route::redirect('/', '/posts');
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', App\Http\Controllers\Public\Auth\Login\IndexController::class)->name('login');
+    Route::post('/login', App\Http\Controllers\Public\Auth\Login\StoreController::class)->name('login.store');
+});
+
+
+Route::prefix('/auth')
+    ->name('public.auth.')
+    ->middleware('guest')
+    ->group(function () {
+
+        //  Реєстрація
+        Route::prefix('/register')
+            ->name('register.')
+            ->group(function () {
+                Route::get('/', App\Http\Controllers\Public\Auth\Register\IndexController::class)->name('index');
+                Route::post('/store', App\Http\Controllers\Public\Auth\Register\StoreController::class)->name('store');
+            });
+
+        //Скидання паролю 
+        Route::prefix('/reset-password')
+            ->name('resetpassword.')
+            ->group(function () {
+                Route::get('/', App\Http\Controllers\Public\Auth\ResetPassword\IndexController::class)->name('index');
+            });
+    });
+
+Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
+    ->middleware('auth')
+    ->name('logout');
+
 
 Route::prefix('/')
     ->name('public.')
     ->group(function () {
-        // Редирект з кореня на /posts
-        Route::prefix('/auth')
-            ->name('auth.')
-            ->middleware('guest')
-            ->group(function () {
-                Route::prefix('/login')
-                    ->name('login.')
-                    ->group(function () {
-                        Route::get('/', App\Http\Controllers\Public\Auth\Login\IndexController::class)->name('index');
-                        Route::post('/store', App\Http\Controllers\Public\Auth\Login\StoreController::class)->name('store');
-                    });
-
-                Route::prefix('/register')
-                    ->name('register.')
-                    ->group(function () {
-                        Route::get('/', App\Http\Controllers\Public\Auth\Register\IndexController::class)->name('index');
-                        Route::post('/store', App\Http\Controllers\Public\Auth\Register\StoreController::class)->name('store');
-                    });
-                Route::prefix('/reset-password')
-                    ->name('resetpassword.')
-                    ->group(function () {
-                        Route::get('/', App\Http\Controllers\Public\Auth\ResetPassword\IndexController::class)->name('index');
-                    });
-            });
-
-        Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
-            ->middleware('auth')
-            ->name('logout');
-
 
         Route::prefix('/posts')
             ->name('post.')
@@ -65,4 +72,3 @@ Route::prefix('/')
                 Route::get('/{user}', App\Http\Controllers\Public\User\ShowController::class)->name('show');
             });
     });
-

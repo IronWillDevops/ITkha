@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-// Додаємо псевдонім для 'login'
-Route::get('/login-redirect', fn() => redirect()->route('admin.login.index'))->name('login');
+
+Route::get('/login-redirect', fn () => redirect()->route('admin.login.index'))
+    ->name('login');
 
 // Auth routes
 Route::middleware('guest')->group(function () {
+ 
     Route::get('/login', App\Http\Controllers\Admin\Auth\IndexController::class)->name('admin.login.index');
     Route::post('/login', App\Http\Controllers\Admin\Auth\StoreController::class)->name('admin.login.store');
 });
@@ -23,8 +25,6 @@ Route::post('admin/logout', App\Http\Controllers\Admin\Auth\DeleteController::cl
 Route::name('admin.')
     ->middleware(['auth', App\Http\Middleware\AdminMiddleware::class])
     ->group(function () {
-
-
 
         Route::get('/dashboard', App\Http\Controllers\Admin\IndexController::class)->name('index');
 

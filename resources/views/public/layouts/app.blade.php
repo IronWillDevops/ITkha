@@ -32,6 +32,7 @@
                     'public.auth.login.index',
                     'public.auth.register.index',
                     'public.auth.resetpassword.index',
+                    'login',
                 ];
             @endphp
 
