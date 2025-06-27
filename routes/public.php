@@ -3,8 +3,11 @@
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
-// Редирект з кореня на /posts
+use Illuminate\Auth\Events\Verified;
+
+// Redirect from root to /posts
 Route::redirect('/', '/posts');
 
 
@@ -12,6 +15,11 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', App\Http\Controllers\Public\Auth\Login\IndexController::class)->name('login');
     Route::post('/login', App\Http\Controllers\Public\Auth\Login\StoreController::class)->name('login.store');
 });
+
+
+Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\VerifyEmailController::class)
+    ->middleware(['signed'])
+    ->name('verification.verify');
 
 
 Route::prefix('/auth')
@@ -50,8 +58,9 @@ Route::prefix('/')
                 Route::get('/', App\Http\Controllers\Public\Post\IndexController::class)->name('index');
                 Route::get('/{post}', App\Http\Controllers\Public\Post\ShowController::class)->name('show');
 
-                // Лайк поста
-                // Лайк/анлайк поста — только для авторизованных пользователей (можно с ограничением на админов)
+                // Like Post
+                // /Unlike post — only for authenticated users (can be restricted to admins)
+
                 Route::middleware(['auth', 'verified'])->group(function () {
                     Route::post('/{post}/like', App\Http\Controllers\Public\Post\LikeController::class)->name('like');
                 });
