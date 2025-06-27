@@ -5,11 +5,11 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
 
-class VerifyEmailNotification extends Notification
+class VerifyEmailNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -44,15 +44,17 @@ class VerifyEmailNotification extends Notification
     /**
      * Создание почтового сообщения.
      */
-       public function toMail($notifiable): MailMessage
+    public function toMail($notifiable): MailMessage
     {
-        $verificationUrl = $this->verificationUrl($notifiable);
+        $url = $this->verificationUrl($notifiable);
+        $expire = config('auth.verification.expire', 60);
 
         return (new MailMessage)
-            ->subject('Підтвердження Email')
+            ->subject('Confirm Your Email')
             ->markdown('emails.verify-email', [
-                'url' => $verificationUrl,
-                'user' => $this->user,
+                'url' => $url,
+                'user' => $notifiable,
+                'time' => $expire,
             ]);
     }
 }

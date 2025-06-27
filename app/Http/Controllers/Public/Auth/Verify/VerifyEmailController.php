@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 use App\Models\User;
+use Illuminate\Container\Attributes\Auth;
 
 class VerifyEmailController extends Controller
 {
