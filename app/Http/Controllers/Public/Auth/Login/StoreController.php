@@ -38,7 +38,7 @@ class StoreController extends Controller
         } catch (EmailNotVerifiedException $ex) {
 
 
-            return redirect()->route('login')->with('error', $ex->getMessage());
+            return redirect()->route('public.auth.reverification.index')->with('error', $ex->getMessage());
         }
     }
 }

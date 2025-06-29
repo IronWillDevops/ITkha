@@ -31,9 +31,10 @@ class VerifyEmailNotification extends Notification implements ShouldQueue
      */
     protected function verificationUrl($notifiable): string
     {
+        
         return URL::temporarySignedRoute(
             'verification.verify',
-            Carbon::now()->addMinutes(config('auth.verification.expire', 60)),
+            Carbon::now()->addMinutes(config('auth.verification.expire')),
             [
                 'id'   => $notifiable->getKey(),
                 'hash' => sha1($notifiable->getEmailForVerification()),
@@ -47,7 +48,7 @@ class VerifyEmailNotification extends Notification implements ShouldQueue
     public function toMail($notifiable): MailMessage
     {
         $url = $this->verificationUrl($notifiable);
-        $expire = config('auth.verification.expire', 60);
+        $expire = config('auth.verification.expire');
 
         return (new MailMessage)
             ->subject('Confirm Your Email')

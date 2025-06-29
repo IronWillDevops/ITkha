@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Public\Auth\Register;
 
 
 use App\Http\Requests\Public\Auth\Register\StoreRequest;
-use App\Services\MailService;
 use Exception;
 
 class StoreController extends BaseController
@@ -18,7 +17,6 @@ class StoreController extends BaseController
         try {
 
             $data = $request->validated();
-            $this->service->store($data);
 
             $user = $this->service->store($data);
 

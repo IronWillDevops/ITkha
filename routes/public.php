@@ -35,6 +35,14 @@ Route::prefix('/auth')
                 Route::post('/store', App\Http\Controllers\Public\Auth\Register\StoreController::class)->name('store');
             });
 
+        // re-verification
+        Route::prefix('/reverification')
+            ->name('reverification.')
+            ->group(function () {
+                Route::get('/', App\Http\Controllers\Public\Auth\ReVerification\IndexController::class)->name('index');
+                Route::post('/store', App\Http\Controllers\Public\Auth\ReVerification\StoreController::class)->name('store');
+              
+            });
         //Скидання паролю 
         Route::prefix('/reset-password')
             ->name('resetpassword.')
