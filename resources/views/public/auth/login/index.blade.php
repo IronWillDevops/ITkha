@@ -66,7 +66,7 @@
                             {{ old('remember') ? 'checked' : '' }}>
                         <span class="ms-2 text-sm font-medium">Remember me</span>
                     </label>
-                    <a href="{{ route('public.auth.resetpassword.index') }}" class="text-sm link link-hover hover:underline">Forgot password?
+                    <a href="{{ route('public.auth.forgot.password.index') }}" class="text-sm link link-hover hover:underline">Forgot password?
 
                     </a>
                 </div>

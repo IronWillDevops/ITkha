@@ -41,14 +41,21 @@ Route::prefix('/auth')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Public\Auth\ReVerification\IndexController::class)->name('index');
                 Route::post('/store', App\Http\Controllers\Public\Auth\ReVerification\StoreController::class)->name('store');
-              
             });
-        //Скидання паролю 
-        Route::prefix('/reset-password')
-            ->name('resetpassword.')
+        Route::prefix('/forgot-password')
+            ->name('forgot.password.')
             ->group(function () {
-                Route::get('/', App\Http\Controllers\Public\Auth\ResetPassword\IndexController::class)->name('index');
+                 Route::get('/', App\Http\Controllers\Public\Auth\ForgotPassword\IndexController::class)->name('index');
+                 Route::post('/store', App\Http\Controllers\Public\Auth\ForgotPassword\StoreController::class)->name('store');
             });
+        Route::prefix('/reset-password')
+            ->name('reset.password.')
+            ->group(function () {
+                 Route::get('/', App\Http\Controllers\Public\Auth\ResetPassword\IndexController::class)->name('index');
+                 Route::post('/store', App\Http\Controllers\Public\Auth\ResetPassword\StoreController::class)->name('store');
+            });
+
+
     });
 
 Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
