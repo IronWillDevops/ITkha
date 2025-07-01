@@ -19,12 +19,12 @@ class StoreController extends Controller
         try {
             $data = $request->validated();
 
-            Password::sendResetLink(
-                $request->only('email')
-            );
+            Password::sendResetLink(['email' => $data['email']]);
 
             return redirect()->route('login')->with(
-                'success','If the account exists, we have sent you a password reset link. Please check your email.');
+                'success',
+                'If the account exists, we have sent you a password reset link. Please check your email.'
+            );
         } catch (Exception $e) {
             return redirect()->route('login')->with('error', 'An unexpected error occurred. Please try again later.');
         }

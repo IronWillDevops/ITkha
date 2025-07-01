@@ -30,6 +30,7 @@
                         <a href="{{ route('public.pages.contact.index') }}"
                             class="block py-2 px-3 nav-btn nav-btn-hover  rounded-sm md:bg-transparent md:p-0">Contact</a>
                     </li>
+                    
                     @auth
                         <li class="relative max-w-28">
                             <button id="userMenuButton" type="button"
