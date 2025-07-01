@@ -20,7 +20,7 @@ Route::middleware('guest')->group(function () {
 Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\VerifyEmailController::class)
     ->middleware(['signed'])
     ->name('verification.verify');
-
+Route::get('/captcha', App\Http\Controllers\Public\Auth\Captcha\CaptchaController::class)->name('captcha.generate');
 
 Route::prefix('/auth')
     ->name('public.auth.')
@@ -45,17 +45,15 @@ Route::prefix('/auth')
         Route::prefix('/forgot-password')
             ->name('forgot.password.')
             ->group(function () {
-                 Route::get('/', App\Http\Controllers\Public\Auth\ForgotPassword\IndexController::class)->name('index');
-                 Route::post('/store', App\Http\Controllers\Public\Auth\ForgotPassword\StoreController::class)->name('store');
+                Route::get('/', App\Http\Controllers\Public\Auth\ForgotPassword\IndexController::class)->name('index');
+                Route::post('/store', App\Http\Controllers\Public\Auth\ForgotPassword\StoreController::class)->name('store');
             });
         Route::prefix('/reset-password')
             ->name('reset.password.')
             ->group(function () {
-                 Route::get('/', App\Http\Controllers\Public\Auth\ResetPassword\IndexController::class)->name('index');
-                 Route::post('/store', App\Http\Controllers\Public\Auth\ResetPassword\StoreController::class)->name('store');
+                Route::get('/', App\Http\Controllers\Public\Auth\ResetPassword\IndexController::class)->name('index');
+                Route::post('/store', App\Http\Controllers\Public\Auth\ResetPassword\StoreController::class)->name('store');
             });
-
-
     });
 
 Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)

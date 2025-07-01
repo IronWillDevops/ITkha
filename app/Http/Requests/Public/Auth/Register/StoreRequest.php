@@ -27,6 +27,11 @@ class StoreRequest extends FormRequest
             'login' => ['required', 'string', 'min:5', 'max:50', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'captcha' => ['required', function ($attribute, $value, $fail) {
+                if ($value !== session('captcha')) {
+                    $fail('Невірна капча.');
+                }
+            }],
 
         ];
     }
@@ -59,6 +64,7 @@ class StoreRequest extends FormRequest
             'password.max' => 'Пароль повинен містити щонайбільше :max символів.',
             'password.confirmed' => 'Паролі не співпадають.',
 
+            'captcha.required' => 'Введіть капчу.',
         ];
     }
 }

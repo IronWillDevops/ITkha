@@ -23,6 +23,11 @@ class StoreRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email', 'max:255'],
+            'captcha' => ['required', function ($attribute, $value, $fail) {
+                if ($value !== session('captcha')) {
+                    $fail('Невірна капча.');
+                }
+            }],
         ];
     }
 
@@ -34,6 +39,7 @@ class StoreRequest extends FormRequest
             'email.email' => 'Email повинен бути дійсною адресою.',
             'email.max' => 'Email не повинен перевищувати :max символів.',
 
+            'captcha.required' => 'Введіть капчу.',
         ];
     }
 }
