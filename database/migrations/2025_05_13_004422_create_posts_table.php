@@ -1,5 +1,6 @@
 <?php
 
+use App\PostStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration {
             $table->string('preview_image')->nullable();
             $table->string('title');
             $table->text('content');
-            $table->enum('status',['draft','published','archived'])->default('draft');
+            $table->enum('status',array_column(PostStatus::cases(), 'value'))->default(PostStatus::DRAFT->value);
            
             $table->integer('views')->default(0);
 

@@ -16,7 +16,7 @@ class ShowController extends Controller
   public function __invoke(Post $post, PostService $postService)
   {
     $post = Post::where('id', $post->id)
-      ->where('status', PostStatus::Published->value)
+      ->where('status', PostStatus::PUBLISHED->value)
       ->firstOrFail();
 
 

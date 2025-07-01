@@ -49,7 +49,6 @@
                             @enderror
                         </div>
                     </div>
-                    
                 </div>
 
 
@@ -81,6 +80,30 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                            @error('login')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div><div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Confirmation password</label>
+                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirmation password">
+                                
+                            @error('login')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+
                 
                   <div class="form-group">
                     <div class="custom-control custom-switch">

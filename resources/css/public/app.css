@@ -123,6 +123,22 @@
 pre {
     @apply w-full overflow-x-auto whitespace-pre-wrap break-words p-4 rounded-lg text-sm border-border border;
 }
+#post-content h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+#post-content p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+#post-content ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+#post-content li {
+    margin-bottom: 0.5rem;
+}
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;

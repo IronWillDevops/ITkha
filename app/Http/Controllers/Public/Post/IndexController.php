@@ -33,7 +33,7 @@ class IndexController extends Controller
             'queryParams' => array_filter($data, fn($v) => $v !== null && $v !== '')
         ]);
         
-        $posts = Post::where('status', PostStatus::Published) // 
+        $posts = Post::where('status', PostStatus::PUBLISHED) // 
             ->filter($filter)
             ->orderBy($data['sort_by'], $data['sort_dir'])
             ->paginate(30);

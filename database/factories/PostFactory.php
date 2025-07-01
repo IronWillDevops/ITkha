@@ -26,9 +26,9 @@ class PostFactory extends Factory
           
             'views' => $this->faker->numberBetween(0, 1000),
             'status' => $this->faker->randomElement([
-                PostStatus::Draft,
-                PostStatus::Published,
-                PostStatus::Archived,
+                PostStatus::DRAFT,
+                PostStatus::PUBLISHED,
+                PostStatus::ARCHIVED,
             ]),
             'category_id' => 1, // переконайтесь, що категорія з ID 1 існує
             'user_id' => 1,

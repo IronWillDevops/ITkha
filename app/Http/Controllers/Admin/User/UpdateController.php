@@ -15,7 +15,9 @@ class UpdateController extends BaseController
     {
         try {
             $data = $request->validated();
+            
             $user = $this->service->update($data, $user);
+            
             return redirect()->route('admin.user.show', compact('user'))->with('toast', [
                 'type' => 'success', // success | info | warning | danger
                 'title' => 'Success',
