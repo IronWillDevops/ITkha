@@ -6,7 +6,7 @@
         <div class="w-full max-w-md p-8 text-text-primary bg-surface rounded-2xl">
             <h2 class="text-2xl font-bold text-center mb-6">{{ config('app.name') }}</h2>
 
-            <form method="POST" action="{{ route('public.auth.login.store') }}">
+            <form method="POST" action="{{ route('login.store') }}">
                 @csrf
 
                 {{-- Email --}}
@@ -66,7 +66,7 @@
                             {{ old('remember') ? 'checked' : '' }}>
                         <span class="ms-2 text-sm font-medium">Remember me</span>
                     </label>
-                    <a href="{{ route('public.auth.resetpassword.index') }}" class="text-sm link link-hover hover:underline">Forgot password?
+                    <a href="{{ route('public.auth.forgot.password.index') }}" class="text-sm link link-hover hover:underline">Forgot password?
 
                     </a>
                 </div>

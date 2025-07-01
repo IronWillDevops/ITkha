@@ -119,7 +119,7 @@
 
                 <div class="form-group">
                     <label>Content</label>
-                    <textarea id="summernote" name="content">{{ !!old('content') }}</textarea>
+                    <textarea id="summernote" name="content">{{ old('content') }}</textarea>
                     @error('content')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror

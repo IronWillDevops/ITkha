@@ -26,6 +26,11 @@ class ContactFormRequest extends FormRequest
             'subject' => ['required', 'string', 'max:50'],
             'email' => ['required', 'email'],
             'message' => ['required', 'string', 'min:10', 'max:1000'],
+            'captcha' => ['required', function ($attribute, $value, $fail) {
+                if ($value !== session('captcha')) {
+                    $fail('Невірна капча.');
+                }
+            }],
         ];
     }
 
@@ -39,14 +44,16 @@ class ContactFormRequest extends FormRequest
             'subject.required' => 'Вкажіть тему повідомлення.',
             'subject.string' => 'Тема повинна бути у форматі тексту',
             'subject.max' => 'Тема не повинна перевищувати :max символів',
-            
+
             'email.required' => 'Вкажіть email.',
             'email.email' => 'Email має бути коректним.',
-            
+
             'message.required' => 'Введіть повідомлення.',
             'message.string' => 'Повідомлення повинно бути у форматі тексту',
             'message.min' => 'Повідомлення має містити щонайменше :min символів.',
             'message.max' => 'Повідомлення не повинно перевищувати :max символів.', // Переконайтеся, що повідомлення відповідає
+
+            'captcha.required' => 'Введіть капчу.',
         ];
     }
 }

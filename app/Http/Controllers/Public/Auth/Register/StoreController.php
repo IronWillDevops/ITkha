@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Public\Auth\Register;
 
 
 use App\Http\Requests\Public\Auth\Register\StoreRequest;
-
 use Exception;
 
 class StoreController extends BaseController
 {
+
     /**
      * Handle the incoming request.
      */
@@ -17,14 +17,18 @@ class StoreController extends BaseController
         try {
 
             $data = $request->validated();
-          $this->service->store($data); // Повертає створеного користувача
+
+            $user = $this->service->store($data);
+
+            // Отправляем письмо для подтверждения email
+            $user->sendEmailVerificationNotification();
+
+            // Отправляем письмо пользователю
 
 
-
-
-            return redirect()->route('public.auth.login.index')->with('success', 'User created successfully');
+            return redirect()->route('login')->with('success', 'User successfully registered. To activate your account, please confirm your email address.');
         } catch (Exception $ex) {
-            return redirect()->route('public.auth.login.index')->with('error', 'An error occurred while creating the user. Please try again later.');
+            return redirect()->route('login')->with('error', 'An error occurred while creating the user. Please try again later.');
         }
     }
 }

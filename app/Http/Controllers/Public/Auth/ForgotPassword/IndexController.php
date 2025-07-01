@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Public\Auth\ResetPassword;
+namespace App\Http\Controllers\Public\Auth\ForgotPassword;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,8 +12,6 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $token = $request->token;
-        $email = $request->email;
-        return view('public.auth.resetpassword.index', compact('token', 'email'));
+         return view('public.auth.forgotpassword.index');
     }
 }

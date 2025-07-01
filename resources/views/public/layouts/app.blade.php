@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    @vite(['resources/css/public/app.css'])
+    @vite(['resources/css/public/app.css','resources/js/public/app.js'])
 
 
     <title>{{ config('app.name') }}</title>
@@ -27,16 +27,16 @@
     <main class="flex-grow container mx-auto px-4 py-6">
         <div class="flex flex-col lg:flex-row gap-6  ">
             @php
-                $excludeRoutes = [
-                    'public.pages.contact.index',
-                    'public.auth.login.index',
-                    'public.auth.register.index',
-                    'public.auth.resetpassword.index',
+                
+                $route = [
+                    'public.post.index',
+                    'public.post.show',
+                    
                 ];
             @endphp
 
 
-            @if (!in_array(Route::currentRouteName(), $excludeRoutes))
+            @if (in_array(Route::currentRouteName(), $route))
                 <div class="w-full lg:w-4/5">
                     @yield('public.content')
                 </div>

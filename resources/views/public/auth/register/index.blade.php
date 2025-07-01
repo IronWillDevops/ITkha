@@ -11,7 +11,7 @@
                 {{-- Name --}}
 
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Your name</label>
+                    <label class="block mb-2 text-sm font-medium" for="name">Your name</label>
                     <div class="relative mb-2">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <i class="fas fa-solid  fa-user"></i>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Your surname</label>
+                    <label class="block mb-2 text-sm font-medium" for="surname">Your surname</label>
                     <div class="relative mb-2">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <i class="fas fa-solid fa-user"></i>
@@ -45,7 +45,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Your login</label>
+                    <label class="block mb-2 text-sm font-medium" for="login">Your login</label>
                     <div class="relative mb-2">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <i class="fas fa-solid fa-user"></i>
@@ -62,7 +62,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Your email</label>
+                    <label class="block mb-2 text-sm font-medium" for="email">Your email</label>
                     <div class="relative mb-2">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <i class="fas fa-solid fa-at"></i>
@@ -79,7 +79,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Your password</label>
+                    <label class="block mb-2 text-sm font-medium" for="password">Your password</label>
                     <div class="relative mb-2">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <i class="fas fa-solid fa-lock"></i>
@@ -99,7 +99,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Confirmation password</label>
+                    <label class="block mb-2 text-sm font-medium" for="password_confirmation">Confirmation password</label>
                     <div class="relative mb-2">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <i class="fas fa-solid fa-lock"></i>
@@ -119,17 +119,35 @@
                         </div>
                     @enderror
                 </div>
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium"  for="captcha">Captcha</label>
+                    <div class="relative mb-2">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <input type="text" name="captcha"  id="captcha" class="input input-hover text-sm  block w-full ps-10 p-2.5 "
+                            placeholder="Enter Captcha" required />
+
+                    </div>
+                    <img src="{{ route('captcha.generate') }}" alt="CAPTCHA"
+                        onclick="this.src='{{ route('captcha.generate') }}?'+Math.random()" style="cursor:pointer;">
+                    <small>Кликните на изображение, чтобы обновить</small>
+                    @error('captcha')
+                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
                 {{-- Submit --}}
-                <button type="submit"
-                    class="w-full input-btn input-btn-hover py-2 px-4 rounded-lg transition">
+                <button type="submit" class="w-full input-btn input-btn-hover py-2 px-4 rounded-lg transition">
                     Register
                 </button>
             </form>
 
             <p class="mt-4 text-right text-sm text-text-secondary">
                 Already have an account?
-                <a href="{{ route('public.auth.login.index') }}" class="link link-hover hover:underline">Login</a>
+                <a href="{{ route('login') }}" class="link link-hover hover:underline">Login</a>
             </p>
         </div>
     </div>

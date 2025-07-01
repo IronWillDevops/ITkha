@@ -22,6 +22,6 @@ class UserService
         if ($role) {
             $user->roles()->syncWithoutDetaching([$role->id]);
         }
-       
+        return $user;
     }
 }

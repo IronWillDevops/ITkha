@@ -30,6 +30,7 @@
                         <a href="{{ route('public.pages.contact.index') }}"
                             class="block py-2 px-3 nav-btn nav-btn-hover  rounded-sm md:bg-transparent md:p-0">Contact</a>
                     </li>
+                    
                     @auth
                         <li class="relative max-w-28">
                             <button id="userMenuButton" type="button"
@@ -51,7 +52,7 @@
                                 class="absolute hidden bg-surface shadow-lg mt-2 right-0 w-48 rounded-md z-50 border border-border overflow-hidden">
                                 <a href="{{ route('public.user.show', Auth::user()->id) }}"
                                     class="block px-4 py-3 text-sm nav-btn nav-btn-hover">Profile</a>
-                                <form method="POST" action="{{ route('public.logout') }}">
+                                <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit"
                                         class="w-full text-left block px-4 py-3 text-sm nav-btn nav-btn-hover cursor-pointer">Logout</button>
@@ -64,7 +65,7 @@
 
                     @guest
                         <li>
-                            <a href="{{ route('public.auth.login.index') }}"
+                            <a href="{{ route('login') }}"
                                 class="block py-2 px-3 nav-btn nav-btn-hover rounded-sm md:bg-transparent md:p-0">Log
                                 in</a>
                         </li>
