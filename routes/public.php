@@ -22,9 +22,7 @@ Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\
     ->name('verification.verify');
 Route::get('/captcha', App\Http\Controllers\Public\Auth\Captcha\CaptchaController::class)->name('captcha.generate');
 
-Route::get('/error', function () {
-    abort(404, 'Тестовая ошибка сервера');
-});
+
 
 Route::prefix('/auth')
     ->name('public.auth.')

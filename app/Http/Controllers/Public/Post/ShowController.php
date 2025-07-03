@@ -31,6 +31,6 @@ class ShowController extends Controller
 
     $popularPosts = $postService->popularPosts();
     $similarPosts = $postService->similarPosts($post);
-    return view('public.post.show', compact('post', 'popularPosts', 'similarPosts'));
+   return view('public.post.show', compact('post', 'popularPosts', 'similarPosts'));
   }
 }

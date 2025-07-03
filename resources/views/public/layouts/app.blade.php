@@ -31,7 +31,7 @@
                 $route = [
                     'public.post.index',
                     'public.post.show',
-                    
+   
                 ];
             @endphp
 
