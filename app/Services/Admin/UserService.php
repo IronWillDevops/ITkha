@@ -38,10 +38,15 @@ class UserService
         } else {
             $data['email_verified_at'] = null;
         }
+
         unset($data['is_verify']);
-        if (isset($data['password'])) {
+
+        if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']); // Удаляем, чтобы не затереть текущий
         }
+
         $user->update($data);
 
         // Предположим, в форме ты передаёшь роль как role_id

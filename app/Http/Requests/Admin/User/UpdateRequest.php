@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\User;
 
+use App\UserStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -40,10 +41,10 @@ class UpdateRequest extends FormRequest
             ],
             'surname' => ['string', 'max:255'],
             'role_id' => ['required', 'exists:roles,id'],
-            'password' => ['string', 'min:8', 'max:255'],
+            'password' => ['nullable', 'string', 'min:8', 'max:255'],
 
             'email_verified_at' => ['required', 'boolean'],
-            'is_active' => ['required', 'boolean'],
+            'status' => ['required', Rule::in(array_column(UserStatus::cases(), 'value'))],
         ];
     }
     public function messages(): array
@@ -68,12 +69,6 @@ class UpdateRequest extends FormRequest
             'email.max' => 'Email не повинен перевищувати :max символів.',
             'email.unique' => 'Користувач з таким email вже існує.',
 
-            'password.required' => 'Пароль є обов’язковим.',
-            'password.string' => 'Пароль повинен бути текстовим.',
-            'password.min' => 'Пароль повинен містити щонайменше :min символів.',
-            'password.max' => 'Пароль повинен містити щонайбільше :max символів.',
-
-
             'password.string' => 'Пароль повинен бути текстовим.',
             'password.min' => 'Пароль повинен містити щонайменше :min символів.',
             'password.max' => 'Пароль повинен містити щонайбільше :max символів.',
@@ -84,8 +79,8 @@ class UpdateRequest extends FormRequest
             'email_verified_at.required' => 'Поле "Підтвердження" є обов’язковим.',
             'email_verified_at.boolean' => 'Поле "Підтвердження" повинно мати значення true або false.',
 
-            'is_active.required' => 'Поле "Активність" є обов’язковим.',
-            'is_active.boolean' => 'Поле "Активність" повинно мати значення true або false.',
+            'status.required' => 'Поле "Статус" є обов’язковим.',
+            'status.in' => 'Неприпустиме значення для поля "Статус".',
 
         ];
     }

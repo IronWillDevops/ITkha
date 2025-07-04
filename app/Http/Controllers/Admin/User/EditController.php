@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Models\Role;
 use App\Models\User;
+use App\UserStatus;
 
 class EditController extends BaseController
 {
@@ -12,9 +13,10 @@ class EditController extends BaseController
      */
     public function __invoke(User $user)
     {
-        
-        $roles = Role::all(); // Отримати всі ролі
-        return view('admin.pages.user.edit', compact('user','roles')); // Можно заменить на вашу главную страницу
+
+        $roles = Role::all();
+        $statuses = UserStatus::cases();
+        return view('admin.pages.user.edit', compact('user', 'roles', 'statuses')); // Можно заменить на вашу главную страницу
 
     }
 }

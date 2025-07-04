@@ -2,4 +2,4 @@
 
 @section('title', __('Service Unavailable'))
 @section('code', '503')
-@section('message', 'The server is temporarily unable to handle the request.')
+@section('message',  $exception->getMessage() ?:'The server is temporarily unable to handle the request.')

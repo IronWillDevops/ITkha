@@ -76,7 +76,7 @@ Route::prefix('/')
                 // Like Post
                 // /Unlike post — only for authenticated users (can be restricted to admins)
 
-                Route::middleware(['auth', 'verified'])->group(function () {
+                Route::middleware(['auth', \App\Http\Middleware\CheckUserVerifiedAndStatus::class])->group(function () {
                     Route::post('/{post}/like', App\Http\Controllers\Public\Post\LikeController::class)->name('like');
                 });
             });

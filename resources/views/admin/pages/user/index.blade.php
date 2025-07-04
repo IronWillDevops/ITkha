@@ -36,7 +36,7 @@
                                 <tr>
                                     <td class="align-middle">{{ $user->id }}.</td>
                                     <td class="align-middle">
-                                        @if ($user->is_active === 1)
+                                        @if ($user->status === \App\UserStatus::ACTIVE->value)
                                             @if (!empty($user->email_verified_at))
                                                 <i class=" fa fa-user-check"></i>
                                             @else

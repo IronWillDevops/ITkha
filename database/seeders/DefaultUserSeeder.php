@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\UserStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Illuminate\Database\Seeder;
@@ -19,10 +20,11 @@ class DefaultUserSeeder extends Seeder
             ['email' => 'admin@example.com'], // умова унікальності
             [
                 'name' => 'Administrator',
-                'login' =>'admin',
+                'login' => 'admin',
                 'password' => Hash::make('password'),
                 'email' => 'admin@example.com',
                 'email_verified_at' => now(),
+                'status' => UserStatus::ACTIVE->value,
             ]
         );
     }

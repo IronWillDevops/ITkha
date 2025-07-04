@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public\Auth\Login;
 use App\Exceptions\User\EmailNotVerifiedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\Auth\Login\StoreRequest;
+use App\UserStatus;
 use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
@@ -24,9 +25,18 @@ class StoreController extends Controller
 
                 $user = Auth::user();
 
-                if (!$user->hasVerifiedEmail()) {
+              //  Перевірка верифікації email
+                if ($user->status == UserStatus::PENDING->value) {
                     Auth::logout();
                     throw new EmailNotVerifiedException();
+                }
+
+                // Перевірка статусу користувача
+                if (!$user->status == UserStatus::ACTIVE->value) {
+                    Auth::logout();
+                    return back()->withErrors([
+                        'error' => 'Ваш обліковий запис неактивний. Зверніться до технічної підтримки.',
+                    ])->onlyInput('email');
                 }
                 return redirect()->intended(route('public.post.index'));
             }

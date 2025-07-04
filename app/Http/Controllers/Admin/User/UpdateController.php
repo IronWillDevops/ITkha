@@ -13,7 +13,7 @@ class UpdateController extends BaseController
      */
     public function __invoke(UpdateRequest $request, User $user)
     {
-        try {
+      #  try {
             $data = $request->validated();
             
             $user = $this->service->update($data, $user);
@@ -23,12 +23,12 @@ class UpdateController extends BaseController
                 'title' => 'Success',
                 'message' => 'User successfully updated.',
             ]);; // Можно заменить на вашу главную страницу
-        } catch (CannotDeactivateLastActiveUserException $ex) {
-            return redirect()->back()->with('toast', [
-                'type' => 'danger', // success | info | warning | danger
-                'title' => 'Danger',
-                'message' => $ex->getMessage(),
-            ]);
-        }
+        // } catch (CannotDeactivateLastActiveUserException $ex) {
+        //     return redirect()->back()->with('toast', [
+        //         'type' => 'danger', // success | info | warning | danger
+        //         'title' => 'Danger',
+        //         'message' => $ex->getMessage(),
+        //     ]);
+        // }
     }
 }

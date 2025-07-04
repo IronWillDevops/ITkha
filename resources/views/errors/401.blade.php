@@ -2,4 +2,4 @@
 
 @section('title', __('Unauthorized'))
 @section('code', '401')
-@section('message', 'Authentication is required to access the resource.')
+@section('message',  $exception->getMessage() ?:'Authentication is required to access the resource.')

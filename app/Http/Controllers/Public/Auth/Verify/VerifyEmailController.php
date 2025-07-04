@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 use App\Models\User;
-use Illuminate\Container\Attributes\Auth;
+use App\UserStatus;
 
 class VerifyEmailController extends Controller
 {
@@ -20,9 +20,13 @@ class VerifyEmailController extends Controller
         }
 
         if ($user->hasVerifiedEmail()) {
+
             return redirect()->route('login')->with('success', 'Email is already verified.');
         }
-
+        if ($user->status !== UserStatus::ACTIVE->value) {
+            $user->status = UserStatus::ACTIVE->value;
+            $user->save();
+        }
         $user->markEmailAsVerified();
         event(new Verified($user));
 
