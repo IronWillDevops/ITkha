@@ -39,17 +39,14 @@ class PostFilter extends AbstractFilter
 
     protected function before(Builder $builder)
     {
-        $builder->where('status', PostStatus::Published);
+        $builder->where('status', PostStatus::PUBLISHED);
         if (!$this->getQueryParam(self::SORT_BY)) {
             $builder->orderBy('created_at', 'desc');
         }
     }
     public function search(Builder $builder, $value)
     {
-        // $builder->where(function ($query) use ($value) {
-        //     $query->where('title', 'like', "%{$value}%")
-        //         ->orWhere('content', 'like', "%{$value}%");
-        // });
+        
          $builder->where(function ($query) use ($value) {
         $query->where('title', 'like', "%{$value}%")
             ->orWhere('content', 'like', "%{$value}%")

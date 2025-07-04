@@ -10,7 +10,7 @@ class PostService
     public function popularPosts(int $limit = 6)
     {
         return Post::withCount('likedByUsers')
-            ->where('status', PostStatus::Published)
+            ->where('status', PostStatus::PUBLISHED)
             ->orderByDesc('liked_by_users_count')
             ->take($limit)
             ->get();
@@ -19,7 +19,7 @@ class PostService
     public function popularPostsByUser(int $user_id, int $limit = 5)
     {
         return Post::withCount('likedByUsers')
-            ->where('status', PostStatus::Published)
+            ->where('status', PostStatus::PUBLISHED)
             ->where('user_id', $user_id)
             ->orderByDesc('liked_by_users_count')
             ->take($limit)
@@ -31,7 +31,7 @@ class PostService
     {
 
         return Post::where('id', '!=', $post->id)
-        ->where('status', PostStatus::Published)
+        ->where('status', PostStatus::PUBLISHED)
             ->where(function ($query) use ($post) {
                 // Та ж категорія
                 $query->where('category_id', $post->category_id);

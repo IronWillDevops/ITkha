@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             DefaultCategorySeeder::class,
             PostSeeder::class,
-            ContactSeeder::class,
         ]);
     }
 }

@@ -1,11 +1,8 @@
 @extends('public.layouts.app')
-@php
-    $hideSidebar = true;
-@endphp
 
 @section('public.content')
     <div class="text-text-primary bg-surface max-w-lg mx-auto mt-10 mb-10 rounded-2xl p-10 border border-border">
-        <h2 class="text-2xl font-semibold text-center mb-6">Заповніть форму для реєстрації</h2>
+        <h2 class="text-2xl font-semibold text-center mb-6">Contact Us</h2>
         <form class="max-w-md mx-auto" action="{{ route('public.pages.contact.store') }}" method="POST">
             @csrf
             <div class="mb-4">
@@ -86,7 +83,7 @@
                 </div>
                 <img src="{{ route('captcha.generate') }}" alt="CAPTCHA"
                     onclick="this.src='{{ route('captcha.generate') }}?'+Math.random()" style="cursor:pointer;">
-                <small>Кликните на изображение, чтобы обновить</small>
+                <small>Click the image to reload the CAPTCHA</small>
                 @error('captcha')
                     <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
                         {{ $message }}
@@ -96,7 +93,7 @@
 
 
             <button type="submit"
-                class="input-btn input-btn-hover font-medium  text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Надіслати</button>
+                class="input-btn input-btn-hover font-medium  text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Send</button>
         </form>
 
     </div>

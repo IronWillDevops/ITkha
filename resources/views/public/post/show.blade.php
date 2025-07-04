@@ -12,7 +12,7 @@
             @endif
 
             <div class="p-6 space-y-6">
-                <h1 class="post-header font-bold">{{ $post->title }}</h1>
+                <h1 class="post-header text-3xl font-bold">{{ $post->title }}</h1>
 
                 <div class="flex flex-wrap items-center text-sm space-x-4 post-footer">
                     <div class="inline-flex items-center space-x-1">

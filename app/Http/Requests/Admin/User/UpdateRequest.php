@@ -40,6 +40,7 @@ class UpdateRequest extends FormRequest
             ],
             'surname' => ['string', 'max:255'],
             'role_id' => ['required', 'exists:roles,id'],
+            'password' => ['string', 'min:8', 'max:255'],
 
             'email_verified_at' => ['required', 'boolean'],
             'is_active' => ['required', 'boolean'],
@@ -68,6 +69,11 @@ class UpdateRequest extends FormRequest
             'email.unique' => 'Користувач з таким email вже існує.',
 
             'password.required' => 'Пароль є обов’язковим.',
+            'password.string' => 'Пароль повинен бути текстовим.',
+            'password.min' => 'Пароль повинен містити щонайменше :min символів.',
+            'password.max' => 'Пароль повинен містити щонайбільше :max символів.',
+
+
             'password.string' => 'Пароль повинен бути текстовим.',
             'password.min' => 'Пароль повинен містити щонайменше :min символів.',
             'password.max' => 'Пароль повинен містити щонайбільше :max символів.',

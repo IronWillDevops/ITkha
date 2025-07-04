@@ -22,6 +22,8 @@ Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\
     ->name('verification.verify');
 Route::get('/captcha', App\Http\Controllers\Public\Auth\Captcha\CaptchaController::class)->name('captcha.generate');
 
+
+
 Route::prefix('/auth')
     ->name('public.auth.')
     ->middleware('guest')

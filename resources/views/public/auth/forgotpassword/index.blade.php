@@ -40,7 +40,7 @@
                     </div>
                     <img src="{{ route('captcha.generate') }}" alt="CAPTCHA"
                         onclick="this.src='{{ route('captcha.generate') }}?'+Math.random()" style="cursor:pointer;">
-                    <small>Кликните на изображение, чтобы обновить</small>
+                    <small>Click the image to reload the CAPTCHA</small>
                     @error('captcha')
                         <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
                             {{ $message }}
