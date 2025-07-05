@@ -23,7 +23,7 @@ Route::post('admin/logout', App\Http\Controllers\Admin\Auth\DeleteController::cl
 
 
 Route::name('admin.')
-    ->middleware(['auth', App\Http\Middleware\AdminMiddleware::class])
+    ->middleware(['auth',\App\Http\Middleware\CheckUserVerifiedAndStatus::class, App\Http\Middleware\AdminMiddleware::class])
     ->group(function () {
 
         Route::get('/dashboard', App\Http\Controllers\Admin\IndexController::class)->name('index');

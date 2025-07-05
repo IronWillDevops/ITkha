@@ -67,12 +67,12 @@
                         <div class="form-group">
                             <label>Role</label>
                             <select class="form-control" name='role_id'>
-                                 @foreach ($roles as $role)
+                                @foreach ($roles as $role)
                                     <option value="{{ $role->id }}"
                                         {{ $user->roles->first()?->id == $role->id ? ' selected' : '' }}>
                                         {{ $role->title }}</option>
-                                @endforeach 
-                               
+                                @endforeach
+
                             </select>
                             @error('role_id')
                                 <p class="text-danger">{{ $message }}</p>
@@ -90,13 +90,34 @@
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                    </div><div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6">
                         <!-- text input -->
                         <div class="form-group">
                             <label>Confirmation password</label>
-                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirmation password">
-                                
+                            <input type="password" class="form-control" name="password_confirmation"
+                                placeholder="Confirmation password">
+
                             @error('login')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name='status'>
+                                @foreach ($statuses as $status)
+                                    <option value="{{ $status->value }}"
+                                        {{ $user->status === $status->value ? 'selected' : '' }}>
+                                        {{ $status->value }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+                            @error('status')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
@@ -104,24 +125,17 @@
                 </div>
 
 
-                
-                  <div class="form-group">
+
+                <div class="form-group">
                     <div class="custom-control custom-switch">
                         <input type="hidden" name="email_verified_at" value="0">
-                        <input type="checkbox" class="custom-control-input" name="email_verified_at" id="email_verified_at" value="1"
-                             {{  !empty($user->email_verified_at) ? 'checked' : '' }}>
+                        <input type="checkbox" class="custom-control-input" name="email_verified_at" id="email_verified_at"
+                            value="1" {{ !empty($user->email_verified_at) ? 'checked' : '' }}>
                         <label class="custom-control-label" for="email_verified_at">Is verified</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="custom-control custom-switch">
-                        <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" class="custom-control-input" name="is_active" id="is_active" value="1"
-                            {{ $user->is_active === 1 ? 'checked' : '' }}>
-                        <label class="custom-control-label" for="is_active">Is active</label>
-                    </div>
-                </div>
-                
+
+
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Add</button>

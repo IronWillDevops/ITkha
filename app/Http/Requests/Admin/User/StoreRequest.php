@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\User;
 
+use App\UserStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -29,7 +31,7 @@ class StoreRequest extends FormRequest
             'password' => ['required', 'string', 'min:8', 'max:255'],
             'role_id' => ['required', 'exists:roles,id'],
             'email_verified_at' => ['required', 'boolean'],
-            'is_active' => ['required', 'boolean'],
+        'status' => ['required', Rule::in(array_column(UserStatus::cases(), 'value'))],
         ];
     }
 
@@ -66,8 +68,8 @@ class StoreRequest extends FormRequest
             'email_verified_at.required' => 'Поле "Підтвердження" є обов’язковим.',
             'email_verified_at.boolean' => 'Поле "Підтвердження" повинно мати значення true або false.',
 
-            'is_active.required' => 'Поле "Активність" є обов’язковим.',
-            'is_active.boolean' => 'Поле "Активність" повинно мати значення true або false.',
+            'status.required' => 'Поле "Статус" є обов’язковим.',
+            'status.in' => 'Неприпустиме значення для поля "Статус".',
         ];
     }
 }

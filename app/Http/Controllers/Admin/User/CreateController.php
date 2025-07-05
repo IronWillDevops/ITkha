@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Models\Role;
+use App\UserStatus;
 
 class CreateController extends BaseController
 {
@@ -10,6 +11,7 @@ class CreateController extends BaseController
     {
       
       $roles = Role::all();
-        return view('admin.pages.user.create',compact('roles')); // Можно заменить на вашу главную страницу
+      $statuses = UserStatus::cases();
+        return view('admin.pages.user.create',compact('roles','statuses')); // Можно заменить на вашу главную страницу
     }
 }

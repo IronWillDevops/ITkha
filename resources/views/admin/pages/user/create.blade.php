@@ -87,24 +87,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name='status'>
+                                @foreach ($statuses as $status)
+                                    <option value="{{ $status->value }}"
+                                       {{ old('status', 'Active') === $status->value ? 'selected' : '' }}>
+                                        {{ $status->value }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+                            @error('status')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <div class="custom-control custom-switch">
                         <input type="hidden" name="email_verified_at" value="0">
-                        <input type="checkbox" class="custom-control-input" name="email_verified_at" id="email_verified_at" value="1"
-                             {{ old('email_verified_at', !empty($user->email_verified_at)) ? 'checked' : '' }}>
+                        <input type="checkbox" class="custom-control-input" name="email_verified_at" id="email_verified_at"
+                            value="1"
+                            {{ old('email_verified_at', !empty($user->email_verified_at)) ? 'checked' : '' }}>
                         <label class="custom-control-label" for="email_verified_at">Is verified</label>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="custom-control custom-switch">
-                        <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" class="custom-control-input" name="is_active" id="is_active" value="1"
-                            {{ (int) old('is_active', 1) === 1 ? 'checked' : '' }}>
-                        <label class="custom-control-label" for="is_active">Is active</label>
-                    </div>
-                </div>
+
 
             </div>
             <div class="card-footer">

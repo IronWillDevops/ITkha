@@ -2,4 +2,4 @@
 
 @section('title', __('Forbidden'))
 @section('code', '403')
-@section('message', 'You do not have permission to access this resource.'))
+@section('message',  $exception->getMessage() ?:'You do not have permission to access this resource.')
