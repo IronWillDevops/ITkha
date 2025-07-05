@@ -30,7 +30,7 @@
 
                         </span>
 
-                        {{-- Правая часть: автор, просмотры и лайки --}}
+                        {{-- Правая часть: Update_at Edit_post--}}
                         <div class="flex items-center space-x-4 post-footer ">
 
                             {{-- Update_at --}}
