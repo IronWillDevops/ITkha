@@ -37,11 +37,7 @@
                                     <td class="align-middle">{{ $user->id }}.</td>
                                     <td class="align-middle">
                                         @if ($user->status === \App\UserStatus::ACTIVE->value)
-                                            @if (!empty($user->email_verified_at))
-                                                <i class=" fa fa-user-check"></i>
-                                            @else
-                                                <i class=" fa fa-user"></i>
-                                            @endif
+                                            <i class=" fa fa-user-check"></i>
                                         @else
                                             <i class=" fa fa-user-times"></i>
                                         @endif

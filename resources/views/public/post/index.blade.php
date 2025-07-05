@@ -20,8 +20,9 @@
                     </div>
                 @endif
                 <div class="p-6 w-full flex flex-col h-full">
+                    <div class="flex justify-between items-center mb-6">
 
-                    <div class="flex justify-between items-center  mb-6">
+                        {{-- Левая часть: ссылка "Read more" --}}
 
                         <span class="inline-block  post-category rounded-full px-3 py-1 text-sm font-semibold  ">
                             <i class="fas fa-tag mr-1"></i>
@@ -29,18 +30,28 @@
 
                         </span>
 
+                        {{-- Правая часть: автор, просмотры и лайки --}}
+                        <div class="flex items-center space-x-4 post-footer ">
 
-
-                        <div class="flex items-center space-x-4  post-footer">
-
-                            <div class="inline-flex items-center space-x-1">
-                                <i class="fas fa-calendar-day"></i>
-                                <span>{{ $post->updated_at->format('d.m.Y H:i') }}</span>
+                            {{-- Update_at --}}
+                            <div class="flex items-center">
+                                <div class="inline-flex items-center space-x-1">
+                                    <i class="fas fa-calendar-day"></i>
+                                    <span>{{ $post->updated_at->format('d.m.Y H:i') }}</span>
+                                </div>
                             </div>
 
-
+                            {{-- Edit --}}
+                            @if (Auth::check() && Auth::user()->hasPermission('posts_edit'))
+                                <div class="flex items-center">
+                                    <a href="{{ route('admin.post.edit', $post->id) }}" class="link link-hover">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
+
                     <hr class="separator">
 
 

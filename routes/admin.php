@@ -11,7 +11,7 @@ Route::get('/login-redirect', fn () => redirect()->route('admin.login.index'))
 Route::middleware('guest')->group(function () {
  
     Route::get('/login', App\Http\Controllers\Admin\Auth\IndexController::class)->name('admin.login.index');
-    Route::post('/login', App\Http\Controllers\Admin\Auth\StoreController::class)->name('admin.login.store');
+    Route::post('/login', App\Http\Controllers\Admin\Auth\StoreController::class)->middleware('throttle:login')->name('admin.login.store');
 });
 
 // Logout
