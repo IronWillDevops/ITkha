@@ -12,7 +12,19 @@
             @endif
 
             <div class="p-6 space-y-6">
-                <h1 class="post-header text-3xl font-bold">{{ $post->title }}</h1>
+                <h1 class="post-header text-3xl font-bold">{{ $post->title }}
+                    @if (Auth::check() && Auth::user()->hasPermission('posts_edit'))
+                        <a href="{{ route('admin.post.edit', $post->id) }}" class="link link-hover">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                    @endif
+                </h1>
+                {{-- Edit --}}
+
+                <div class="flex items-center">
+
+                </div>
+
 
                 <div class="flex flex-wrap items-center text-sm space-x-4 post-footer">
                     <div class="inline-flex items-center space-x-1">
@@ -63,6 +75,8 @@
                             <span>{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
                         @endauth
                     </span>
+
+
                 </div>
 
 

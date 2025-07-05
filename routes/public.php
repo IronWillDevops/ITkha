@@ -13,7 +13,8 @@ Route::redirect('/', '/posts');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', App\Http\Controllers\Public\Auth\Login\IndexController::class)->name('login');
-    Route::post('/login', App\Http\Controllers\Public\Auth\Login\StoreController::class)->name('login.store');
+    Route::post('/login', App\Http\Controllers\Public\Auth\Login\StoreController::class)->middleware('throttle:login')
+        ->name('login.store');;
 });
 
 
