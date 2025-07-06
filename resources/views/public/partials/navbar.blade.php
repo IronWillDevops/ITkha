@@ -1,8 +1,9 @@
 <header>
      <nav class="bg-surface text-text-primary shadow border-solid border-b-1 border-border">
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+           
             <a href="{{ route('public.post.index') }}" class="text flex items-center space-x-3 rtl:space-x-reverse">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
+                 <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
             </a>
             <button data-collapse-toggle="navbar-default" type="button"
                 class="nav-btn  nav-btn-hover inline-flex items-center p-2 w-10 h-10 justify-center text-sm  rounded-lg md:hidden"

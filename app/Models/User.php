@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\VerifyEmailNotification;
 use App\Notifications\ResetPasswordNotification;
+use App\PostStatus;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -113,7 +114,10 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         });
     }
-
+    public function publishedPosts()
+    {
+                return $this->hasMany(Post::class)->where('status', PostStatus::PUBLISHED->value)->paginate(26);
+    }
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -132,5 +136,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new ResetPasswordNotification($token));
     }
-
 }
