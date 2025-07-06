@@ -10,48 +10,14 @@
                 @csrf
 
                 {{-- Email --}}
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium" for="email">Your email</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-at"></i>
-                        </div>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your email"
-                            required />
+                <x-public.form.input.text type="email" name="email" text="Your email" placeholder="Your email"
+                    icon="fas fa-solid fa-at" />
+                {{-- Captcha --}}
+                <x-public.form.input.captcha name="captcha" text="Captcha" placeholder="Enter Captcha" />
 
-                    </div>
-                    @error('email')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium" for="captcha">Captcha</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <input type="text" name="captcha" id="captcha" class="input input-hover text-sm  block w-full ps-10 p-2.5 "
-                            placeholder="Enter Captcha" required />
-
-                    </div>
-                    <img src="{{ route('captcha.generate') }}" alt="CAPTCHA"
-                        onclick="this.src='{{ route('captcha.generate') }}?'+Math.random()" style="cursor:pointer;">
-                    <small>Click the image to reload the CAPTCHA</small>
-                    @error('captcha')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                {{-- Кнопка входа --}}
-                <button type="submit"
-                    class="input-btn input-btn-hover w-full font-medium  text-sm  px-5 py-2.5 text-center ">Reset
-                    password</button>
+                {{-- Submit --}}
+                <x-public.form.input.submit text="Reset password"/>
+                
             </form>
             <div class="mb-4">
                 <p class="mt-4  text-right text-sm text-text-secondary">

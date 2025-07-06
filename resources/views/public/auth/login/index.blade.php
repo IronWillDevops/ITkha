@@ -10,70 +10,35 @@
                 @csrf
 
                 {{-- Email --}}
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Your email</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-at"></i>
-                        </div>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your email"
-                            required />
+                <x-public.form.input.text type="email" name="email" text="Your email" placeholder="Your email"
+                    icon="fas fa-solid fa-at" />
 
-                    </div>
-                    @error('email')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+                {{-- Password --}}
+                <x-public.form.input.password name="password" text="Your password" placeholder="Your password"
+                    icon="fas fa-solid fa-lock" />
+                @error('error')
+                    <p class="text-error ">{{ $message }}</p>
+                @enderror
 
 
 
-                {{-- Пароль --}}
-
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Your password</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-lock"></i>
-                        </div>
-                        <input type="password" name="password" id="password" value="{{ old('password') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your password"
-                            required />
-                        <button type="button" onclick="togglePasswordVisibility('password', this)"
-                            class="absolute right-2 top-1/2 transform -translate-y-1/2  hover:text-text-hover focus:outline-none">
-                            <i class="fas fa-eye"></i>
-                        </button>
-
-                    </div>
-                    @error('password')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                    @error('error')
-                        <p class="text-error ">{{ $message }}</p>
-                    @enderror
-                </div>
 
 
-
-              
                 <div class="mb-4 flex items-center justify-between">
                     <label class="flex items-center">
                         <input id="remember" name="remember" type="checkbox" value="" class="w-4 h-4 rounded-sm"
                             {{ old('remember') ? 'checked' : '' }}>
                         <span class="ms-2 text-sm font-medium">Remember me</span>
                     </label>
-                    <a href="{{ route('public.auth.forgot.password.index') }}" class="text-sm link link-hover hover:underline">Forgot password?
+                    <a href="{{ route('public.auth.forgot.password.index') }}"
+                        class="text-sm link link-hover hover:underline">Forgot password?
 
                     </a>
                 </div>
 
                 {{-- Кнопка входа --}}
-                <button type="submit"
-                    class="input-btn input-btn-hover w-full font-medium  text-sm  px-5 py-2.5 text-center ">Log in</button>
+                <x-public.form.input.submit text="Log in" />
+
             </form>
 
             <p class="mt-4 text-right text-sm text-text-secondary">
@@ -85,6 +50,5 @@
 @endsection
 
 @push('scripts')
-
     @vite('resources/js/public/togglePasswordVisibility.js')
 @endpush

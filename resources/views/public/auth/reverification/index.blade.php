@@ -10,31 +10,13 @@
             <form method="POST" action="{{ route('public.auth.reverification.store') }}">
                 @csrf
 
-                {{-- Email --}}
-
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium">Your email</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-at"></i>
-                        </div>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your email"
-                            autocomplete="email" autofocus required />
-
-                    </div>
-                    @error('email')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
+                 {{-- Email --}}
+                <x-public.form.input.text type="email" name="email" text="Your email" placeholder="Your email"
+                    icon="fas fa-solid fa-at" />
 
                 {{-- Submit --}}
-                <button type="submit" class="w-full input-btn input-btn-hover py-2 px-4 rounded-lg transition">
-                    Resend Verification Email
-                </button>
+                <x-public.form.input.submit text=" Resend verification email" />
+                
             </form>
 
 

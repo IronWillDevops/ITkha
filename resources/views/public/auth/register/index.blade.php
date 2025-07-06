@@ -7,142 +7,31 @@
 
             <form method="POST" action="{{ route('public.auth.register.store') }}">
                 @csrf
-
                 {{-- Name --}}
+                <x-public.form.input.text type="text" name="name" text="Your name" placeholder="Your name"
+                    icon="fas fa-solid fa-user" />
+                {{-- SurName --}}
+                <x-public.form.input.text type="text" name="surname" text="Your surname" placeholder="Your surname"
+                    icon="fas fa-solid fa-user" />
+                {{-- Login --}}
+                <x-public.form.input.text type="text" name="login" text="Your login" placeholder="Your login"
+                    icon="fas fa-solid fa-user" />
+                {{-- Email --}}
+                <x-public.form.input.text type="email" name="email" text="Your email" placeholder="Your email"
+                    icon="fas fa-solid fa-at" />
 
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium" for="name">Your name</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid  fa-user"></i>
-                        </div>
-                        <input type="text" name="name" id="name" value="{{ old('name') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your name" required />
+                {{-- Password --}}
+                <x-public.form.input.password name="password" text="Your password" placeholder="Your password"
+                    icon="fas fa-solid fa-lock" />
+                {{-- Password --}}
+                <x-public.form.input.password name="password_confirmation" text="Confirmation password"
+                    placeholder="Repeat password" icon="fas fa-solid fa-lock" />
 
-                    </div>
-                    @error('name')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium" for="surname">Your surname</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-user"></i>
-                        </div>
-                        <input type="text" name="surname" id="surname" value="{{ old('surname') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your surname"
-                            required />
-
-                    </div>
-                    @error('surname')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium" for="login">Your login</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-user"></i>
-                        </div>
-                        <input type="text" name="login" id="login" value="{{ old('login') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your login"
-                            required />
-
-                    </div>
-                    @error('login')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium" for="email">Your email</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-at"></i>
-                        </div>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your email"
-                            required />
-
-                    </div>
-                    @error('email')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium" for="password">Your password</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-lock"></i>
-                        </div>
-                        <input type="password" name="password" id="password" value="{{ old('password') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Your password"
-                            required />
-                        <button type="button" onclick="togglePasswordVisibility('password', this)"
-                            class="absolute right-2 top-1/2 transform -translate-y-1/2  hover:text-text-hover focus:outline-none">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                    @error('password')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium" for="password_confirmation">Confirmation password</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-solid fa-lock"></i>
-                        </div>
-                        <input type="password" name="password_confirmation" id="password_confirmation"
-                            value="{{ old('password_confirmation') }}"
-                            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="Confirmation password"
-                            required />
-                        <button type="button" onclick="togglePasswordVisibility('password_confirmation', this)"
-                            class="absolute right-2 top-1/2 transform -translate-y-1/2  hover:text-text-hover focus:outline-none">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                    @error('password_confirmation')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium"  for="captcha">Captcha</label>
-                    <div class="relative mb-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <input type="text" name="captcha"  id="captcha" class="input input-hover text-sm  block w-full ps-10 p-2.5 "
-                            placeholder="Enter Captcha" required />
-
-                    </div>
-                    <img src="{{ route('captcha.generate') }}" alt="CAPTCHA"
-                        onclick="this.src='{{ route('captcha.generate') }}?'+Math.random()" style="cursor:pointer;">
-                    <small>Click the image to reload the CAPTCHA</small>
-                    @error('captcha')
-                        <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+                {{-- Captcha --}}
+                <x-public.form.input.captcha name="capthca" text="Captcha" placeholder="Enter Captcha" />
 
                 {{-- Submit --}}
-                <button type="submit" class="w-full input-btn input-btn-hover py-2 px-4 rounded-lg transition">
-                    Register
-                </button>
+                <x-public.form.input.submit text="Register"/>
             </form>
 
             <p class="mt-4 text-right text-sm text-text-secondary">

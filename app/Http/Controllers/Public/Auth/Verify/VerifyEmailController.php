@@ -26,6 +26,7 @@ class VerifyEmailController extends Controller
         if ($user->status !== UserStatus::ACTIVE->value) {
             $user->status = UserStatus::ACTIVE->value;
             $user->save();
+           
         }
         $user->markEmailAsVerified();
         event(new Verified($user));
