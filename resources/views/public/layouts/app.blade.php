@@ -41,6 +41,7 @@
                 <aside class="w-full lg:w-1/5 ">
                     @include('public.partials.sidebar')
                 </aside>
+                     
             @else
                 <div class="w-full">
                     @yield('public.content')
