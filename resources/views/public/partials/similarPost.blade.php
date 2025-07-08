@@ -1,4 +1,4 @@
- <section class="mt-12 bg-surface rounded-2xl border border-border">
+ <section class=" bg-surface rounded-2xl border border-border">
      <div class="p-6">
          <h2 class="text-2xl font-semibold mb-6">Similar posts</h2>
          <div class="text grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -8,7 +8,7 @@
              class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="{{ $placeholder }}"
              @if ($required) required @endif />
      </div>
-     @error($name )
+     @error($name)
          <div class=" mb-2 text-sm text-error rounded-lg" role="alert">
              {{ $message }}
          </div>

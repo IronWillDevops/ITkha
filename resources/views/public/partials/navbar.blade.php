@@ -1,9 +1,9 @@
 <header>
-     <nav class="bg-surface text-text-primary shadow border-solid border-b-1 border-border">
+    <nav class="bg-surface text-text-primary shadow border-solid border-b-1 border-border">
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
-           
+
             <a href="{{ route('public.post.index') }}" class="text flex items-center space-x-3 rtl:space-x-reverse">
-                 <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
             </a>
             <button data-collapse-toggle="navbar-default" type="button"
                 class="nav-btn  nav-btn-hover inline-flex items-center p-2 w-10 h-10 justify-center text-sm  rounded-lg md:hidden"
@@ -31,7 +31,7 @@
                         <a href="{{ route('public.pages.contact.index') }}"
                             class="block py-2 px-3 nav-btn nav-btn-hover  rounded-sm md:bg-transparent md:p-0">Contact</a>
                     </li>
-                    
+
                     @auth
                         <li class="relative max-w-28">
                             <button id="userMenuButton" type="button"
@@ -142,19 +142,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             const userMenuButton = document.getElementById('userMenuButton');
             const userDropdown = document.getElementById('userDropdown');
+            if (userMenuButton && userDropdown) {
+                // Клік на кнопку: відкриття/закриття меню
+                userMenuButton.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    userDropdown.classList.toggle('hidden');
+                });
 
-            // Клік на кнопку: відкриття/закриття меню
-            userMenuButton.addEventListener('click', function(event) {
-                event.stopPropagation();
-                userDropdown.classList.toggle('hidden');
-            });
 
-            // Клік поза меню: закриття
-            document.addEventListener('click', function(event) {
-                if (!userDropdown.contains(event.target) && !userMenuButton.contains(event.target)) {
-                    userDropdown.classList.add('hidden');
-                }
-            });
+                // Клік поза меню: закриття
+                document.addEventListener('click', function(event) {
+                    if (!userDropdown.contains(event.target) && !userMenuButton.contains(event.target)) {
+                        userDropdown.classList.add('hidden');
+                    }
+                });
+            }
         });
     </script>
 @endpush

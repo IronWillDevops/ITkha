@@ -51,7 +51,7 @@
             </h4>
 
             <p class="mb-4 post-content  leading-normal font-light break-words">
-                {!! highlight(Str::limit(strip_tags(html_entity_decode($post->content)), 450), request('search')) !!}
+                {!! highlight(Str::limit(strip_tags(html_entity_decode($post->content)), 450), request('search')) !!} 
             </p>
 
         </div>

@@ -28,7 +28,7 @@
                     placeholder="Repeat password" icon="fas fa-solid fa-lock" />
 
                 {{-- Captcha --}}
-                <x-public.form.input.captcha name="capthca" text="Captcha" placeholder="Enter Captcha" />
+                <x-public.form.input.captcha name="captcha" text="Captcha" placeholder="Enter Captcha" />
 
                 {{-- Submit --}}
                 <x-public.form.input.submit text="Register"/>

@@ -75,8 +75,6 @@
                             <span>{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
                         @endauth
                     </span>
-
-
                 </div>
 
 
