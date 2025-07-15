@@ -4,7 +4,7 @@
         <div class="relative flex-grow min-w-52 ">
             <div class="">
                 <input type="search" name="search" value="{{ request('search') }}"
-                    placeholder="Search by title and content"
+                    placeholder="{{ __('filter.search') }}"
                     class="filter filter-hover w-full rounded px-3 py-2 pl-10 " autocomplete="off" id="search-input" />
                 <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 "></i>
             </div>
@@ -15,7 +15,7 @@
             <button type="button" class="filter filter-hover  rounded px-3 py-2 flex items-center space-x-2 h-10"
                 onclick="document.getElementById('category-dropdown').classList.toggle('hidden')" aria-haspopup="true"
                 aria-expanded="false">
-                <span>Categories</span>
+                <span>{{ __('filter.category') }}</span>
                 <i class="fa fa-angle-down "></i>
             </button>
 
@@ -25,7 +25,7 @@
                     <input type="radio" name="category" value=""
                         onchange="document.getElementById('filter-form').submit()" class="mr-2"
                         {{ request('category') === null || request('category') === '' ? 'checked' : '' }} />
-                    <span>All categories</span>
+                    <span>{{ __('filter.all_category') }}</span>
                 </label>
                 @foreach ($categories as $category)
                     <label class="flex items-center px-3 py-1 filter-item cursor-pointer select-none">
@@ -43,7 +43,7 @@
             <button type="button" class="filter filter-hover  rounded px-3 py-2 flex items-center space-x-2 h-10"
                 onclick="document.getElementById('tags-dropdown').classList.toggle('hidden')" aria-haspopup="true"
                 aria-expanded="false">
-                <span>Tags</span>
+                <span>{{ __('filter.tag') }}</span>
                 <i class="fa fa-angle-down"></i>
             </button>
             <div id="tags-dropdown"
@@ -63,25 +63,25 @@
         <div class="relative ">
             <button type="button" onclick="document.getElementById('sort-by-dropdown').classList.toggle('hidden')"
                 class="filter filter-hover rounded px-3 py-2 flex  items-center justify-center h-10"
-                aria-haspopup="true" aria-expanded="false" title="Sort by">
+                aria-haspopup="true" aria-expanded="false" title="{{ __('filter.sort.label') }}">
                 <i class="fa fa-list"></i>
             </button>
             <select name="sort_by" id="sort-by-dropdown"
                 class="hidden absolute z-20 mt-1 w-48 rounded shadow bg-surface border p-3"
                 onchange="document.getElementById('filter-form').submit()" size="4" style="cursor:pointer;">
                 <option class="filter-item" value="id" {{ request('sort_by') == 'id' ? 'selected' : '' }}>
-                    ID</option>
-                <option class="filter-item" value="title" {{ request('sort_by') == 'title' ? 'selected' : '' }}>Назва
+                    {{ __('filter.sort.options.id') }}</option>
+                <option class="filter-item" value="title" {{ request('sort_by') == 'title' ? 'selected' : '' }}>{{ __('filter.sort.options.title') }}
                 </option>
                 <option class="filter-item" value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>
-                    Дата створення
+                    {{ __('filter.sort.options.create_at') }}
                 </option>
             </select>
         </div>
 
         <!-- Кнопка напрямку сортування (asc/desc) -->
         <button type="button" class="filter filter-hover  rounded px-3 py-2 flex items-center justify-center h-10"
-            title="Change direct sorting" onclick="toggleSortDir()">
+            title="{{ __('filter.sort.direction') }}" onclick="toggleSortDir()">
             @if (request('sort_dir') === 'desc')
                 <i class="fas fa-sort-alpha-down-alt"></i>
             @else
@@ -92,7 +92,7 @@
         <!-- Кнопка скидання фільтрів з іконкою -->
         <a href="{{ route('public.post.index') }}"
             class="filter filter-hover  px-3 py-2 rounded  flex items-center justify-center h-10"
-            title="Reset filter">
+            title="{{ __('filter.reset') }}">
             <i class="fa fa-times icon-danger"></i>
         </a>
 

@@ -10,19 +10,19 @@
                 @csrf
 
                 {{-- Email --}}
-                <x-public.form.input.text type="email" name="email" text="Your email" placeholder="Your email"
+                <x-public.form.input.text type="email" name="email" text="{{ __('form.common.email') }}" placeholder="{{ __('form.common.email') }}"
                     icon="fas fa-solid fa-at" />
                 {{-- Captcha --}}
-                <x-public.form.input.captcha name="captcha" text="Captcha" placeholder="Enter Captcha" />
+                <x-public.form.input.captcha name="captcha" text="{{ __('form.common.captcha') }}" placeholder="{{ __('form.common.captcha') }}" />
 
                 {{-- Submit --}}
-                <x-public.form.input.submit text="Reset password"/>
+                <x-public.form.input.submit text="{{ __('form.forgot.submit') }}"/>
                 
             </form>
             <div class="mb-4">
                 <p class="mt-4  text-right text-sm text-text-secondary">
-                    Remember your password?
-                    <a href="{{ route('login') }}" class="link link-hover hover:underline">Log in</a>
+                   {{ __('form.common.remember_your_password') }}
+                    <a href="{{ route('login') }}" class="link link-hover hover:underline">{{ __('form.login.submit') }}</a>
                 </p>
             </div>
 

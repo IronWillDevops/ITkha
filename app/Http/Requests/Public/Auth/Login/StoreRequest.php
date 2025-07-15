@@ -21,21 +21,23 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
-       return [
-            'email' => ['required', 'string', 'email'],
+        return [
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string'],
         ];
     }
     public function messages(): array
     {
         return [
+            'email.required' => __('validation.email_required'),
+            'email.string' => __('validation.email_string'),
+            'email.email' => __('validation.email_email'),
+            'email.max' => __('validation.email_max'),
 
-            'email.required' => 'Email є обов’язковим.',
-            'email.string' => 'Email повинен бути текстовим.',
-            'email.email' => 'Email повинен бути дійсною адресою.',
 
-            'password.required' => 'Пароль є обов’язковим.',
-            'password.string' => 'Пароль повинен бути текстовим.',
+
+            'password.required' => __('validation.password_required'),
+            'password.string' => __('validation.password_string'),
         ];
     }
 }

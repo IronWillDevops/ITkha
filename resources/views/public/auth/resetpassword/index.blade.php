@@ -5,7 +5,7 @@
 
         <div class="w-full max-w-md p-8 text-text-primary bg-surface rounded-2xl">
             <h2 class="text-2xl font-bold text-center mb-6">{{ config('app.name') }}</h2>
-            <p class="mb-2 text-sm">Your new password must be different from previous used passwords.</p>
+            <p class="mb-2 text-sm">{{ __('form.reset.different_password') }}</p>
             <form method="POST" action="{{ route('public.auth.reset.password.store') }}">
                 @csrf
 
@@ -15,21 +15,21 @@
 
 
                 {{-- Password --}}
-                <x-public.form.input.password name="password" text="Your new password" placeholder="Your new password"
+                <x-public.form.input.password name="password" text="{{ __('form.common.password') }}" placeholder="{{ __('form.common.password') }}"
                     icon="fas fa-solid fa-lock" />
 
                 {{-- Password confirmation --}}
-                <x-public.form.input.password name="password_confirmation" text="Confirmation new password"
+                <x-public.form.input.password name="{{ __('form.common.password_repeat') }}" text="{{ __('form.common.password_repeat') }}"
                     placeholder="Repeat new password" icon="fas fa-solid fa-lock" />
 
                 {{-- Submit --}}
-                <x-public.form.input.submit text="Reset password" />
+                <x-public.form.input.submit text="{{ __('form.reset.submit') }}" />
 
             </form>
             <div class="mb-4">
                 <p class="mt-4  text-right text-sm text-text-secondary">
-                    Remember your password?
-                    <a href="{{ route('login') }}" class="link link-hover hover:underline">Log in</a>
+                    {{ __('form.common.remember_your_password') }}
+                    <a href="{{ route('login') }}" class="link link-hover hover:underline">{{ __('form.login.submit') }}</a>
                 </p>
             </div>
 

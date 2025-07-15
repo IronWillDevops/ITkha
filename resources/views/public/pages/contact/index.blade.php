@@ -7,29 +7,27 @@
             @csrf
 
             {{-- Name --}}
-            <x-public.form.input.text type="text" name="name" text="Your name" placeholder="Your name"
-                icon="fas fa-solid fa-user" />
+            <x-public.form.input.text type="text" name="name" text="{{ __('form.common.name') }}"
+                placeholder="{{ __('form.common.name') }}" icon="fas fa-solid fa-user" />
 
             {{-- Email --}}
-            <x-public.form.input.text type="email" name="email" text="Your email" placeholder="Your email"
-                icon="fas fa-solid fa-at" />
+            <x-public.form.input.text type="email" name="email" text="{{ __('form.common.email') }}"
+                placeholder="{{ __('form.common.email') }}" icon="fas fa-solid fa-at" />
 
             {{-- Subject --}}
-            <x-public.form.input.text type="text" name="subject" text="Your subject" placeholder="Your subject"
+            <x-public.form.input.text type="text" name="subject" text="{{ __('form.contact_us.subject') }}" placeholder="{{ __('form.contact_us.subject') }}"
                 icon="fas fa-envelope" />
-            
-                {{-- Message --}}
-            <x-public.form.input.area name="message" text="Your message" placeholder="Your message" />
 
-
+            {{-- Message --}}
+            <x-public.form.input.area name="message" text="{{ __('form.contact_us.message') }}" placeholder="{{ __('form.contact_us.message') }}" />
 
             {{-- Captcha --}}
-            <x-public.form.input.captcha name="captcha" text="Captcha" placeholder="Enter Captcha" />
+            <x-public.form.input.captcha name="captcha" text="{{ __('form.common.captcha') }}"
+                placeholder="{{ __('form.common.captcha') }}" />
 
 
-            <button type="submit"
-                class="input-btn input-btn-hover font-medium  text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Send</button>
-        </form>
+            <x-public.form.input.submit text="{{ __('form.contact_us.submit') }}" />
+
 
     </div>
 

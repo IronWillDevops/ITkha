@@ -23,7 +23,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'token'    => ['required'],
-            'email'    => ['required', 'string', 'email'],
+            'email'    => ['required', 'string', 'email','max:255'],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
         ];
     }
@@ -31,17 +31,18 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'token.required' => 'Токен скидання пароля є обов’язковим.',
+            'token.required' => __('validation.token_required'),
 
-            'email.required' => 'Email є обов’язковим.',
-            'email.string' => 'Email повинен бути текстовим.',
-            'email.email' => 'Email повинен бути дійсною адресою.',
+            'email.required' => __('validation.email_required'),
+            'email.string' => __('validation.email_string'),
+            'email.email' => __('validation.email_email'),
+            'email.max' => __('validation.email_max'),
 
-            'password.required' => 'Пароль є обов’язковим.',
-            'password.string' => 'Пароль повинен бути текстовим.',
-            'password.min' => 'Пароль повинен містити щонайменше :min символів.',
-            'password.max' => 'Пароль повинен містити щонайбільше :max символів.',
-            'password.confirmed' => 'Паролі не співпадають.',
+            'password.required' => __('validation.password_required'),
+            'password.string' => __('validation.password_string'),
+            'password.min' => __('validation.password_min'),
+            'password.max' => __('validation.password_max'),
+            'password.confirmed' => __('validation.password_confirmed'),
         ];
     }
 }
