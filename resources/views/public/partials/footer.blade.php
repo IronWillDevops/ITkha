@@ -3,11 +3,12 @@
         <span class=" text-sm sm:text-center">
             &copy; 2024 - {{ date('Y') }} {{ config('app.name') }}. All Rights Reserved.
         </span>
-        <div class="flex mt-4 sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse ">
-            <a href=#>EN</a>
-            <a href=#>UA</a> 
+        <div class="flex mt-4 sm:justify-center md:mt-0 space-x-2 rtl:space-x-reverse ">
+            <a href="{{ route('locale.switch', ['locale' => 'en']) }}" class="link link-hover">EN</a>
+            <a href="{{ route('locale.switch', ['locale' => 'uk']) }}" class="link link-hover">UK</a>
+
             @foreach (\App\Models\SocialLink::all() as $link)
-                <a href="{{ $link->url }}" class="footer-btn footer-btn-hover" alt="{{ $link->title }}">
+                <a href="{{ $link->url }}" class="footer-btn footer-btn-hover " alt="{{ $link->title }}">
                     <i class=" fab {{ $link->icon }}"></i>
                 </a>
             @endforeach

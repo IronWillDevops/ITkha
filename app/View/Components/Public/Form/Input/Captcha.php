@@ -12,14 +12,10 @@ class Captcha extends Component
      * Create a new component instance.
      */
     public string $name;
-    public string $text;
-    public string $placeholder;
 
-    public function __construct(string $name, string $text, string $placeholder = '')
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->text = $text;
-        $this->placeholder = $placeholder;
     }
 
     /**

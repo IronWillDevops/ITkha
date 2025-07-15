@@ -1,12 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
-
-use Illuminate\Auth\Events\Verified;
-
+use Illuminate\Support\Facades\Session;
 // Redirect from root to /posts
 Route::redirect('/', '/posts');
 
@@ -23,6 +19,8 @@ Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\
     ->name('verification.verify');
 Route::get('/captcha', App\Http\Controllers\Public\Auth\Captcha\CaptchaController::class)->name('captcha.generate');
 
+Route::get('/locale/{locale}', App\Http\Controllers\Public\Language\LocaleController::class)
+    ->name('locale.switch');
 
 
 Route::prefix('/auth')

@@ -10,17 +10,14 @@
     <div class="p-6 w-full flex flex-col h-full">
         <div class="flex justify-between items-center mb-6">
 
-            {{-- Левая часть: ссылка "Read more" --}}
-
+            {{-- Левая часть: --}}
             <span class="inline-block  post-category rounded-full px-3 py-1 text-sm font-semibold  ">
                 <i class="fas fa-tag mr-1"></i>
                 {{ $post->category->title }}
-
             </span>
 
             {{-- Правая часть: Update_at Edit_post --}}
             <div class="flex items-center space-x-4 post-footer ">
-
                 {{-- Update_at --}}
                 <div class="flex items-center">
                     <div class="inline-flex items-center space-x-1">
@@ -75,7 +72,7 @@
             {{-- Левая часть: ссылка "Read more" --}}
             <a href="{{ route('public.post.show', $post->id) }}"
                 class="link link-hover font-semibold text-sm  flex items-center">
-                Read more
+                {{ __('post.read_more') }}
                 <i class="fas fa-link ml-2"></i>
             </a>
 
@@ -111,8 +108,6 @@
                     <i class="fas fa-heart mr-1"></i>
                     <span>{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
                 @endauth
-
-
             </div>
         </div>
     </div>

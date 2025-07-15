@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255'],
             'captcha' => ['required', function ($attribute, $value, $fail) {
                 if ($value !== session('captcha')) {
-                    $fail('Невірна капча.');
+                    $fail(__('validation.captcha_incorrect'));
                 }
             }],
         ];
@@ -34,12 +34,12 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'Email є обов’язковим.',
-            'email.string' => 'Email повинен бути текстовим.',
-            'email.email' => 'Email повинен бути дійсною адресою.',
-            'email.max' => 'Email не повинен перевищувати :max символів.',
+            'email.required' => __('validation.email_required'),
+            'email.string' => __('validation.email_string'),
+            'email.email' => __('validation.email_email'),
+            'email.max' => __('validation.email_max'),
 
-            'captcha.required' => 'Введіть капчу.',
+            'captcha.required' => __('validation.captcha_required'),
         ];
     }
 }

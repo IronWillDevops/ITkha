@@ -16,7 +16,7 @@
             <div class="border border-border bg-surface text-text-primary shadow  p-4 rounded-lg">
                 <h3 class="text-xl font-semibold mb-4">
                     <i class=" fas fa-newspaper mr-3"></i>
-                    Top 5 posts
+                    {{ __('post.top_posts') }}
                 </h3>
                 <ul class="space-y-2">
                     @foreach ($popularPosts as $post)

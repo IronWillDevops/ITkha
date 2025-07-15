@@ -8,35 +8,34 @@
             <form method="POST" action="{{ route('public.auth.register.store') }}">
                 @csrf
                 {{-- Name --}}
-                <x-public.form.input.text type="text" name="name" text="Your name" placeholder="Your name"
+                <x-public.form.input.text type="text" name="name" text="{{ __('form.common.name') }}" placeholder="{{  __('form.common.name')}}"
                     icon="fas fa-solid fa-user" />
                 {{-- SurName --}}
-                <x-public.form.input.text type="text" name="surname" text="Your surname" placeholder="Your surname"
+                <x-public.form.input.text type="text" name="surname" text="{{ __('form.common.surname') }}" placeholder="{{ __('form.common.surname') }}"
                     icon="fas fa-solid fa-user" />
                 {{-- Login --}}
-                <x-public.form.input.text type="text" name="login" text="Your login" placeholder="Your login"
+                <x-public.form.input.text type="text" name="login" text="{{ __('form.common.login') }}" placeholder="{{ __('form.common.login') }}"
                     icon="fas fa-solid fa-user" />
                 {{-- Email --}}
-                <x-public.form.input.text type="email" name="email" text="Your email" placeholder="Your email"
+                <x-public.form.input.text type="email" name="email" text="{{ __('form.common.email') }}" placeholder="{{ __('form.common.email') }}"
                     icon="fas fa-solid fa-at" />
 
                 {{-- Password --}}
-                <x-public.form.input.password name="password" text="Your password" placeholder="Your password"
+                <x-public.form.input.password name="password" text="{{ __('form.common.password') }}" placeholder="{{ __('form.common.password') }}"
                     icon="fas fa-solid fa-lock" />
                 {{-- Password --}}
-                <x-public.form.input.password name="password_confirmation" text="Confirmation password"
+                <x-public.form.input.password name="{{ __('form.common.password_repeat') }}" text="{{ __('form.common.password_repeat') }}"
                     placeholder="Repeat password" icon="fas fa-solid fa-lock" />
 
                 {{-- Captcha --}}
-                <x-public.form.input.captcha name="captcha" text="Captcha" placeholder="Enter Captcha" />
-
+                <x-public.form.input.captcha name="captcha" />
                 {{-- Submit --}}
-                <x-public.form.input.submit text="Register"/>
+                <x-public.form.input.submit text="{{ __('form.register.submit') }}"/>
             </form>
 
             <p class="mt-4 text-right text-sm text-text-secondary">
-                Already have an account?
-                <a href="{{ route('login') }}" class="link link-hover hover:underline">Login</a>
+                {{ __('form.common.already_have_an_account') }}
+                <a href="{{ route('login') }}" class="link link-hover hover:underline">{{ __('form.login.submit') }}</a>
             </p>
         </div>
     </div>

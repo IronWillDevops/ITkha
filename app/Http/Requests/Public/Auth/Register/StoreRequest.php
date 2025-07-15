@@ -39,32 +39,33 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Ім’я є обов’язковим.',
-            'name.string' => 'Ім’я повинно бути текстовим.',
-            'name.max' => 'Ім’я не повинно перевищувати :max символів.',
 
-            'surname.string' => 'Ім’я повинно бути текстовим.',
-            'surname.max' => 'Ім’я не повинно перевищувати :max символів.',
+            'name.required' => __('validation.name_required'),
+            'name.string' => __('validation.name_string'),
+            'name.max' => __('validation.name_max'),
 
-            'login.required' => 'Login є обов’язковим.',
-            'login.string' => 'Login повинен бути текстовим.',
-            'login.min' => 'Login повинен містити щонайменше :min символів.',
-            'login.max' => 'Login повинен містити щонайбільше :max символів.',
-            'login.unique' => 'Користувач з таким login вже існує.',
+            'surname.string' => __('validation.surname_string'),
+            'surname.max' => __('validation.surname_max'),
 
-            'email.required' => 'Email є обов’язковим.',
-            'email.string' => 'Email повинен бути текстовим.',
-            'email.email' => 'Email повинен бути дійсною адресою.',
-            'email.max' => 'Email не повинен перевищувати :max символів.',
-            'email.unique' => 'Користувач з таким email вже існує.',
+            'login.required' => __('validation.login_required'),
+            'login.string' => __('validation.login_string'),
+            'login.min' => __('validation.login_min'),
+            'login.max' => __('validation.login_max'),
+            'login.unique' => __('validation.login_unique'),
 
-            'password.required' => 'Пароль є обов’язковим.',
-            'password.string' => 'Пароль повинен бути текстовим.',
-            'password.min' => 'Пароль повинен містити щонайменше :min символів.',
-            'password.max' => 'Пароль повинен містити щонайбільше :max символів.',
-            'password.confirmed' => 'Паролі не співпадають.',
+            'email.required' => __('validation.email_required'),
+            'email.string' => __('validation.email_string'),
+            'email.email' => __('validation.email_email'),
+            'email.max' => __('validation.email_max'),
+            'email.unique' => __('validation.email_unique'),
 
-            'captcha.required' => 'Введіть капчу.',
+            'password.required' => __('validation.password_required'),
+            'password.string' => __('validation.password_string'),
+            'password.min' => __('validation.password_min'),
+            'password.max' => __('validation.password_max'),
+            'password.confirmed' => __('validation.password_confirmed'),
+
+            'captcha.required' => __('validation.captcha_required'),
         ];
     }
 }

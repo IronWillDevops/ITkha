@@ -8,7 +8,7 @@
             <button data-collapse-toggle="navbar-default" type="button"
                 class="nav-btn  nav-btn-hover inline-flex items-center p-2 w-10 h-10 justify-center text-sm  rounded-lg md:hidden"
                 aria-controls="navbar-default" aria-expanded="false">
-                <span class="sr-only">Open main menu</span>
+                <span class="sr-only"></span>
                 <i class="fas fa-bars fa-2x"></i>
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -16,7 +16,7 @@
                     class="font-medium md:items-center md:justify-between flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
                     <li>
                         <button id="theme-toggle" type="button" class="nav-btn nav-btn-hover rounded-lg text-sm p-1.5"
-                            aria-label="Перемкнути тему">
+                            aria-label="Change theme">
                             <div id="theme-toggle-dark-icon"><i class="fas fa-moon hidden fa-lg"></i></div>
                             <div id="theme-toggle-light-icon"><i class="fas fa-sun hidden fa-lg"></i></div>
                         </button>
@@ -24,12 +24,12 @@
                     <li>
                         <a href="{{ route('public.post.index') }}"
                             class="block py-2 px-3 nav-btn nav-btn-hover  rounded-sm md:bg-transparent md:p-0 "
-                            aria-current="page">Home</a>
+                            aria-current="page">{{ __('header.main') }}</a>
                     </li>
 
                     <li>
                         <a href="{{ route('public.pages.contact.index') }}"
-                            class="block py-2 px-3 nav-btn nav-btn-hover  rounded-sm md:bg-transparent md:p-0">Contact</a>
+                            class="block py-2 px-3 nav-btn nav-btn-hover  rounded-sm md:bg-transparent md:p-0">{{ __('header.contact_us') }}</a>
                     </li>
 
                     @auth
@@ -52,23 +52,19 @@
                             <div id="userDropdown"
                                 class="absolute hidden bg-surface shadow-lg mt-2 right-0 w-48 rounded-md z-50 border border-border overflow-hidden">
                                 <a href="{{ route('public.user.show', Auth::user()->id) }}"
-                                    class="block px-4 py-3 text-sm nav-btn nav-btn-hover">Profile</a>
+                                    class="block px-4 py-3 text-sm nav-btn nav-btn-hover">{{ __('header.auth.profile') }}</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit"
-                                        class="w-full text-left block px-4 py-3 text-sm nav-btn nav-btn-hover cursor-pointer">Logout</button>
+                                        class="w-full text-left block px-4 py-3 text-sm nav-btn nav-btn-hover cursor-pointer">{{ __('header.auth.logout') }}</button>
                                 </form>
                             </div>
                         </li>
                     @endauth
-
-
-
                     @guest
                         <li>
                             <a href="{{ route('login') }}"
-                                class="block py-2 px-3 nav-btn nav-btn-hover rounded-sm md:bg-transparent md:p-0">Log
-                                in</a>
+                                class="block py-2 px-3 nav-btn nav-btn-hover rounded-sm md:bg-transparent md:p-0">{{ __('header.auth.login') }}</a>
                         </li>
                     @endguest
 
@@ -76,8 +72,6 @@
             </div>
         </div>
     </nav>
-
-
 </header>
 
 
