@@ -21,7 +21,7 @@
             </form>
             <div class="mb-4">
                 <p class="mt-4  text-right text-sm text-text-secondary">
-                   {{__('form.common.remember_your_password') }}
+                   {{ __('form.common.remember_your_password') }}
                     <a href="{{ route('login') }}" class="link link-hover hover:underline">{{ __('form.login.submit') }}</a>
                 </p>
             </div>

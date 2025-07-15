@@ -3,7 +3,7 @@
 return [
     'search' => 'Search by title and content',
     'category' => 'Categories',
-    'all_category'=>'All category',
+    'all_category'=>'All categories',
     'tag' => 'Tags',
 
     'sort' => [
