@@ -9,10 +9,14 @@ return [
         'liked_posts' => [
             'title' => 'Liked Posts',
             'description' => 'List of saved posts',
+        ], 
+        'favorite_posts' => [
+            'title' => 'Favorite Posts',
+            'description' => 'List of favorite publications',
         ],
         'edit_profile' => [
             'title' => 'Profile Settings',
-            'description' => 'Change email, name, language, etc.',
+            'description' => 'Change name, surname etc.',
         ],
     ],
 
