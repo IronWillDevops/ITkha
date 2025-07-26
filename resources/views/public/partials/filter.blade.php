@@ -4,8 +4,8 @@
         <div class="relative flex-grow min-w-52 ">
             <div class="">
                 <input type="search" name="search" value="{{ request('search') }}"
-                    placeholder="{{ __('filter.search') }}"
-                    class="filter filter-hover w-full rounded px-3 py-2 pl-10 " autocomplete="off" id="search-input" />
+                    placeholder="{{ __('filter.search') }}" class="filter filter-hover w-full rounded px-3 py-2 pl-10 "
+                    autocomplete="off" id="search-input" />
                 <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 "></i>
             </div>
         </div>
@@ -37,28 +37,28 @@
                 @endforeach
             </div>
         </div>
-
-        <!-- Теги у вигляді dropdown з чекбоксами -->
-        <div class="relative" style="position: relative;">
-            <button type="button" class="filter filter-hover  rounded px-3 py-2 flex items-center space-x-2 h-10"
-                onclick="document.getElementById('tags-dropdown').classList.toggle('hidden')" aria-haspopup="true"
-                aria-expanded="false">
-                <span>{{ __('filter.tag') }}</span>
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <div id="tags-dropdown"
-                class="hidden absolute z-10 mt-1 w-48 bg-surface border p-3 rounded shadow max-h-60 overflow-auto">
-                @foreach ($tags as $tag)
-                    <label class="flex items-center px-3 py-1 filter-item cursor-pointer select-none">
-                        <input type="checkbox" name="tags[]" value="{{ $tag->title }}"
-                            onchange="document.getElementById('filter-form').submit()" class="mr-2 "
-                            {{ collect(request('tags'))->contains($tag->title) ? 'checked' : '' }} />
-                        <span>{{ $tag->title }}</span>
-                    </label>
-                @endforeach
+        @if ($tags->isNotEmpty())
+            <!-- Теги у вигляді dropdown з чекбоксами -->
+            <div class="relative" style="position: relative;">
+                <button type="button" class="filter filter-hover  rounded px-3 py-2 flex items-center space-x-2 h-10"
+                    onclick="document.getElementById('tags-dropdown').classList.toggle('hidden')" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span>{{ __('filter.tag') }}</span>
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <div id="tags-dropdown"
+                    class="hidden absolute z-10 mt-1 w-48 bg-surface border p-3 rounded shadow max-h-60 overflow-auto">
+                    @foreach ($tags as $tag)
+                        <label class="flex items-center px-3 py-1 filter-item cursor-pointer select-none">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->title }}"
+                                onchange="document.getElementById('filter-form').submit()" class="mr-2 "
+                                {{ collect(request('tags'))->contains($tag->title) ? 'checked' : '' }} />
+                            <span>{{ $tag->title }}</span>
+                        </label>
+                    @endforeach
+                </div>
             </div>
-        </div>
-
+        @endif
         <!-- Сортування: поле з кнопкою іконкою -->
         <div class="relative ">
             <button type="button" onclick="document.getElementById('sort-by-dropdown').classList.toggle('hidden')"
@@ -71,9 +71,11 @@
                 onchange="document.getElementById('filter-form').submit()" size="4" style="cursor:pointer;">
                 <option class="filter-item" value="id" {{ request('sort_by') == 'id' ? 'selected' : '' }}>
                     {{ __('filter.sort.options.id') }}</option>
-                <option class="filter-item" value="title" {{ request('sort_by') == 'title' ? 'selected' : '' }}>{{ __('filter.sort.options.title') }}
+                <option class="filter-item" value="title" {{ request('sort_by') == 'title' ? 'selected' : '' }}>
+                    {{ __('filter.sort.options.title') }}
                 </option>
-                <option class="filter-item" value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>
+                <option class="filter-item" value="created_at"
+                    {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>
                     {{ __('filter.sort.options.create_at') }}
                 </option>
             </select>

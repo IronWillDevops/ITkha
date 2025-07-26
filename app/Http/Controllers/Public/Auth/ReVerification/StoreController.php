@@ -25,13 +25,13 @@ class StoreController extends Controller
 
             if ($user && !$user->hasVerifiedEmail()) {
                 $user->sendEmailVerificationNotification();
-                return redirect()->route('login')->with('success', 'If the account exists, we have sent you a verification link. Please check your email to confirm your account.');
+                return redirect()->route('login')->with('success', __('message.success.link_sent'));
             }
 
 
-            return redirect()->route('login')->with('success', 'If the email exists, a verification link has been sent. Please check your inbox. If you do not receive it, ensure your email is correct.');
+            return redirect()->route('login')->with('success', __('message.success.link_generic'));
         } catch (Exception $ex) {
-            return redirect()->route('login')->with('error', 'An error occurred while creating the user. Please try again later.');
+            return redirect()->route('login')->with('error', __('message.error.unexpected_error'));
         }
     }
 }

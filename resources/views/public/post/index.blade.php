@@ -1,4 +1,4 @@
-@extends('public.layouts.app')
+@extends('public.layouts.app-with-sidebar')
 
 @section('public.content')
     @include('public.partials.filter')

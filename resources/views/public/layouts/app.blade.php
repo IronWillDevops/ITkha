@@ -11,9 +11,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-
-
-
     <title>{{ config('app.name') }}</title>
     @stack('head')
 </head>
@@ -27,8 +24,10 @@
     @include('public.partials.navbar')
 
     <main class="flex-grow container mx-auto px-4 py-6">
-        <div class="flex flex-col lg:flex-row gap-6  ">
-            @php
+        {{-- <div class="flex flex-col lg:flex-row gap-6  "> --}}
+
+            @yield('public.layouts')
+            {{-- @php
 
                 $route = ['public.post.index', 'public.post.show'];
             @endphp
@@ -46,9 +45,9 @@
                 <div class="w-full">
                     @yield('public.content')
                 </div>
-            @endif
+            @endif --}}
 
-        </div>
+        {{-- </div> --}}
     </main>
 
 

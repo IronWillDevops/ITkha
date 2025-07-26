@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255'],
             'captcha' => ['required', function ($attribute, $value, $fail) {
                 if ($value !== session('captcha')) {
-                    $fail(__('validation.captcha_incorrect'));
+                    $fail(__('validation.captcha.incorrect'));
                 }
             }],
         ];
@@ -34,12 +34,12 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => __('validation.email_required'),
-            'email.string' => __('validation.email_string'),
-            'email.email' => __('validation.email_email'),
-            'email.max' => __('validation.email_max'),
+            'email.required' => __('validation.email.required'),
+            'email.string' => __('validation.email.string'),
+            'email.email' => __('validation.email.email'),
+            'email.max' => __('validation.email.max'),
 
-            'captcha.required' => __('validation.captcha_required'),
+            'captcha.required' => __('validation.captcha.required'),
         ];
     }
 }

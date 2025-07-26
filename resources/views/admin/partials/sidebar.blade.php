@@ -120,17 +120,18 @@
                                         </p>
                                     </a>
                                 </li>
-                            @endcan
-                            @can('viewAny', \App\Models\Role::class)
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.role.index') }}" class="nav-link">
-                                        <i class="fas fa-users-cog nav-icon"></i>
-                                        <p>Roles</p>
-                                    </a>
-                                </li>
-                            @endcan
+                            </ul>
+                        @endcan
+                        @can('viewAny', \App\Models\Role::class)
+                        <li class="nav-item">
+                            <a href="{{ route('admin.role.index') }}" class="nav-link">
+                                <i class="fas fa-users-cog nav-icon"></i>
+                                <p>Roles</p>
+                            </a>
+                        </li>
+                    @endcan
 
-                        </ul>
+
                     </li>
                 @endif
 
@@ -177,7 +178,7 @@
                     </ul>
                 </li>
 
-                
+
                 <li class="nav-item">
                     <a href="{{ route('admin.icons.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-icons"></i>
@@ -186,6 +187,7 @@
                         </p>
                     </a>
                 </li>
+            </ul>
         </nav>
         <!-- /.sidebar-menu -->
     </div>

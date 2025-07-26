@@ -35,7 +35,7 @@ class StoreController extends Controller
                 if (!$user->status == UserStatus::ACTIVE->value) {
                     Auth::logout();
                     return back()->withErrors([
-                        'error' => 'Ваш обліковий запис неактивний. Зверніться до технічної підтримки.',
+                        'error' => __('message.success.account_inactive'),
                     ])->onlyInput('email');
                 }
                 return redirect()->intended(route('public.post.index'));
@@ -43,7 +43,7 @@ class StoreController extends Controller
 
 
             return back()->withErrors([
-                'error' => 'Невірний email або пароль.',
+                'error' => __('message.error.auth_failed'),
             ])->onlyInput('email');
         } catch (EmailNotVerifiedException $ex) {
 

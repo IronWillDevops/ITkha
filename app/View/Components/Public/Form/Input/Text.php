@@ -16,14 +16,17 @@ class Text extends Component
     public $text;
     public $placeholder;
     public $icon;
+    public $value;
     public $required;
-    public function __construct($type, $name, $text, $placeholder, $icon, $required = true)
+
+    public function __construct($type, $name, $text, $placeholder, $icon, $value = "", $required = true)
     {
         $this->type = $type;
         $this->name = $name;
         $this->text = $text;
         $this->placeholder = $placeholder;
         $this->icon = $icon;
+        $this->value = $value;
         $this->required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     }
 

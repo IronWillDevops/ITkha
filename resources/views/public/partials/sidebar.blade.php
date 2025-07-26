@@ -4,7 +4,7 @@
             <i class="icon fa fa-newspaper mr-3"></i>
             {{ __('post.popular_posts') }}
         </h3>
-        <hr class="h-px my-8 separator">
+        <x-public.ui.separator />
         <ul class="space-y-2">
             @foreach ($popularPosts as $post)
                 <li>

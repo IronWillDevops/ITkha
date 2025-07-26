@@ -30,9 +30,9 @@ class StoreController extends Controller
         );
 
         if ($status == Password::PASSWORD_RESET) {
-            return redirect()->route('login')->with('success', 'Password changed successfully. Please log in.');
+            return redirect()->route('login')->with('success', __('message.success.reset'));
         } else {
-            return redirect()->route('login')->with('error', 'Failed to reset password. Please check that the token and email are correct.');
+            return redirect()->route('login')->with('error',  __('message.error.reset'));
         }
 
         

@@ -23,10 +23,10 @@ class StoreController extends Controller
 
             return redirect()->route('login')->with(
                 'success',
-                'If the account exists, we have sent you a password reset link. Please check your email.'
+                __('message.success.password_reset_link_sent')
             );
         } catch (Exception $e) {
-            return redirect()->route('login')->with('error', 'An unexpected error occurred. Please try again later.');
+            return redirect()->route('login')->with('error', __('message.error.unexpected_error'));
         }
     }
 }

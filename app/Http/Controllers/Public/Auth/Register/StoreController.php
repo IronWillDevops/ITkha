@@ -26,9 +26,9 @@ class StoreController extends BaseController
             // Отправляем письмо пользователю
 
 
-            return redirect()->route('login')->with('success', 'User successfully registered. To activate your account, please confirm your email address.');
+            return redirect()->route('login')->with('success', __('message.success.register'));
         } catch (Exception $ex) {
-            return redirect()->route('login')->with('error', 'An error occurred while creating the user. Please try again later.');
+            return redirect()->route('login')->with('error', __('message.error.register'));
         }
     }
 }

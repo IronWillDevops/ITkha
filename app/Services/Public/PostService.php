@@ -16,14 +16,12 @@ class PostService
             ->get();
     }
 
-    public function popularPostsByUser(int $user_id, int $limit = 5)
+    public function popularPostsByUser(int $user_id)
     {
         return Post::withCount('likedByUsers')
             ->where('status', PostStatus::PUBLISHED)
             ->where('user_id', $user_id)
-            ->orderByDesc('liked_by_users_count')
-            ->take($limit)
-            ->get();
+            ->orderByDesc('liked_by_users_count');
     }
 
 

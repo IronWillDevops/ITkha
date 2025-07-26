@@ -3,11 +3,11 @@
         <ul class="inline-flex items-center -space-x-px text-sm">
             {{-- Previous --}}
             @if ($paginator->onFirstPage())
-                <li class="px-3 py-2 text-text-primary border border-border rounded-l">«</li>
+                <li class="px-3 py-2  border border-border rounded-l">«</li>
             @else
                 <li>
                     <a href="{{ $paginator->previousPageUrl() }}"
-                       class="px-3 py-2  border border-border hover:bg-text-hover rounded-l">«</a>
+                       class="px-3 py-2 text-text-primary border border-border hover:bg-text-hover rounded-l">«</a>
                 </li>
             @endif
 
@@ -41,7 +41,7 @@
                        class="px-3 py-2 text-text-primary border border-border hover:bg-text-hover rounded-r">»</a>
                 </li>
             @else
-                <li class="px-3 py-2 text-text-primary border border-border rounded-r">»</li>
+                <li class="px-3 py-2 border border-border rounded-r">»</li>
             @endif
         </ul>
     </nav>

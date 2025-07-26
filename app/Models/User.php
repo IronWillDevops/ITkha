@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     protected $fillable = [
+        'avatar',
         'name',
         'surname',
         'login',
@@ -53,6 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return array<string, string>
      */
+
     protected function casts(): array
     {
         return [
@@ -91,6 +93,15 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->whereIn('header', $headers);
         })->exists();
     }
+    public function getInitial()
+    {
+        $name = $this->name ?? '';
+        $surname = $this->surname ?? '';
+
+        $initials = mb_substr($name, 0, 1) . mb_substr($surname, 0, 1);
+
+        return strtoupper($initials);
+    }
 
     protected static function booted(): void
     {
@@ -116,7 +127,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function publishedPosts()
     {
-                return $this->hasMany(Post::class)->where('status', PostStatus::PUBLISHED->value)->paginate(26);
+        return $this->hasMany(Post::class)->where('status', PostStatus::PUBLISHED->value)->paginate(20);
     }
     public function posts()
     {
@@ -132,8 +143,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new VerifyEmailNotification($this));
     }
+
     public function sendPasswordResetNotification($token): void
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
     }
 }

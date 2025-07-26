@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 
 class ShowController extends Controller
 {
+ 
   /**
    * Handle the incoming request.
    */
-  public function __invoke(User $user,PostService $postService)
+  public function __invoke(User $user, PostService $postService)
   {
-       $popularPosts = $postService->popularPostsByUser($user->id);
-       return view('public.user.show', compact('user', 'popularPosts'));
+    $posts = $postService->popularPostsByUser($user->id)->paginate(10);
+    return view('public.user.show', compact('user', 'posts'));
   }
 }

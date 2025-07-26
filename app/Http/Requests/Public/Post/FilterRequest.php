@@ -38,23 +38,24 @@ class FilterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'search.string' => 'Пошуковий запит має бути рядком.',
-            'search.min' => 'Пошуковий запит має містити щонайменше :min символи.',
+            'search.string' => __('validation.search.string'),
+            'search.min' => __('validation.search.min'),
 
-            'title.string' => 'Заголовок має бути рядком.',
-            'content.string' => 'Контент має бути рядком.',
-            'category.string' => 'Категорія має бути рядком.',
+            'title.string' => __('validation.title.string'),
+            'content.string' => __('validation.content.string'),
+            'category.string' => __('validation.category.string'),
 
-            'tags.array' => 'Теги мають бути передані у вигляді масиву.',
-            'tags.*.string' => 'Кожен тег має бути рядком.',
+            'tags.array' => __('validation.tags.array'),
 
-            'author.string' => 'Ім’я автора має бути рядком.',
+            'tags.*.string' => __('validation.tags.*.string'),
 
-            'sort_by.string' => 'Поле сортування має бути рядком.',
-            'sort_by.in' => 'Поле сортування може бути лише одним із: id, title, created_at, updated_at.',
+            'author.string' => __('validation.author.string'),
 
-            'sort_dir.string' => 'Напрям сортування має бути рядком.',
-            'sort_dir.in' => 'Напрям сортування може бути тільки "asc" або "desc".',
+            'sort_by.string' => __('validation.sort_by.string'),
+            'sort_by.in' =>  __('validation.sort_by.in'),
+
+            'sort_dir.string' => __('validation.sort_dir.string'),
+            'sort_dir.in' => __('validation.sort_dir.in'),
         ];
     }
 }

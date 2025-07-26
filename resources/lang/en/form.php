@@ -36,7 +36,6 @@ return [
 
     'reset' => [
         'different_password' => 'Your new password must be different from previous used passwords.',
-
         'submit' => 'Reset password',
     ],
 
@@ -44,9 +43,12 @@ return [
         'info' => 'Enter your email to receive the verification link again.',
         'submit' => 'Resend verification email',
     ],
-    'contact_us' =>[
+    'contact_us' => [
         'subject' => 'Subject',
         'message' => 'Message',
         'submit' => 'Send',
+    ],
+    'message' => [
+        'send_message' => 'Thank you! Your message has been sent.'
     ],
 ];

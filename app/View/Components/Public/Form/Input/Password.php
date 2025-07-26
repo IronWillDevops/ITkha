@@ -16,7 +16,7 @@ class Password extends Component
     public $text;
     public $placeholder;
     public $icon;
-    public function __construct( $name, $text, $placeholder, $icon)
+    public function __construct( $name, $text, $placeholder, $icon="fas fa-solid fa-lock")
     {
         $this->name = $name;
         $this->text = $text;
