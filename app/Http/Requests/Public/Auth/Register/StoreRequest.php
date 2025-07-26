@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Public\Auth\Register;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class StoreRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class StoreRequest extends FormRequest
             'surname' => ['string', 'max:255'],
             'login' => ['required', 'string', 'min:5', 'max:50', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'password' => ['required', 'string', 'max:255', 'confirmed', Password::defaults()],
             'captcha' => ['required', function ($attribute, $value, $fail) {
                 if ($value !== session('captcha')) {
                     $fail('Невірна капча.');
@@ -40,32 +41,39 @@ class StoreRequest extends FormRequest
     {
         return [
 
-            'name.required' => __('validation.name_required'),
-            'name.string' => __('validation.name_string'),
-            'name.max' => __('validation.name_max'),
+            'name.required' => __('validation.name.required'),
+            'name.string' => __('validation.name.string'),
+            'name.max' => __('validation.name.max'),
 
-            'surname.string' => __('validation.surname_string'),
-            'surname.max' => __('validation.surname_max'),
+            'surname.string' => __('validation.surname.string'),
+            'surname.max' => __('validation.surname.max'),
 
-            'login.required' => __('validation.login_required'),
-            'login.string' => __('validation.login_string'),
-            'login.min' => __('validation.login_min'),
-            'login.max' => __('validation.login_max'),
-            'login.unique' => __('validation.login_unique'),
+            'login.required' => __('validation.login.required'),
+            'login.string' => __('validation.login.string'),
+            'login.min' => __('validation.login.min'),
+            'login.max' => __('validation.login.max'),
+            'login.unique' => __('validation.login.unique'),
 
-            'email.required' => __('validation.email_required'),
-            'email.string' => __('validation.email_string'),
-            'email.email' => __('validation.email_email'),
-            'email.max' => __('validation.email_max'),
-            'email.unique' => __('validation.email_unique'),
+            'email.required' => __('validation.email.required'),
+            'email.string' => __('validation.email.string'),
+            'email.email' => __('validation.email.email'),
+            'email.max' => __('validation.email.max'),
+            'email.unique' => __('validation.email.unique'),
+            
+            'password.required' => __('validation.password.required'),
+            'password.string' => __('validation.password.string'),
+            'password.max' => __('validation.password.max'),
+            'password.confirmed' => __('validation.password.confirmed'),
 
-            'password.required' => __('validation.password_required'),
-            'password.string' => __('validation.password_string'),
-            'password.min' => __('validation.password_min'),
-            'password.max' => __('validation.password_max'),
-            'password.confirmed' => __('validation.password_confirmed'),
+            // Повідомлення для правил Password::defaults()
+            'password.min' => __('validation.password.min'),
+            'password.letters' => __('validation.password.letters'),
+            'password.mixed' => __('validation.password.mixed'),
+            'password.numbers' => __('validation.password.numbers'),
+            'password.symbols' => __('validation.password.symbols'),
+            'password.uncompromised' => __('validation.password.uncompromised'),
 
-            'captcha.required' => __('validation.captcha_required'),
+            'captcha.required' => __('validation.captcha.required'),
         ];
     }
 }

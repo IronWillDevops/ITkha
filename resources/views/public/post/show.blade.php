@@ -1,4 +1,4 @@
-@extends('public.layouts.app')
+@extends('public.layouts.app-with-sidebar')
 
 @section('public.content')
     <div class="text-text-primary flex flex-col gap-6">
@@ -89,7 +89,7 @@
                     </div>
                 @endif
 
-                <hr class="border-border">
+                <x-public.ui.separator />
                 <div id="post-content" class="prose max-w-none prose-lg prose-gray post-content  wrap-anywhere">
                     {!! $post->content !!}
                 </div>

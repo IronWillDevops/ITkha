@@ -93,5 +93,9 @@ Route::prefix('/')
             ->name('user.')
             ->group(function () {
                 Route::get('/{user}', App\Http\Controllers\Public\User\ShowController::class)->name('show');
-            });
+                Route::get('/{user}/liked', App\Http\Controllers\Public\User\LikedPostsController::class)->name('show.like');
+                Route::get('/{user}/edit', App\Http\Controllers\Public\User\EditController::class)->middleware('auth')->name('edit');
+                Route::patch('/{user}', App\Http\Controllers\Public\User\UpdateController::class)->middleware('auth')->name('update');
+                Route::patch('/{user}/password', App\Http\Controllers\Public\User\UpdatePasswordController::class)->middleware('auth')->name('password.update');
+             });
     });

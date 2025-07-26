@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckPermission;
-
+use Illuminate\Validation\Rules\Password;
 
 use Illuminate\Support\Facades\Gate;
 
@@ -23,10 +23,19 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
 
-     
+
     public function boot(): void
     {
-        //
+        // Default Password
+        Password::defaults(function () {
+            return Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols();
+        });
+
+
         Route::aliasMiddleware('permission', CheckPermission::class);
 
         \App\Models\Tag::observe(\App\Observers\TagObserver::class);
@@ -44,5 +53,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(\App\Models\Role::class,  \App\Policies\Admin\RolePolicy::class);
         Gate::policy(\App\Models\Contact::class,  \App\Policies\Admin\ContactPolicy::class);
         Gate::policy(\App\Models\Log::class,  \App\Policies\Admin\LogPolicy::class);
+
+        Gate::policy(\App\Models\User::class, \App\Policies\Public\UserPolicy::class);
     }
 }

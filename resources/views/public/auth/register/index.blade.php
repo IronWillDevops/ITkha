@@ -1,4 +1,4 @@
-@extends('public.layouts.app')
+@extends('public.layouts.app-fullwidth')
 
 @section('public.content')
     <div class="text-text-primary bg-surface max-w-lg mx-auto mt-10 mb-10 rounded-2xl p-10 border border-border">
@@ -8,29 +8,29 @@
             <form method="POST" action="{{ route('public.auth.register.store') }}">
                 @csrf
                 {{-- Name --}}
-                <x-public.form.input.text type="text" name="name" text="{{ __('form.common.name') }}" placeholder="{{  __('form.common.name')}}"
-                    icon="fas fa-solid fa-user" />
+                <x-public.form.input.text type="text" name="name" text="{{ __('form.common.name') }}"
+                    placeholder="{{ __('form.common.name') }}" icon="fas fa-solid fa-user" />
                 {{-- SurName --}}
-                <x-public.form.input.text type="text" name="surname" text="{{ __('form.common.surname') }}" placeholder="{{ __('form.common.surname') }}"
-                    icon="fas fa-solid fa-user" />
+                <x-public.form.input.text type="text" name="surname" text="{{ __('form.common.surname') }}"
+                    placeholder="{{ __('form.common.surname') }}" icon="fas fa-solid fa-user" />
                 {{-- Login --}}
-                <x-public.form.input.text type="text" name="login" text="{{ __('form.common.login') }}" placeholder="{{ __('form.common.login') }}"
-                    icon="fas fa-solid fa-user" />
+                <x-public.form.input.text type="text" name="login" text="{{ __('form.common.login') }}"
+                    placeholder="{{ __('form.common.login') }}" icon="fas fa-solid fa-user" />
                 {{-- Email --}}
-                <x-public.form.input.text type="email" name="email" text="{{ __('form.common.email') }}" placeholder="{{ __('form.common.email') }}"
-                    icon="fas fa-solid fa-at" />
+                <x-public.form.input.text type="email" name="email" text="{{ __('form.common.email') }}"
+                    placeholder="{{ __('form.common.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Password --}}
-                <x-public.form.input.password name="password" text="{{ __('form.common.password') }}" placeholder="{{ __('form.common.password') }}"
-                    icon="fas fa-solid fa-lock" />
+                <x-public.form.input.password name="password" text="{{ __('form.common.password') }}"
+                    placeholder="{{ __('form.common.password') }}" />
                 {{-- Password --}}
                 <x-public.form.input.password name="password_confirmation" text="{{ __('form.common.password_repeat') }}"
-                    placeholder="Repeat password" icon="fas fa-solid fa-lock" />
+                    placeholder="{{ __('form.common.password_repeat') }}" />
 
                 {{-- Captcha --}}
                 <x-public.form.input.captcha name="captcha" />
                 {{-- Submit --}}
-                <x-public.form.input.submit text="{{ __('form.register.submit') }}"/>
+                <x-public.form.input.submit text="{{ __('form.register.submit') }}" />
             </form>
 
             <p class="mt-4 text-right text-sm text-text-secondary">

@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Controllers\Public\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class LikedPostsController extends Controller
+{
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(User $user,Request $request)
+    {
+        $posts = $user->likedPosts()->latest()->paginate(10);
+       return view('public.user.show', compact('user', 'posts'));
+    }
+}

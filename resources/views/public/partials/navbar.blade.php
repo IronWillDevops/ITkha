@@ -34,31 +34,45 @@
 
                     @auth
                         <li class="relative max-w-28">
-                            <button id="userMenuButton" type="button"
-                                class="flex items-center gap-2 px-3 py-2 nav-btn nav-btn-hover rounded-sm md:bg-transparent md:p-0 focus:outline-none">
-
-                                <span class="truncate max-w-24" title="{{ Auth::user()->login }}">
-                                    {{ Auth::user()->login }}
-                                </span>
-
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.354a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </button>
-
-                            <!-- Dropdown -->
+                            @if (Auth::user()->avatar)
+                                <img id="userMenuButton" type="button" data-dropdown-toggle="userDropdown"
+                                    data-dropdown-placement="bottom-start" class="relative inline-flex items-center justify-center w-10 h-10 object-cover rounded-full border border-border"
+                                   src="{{ asset('storage/' . Auth::user()->avatar) }}" data-filename="image.png"
+                                    alt="{{ Auth::user()->name }}">
+                            @else
+                                <div id="userMenuButton"
+                                    class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full border border-border">
+                                    <span class="font-medium">
+                                       {{Auth::user()->getInitial()}}
+                                    </span>
+                                </div>
+                            @endif
+                            <!-- Dropdown menu -->
                             <div id="userDropdown"
-                                class="absolute hidden bg-surface shadow-lg mt-2 right-0 w-48 rounded-md z-50 border border-border overflow-hidden">
-                                <a href="{{ route('public.user.show', Auth::user()->id) }}"
-                                    class="block px-4 py-3 text-sm nav-btn nav-btn-hover">{{ __('header.auth.profile') }}</a>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="w-full text-left block px-4 py-3 text-sm nav-btn nav-btn-hover cursor-pointer">{{ __('header.auth.logout') }}</button>
-                                </form>
+                                class="absolute right-0 z-50 hidden bg-surface divide-y  rounded-lg shadow-sm w-44 border border-border">
+                                <div class="px-4 py-3 text-sm ">
+                                    <div class="font-medium truncate">{{ Auth::user()->login }}</div>
+                                </div>
+
+                                <hr class="border border-border">
+                                <ul class="py-2 text-sm " aria-labelledby="avatarButton">
+                                    <li>
+                                        <a href="{{ route('public.user.show', Auth::user()->id) }}"
+                                            class="block px-4 py-2 nav-btn nav-btn-hover">{{ __('header.auth.profile') }}</a>
+                                    </li>
+
+                                </ul>
+                                <hr class="border border-border">
+                                <div class="py-1">
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit"
+                                            class="w-full text-left block px-4 py-3 text-sm nav-btn nav-btn-hover cursor-pointer">{{ __('header.auth.logout') }}</button>
+                                    </form>
+                                </div>
                             </div>
+
+
                         </li>
                     @endauth
                     @guest

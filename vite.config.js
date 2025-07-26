@@ -9,7 +9,8 @@ export default defineConfig({
                 'resources/css/public/app.css',
                 'resources/js/public/app.js',
                 'resources/js/public/togglePasswordVisibility.js',
-                'resources/js/public/like.js'
+                'resources/js/public/like.js',
+                'resources/js/public/loadPreviewAvatar.js',
             ],
             refresh: true,
         }),

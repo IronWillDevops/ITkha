@@ -17,7 +17,7 @@ class LocaleController extends Controller
         $available = array_values(config('app.available_locales'));
 
         if (!in_array($locale, $available)) {
-            abort(400, 'Invalid language');
+            abort(400, __('message.error.invalid_language'));
         }
 
         Session::put('locale', $locale);

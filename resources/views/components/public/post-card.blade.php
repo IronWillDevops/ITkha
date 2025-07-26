@@ -1,5 +1,5 @@
 <div
-    class="relative flex w-full flex-col md:flex-row bg-surface shadow-sm border border-border text-text-primary hover:shadow-md rounded-lg">
+    class="relative overflow-hidden flex w-full flex-col md:flex-row bg-surface shadow-sm border border-border text-text-primary hover:shadow-md rounded-lg">
 
     @if (!empty($post->main_image) && Storage::disk('public')->exists($post->main_image))
         <div class="relative  md:w-2/5 shrink-0 overflow-hidden aspect-[3/2]">
@@ -7,8 +7,8 @@
                 class="h-full w-full rounded-md md:rounded-lg object-cover" />
         </div>
     @endif
-    <div class="p-6 w-full flex flex-col h-full">
-        <div class="flex justify-between items-center mb-6">
+    <div class="p-6 w-full flex flex-col h-full overflow-hidden">
+        <div class="flex justify-between items-center ">
 
             {{-- Левая часть: --}}
             <span class="inline-block  post-category rounded-full px-3 py-1 text-sm font-semibold  ">
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <hr class="separator">
+        <x-public.ui.separator />
 
 
         <div class="flex-grow">
@@ -47,16 +47,16 @@
                 </a>
             </h4>
 
-            <p class="mb-4 post-content  leading-normal font-light break-words">
-                {!! highlight(Str::limit(strip_tags(html_entity_decode($post->content)), 450), request('search')) !!} 
+            <p class="mb-4 post-content  leading-normal font-light break-words break-all overflow-hidden">
+                {!! highlight(Str::limit(strip_tags(html_entity_decode($post->content)), 450), request('search')) !!}
             </p>
 
         </div>
 
         @if ($post->tags && $post->tags->count())
-            <div class="flex flex-wrap items-center post-tag space-x-4 mb-6">
+            <div class="flex flex-wrap items-center gap-2 mb-6">
                 @foreach ($post->tags as $tag)
-                    <span class="border rounded-2xl px-3 py-0.5 mx-3 flex items-center">
+                    <span class="border rounded-2xl px-3 py-0.5  flex items-center">
                         <i class="fas fa-tags"></i>
                         <span class="font-medium ml-2">{{ $tag->title }}</span>
                     </span>
@@ -65,9 +65,9 @@
         @endif
 
 
-        <hr class="separator">
+        <x-public.ui.separator />
 
-        <div class="flex justify-between items-center mt-4">
+        <div class="flex justify-between items-center  flex-wrap gap-4 text-sm">
 
             {{-- Левая часть: ссылка "Read more" --}}
             <a href="{{ route('public.post.show', $post->id) }}"

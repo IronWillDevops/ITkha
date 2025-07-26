@@ -14,11 +14,18 @@ class Area extends Component
     public $name;
     public $text;
     public $placeholder;
-    public function __construct($name, $text, $placeholder)
+    public $value;
+    public $required;
+
+    public function __construct($name, $text, $placeholder, $value = "", $required = true)
     {
+
         $this->name = $name;
         $this->text = $text;
         $this->placeholder = $placeholder;
+        $this->value = $value;
+
+        $this->required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**

@@ -28,7 +28,7 @@ class ContactFormRequest extends FormRequest
             'message' => ['required', 'string', 'min:10', 'max:1000'],
             'captcha' => ['required', function ($attribute, $value, $fail) {
                 if ($value !== session('captcha')) {
-                    $fail('Невірна капча.');
+                    $fail(__('validation.captcha.incorrect'));
                 }
             }],
         ];
@@ -37,23 +37,23 @@ class ContactFormRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Вкажіть ім’я.',
-            'name.string' => 'Ім’я повинно бути у форматі тексту',
-            'name.max' => 'Ім’я не повинно перевищувати :max символів',
+            'name.required' => __('validation.name.required'),
+            'name.string' => __('validation.name.string'),
+            'name.max' => __('validation.name.max'),
 
-            'subject.required' => 'Вкажіть тему повідомлення.',
-            'subject.string' => 'Тема повинна бути у форматі тексту',
-            'subject.max' => 'Тема не повинна перевищувати :max символів',
+            'subject.required' => __('validation.subject.required'),
+            'subject.string' => __('validation.subject.string'),
+            'subject.max' => __('validation.subject.max'),
 
-            'email.required' => 'Вкажіть email.',
-            'email.email' => 'Email має бути коректним.',
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.email'),
 
-            'message.required' => 'Введіть повідомлення.',
-            'message.string' => 'Повідомлення повинно бути у форматі тексту',
-            'message.min' => 'Повідомлення має містити щонайменше :min символів.',
-            'message.max' => 'Повідомлення не повинно перевищувати :max символів.', // Переконайтеся, що повідомлення відповідає
+            'message.required' => __('validation.message.required'),
+            'message.string' =>  __('validation.message.string'),
+            'message.min' =>  __('validation.message.min'),
+            'message.max' =>  __('validation.message.max'),
 
-            'captcha.required' => 'Введіть капчу.',
+            'captcha.required' => __('validation.captcha.incorrect'),
         ];
     }
 }

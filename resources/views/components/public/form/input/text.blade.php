@@ -4,7 +4,7 @@
          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
              <i class="{{ $icon }}"></i>
          </div>
-         <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" value="{{ old($name) }}"
+         <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" value="{{ old($name, $value) }}"
              class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="{{ $placeholder }}"
              @if ($required) required @endif />
      </div>

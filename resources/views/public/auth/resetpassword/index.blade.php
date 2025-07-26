@@ -1,4 +1,4 @@
-@extends('public.layouts.app')
+@extends('public.layouts.app-fullwidth')
 
 @section('public.content')
     <div class="text-text-primary bg-surface max-w-lg mx-auto mt-10 mb-10 rounded-2xl p-10 border border-border">

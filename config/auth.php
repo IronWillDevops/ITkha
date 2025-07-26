@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Validation\Rules\Password;
+
 return [
 
     /*
@@ -98,7 +100,7 @@ return [
             'throttle' => 60,
         ],
     ],
-
+  
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
