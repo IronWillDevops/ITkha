@@ -192,10 +192,13 @@
         if (!categoryDropdown.contains(event.target) && !categoryButton.contains(event.target)) {
             categoryDropdown.classList.add('hidden');
         }
+        // Теги
         const tagsDropdown = document.getElementById('tags-dropdown');
-        const tagsButton = tagsDropdown.previousElementSibling;
-        if (!tagsDropdown.contains(event.target) && !tagsButton.contains(event.target)) {
-            tagsDropdown.classList.add('hidden');
+        if (tagsDropdown) {
+            const tagsButton = tagsDropdown.previousElementSibling;
+            if (tagsButton && !tagsDropdown.contains(event.target) && !tagsButton.contains(event.target)) {
+                tagsDropdown.classList.add('hidden');
+            }
         }
 
         const sortByDropdown = document.getElementById('sort-by-dropdown');

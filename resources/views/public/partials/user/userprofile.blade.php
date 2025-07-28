@@ -72,6 +72,15 @@
                      </p>
                      <p class="text-xs text-text-secondary">{{ __('profile.actions.liked_posts.description') }}</p>
                  </div>
+             </a>    
+             <a href="{{ route('public.user.show.favorite', $user->id) }}"
+                 class="flex items-center gap-4 p-4 rounded-xl border transition">
+                 <i class="fas fa-bookmark text-xl"></i>
+                 <div>
+                     <p class="text-sm font-semibold text-text-primary">{{ __('profile.actions.favorite_posts.title') }}
+                     </p>
+                     <p class="text-xs text-text-secondary">{{ __('profile.actions.favorite_posts.description') }}</p>
+                 </div>
              </a>
 
              <a href="{{ route('public.user.edit', $user->id) }}"

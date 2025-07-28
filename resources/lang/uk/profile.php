@@ -11,9 +11,13 @@ return [
             'title' => 'Уподобані пости',
             'description' => 'Список збережених публікацій',
         ],
+        'favorite_posts' => [
+            'title' => 'Улюблені пости',
+            'description' => 'Список улюблених видань',
+        ],
         'edit_profile' => [
             'title' => 'Налаштування профілю',
-            'description' => 'Змінити email, імʼя, мову тощо',
+            'description' => 'Змінити імʼя, прізвище тощо',
         ],
     ],
     'sections' => [

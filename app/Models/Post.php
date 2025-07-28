@@ -57,4 +57,8 @@ class Post extends Model
     {
         return $this->likedByUsers()->where('user_id', $user->id)->exists();
     }
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
 }

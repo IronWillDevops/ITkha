@@ -50,30 +50,19 @@
                     </span>
 
                     <span>|</span>
-
+    
                     <span class="inline-flex items-center">
                         <i class="fa fa-eye ml-2"></i>
                         <span class="font-medium ml-2">{{ Number::abbreviate($post->views) }}</span>
                     </span>
+                    <span>|</span>
 
+                    <livewire:public.favorite-button :post="$post" />
                     <span>|</span>
 
                     <span class="inline-flex items-center">
-                        {{-- Лайки --}}
-                        @auth
-                            <form method="POST" action="{{ route('public.post.like', $post) }}" class="like-form"
-                                data-post-id="{{ $post->id }}">
-                                @csrf
-                                <button type="submit"
-                                    class="flex items-center {{ auth()->user()->likedPosts->contains($post->id) ? 'post-like' : 'post-like-hover' }} like-button">
-                                    <i class="fas fa-heart mr-1"></i>
-                                    <span class="like-count">{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
-                                </button>
-                            </form>
-                        @else
-                            <i class="fas fa-heart mr-1"></i>
-                            <span>{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
-                        @endauth
+                        {{-- Likes --}}
+                        <livewire:public.post-like-button :post="$post" :key="'post-like-' . $post->id" />
                     </span>
                 </div>
 
@@ -100,13 +89,5 @@
         @if ($similarPosts->isNotEmpty())
             @include('public.partials.similarPost')
         @endif
-
-
     </div>
-
-
 @endsection
-
-@push('scripts')
-    @vite('resources/js/public/like.js')
-@endpush
