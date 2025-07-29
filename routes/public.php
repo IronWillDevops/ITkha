@@ -71,6 +71,11 @@ Route::prefix('/')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Public\Post\IndexController::class)->name('index');
                 Route::get('/{post}', App\Http\Controllers\Public\Post\ShowController::class)->name('show');
+                
+                Route::middleware('auth')->group(function () {
+                    Route::post('/comments', App\Http\Controllers\Public\Comment\StoreController::class)
+                        ->name('comment.store');
+                });
             });
 
 
@@ -93,3 +98,4 @@ Route::prefix('/')
                 Route::patch('/{user}/password', App\Http\Controllers\Public\User\UpdatePasswordController::class)->middleware('auth')->name('password.update');
             });
     });
+// routes/web.php

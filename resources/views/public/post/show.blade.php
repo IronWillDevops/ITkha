@@ -50,7 +50,7 @@
                     </span>
 
                     <span>|</span>
-    
+
                     <span class="inline-flex items-center">
                         <i class="fa fa-eye ml-2"></i>
                         <span class="font-medium ml-2">{{ Number::abbreviate($post->views) }}</span>
@@ -89,5 +89,10 @@
         @if ($similarPosts->isNotEmpty())
             @include('public.partials.similarPost')
         @endif
+
+        {{-- Comments --}}
+        @include('public.partials.comment.index')
+
+
     </div>
 @endsection

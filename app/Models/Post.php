@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\CommentStatus;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tag;
 use App\Models\Category;
@@ -60,5 +61,15 @@ class Post extends Model
     public function favoritedByUsers()
     {
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    // Comments
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->with('children');
+    }
+    public function allApprovedComments()
+    {
+        return $this->hasMany(Comment::class)->with('children')->where('status', CommentStatus::APPROVED);
     }
 }

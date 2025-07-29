@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Public\Auth\Register;
 
+use App\Rules\Public\CaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -28,11 +29,7 @@ class StoreRequest extends FormRequest
             'login' => ['required', 'string', 'min:5', 'max:50', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'max:255', 'confirmed', Password::defaults()],
-            'captcha' => ['required', function ($attribute, $value, $fail) {
-                if ($value !== session('captcha')) {
-                    $fail('Невірна капча.');
-                }
-            }],
+            'captcha' => ['required',  new CaptchaRule()],
 
         ];
     }
