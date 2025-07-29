@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin\Post;
 
-use App\PostStatus;
+use App\Enums\PostStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Models\Role;
-use App\UserStatus;
+use App\Enums\UserStatus;
 
 class CreateController extends BaseController
 {

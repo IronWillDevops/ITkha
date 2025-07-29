@@ -132,7 +132,7 @@
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select name="status" id="status" class="form-control">
-                                @foreach (App\PostStatus::cases() as $status)
+                                @foreach (App\Enums\PostStatus::cases() as $status)
                                     <option value="{{ $status->value }}"
                                         {{ ($status->value == $post->status)? 'selected' : '' }}>
                                         {{ $status->value }}

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Public\Auth\Login;
 use App\Exceptions\User\EmailNotVerifiedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\Auth\Login\StoreRequest;
-use App\UserStatus;
+use App\Enums\UserStatus;
 use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller

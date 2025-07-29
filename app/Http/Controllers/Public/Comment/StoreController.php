@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Public\Comment;
 
-use App\CommentStatus;
+use App\Enums\CommentStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\Comment\StoreRequest;
 use App\Models\Comment;
@@ -21,7 +21,7 @@ class StoreController extends Controller
             'user_id' => auth()->id(),
             'body' => $data['body'],
             'parent_id' => $data['parent_id'] ?? null,
-            'status' => CommentStatus::PENDING,
+            'status' => CommentStatus::APPROVED,
         ]);
 
         return redirect()->back()->with('success', __('post.comment.comment_added'));

@@ -36,7 +36,7 @@
                                 <tr>
                                     <td class="align-middle">{{ $user->id }}.</td>
                                     <td class="align-middle">
-                                        @if ($user->status === \App\UserStatus::ACTIVE->value)
+                                        @if ($user->status === \App\Enums\UserStatus::ACTIVE->value)
                                             <i class=" fa fa-user-check"></i>
                                         @else
                                             <i class=" fa fa-user-times"></i>

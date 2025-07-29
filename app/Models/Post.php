@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\CommentStatus;
+use App\Enums\CommentStatus;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tag;
 use App\Models\Category;

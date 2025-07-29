@@ -3,7 +3,7 @@
 namespace App\Services\Public;
 
 use App\Models\Post;
-use App\PostStatus;
+use App\Enums\PostStatus;
 
 class PostService
 {
