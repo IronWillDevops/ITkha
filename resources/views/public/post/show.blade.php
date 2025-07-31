@@ -19,12 +19,6 @@
                         </a>
                     @endif
                 </h1>
-                {{-- Edit --}}
-
-                <div class="flex items-center">
-
-                </div>
-
 
                 <div class="flex flex-wrap items-center text-sm space-x-4 post-footer">
                     <div class="inline-flex items-center space-x-1">
@@ -35,14 +29,14 @@
                     <span>|</span>
 
                     <span class="inline-flex items-center">
-                        <i class="fas fa-tag ml-2"></i>
+                        <i class="fas fa-tag "></i>
                         <span class="font-medium ml-2">{{ $post->category->title }}</span>
                     </span>
 
                     <span>|</span>
 
                     <span class="inline-flex items-center">
-                        <i class="fa fa-user ml-2"></i>
+                        <i class="fa fa-user "></i>
                         <a href="{{ route('public.user.show', $post->author->id) }}"
                             class="link-hover hover:underline ml-2">
                             {{ $post->author->login }}
@@ -50,30 +44,23 @@
                     </span>
 
                     <span>|</span>
-
                     <span class="inline-flex items-center">
-                        <i class="fa fa-eye ml-2"></i>
+                        <i class="far fa-comment "></i>
+                        <span class="font-medium ml-2">{{ $post->allApprovedComments->count() }}</span>
+                    </span>
+                    <span>|</span>
+                    <span class="inline-flex items-center">
+                        <i class="fa fa-eye "></i>
                         <span class="font-medium ml-2">{{ Number::abbreviate($post->views) }}</span>
                     </span>
+                    <span>|</span>
 
+                    <livewire:public.favorite-button :post="$post" />
                     <span>|</span>
 
                     <span class="inline-flex items-center">
-                        {{-- Лайки --}}
-                        @auth
-                            <form method="POST" action="{{ route('public.post.like', $post) }}" class="like-form"
-                                data-post-id="{{ $post->id }}">
-                                @csrf
-                                <button type="submit"
-                                    class="flex items-center {{ auth()->user()->likedPosts->contains($post->id) ? 'post-like' : 'post-like-hover' }} like-button">
-                                    <i class="fas fa-heart mr-1"></i>
-                                    <span class="like-count">{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
-                                </button>
-                            </form>
-                        @else
-                            <i class="fas fa-heart mr-1"></i>
-                            <span>{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
-                        @endauth
+                        {{-- Likes --}}
+                        <livewire:public.post-like-button :post="$post" :key="'post-like-' . $post->id" />
                     </span>
                 </div>
 
@@ -90,6 +77,7 @@
                 @endif
 
                 <x-public.ui.separator />
+                
                 <div id="post-content" class="prose max-w-none prose-lg prose-gray post-content  wrap-anywhere">
                     {!! $post->content !!}
                 </div>
@@ -101,12 +89,9 @@
             @include('public.partials.similarPost')
         @endif
 
+        {{-- Comments --}}
+        @include('public.partials.comment.index')
+
 
     </div>
-
-
 @endsection
-
-@push('scripts')
-    @vite('resources/js/public/like.js')
-@endpush

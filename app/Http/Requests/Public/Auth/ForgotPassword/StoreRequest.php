@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Public\Auth\ForgotPassword;
 
+use App\Rules\Public\CaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -23,11 +24,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email', 'max:255'],
-            'captcha' => ['required', function ($attribute, $value, $fail) {
-                if ($value !== session('captcha')) {
-                    $fail(__('validation.captcha.incorrect'));
-                }
-            }],
+            'captcha' => ['required', new CaptchaRule()],
         ];
     }
 

@@ -11,7 +11,7 @@ class LikedPostsController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(User $user,Request $request)
+    public function __invoke(User $user)
     {
         $posts = $user->likedPosts()->latest()->paginate(10);
        return view('public.user.show', compact('user', 'posts'));

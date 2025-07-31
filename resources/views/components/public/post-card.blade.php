@@ -86,28 +86,23 @@
                         <span>{!! highlight($post->author->login ?? 'Unknown', request('search')) !!}</span>
                     </a>
                 </div>
+                {{-- Comments --}}
+                <div class="flex items-center">
+                   <i class="far fa-comment mr-1"></i>
+                    <span>{{ $post->allApprovedComments->count() }}</span>
+                </div>
 
-                {{-- Просмотры --}}
+                {{-- View --}}
                 <div class="flex items-center">
                     <i class="fas fa-eye mr-1"></i>
                     <span>{{ Number::abbreviate($post->views) ?? 0 }}</span>
                 </div>
 
-                {{-- Лайки --}}
-                @auth
-                    <form method="POST" action="{{ route('public.post.like', $post) }}" class="like-form"
-                        data-post-id="{{ $post->id }}">
-                        @csrf
-                        <button type="submit"
-                            class="flex items-center {{ auth()->user()->likedPosts->contains($post->id) ? 'post-like' : 'post-like-hover' }} like-button">
-                            <i class="fas fa-heart mr-1"></i>
-                            <span class="like-count">{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
-                        </button>
-                    </form>
-                @else
-                    <i class="fas fa-heart mr-1"></i>
-                    <span>{{ Number::abbreviate($post->likedByUsers->count()) ?? 0 }}</span>
-                @endauth
+                {{-- bookmark --}}
+                <livewire:public.favorite-button :post="$post" :key="'post-' . $post->id" />
+
+                {{-- Likes --}}
+                <livewire:public.post-like-button :post="$post" :key="'post-like-' . $post->id" />
             </div>
         </div>
     </div>

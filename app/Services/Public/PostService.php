@@ -3,7 +3,7 @@
 namespace App\Services\Public;
 
 use App\Models\Post;
-use App\PostStatus;
+use App\Enums\PostStatus;
 
 class PostService
 {
@@ -29,7 +29,7 @@ class PostService
     {
 
         return Post::where('id', '!=', $post->id)
-        ->where('status', PostStatus::PUBLISHED)
+            ->where('status', PostStatus::PUBLISHED)
             ->where(function ($query) use ($post) {
                 // Та ж категорія
                 $query->where('category_id', $post->category_id);

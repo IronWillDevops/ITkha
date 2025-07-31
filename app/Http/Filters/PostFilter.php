@@ -3,7 +3,7 @@
 
 namespace App\Http\Filters;
 
-use App\PostStatus;
+use App\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Builder;
 
 class PostFilter extends AbstractFilter

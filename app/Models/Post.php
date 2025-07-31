@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CommentStatus;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tag;
 use App\Models\Category;
@@ -20,6 +21,7 @@ class Post extends Model
         'main_image',
         'preview_image',
         'status',
+        'comments_enabled',
         'likes',
         'views',
         'category_id',
@@ -27,6 +29,7 @@ class Post extends Model
     ];
 
     protected $casts = [
+        'comments_enabled' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -56,5 +59,19 @@ class Post extends Model
     public function isLikedBy(User $user): bool
     {
         return $this->likedByUsers()->where('user_id', $user->id)->exists();
+    }
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    // Comments
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->with('children');
+    }
+    public function allApprovedComments()
+    {
+        return $this->hasMany(Comment::class)->with('children')->where('status', CommentStatus::APPROVED);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin\Post;
 
-use App\PostStatus;
+use App\Enums\PostStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -13,7 +13,6 @@ class StoreRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-        
     }
 
     /**
@@ -32,6 +31,7 @@ class StoreRequest extends FormRequest
             'preview_image' => ['file', 'mimes:jpg,png', 'max:2048'],
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],
+            'comments_enabled' => ['required', 'boolean'],
 
 
             'category_id' => ['required', 'integer', 'exists:categories,id'],
@@ -69,6 +69,9 @@ class StoreRequest extends FormRequest
             'status.required' => 'Вкажіть статус посту.',
             'status.string' => 'Статус посту повинен бути рядком.',
             'status.in' => 'Вказано некоректний статус посту. Доступні значення: draft, published, archived.',
+
+            'comments_enabled.required' => 'Поле "Коментарі" є обов’язковим.',
+            'comments_enabled.boolean' => 'Поле "Коментарі" повинно бути булевим значенням.',
 
             'category_id.required' => 'Поле "Категорія" є обов’язковим.',
             'category_id.integer' => 'Категорія повинна бути числом.',

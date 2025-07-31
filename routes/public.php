@@ -12,6 +12,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', App\Http\Controllers\Public\Auth\Login\StoreController::class)->middleware('throttle:login')
         ->name('login.store');;
 });
+Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
+    ->middleware('auth')
+    ->name('logout');
 
 
 Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\VerifyEmailController::class)
@@ -57,9 +60,6 @@ Route::prefix('/auth')
             });
     });
 
-Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
-    ->middleware('auth')
-    ->name('logout');
 
 
 Route::prefix('/')
@@ -72,11 +72,9 @@ Route::prefix('/')
                 Route::get('/', App\Http\Controllers\Public\Post\IndexController::class)->name('index');
                 Route::get('/{post}', App\Http\Controllers\Public\Post\ShowController::class)->name('show');
 
-                // Like Post
-                // /Unlike post — only for authenticated users (can be restricted to admins)
-
-                Route::middleware(['auth', \App\Http\Middleware\CheckUserVerifiedAndStatus::class])->group(function () {
-                    Route::post('/{post}/like', App\Http\Controllers\Public\Post\LikeController::class)->name('like');
+                Route::middleware('auth')->group(function () {
+                    Route::post('/comments', App\Http\Controllers\Public\Comment\StoreController::class)
+                        ->name('comment.store');
                 });
             });
 
@@ -94,8 +92,10 @@ Route::prefix('/')
             ->group(function () {
                 Route::get('/{user}', App\Http\Controllers\Public\User\ShowController::class)->name('show');
                 Route::get('/{user}/liked', App\Http\Controllers\Public\User\LikedPostsController::class)->name('show.like');
+                Route::get('/{user}/favorite', App\Http\Controllers\Public\User\FavoritePostsController::class)->name('show.favorite');
                 Route::get('/{user}/edit', App\Http\Controllers\Public\User\EditController::class)->middleware('auth')->name('edit');
                 Route::patch('/{user}', App\Http\Controllers\Public\User\UpdateController::class)->middleware('auth')->name('update');
                 Route::patch('/{user}/password', App\Http\Controllers\Public\User\UpdatePasswordController::class)->middleware('auth')->name('password.update');
-             });
+            });
     });
+// routes/web.php

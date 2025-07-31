@@ -22,6 +22,4 @@
 
 
 
-@push('scripts')
-    @vite('resources/js/public/like.js')
-@endpush
+
