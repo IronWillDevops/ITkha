@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Public;
 
+use App\Rules\Public\CaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactFormRequest extends FormRequest
@@ -26,11 +27,7 @@ class ContactFormRequest extends FormRequest
             'subject' => ['required', 'string', 'max:50'],
             'email' => ['required', 'email'],
             'message' => ['required', 'string', 'min:10', 'max:1000'],
-            'captcha' => ['required', function ($attribute, $value, $fail) {
-                if ($value !== session('captcha')) {
-                    $fail(__('validation.captcha.incorrect'));
-                }
-            }],
+            'captcha' => ['required',  new CaptchaRule()],
         ];
     }
 

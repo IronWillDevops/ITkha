@@ -1,6 +1,6 @@
 <?php
 
-use App\PostStatus;
+use App\Enums\PostStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->string('preview_image')->nullable();
             $table->string('title');
             $table->text('content');
-            $table->enum('status',array_column(PostStatus::cases(), 'value'))->default(PostStatus::DRAFT->value);
-           
+            $table->enum('status', array_column(PostStatus::cases(), 'value'))->default(PostStatus::DRAFT->value);
+            $table->boolean('comments_enabled')->default(true);
             $table->integer('views')->default(0);
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->default(1);

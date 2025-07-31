@@ -32,6 +32,7 @@ class PostService
             if (isset($tagIds)) {
                 $post->tags()->attach($tagIds);
             }
+            $post->comments_enabled = $request->boolean('comments_enabled');
             DB::commit();
         } catch (Exception $expt) {
             Db::rollback();
@@ -43,7 +44,7 @@ class PostService
     {
         try {
             DB::beginTransaction();
-
+       
             if (isset($data['tag_ids'])) {
                 $tagIds = $data['tag_ids'];
                 unset($data['tag_ids']);
@@ -70,6 +71,8 @@ class PostService
             if (isset($tagIds)) {
                 $post->tags()->sync($tagIds);
             }
+
+            $post->comments_enabled = $request->boolean('comments_enabled');
             DB::commit();
         } catch (Exception $expt) {
             Db::rollback();

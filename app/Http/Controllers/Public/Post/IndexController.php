@@ -8,7 +8,7 @@ use App\Http\Requests\Public\Post\FilterRequest;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Post;
-use App\PostStatus;
+use App\Enums\PostStatus;
 use App\Services\Public\PostService;
 
 class IndexController extends Controller

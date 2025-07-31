@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\VerifyEmailNotification;
 use App\Notifications\ResetPasswordNotification;
-use App\PostStatus;
+use App\Enums\PostStatus;
 
 class User extends Authenticatable implements MustVerifyEmail
 {

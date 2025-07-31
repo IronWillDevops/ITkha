@@ -19,12 +19,6 @@
                         </a>
                     @endif
                 </h1>
-                {{-- Edit --}}
-
-                <div class="flex items-center">
-
-                </div>
-
 
                 <div class="flex flex-wrap items-center text-sm space-x-4 post-footer">
                     <div class="inline-flex items-center space-x-1">
@@ -35,14 +29,14 @@
                     <span>|</span>
 
                     <span class="inline-flex items-center">
-                        <i class="fas fa-tag ml-2"></i>
+                        <i class="fas fa-tag "></i>
                         <span class="font-medium ml-2">{{ $post->category->title }}</span>
                     </span>
 
                     <span>|</span>
 
                     <span class="inline-flex items-center">
-                        <i class="fa fa-user ml-2"></i>
+                        <i class="fa fa-user "></i>
                         <a href="{{ route('public.user.show', $post->author->id) }}"
                             class="link-hover hover:underline ml-2">
                             {{ $post->author->login }}
@@ -50,9 +44,13 @@
                     </span>
 
                     <span>|</span>
-    
                     <span class="inline-flex items-center">
-                        <i class="fa fa-eye ml-2"></i>
+                        <i class="far fa-comment "></i>
+                        <span class="font-medium ml-2">{{ $post->allApprovedComments->count() }}</span>
+                    </span>
+                    <span>|</span>
+                    <span class="inline-flex items-center">
+                        <i class="fa fa-eye "></i>
                         <span class="font-medium ml-2">{{ Number::abbreviate($post->views) }}</span>
                     </span>
                     <span>|</span>
@@ -79,6 +77,7 @@
                 @endif
 
                 <x-public.ui.separator />
+                
                 <div id="post-content" class="prose max-w-none prose-lg prose-gray post-content  wrap-anywhere">
                     {!! $post->content !!}
                 </div>
@@ -89,5 +88,10 @@
         @if ($similarPosts->isNotEmpty())
             @include('public.partials.similarPost')
         @endif
+
+        {{-- Comments --}}
+        @include('public.partials.comment.index')
+
+
     </div>
 @endsection

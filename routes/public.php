@@ -12,6 +12,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', App\Http\Controllers\Public\Auth\Login\StoreController::class)->middleware('throttle:login')
         ->name('login.store');;
 });
+Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
+    ->middleware('auth')
+    ->name('logout');
 
 
 Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\VerifyEmailController::class)
@@ -57,9 +60,6 @@ Route::prefix('/auth')
             });
     });
 
-Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
-    ->middleware('auth')
-    ->name('logout');
 
 
 Route::prefix('/')
@@ -71,6 +71,11 @@ Route::prefix('/')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Public\Post\IndexController::class)->name('index');
                 Route::get('/{post}', App\Http\Controllers\Public\Post\ShowController::class)->name('show');
+
+                Route::middleware('auth')->group(function () {
+                    Route::post('/comments', App\Http\Controllers\Public\Comment\StoreController::class)
+                        ->name('comment.store');
+                });
             });
 
 
@@ -93,3 +98,4 @@ Route::prefix('/')
                 Route::patch('/{user}/password', App\Http\Controllers\Public\User\UpdatePasswordController::class)->middleware('auth')->name('password.update');
             });
     });
+// routes/web.php
