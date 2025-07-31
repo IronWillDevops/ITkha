@@ -145,6 +145,23 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="comments_enabled">Comments</label>
+                            <select name="comments_enabled" id="comments_enabled" class="form-control">
+                                <option value="1"
+                                    {{ old('comments_enabled', $post->comments_enabled ?? true) ? 'selected' : '' }}>Yes
+                                </option>
+                                <option value="0"
+                                    {{ old('comments_enabled', $post->comments_enabled ?? true) ? '' : 'selected' }}>No
+                                </option>
+                            </select>
+
+                            @error('comments_enabled')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
 

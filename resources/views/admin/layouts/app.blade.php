@@ -17,7 +17,7 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
-    
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- summernote -->
@@ -106,7 +106,8 @@
         // summernote
         $('#summernote').summernote({
             placeholder: 'Enter content',
-            height: 300
+            height: 300,
+          
         });
 
         // File Input
@@ -117,17 +118,16 @@
         //Initialize Select2 Elements
         $('.select2').select2()
         @if (session('toast'))
-                $(document).ready(function() {
-                    $(document).Toasts('create', {
-                        class: 'bg-{{ session('toast.type', 'info') }}',
-                        title: '{{ session('toast.title') }}',
-                        body: '{{ session('toast.message') }}',
-                        autohide: true,
-                        delay: {{ session('toast.delay', 5000) }}
-                    });
+            $(document).ready(function() {
+                $(document).Toasts('create', {
+                    class: 'bg-{{ session('toast.type', 'info') }}',
+                    title: '{{ session('toast.title') }}',
+                    body: '{{ session('toast.message') }}',
+                    autohide: true,
+                    delay: {{ session('toast.delay', 5000) }}
                 });
-                @endif
-
+            });
+        @endif
     </script>
     {{-- Здесь будет выводиться весь добавленный скрипт --}}
     @stack('scripts')

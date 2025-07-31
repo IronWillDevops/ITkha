@@ -35,5 +35,7 @@ return [
         'parent_id' => [
             'exists' => 'The comment you are replying to was not found.',
         ],
+
+        'comments_disabled' => 'Comments on this post are disabled.',
     ],
 ];

@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->string('preview_image')->nullable();
             $table->string('title');
             $table->text('content');
-            $table->enum('status',array_column(PostStatus::cases(), 'value'))->default(PostStatus::DRAFT->value);
-           
+            $table->enum('status', array_column(PostStatus::cases(), 'value'))->default(PostStatus::DRAFT->value);
+            $table->boolean('comments_enabled')->default(true);
             $table->integer('views')->default(0);
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->default(1);

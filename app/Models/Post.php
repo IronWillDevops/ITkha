@@ -21,6 +21,7 @@ class Post extends Model
         'main_image',
         'preview_image',
         'status',
+        'comments_enabled',
         'likes',
         'views',
         'category_id',
@@ -28,6 +29,7 @@ class Post extends Model
     ];
 
     protected $casts = [
+        'comments_enabled' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

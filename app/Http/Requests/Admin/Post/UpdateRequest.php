@@ -32,6 +32,7 @@ class UpdateRequest extends FormRequest
 
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],
+            'comments_enabled' => ['required', 'boolean'],
 
             'category_id' => ['required', 'integer', 'exists:categories,id'],
 

@@ -86,13 +86,18 @@
                         <span>{!! highlight($post->author->login ?? 'Unknown', request('search')) !!}</span>
                     </a>
                 </div>
+                {{-- Comments --}}
+                <div class="flex items-center">
+                   <i class="far fa-comment mr-1"></i>
+                    <span>{{ $post->allApprovedComments->count() }}</span>
+                </div>
 
-                {{-- Просмотры --}}
-            
+                {{-- View --}}
                 <div class="flex items-center">
                     <i class="fas fa-eye mr-1"></i>
                     <span>{{ Number::abbreviate($post->views) ?? 0 }}</span>
                 </div>
+
                 {{-- bookmark --}}
                 <livewire:public.favorite-button :post="$post" :key="'post-' . $post->id" />
 
