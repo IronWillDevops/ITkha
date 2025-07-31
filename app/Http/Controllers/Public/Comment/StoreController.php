@@ -17,7 +17,6 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request)
     {
         $data = $request->validated();
-
         $post = Post::findOrFail($data['post_id']);
 
         if (! $post->comments_enabled) {
