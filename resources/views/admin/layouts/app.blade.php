@@ -87,8 +87,8 @@
     <script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
-    <!-- ChartJS -->
-    <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+    {{-- <!-- ChartJS -->
+    <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script> --}}
     <!-- summernote -->
     <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
     <!-- bs-custom-file-input -->
@@ -100,8 +100,6 @@
 
 
 
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
     <script>
         // summernote
         $('#summernote').summernote({
