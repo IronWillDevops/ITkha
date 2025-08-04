@@ -9,23 +9,17 @@ use Illuminate\Http\Request;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class EditController extends Controller
-{ use AuthorizesRequests;
+class EditController extends BaseController
+{
+    use AuthorizesRequests;
     /**
      * Handle the incoming request.
      */
     public function __invoke(User $user)
-    { 
-        
-    $this->authorize('view', $user);
-        // Завантажити зв’язок profile, або створити новий, якщо не існує
-        if (!$user->relationLoaded('profile') || !$user->profile) {
-            $user->loadMissing('profile');
+    {
 
-            if (!$user->profile) {
-                $user->profile()->create(); // створюємо порожній профіль
-            }
-        }
+        $this->authorize('viewPublic', $user);
+        $this->service->ensureProfileExists($user);
 
         return view('public.user.edit', compact('user'));
     }

@@ -28,7 +28,6 @@ class UpdateRequest extends FormRequest
             'content' => ['required', 'string'],
 
             'main_image' => ['file', 'mimes:jpg,jpeg,png', 'max:2048'],
-            'preview_image' => ['file', 'mimes:jpg,jpeg,png', 'max:2048'],
 
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],

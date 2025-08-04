@@ -60,14 +60,14 @@
                     value="{{ $user->profile?->address }}" required="false" />
                 {{-- Web site --}}
                 <x-public.form.input.text type="website" name="website" text="{{ __('profile.job.website') }}"
-                    placeholder="https://example.com" icon="fas fa-link"
-                    value="{{ $user->profile?->website }}" required="false" />
+                    placeholder="https://example.com" icon="fas fa-link" value="{{ $user->profile?->website }}"
+                    required="false" />
                 {{-- About myself --}}
                 <x-public.form.input.area name="about_myself" text="{{ __('profile.job.about') }}"
                     placeholder="{{ __('profile.placeholder.about_myself') }}" value="{{ $user->profile?->about_myself }}"
                     required="false" />
             </section>
-            {{-- Розділ: Соціальні мережі --}}
+            {{-- Social Medіa --}}
             <section class="">
                 <h2 class="text-xl font-semibold mb-4">{{ __('profile.sections.social') }}</h2>
                 {{-- Web site --}}
@@ -85,7 +85,7 @@
 
         <x-public.ui.separator />
 
-        <form action="{{ route('public.user.password.update',$user->id) }}" method="POST" class="space-y-10">
+        <form action="{{ route('public.user.password.update', $user->id) }}" method="POST" class="space-y-10">
             @csrf
             @method('PATCH')
             {{-- Розділ: Безпека --}}
@@ -94,7 +94,7 @@
                 <x-public.form.input.password name="current_password" text="{{ __('profile.security.current_password') }}"
                     placeholder="{{ __('profile.placeholder.current_password') }}" />
                 <x-public.form.input.password name="password" text="{{ __('profile.security.password_new') }}"
-                    placeholder="{{ __('profile.placeholder.password_new') }}" />
+                    placeholder="{{ __('profile.placeholder.password_new') }}" :showStrengthBar="true" />
                 <x-public.form.input.password name="password_confirmation"
                     text="{{ __('profile.security.password_confirmation') }}"
                     placeholder="{{ __('profile.placeholder.password_confirmation') }}" />
@@ -108,6 +108,3 @@
     </div>
 @endsection
 
-@push('scripts')
-    @vite('resources/js/public/loadPreviewAvatar.js')
-@endpush

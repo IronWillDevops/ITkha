@@ -110,8 +110,8 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        @can('viewAny', \App\Models\User::class)
-                            <ul class="nav nav-treeview">
+                        <ul class="nav nav-treeview">
+                            @can('viewAny', \App\Models\User::class)
                                 <li class="nav-item">
                                     <a href="{{ route('admin.user.index') }}" class="nav-link">
                                         <i class="fas fa-users nav-icon"></i>
@@ -120,18 +120,16 @@
                                         </p>
                                     </a>
                                 </li>
-                            </ul>
-                        @endcan
-                        @can('viewAny', \App\Models\Role::class)
-                        <li class="nav-item">
-                            <a href="{{ route('admin.role.index') }}" class="nav-link">
-                                <i class="fas fa-users-cog nav-icon"></i>
-                                <p>Roles</p>
-                            </a>
-                        </li>
-                    @endcan
-
-
+                            @endcan
+                            @can('viewAny', \App\Models\Role::class)
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.role.index') }}" class="nav-link">
+                                        <i class="fas fa-users-cog nav-icon"></i>
+                                        <p>Roles</p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
                     </li>
                 @endif
 

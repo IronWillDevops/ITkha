@@ -28,7 +28,6 @@ class StoreRequest extends FormRequest
             'content' => ['required', 'string'],
 
             'main_image' => ['file', 'mimes:jpg,png', 'max:2048'],
-            'preview_image' => ['file', 'mimes:jpg,png', 'max:2048'],
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],
             'comments_enabled' => ['required', 'boolean'],

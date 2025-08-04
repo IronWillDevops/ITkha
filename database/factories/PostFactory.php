@@ -20,7 +20,6 @@ class PostFactory extends Factory
     {
         return [
             'main_image' => $this->faker->imageUrl(800, 600, 'nature', true),
-            'preview_image' => $this->faker->imageUrl(400, 300, 'abstract', true),
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(3, true),
           

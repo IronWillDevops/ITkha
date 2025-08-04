@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Public\Auth\ResetPassword;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class StoreRequest extends FormRequest
 {
@@ -23,8 +24,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'token'    => ['required'],
-            'email'    => ['required', 'string', 'email','max:255'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'email'    => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed', Password::defaults()],
         ];
     }
 
@@ -40,9 +41,14 @@ class StoreRequest extends FormRequest
 
             'password.required' => __('validation.password.required'),
             'password.string' => __('validation.password.string'),
-            'password.min' => __('validation.password.min'),
             'password.max' => __('validation.password.max'),
             'password.confirmed' => __('validation.password.confirmed'),
+            'password.min' => __('validation.password.min'),
+            'password.letters' => __('validation.password.letters'),
+            'password.mixed' => __('validation.password.mixed'),
+            'password.numbers' => __('validation.password.numbers'),
+            'password.symbols' => __('validation.password.symbols'),
+            'password.uncompromised' => __('validation.password.uncompromised'),
         ];
     }
 }

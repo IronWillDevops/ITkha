@@ -51,29 +51,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <!-- text input -->
-                        <div class="form-group">
-                            <label>Preview image</label>
-
-                            <img id="preview-image-preview" src="#" alt="Preview" class="img-fluid d-none"
-                                style="max-height: 200px; object-fit: contain; display: block; margin-bottom: 10px;" />
-
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="preview_image"
-                                        id="preview-image-input">
-                                    <label class="custom-file-label" for="preview-image-input">Choose file</label>
-                                </div>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">Upload</span>
-                                </div>
-                            </div>
-                            @error('preview_image')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div class="row">

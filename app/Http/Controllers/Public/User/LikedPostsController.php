@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Public\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class LikedPostsController extends Controller
 {

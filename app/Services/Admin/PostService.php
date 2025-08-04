@@ -24,9 +24,6 @@ class PostService
                 $data['main_image'] = $request->file('main_image')->store('images/main', 'public');
             }
 
-            if ($request->hasFile('preview_image')) {
-                $data['preview_image'] = $request->file('preview_image')->store('images/preview', 'public');
-            }
 
             $post = Post::firstOrCreate($data);
             if (isset($tagIds)) {
@@ -60,12 +57,6 @@ class PostService
                 $data['main_image'] = $request->file('main_image')->store('images/main', 'public');
             }
 
-            if ($request->hasFile('preview_image')) {
-                if ($post->preview_image && Storage::disk('public')->exists($post->preview_image)) {
-                    Storage::disk('public')->delete($post->preview_image);
-                }
-                $data['preview_image'] = $request->file('preview_image')->store('images/preview', 'public');
-            }
 
             $post->update($data);
             if (isset($tagIds)) {

@@ -2,42 +2,23 @@
 
 namespace App\Http\Controllers\Public\Post;
 
-use App\Http\Controllers\Controller;
-use App\Models\Post;
-use App\Enums\PostStatus;
-use App\Services\Public\PostService;
-use Illuminate\Http\Request;
 
-class ShowController extends Controller
+use App\Models\Post;
+
+class ShowController extends BaseController
 {
   /**
    * Handle the incoming request.
    */
 
-  public function __invoke(Post $post, PostService $postService)
+  public function __invoke(Post $post)
   {
-    $post = Post::with([
-      'comments' => fn($query) =>
-      $query->approved()->whereNull('parent_id')->with([
-        'children' => fn($q) => $q->approved()->with('user'),
-        'user'
-      ])
-    ])
-      ->where('id', $post->id)
-      ->where('status', PostStatus::PUBLISHED->value)
-      ->firstOrFail();
+    $post = $this->service->getPostForShow($post);
 
-    $sessionKey = 'post_viewed_' . $post->id;
+    $this->service->incrementViewCount($post);
 
-    if (!session()->has($sessionKey)) {
-      $post->timestamps = false;
-      $post->views += 1;
-      $post->save();
-      session()->put($sessionKey, true);
-    }
-
-    $popularPosts = $postService->popularPosts();
-    $similarPosts = $postService->similarPosts($post);
+    $popularPosts = $this->service->popularPosts();
+    $similarPosts = $this->service->similarPosts($post);
 
     return view('public.post.show', compact('post', 'popularPosts', 'similarPosts'));
   }
