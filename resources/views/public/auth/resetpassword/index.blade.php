@@ -16,10 +16,10 @@
 
                 {{-- Password --}}
                 <x-public.form.input.password name="password" text="{{ __('form.common.password') }}" placeholder="{{ __('form.common.password') }}"
-                    icon="fas fa-solid fa-lock" :showStrengthBar="true" />
+                    icon="fas fa-solid fa-lock" />
 
                 {{-- Password confirmation --}}
-                <x-public.form.input.password name="password_confirmation" text="{{ __('form.common.password_repeat') }}"
+                <x-public.form.input.password name="{{ __('form.common.password_repeat') }}" text="{{ __('form.common.password_repeat') }}"
                     placeholder="Repeat new password" icon="fas fa-solid fa-lock" />
 
                 {{-- Submit --}}
@@ -37,3 +37,6 @@
     </div>
 @endsection
 
+@push('scripts')
+    @vite('resources/js/public/togglePasswordVisibility.js')
+@endpush

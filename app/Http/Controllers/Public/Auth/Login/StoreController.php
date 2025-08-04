@@ -2,45 +2,53 @@
 
 namespace App\Http\Controllers\Public\Auth\Login;
 
-use App\Exceptions\User\AccountInactiveException;
-use App\Exceptions\User\AuthFailedException;
 use App\Exceptions\User\EmailNotVerifiedException;
-use App\Http\Controllers\Public\Auth\Login\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\Auth\Login\StoreRequest;
-use App\Services\Public\Auth\LoginService;
-use Exception;
-use Illuminate\Http\RedirectResponse;
+use App\Enums\UserStatus;
+use Illuminate\Support\Facades\Auth;
 
-class StoreController extends BaseController
+class StoreController extends Controller
 {
-   
+
+
     /**
-     * Обробка запиту логіну
+     * Handle the incoming request.
      */
-    public function __invoke(StoreRequest $request): RedirectResponse
+    public function __invoke(StoreRequest $request)
     {
         try {
             $credentials = $request->validated();
-            $this->service->login($credentials, $request->boolean('remember'));
 
-            return redirect()->intended(route('public.post.index'));
+            if (Auth::attempt($credentials, $request->boolean('remember'))) {
+                $request->session()->regenerate();
+
+                $user = Auth::user();
+
+              //  Перевірка верифікації email
+                if ($user->status == UserStatus::PENDING->value) {
+                    Auth::logout();
+                    throw new EmailNotVerifiedException();
+                }
+
+                // Перевірка статусу користувача
+                if (!$user->status == UserStatus::ACTIVE->value) {
+                    Auth::logout();
+                    return back()->withErrors([
+                        'error' => __('message.success.account_inactive'),
+                    ])->onlyInput('email');
+                }
+                return redirect()->intended(route('public.post.index'));
+            }
+
+
+            return back()->withErrors([
+                'error' => __('message.error.auth_failed'),
+            ])->onlyInput('email');
         } catch (EmailNotVerifiedException $ex) {
-            return redirect()
-                ->route('public.auth.reverification.index')
-                ->with('error', $ex->getMessage());
-        } catch (AccountInactiveException $ex) {
-            // Використовуємо повідомлення з винятку
-            return back()
-                ->withErrors(['error' => $ex->getMessage()])
-                ->onlyInput('email');
-        } catch (AuthFailedException $ex) {
-            // Повертаємо назад із повідомленням помилки
-            return back()
-                ->withErrors(['error' => $ex->getMessage()])
-                ->onlyInput('email');
-        } catch (Exception $ex) {
-            // Показати загальну сторінку помилки 500
-            abort(500, 'Server Error');
+
+
+            return redirect()->route('public.auth.reverification.index')->with('error', $ex->getMessage());
         }
     }
 }

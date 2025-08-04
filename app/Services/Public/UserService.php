@@ -1,14 +1,16 @@
 <?php
 
-namespace  App\Services\Public\Auth;
+namespace App\Services\Public;
+
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterService 
+class UserService
 {
     public function store($data)
     {
+
         $data['password'] = Hash::make($data['password']);
 
         $user = User::firstOrCreate(['email' => $data['email']], $data);

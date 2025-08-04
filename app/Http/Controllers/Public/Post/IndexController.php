@@ -3,25 +3,44 @@
 namespace App\Http\Controllers\Public\Post;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\PostFilter;
 use App\Http\Requests\Public\Post\FilterRequest;
-
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Post;
 use App\Enums\PostStatus;
+use App\Services\Public\PostService;
 
-class IndexController extends BaseController
+class IndexController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(FilterRequest $request)
+    public function __invoke(FilterRequest $request, PostService $postService)
     {
+
 
         $data = $request->validated();
 
-        $posts = $this->service->getFilteredPosts($data);
+        // Задаємо дефолтне сортування, якщо не передано
+        if (empty($data['sort_by'])) {
+            $data['sort_by'] = 'created_at';
+        }
+        if (empty($data['sort_dir'])) {
+            $data['sort_dir'] = 'desc';
+        }
+        $filter = app()->make(PostFilter::class, [
+            'queryParams' => array_filter($data, fn($v) => $v !== null && $v !== '')
+        ]);
+        
+        $posts = Post::where('status', PostStatus::PUBLISHED) // 
+            ->filter($filter)
+            ->orderBy($data['sort_by'], $data['sort_dir'])
+            ->paginate(30);
 
-        $categories = $this->service->getAllCategories();
-        $tags = $this->service->getAllTags();
-        $popularPosts = $this->service->popularPosts();
+        $categories = Category::all();
+        $tags = Tag::all();
+        $popularPosts = $postService->popularPosts();
 
         return view('public.post.index', compact('posts', 'categories', 'tags', 'popularPosts'));
     }

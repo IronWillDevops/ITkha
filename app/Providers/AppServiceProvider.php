@@ -54,5 +54,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(\App\Models\Contact::class,  \App\Policies\Admin\ContactPolicy::class);
         Gate::policy(\App\Models\Log::class,  \App\Policies\Admin\LogPolicy::class);
 
+        Gate::policy(\App\Models\User::class, \App\Policies\Public\UserPolicy::class);
     }
 }
