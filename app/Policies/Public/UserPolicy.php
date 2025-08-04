@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies\Admin;
+namespace App\Policies\Public;
 
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -12,7 +12,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-         return $user->hasPermission('roles_show');
+        return false;
     }
 
     /**
@@ -20,7 +20,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-         return $user->hasPermission('roles_show');
+          return $user->id === $model->id;
     }
 
     /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-         return $user->hasPermission('roles_create');
+        return false;
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-         return $user->hasPermission('roles_edit');
+        return $user->id === $model->id;
     }
 
     /**
@@ -44,7 +44,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-         return $user->hasPermission('roles_delete');
+        return false;
     }
 
     /**

@@ -13,6 +13,7 @@ class ShowController extends BaseController
      */
     public function __invoke(User $user)
     {
-        return view('admin.pages.user.show', compact('user')); 
+        
+        return view('admin.pages.user.show', compact('user')); // Можно заменить на вашу главную страницу
     }
 }

@@ -16,14 +16,12 @@ class Password extends Component
     public $text;
     public $placeholder;
     public $icon;
-    public $showStrengthBar;
-    public function __construct($name, $text, $placeholder, $icon = "fas fa-solid fa-lock", $showStrengthBar = false)
+    public function __construct( $name, $text, $placeholder, $icon="fas fa-solid fa-lock")
     {
         $this->name = $name;
         $this->text = $text;
         $this->placeholder = $placeholder;
         $this->icon = $icon;
-        $this->showStrengthBar = $showStrengthBar;
     }
 
     /**

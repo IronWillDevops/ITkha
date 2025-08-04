@@ -8,25 +8,28 @@ use App\Http\Requests\Public\Auth\ReVerification\StoreRequest;
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
-use App\Services\Public\Auth\ReVerificationService;
 use Exception;
 
-class StoreController extends BaseController
+class StoreController extends Controller
 {
+
     /**
      * Handle the incoming request.
      */
     public function __invoke(StoreRequest $request)
     {
         try {
+            $data = $request->validated();
 
-            $sent = $this->service->store($request->validated()['email']);
+            $user = User::where('email', $data['email'])->first();
 
-            if ($sent) {
+            if ($user && !$user->hasVerifiedEmail()) {
+                $user->sendEmailVerificationNotification();
                 return redirect()->route('login')->with('success', __('message.success.link_sent'));
-            } else {
-                return redirect()->route('login')->with('success', __('message.success.link_generic'));
             }
+
+
+            return redirect()->route('login')->with('success', __('message.success.link_generic'));
         } catch (Exception $ex) {
             return redirect()->route('login')->with('error', __('message.error.unexpected_error'));
         }
