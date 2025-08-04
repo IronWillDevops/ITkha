@@ -98,7 +98,7 @@ Update your system’s hosts file:
 URL: http://admin.example.test/dashboard
 
 Default credentials:
- - Email: `admin@example.test`
+ - Email: `admin@example.com`
  - Password: `password`
 
 ## 📌 Features
