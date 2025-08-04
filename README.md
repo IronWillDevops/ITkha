@@ -108,4 +108,4 @@ CAPTCHA support using `php-gd`
 Task queue using Laravel’s queue system
 
 ## 📄 License
-This project is open-source and available under the [[MIT license |https://opensource.org/license/MIT]].
+This project is open-source and available under the [MIT license](https://opensource.org/license/MIT).
