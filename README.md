@@ -95,7 +95,7 @@ Update your system’s hosts file:
 ```
 
 ## 🔐 Admin Panel
-URL: http://admin.example.test
+URL: http://admin.example.test/dashboard
 
 Default credentials:
  - Email: `admin@example.test`
