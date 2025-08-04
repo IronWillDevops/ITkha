@@ -108,6 +108,3 @@
     </div>
 @endsection
 
-@push('scripts')
-    @vite('resources/js/public/loadPreviewAvatar.js')
-@endpush

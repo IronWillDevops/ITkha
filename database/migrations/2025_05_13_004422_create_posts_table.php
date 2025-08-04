@@ -15,7 +15,6 @@ return new class extends Migration {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('main_image')->nullable();
-            $table->string('preview_image')->nullable();
             $table->string('title');
             $table->text('content');
             $table->enum('status', array_column(PostStatus::cases(), 'value'))->default(PostStatus::DRAFT->value);
