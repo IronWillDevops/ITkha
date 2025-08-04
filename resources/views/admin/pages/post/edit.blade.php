@@ -52,6 +52,30 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Preview image</label>
+
+                            <img id="preview-image-preview" src="{{ asset('storage/' . $post->preview_image) }}"
+                                alt="Preview" class="img-fluid"
+                                style="max-height: 200px; object-fit: contain; display: block; margin-bottom: 10px;" />
+
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="preview_image"
+                                        id="preview-image-input">
+                                    <label class="custom-file-label" for="preview-image-input">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                            </div>
+                            @error('preview_image')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -193,6 +217,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             previewImage('main-image-input', 'main-image-preview');
+            previewImage('preview-image-input', 'preview-image-preview');
         });
     </script>
 @endpush
