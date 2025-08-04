@@ -2,39 +2,22 @@
 
 namespace App\Http\Controllers\Public\Auth\ResetPassword;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\Auth\ResetPassword\StoreRequest;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Str;
-use App\Models\User;
 
-class StoreController extends Controller
+
+class StoreController extends BaseController
 {
-    /**
-     * Handle the incoming request.
-     */
+    
+
     public function __invoke(StoreRequest $request)
     {
-        $data = $request->validated();
-
-        $status = Password::reset(
-            $data,
-            function (User $user, string $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password),
-                    'remember_token' => Str::random(60),
-                ])->save();
-            }
-        );
+        $status = $this->service->store($request->validated());
 
         if ($status == Password::PASSWORD_RESET) {
             return redirect()->route('login')->with('success', __('message.success.reset'));
         } else {
             return redirect()->route('login')->with('error',  __('message.error.reset'));
         }
-
-        
     }
 }

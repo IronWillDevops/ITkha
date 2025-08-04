@@ -8,8 +8,6 @@ export default defineConfig({
             input: [
                 'resources/css/public/app.css',
                 'resources/js/public/app.js',
-                'resources/js/public/togglePasswordVisibility.js',
-                'resources/js/public/loadPreviewAvatar.js',
             ],
             refresh: true,
         }),
