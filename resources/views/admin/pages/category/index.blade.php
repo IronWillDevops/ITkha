@@ -24,6 +24,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Title</th>
+                                <th>Title</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,6 +32,7 @@
                             @foreach ($categories as $category)
                                 <tr>
                                     <td class="align-middle">{{ $category->id }}.</td>
+                                    <td class="align-middle">{{ $category->title }}</td>
                                     <td class="align-middle">{{ $category->title }}</td>
                                     <td class="align-middle">
                                         <div class='btn-group'>
