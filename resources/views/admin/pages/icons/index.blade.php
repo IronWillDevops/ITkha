@@ -61,7 +61,3 @@
     <?php endforeach; ?>
 </div>
 @endsection
-
-@push('scripts')
-
-@endpush

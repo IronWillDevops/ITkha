@@ -51,29 +51,6 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <!-- text input -->
-                        <div class="form-group">
-                            <label>Preview image</label>
-
-                            <img id="preview-image-preview" src="#" alt="Preview" class="img-fluid d-none"
-                                style="max-height: 200px; object-fit: contain; display: block; margin-bottom: 10px;" />
-
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="preview_image"
-                                        id="preview-image-input">
-                                    <label class="custom-file-label" for="preview-image-input">Choose file</label>
-                                </div>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">Upload</span>
-                                </div>
-                            </div>
-                            @error('preview_image')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
                 </div>
 
                 <div class="row">
@@ -185,31 +162,4 @@
         <!-- /.card-body -->
     </div>
 @endsection
-@push('scripts')
-    <script>
-        function previewImage(inputId, previewId) {
-            const input = document.getElementById(inputId);
-            const preview = document.getElementById(previewId);
 
-            input.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        preview.src = e.target.result;
-                        preview.classList.remove('d-none');
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.src = '#';
-                    preview.classList.add('d-none');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            previewImage('main-image-input', 'main-image-preview');
-            previewImage('preview-image-input', 'preview-image-preview');
-        });
-    </script>
-@endpush
