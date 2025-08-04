@@ -19,7 +19,6 @@ class Post extends Model
         'title',
         'content',
         'main_image',
-        'preview_image',
         'status',
         'comments_enabled',
         'likes',

@@ -22,7 +22,7 @@
 
                 {{-- Password --}}
                 <x-public.form.input.password name="password" text="{{ __('form.common.password') }}"
-                    placeholder="{{ __('form.common.password') }}" />
+                    placeholder="{{ __('form.common.password') }}" :showStrengthBar="true" />
                 {{-- Password --}}
                 <x-public.form.input.password name="password_confirmation" text="{{ __('form.common.password_repeat') }}"
                     placeholder="{{ __('form.common.password_repeat') }}" />
@@ -40,6 +40,4 @@
         </div>
     </div>
 @endsection
-@push('scripts')
-    @vite('resources/js/public/togglePasswordVisibility.js')
-@endpush
+
