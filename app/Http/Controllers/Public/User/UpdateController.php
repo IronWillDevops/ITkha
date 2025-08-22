@@ -16,6 +16,7 @@ class UpdateController extends Controller
     public function __invoke(UpdateRequest $request, User $user)
     {
         $data = $request->validated();
+        
         // Оновлення основної інформації користувача
         $user->fill([
             'name' => $data['name'],
@@ -31,6 +32,7 @@ class UpdateController extends Controller
 
             // Збереження нового
             $avatarPath = $request->file('avatar')->store("avatars/{$user->id}", 'public');
+      
             $user->avatar = $avatarPath;
         }
 

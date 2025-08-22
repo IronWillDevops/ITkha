@@ -14,6 +14,9 @@ class ShowController extends Controller
      */
     public function __invoke(Tag $tag)
     {
-        return view('admin.pages.tag.show', compact('tag')); // Можно заменить на вашу главную страницу
+        $posts = $tag->posts()
+            ->orderBy('id', 'desc') // найновіші першими
+            ->paginate(10);
+        return view('admin.pages.tag.show', compact('tag','posts')); // Можно заменить на вашу главную страницу
     }
 }

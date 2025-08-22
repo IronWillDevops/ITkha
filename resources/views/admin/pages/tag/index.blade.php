@@ -24,6 +24,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Title</th>
+                                <th>Count</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,7 +32,9 @@
                             @foreach ($tags as $tag)
                                 <tr>
                                     <td class="align-middle">{{ $tag->id }}.</td>
-                                    <td class="align-middle">{{ $tag->title }}</td>
+                                    <td class="align-middle"><a
+                                            href="{{ route('admin.tag.show', $tag->id) }}">{{ $tag->title }}</a></td>
+                                    <td class="align-middle">{{ $tag->posts->count() }}</td>
                                     <td class="align-middle">
                                         <div class='btn-group'>
                                             <a href="{{ route('admin.tag.show', $tag->id) }}" class="btn btn-default"><i

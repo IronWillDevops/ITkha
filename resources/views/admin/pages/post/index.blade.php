@@ -29,8 +29,8 @@
 
                                 <th>Tags</th>
                                 <th>Status</th>
+                                <th>Author</th>
                                 <th>Created at</th>
-                                <th>Updated at</th>
                                 <th>Action</th>
 
                             </tr>
@@ -40,17 +40,17 @@
                                 <tr>
                                     <td class="align-middle">{{ $post->id }}.</td>
 
-                                    <td class="align-middle">{{ $post->title }}</td>
-                                    <td class="align-middle">{{ $post->category->title }}</td>
+                                    <td class="align-middle"><a href="{{ route('admin.post.show',$post->id) }}">{{ $post->title }}</a></td>
+                                    <td class="align-middle"><a href="{{ route('admin.category.show',$post->category->id) }}">{{ $post->category->title }}</a></td>
                                     <td class="align-middle">
                                         @foreach ($post->tags as $tag)
-                                            #{{ $tag->title }}
+                                            <a href="{{ route('admin.tag.show',$tag->id) }}">{{ $tag->title }}</a>
                                         @endforeach
                                     </td>
-                                    
+
                                     <td class="align-middle">{{ $post->status }}</td>
+                                    <td class="align-middle"><a href="{{ route('admin.user.show',$post->author->id) }}">{{ $post->author->login }}</a></td>
                                     <td class="align-middle">{{ $post->created_at }}</td>
-                                    <td class="align-middle">{{ $post->updated_at }}</td>
                                     <td class="align-middle">
                                         <div class='btn-group'>
                                             <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-default"><i

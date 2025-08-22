@@ -7,7 +7,8 @@
         <input type="password" name="{{ $name }}" id="{{ $name }}" value="{{ old($name) }}"
             class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="{{ $placeholder }}" required />
         <button type="button" onclick="togglePasswordVisibility('{{ $name }}', this)"
-            class="absolute right-2 top-1/2 transform -translate-y-1/2  hover:text-text-hover focus:outline-none">
+            class="absolute right-2 top-1/2 transform -translate-y-1/2  hover:text-text-hover focus:outline-none" 
+             tabindex="-1">
             <i class="fas fa-eye"></i>
         </button>
     </div>

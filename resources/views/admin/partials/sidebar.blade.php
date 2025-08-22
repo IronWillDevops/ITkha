@@ -11,8 +11,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img  src="{{ asset('storage/' . Auth::user()->avatar) }}" data-filename="image.png"
-                                    alt="{{ Auth::user()->name }}" class="img-circle elevation-2">
+                @if (Auth::user()->avatar)
+                    <img src="{{ asset('storage/' . Auth::user()->avatar) }}" data-filename="image.png"
+                        alt="{{ Auth::user()->name }}" class="img-circle elevation-2">
+                @endif
             </div>
             <div class="info">
                 <a href="#" class="d-block">
@@ -111,26 +113,26 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        @can('viewAny', \App\Models\User::class)
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.user.index') }}" class="nav-link">
-                                        <i class="fas fa-users nav-icon"></i>
-                                        <p>Users
-                                            <span class="badge badge-info right">{{ \App\Models\User::count() }}</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
+                        <ul class="nav nav-treeview">
+                            @can('viewAny', \App\Models\User::class)
+                            <li class="nav-item">
+                                <a href="{{ route('admin.user.index') }}" class="nav-link">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p>Users
+                                        <span class="badge badge-info right">{{ \App\Models\User::count() }}</span>
+                                    </p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('viewAny', \App\Models\Role::class)
+                            <li class="nav-item">
+                                <a href="{{ route('admin.role.index') }}" class="nav-link">
+                                    <i class="fas fa-users-cog nav-icon"></i>
+                                    <p>Roles</p>
+                                </a>
+                            </li>
+                        </ul>
                         @endcan
-                        @can('viewAny', \App\Models\Role::class)
-                        <li class="nav-item">
-                            <a href="{{ route('admin.role.index') }}" class="nav-link">
-                                <i class="fas fa-users-cog nav-icon"></i>
-                                <p>Roles</p>
-                            </a>
-                        </li>
-                    @endcan
 
 
                     </li>

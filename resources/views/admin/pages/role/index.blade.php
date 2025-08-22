@@ -5,13 +5,12 @@
 @endsection
 
 @section('admin.content')
-
-
     <div class="card card-default color-palette-box">
         <div class="card-header">
             <div class="btn-group">
-                <a href="{{ route('admin.role.create') }}"  type="button" class="btn btn-info"><i class="fa fa-plus"></i> Add</a>
-           </div>
+                <a href="{{ route('admin.role.create') }}" type="button" class="btn btn-info"><i class="fa fa-plus"></i>
+                    Add</a>
+            </div>
         </div>
         <div class="card-body">
             <div class="card">
@@ -33,18 +32,18 @@
                             @foreach ($roles as $role)
                                 <tr>
                                     <td class="align-middle">{{ $role->id }}.</td>
-                                    <td class="align-middle">{{ $role->title }}</td>
+                                    <td class="align-middle"><a
+                                            href="{{ route('admin.role.show', $role->id) }}">{{ $role->title }}</a></td>
                                     <td class="align-middle">
                                         <div class='btn-group'>
-                                            <a href="{{ route('admin.role.show', $role->id) }}"
-                                                class="btn btn-default"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('admin.role.edit', $role->id) }}"
-                                                class="btn btn-default"><i class="fas fa-pen"></i></a>
+                                            <a href="{{ route('admin.role.show', $role->id) }}" class="btn btn-default"><i
+                                                    class="fas fa-eye"></i></a>
+                                            <a href="{{ route('admin.role.edit', $role->id) }}" class="btn btn-default"><i
+                                                    class="fas fa-pen"></i></a>
 
                                         </div>
                                         <div class='btn-group'>
-                                            <form action="{{ route('admin.role.delete', $role->id) }}"
-                                                method="POST">
+                                            <form action="{{ route('admin.role.delete', $role->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-default"><a
