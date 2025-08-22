@@ -105,7 +105,7 @@
         $('#summernote').summernote({
             placeholder: 'Enter content',
             height: 300,
-          
+
         });
 
         // File Input

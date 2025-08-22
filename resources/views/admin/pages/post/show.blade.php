@@ -5,76 +5,92 @@
 @endsection
 
 @section('admin.content')
-    <div class="card card-default color-palette-box">
-        <div class="card-header">
-            <div class="btn-group">
-                <a href="{{ route('admin.post.create') }}" type="button" class="btn btn-info"><i class="fa fa-plus"></i>
-                    Add</a>
-                <a href="{{ route('admin.post.edit', $post->id) }}" type="button" class="btn btn-default"><i
-                        class="fa fa-edit"></i> Edit</a>
-            </div>
-            <div class="btn-group">
-                <form action="{{ route('admin.post.delete', $post->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Sure delete?')">
-                        <i class="fa fa-trash"></i> Delete
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <div class="card-body">
-            <div class="card">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <!-- Пост -->
+            <div class="card border-0 shadow-sm w-100">
                 <div class="card-header">
-                    <h3 class="card-title">All categories</h3>
+                    <div class="btn-group">
+                        <a href="{{ route('admin.post.create') }}" type="button" class="btn btn-info"><i
+                                class="fa fa-plus"></i>
+                            Add</a>
+                        <a href="{{ route('admin.post.edit', $post->id) }}" type="button" class="btn btn-default"><i
+                                class="fa fa-edit"></i> Edit</a>
+                    </div>
+                    <div class="btn-group">
+                        <form action="{{ route('admin.post.delete', $post->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Sure delete?')">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
-                        <tbody>
-                            <tr>
-                                <td>ID</td>
-                                <td>{{ $post->id }}</td>
 
-                            </tr>
-                            <tr>
-                                <td>Title</td>
-                                <td>{{ $post->title }}</td>
+                <div class="card-body">
 
-                            </tr>
-                            <tr>
-                                <td>Category</td>
-                                <td>{{ $post->category->title }}</td>
+                    <!-- Заголовок + Дії -->
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h2 class="mb-1">{{ $post->title }}</h2>
+                            <div class="text-muted">
+                                <small>Created at: {{ $post->created_at->format('d.m.Y H:i') }}</small>
+                            </div>
+                        </div>
+                    </div>
 
-                            </tr>
-                            <tr>
-                                <td>Tags</td>
-                                <td>
-                                    @foreach ($post->tags as $tag)
-                                        #{{ $tag->title }}
-                                    @endforeach
-                                </td>
+                    <!-- Зображення + Інфо -->
+                    <div class="row mb-4">
+                        @if ($post->main_image)
+                            <div class="col-md-8 mb-3 mb-md-0">
+                                <img src="{{ asset('storage/' . $post->main_image) }}" class="img-fluid rounded w-100"
+                                    style="max-height: 400px; object-fit: cover;" alt="Image post">
+                            </div>
+                        @endif
 
-                            </tr>
-                            <tr>
-                                <td>Create At</td>
-                                <td>{{ $post->created_at }}</td>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <strong>Author:</strong><br>
+                                <a href="{{ route('admin.user.show', $post->author->id) }}">
+                                    {{ $post->author->login ?? '—' }}</a>
+                            </div>
 
-                            </tr>
-                            <tr>
-                                <td>Update At</td>
-                                <td>{{ $post->updated_at }}</td>
+                            <div class="mb-3">
+                                <strong>Category:</strong><br>
+                                {{ $post->category->title ?? '—' }}
+                            </div>
 
-                            </tr>
-                        </tbody>
-                    </table>
+                            <div class="mb-3">
+                                <strong>Status:</strong><br>
+
+                                <span
+                                    class="badge badge-{{ $post->status === \App\Enums\PostStatus::PUBLISHED->value ? 'success' : 'secondary' }}">
+                                    {{ $post->status }}
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <strong>Tags:</strong><br>
+                                @forelse ($post->tags as $tag)
+                                    <span class="badge badge-light border text-dark">{{ $tag->title }}</span>
+                                @empty
+                                    <span class="text-muted">—</span>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Контент -->
+                    <div>
+                        <strong>Content:</strong>
+                        <div class="border rounded p-3 bg-light mt-2">
+                            {!! $post->content !!}
+                        </div>
+                    </div>
+
                 </div>
-                <!-- /.card-body -->
-                
             </div>
-
         </div>
-        <!-- /.card-body -->
     </div>
 @endsection

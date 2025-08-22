@@ -9,13 +9,24 @@ use Illuminate\Http\Request;
 class DeleteController extends Controller
 {
     //
-    public function __invoke(Contact $contact)
+    public function __invoke(Request $request)
     {
-        $contact->delete();
-        return redirect()->route('admin.contact.index')->with('toast', [
+
+        $ids = $request->input('selected'); // <-- правильно!
+
+        if ($ids && is_array($ids)) {
+            Contact::whereIn('id', $ids)->delete();
+            return redirect()->back()->with('toast', [
                 'type' => 'success', // success | info | warning | danger
                 'title' => 'Success',
-                'message' =>'Message successfully deleted',
-            ]);;
+                'message' => 'Message(s) successfully deleted',
+            ]);
+        }
+
+        return redirect()->back()->with('toast', [
+            'type' => 'danger',
+            'title' => 'Error',
+            'message' => 'You have not selected any letter.',
+        ]);
     }
 }

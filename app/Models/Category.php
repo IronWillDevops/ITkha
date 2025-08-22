@@ -11,10 +11,10 @@ class Category extends Model
     use SoftDeletes;
     protected $fillable = ['title'];
 
-    // public function posts()
-    // {
-    //     return $this->hasMany(Post::class);
-    // }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
     protected static function booted()
     {
 

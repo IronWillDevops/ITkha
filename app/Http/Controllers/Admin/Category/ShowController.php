@@ -12,7 +12,9 @@ class ShowController extends Controller
      * Handle the incoming request.
      */
     public function __invoke(Category $category)
-    {
-        return view('admin.pages.category.show', compact('category')); // Можно заменить на вашу главную страницу
+    { $posts = $category->posts()
+            ->orderBy('id', 'desc') // найновіші першими
+            ->paginate(10);
+        return view('admin.pages.category.show', compact('category','posts')); // Можно заменить на вашу главную страницу
     }
 }

@@ -22,7 +22,7 @@ class PostFactory extends Factory
             'main_image' => $this->faker->imageUrl(800, 600, 'nature', true),
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(3, true),
-          
+
             'views' => $this->faker->numberBetween(0, 1000),
             'status' => $this->faker->randomElement([
                 PostStatus::DRAFT,
@@ -31,6 +31,8 @@ class PostFactory extends Factory
             ]),
             'category_id' => 1, // переконайтесь, що категорія з ID 1 існує
             'user_id' => 1,
+            'created_at' => $this->faker->dateTimeBetween('2025-01-01', now()),
+            'updated_at' => now(),
         ];
     }
 }
