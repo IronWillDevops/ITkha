@@ -9,6 +9,25 @@
         <div class="row justify-content-center">
             <!-- Пост -->
             <div class="card border-0 shadow-sm w-100">
+                <div class="card-header">
+                    <div class="btn-group">
+                        <a href="{{ route('admin.post.create') }}" type="button" class="btn btn-info"><i
+                                class="fa fa-plus"></i>
+                            Add</a>
+                        <a href="{{ route('admin.post.edit', $post->id) }}" type="button" class="btn btn-default"><i
+                                class="fa fa-edit"></i> Edit</a>
+                    </div>
+                    <div class="btn-group">
+                        <form action="{{ route('admin.post.delete', $post->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Sure delete?')">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="card-body">
 
                     <!-- Заголовок + Дії -->
@@ -19,14 +38,6 @@
                                 <small>Created at: {{ $post->created_at->format('d.m.Y H:i') }}</small>
                             </div>
                         </div>
-                        <div>
-                            <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-outline-primary btn-sm">
-                                <i class="fas fa-pen"></i> Edit
-                            </a>
-                            <a href="{{ route('admin.post.index') }}" class="btn btn-outline-secondary btn-sm">
-                                <i class="fas fa-arrow-left"></i> Back
-                            </a>
-                        </div>
                     </div>
 
                     <!-- Зображення + Інфо -->
@@ -34,14 +45,15 @@
                         @if ($post->main_image)
                             <div class="col-md-8 mb-3 mb-md-0">
                                 <img src="{{ asset('storage/' . $post->main_image) }}" class="img-fluid rounded w-100"
-                                    style="max-height: 400px; object-fit: cover;" alt="Зображення поста">
+                                    style="max-height: 400px; object-fit: cover;" alt="Image post">
                             </div>
                         @endif
 
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <strong>Author:</strong><br>
-                                {{ $post->Author->login ?? '—' }}
+                                <a href="{{ route('admin.user.show', $post->author->id) }}">
+                                    {{ $post->author->login ?? '—' }}</a>
                             </div>
 
                             <div class="mb-3">
@@ -51,10 +63,10 @@
 
                             <div class="mb-3">
                                 <strong>Status:</strong><br>
-                               
+
                                 <span
                                     class="badge badge-{{ $post->status === \App\Enums\PostStatus::PUBLISHED->value ? 'success' : 'secondary' }}">
-                                   {{ $post->status  }}
+                                    {{ $post->status }}
                                 </span>
                             </div>
 

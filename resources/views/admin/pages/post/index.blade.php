@@ -44,7 +44,7 @@
                                     <td class="align-middle"><a href="{{ route('admin.category.show',$post->category->id) }}">{{ $post->category->title }}</a></td>
                                     <td class="align-middle">
                                         @foreach ($post->tags as $tag)
-                                            #{{ $tag->title }}
+                                            <a href="{{ route('admin.tag.show',$tag->id) }}">{{ $tag->title }}</a>
                                         @endforeach
                                     </td>
 

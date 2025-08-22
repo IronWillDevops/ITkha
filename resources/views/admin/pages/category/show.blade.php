@@ -27,7 +27,7 @@
         <div class="card-body">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">All categories</h3>
+                    <h3 class="card-title">All categorys</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
@@ -61,5 +61,43 @@
 
         </div>
         <!-- /.card-body -->
+    </div>
+
+    <div class="card card-default color-palette-box">
+        <div class="card-header">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-newspaper"></i> Posts with this category
+            </h3>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($posts as $post)
+                        <tr>
+                            <td>{{ $post->id }}</td>
+                            <td><a href="{{ route('admin.post.show', $post->id) }}">{{ $post->title }}</a></td>
+                            <td>{{ $post->status }}</td>
+                            <td>{{ $post->created_at->format('Y-m-d H:i') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center">No posts found for this category</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+
+            </table>
+            <div class="card-footer clearfix">
+                {{ $posts->links('pagination::bootstrap-5') }}
+            </div>
+        </div>
     </div>
 @endsection

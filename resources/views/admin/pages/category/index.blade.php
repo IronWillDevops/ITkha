@@ -8,7 +8,8 @@
     <div class="card card-default color-palette-box">
         <div class="card-header">
             <div class="btn-group">
-                <a href="{{ route('admin.category.create') }}"  type="button" class="btn btn-info"><i class="fa fa-plus"></i> Add</a>
+                <a href="{{ route('admin.category.create') }}" type="button" class="btn btn-info"><i class="fa fa-plus"></i>
+                    Add</a>
             </div>
         </div>
         <div class="card-body">
@@ -24,7 +25,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Title</th>
-                                <th>Title</th>
+                                <th>Count</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -32,8 +33,10 @@
                             @foreach ($categories as $category)
                                 <tr>
                                     <td class="align-middle">{{ $category->id }}.</td>
-                                    <td class="align-middle">{{ $category->title }}</td>
-                                    <td class="align-middle">{{ $category->title }}</td>
+                                    <td class="align-middle"><a
+                                            href="{{ route('admin.category.show', $category->id) }}">{{ $category->title }}</a>
+                                    </td>
+                                    <td class="align-middle">{{ $category->posts->count() }}</td>
                                     <td class="align-middle">
                                         <div class='btn-group'>
                                             <a href="{{ route('admin.category.show', $category->id) }}"

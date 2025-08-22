@@ -95,8 +95,9 @@ Route::name('admin.')
             ->name('contact.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Contact\IndexController::class)->name('index')->middleware('permission:contacts_show');
+                Route::get('/{contact}', App\Http\Controllers\Admin\Contact\ShowController::class)->name('show')->middleware('permission:contacts_show');
                 Route::patch('/{contact}/mark-read', App\Http\Controllers\Admin\Contact\UpdateController::class)->name('update')->middleware('permission:contacts_edit');
-                Route::delete('/{contact}', App\Http\Controllers\Admin\Contact\DeleteController::class)->name('delete')->middleware('permission:contacts_delete');
+                Route::delete('/delete', App\Http\Controllers\Admin\Contact\DeleteController::class)->name('delete')->middleware('permission:contacts_delete');
             });
         Route::prefix('log')
             ->name('log.')

@@ -41,11 +41,11 @@
                                         @else
                                             <i class=" fa fa-user-times"></i>
                                         @endif
-                                        <span class="ml-2">{{ $user->name }}</span>
+                                        <span class="ml-2"><a href="{{ route('admin.user.show', $user->id) }}">{{ $user->name }}</a></span>
                                     </td>
                                     <td class="align-middle">{{ $user->login }}</td>
                                     <td class="align-middle">{{ $user->email }}</td>
-                                    <td class="align-middle">{{ $user->roles->first()?->title }}</td>
+                                    <td class="align-middle"><a href="{{ route('admin.role.show', $user->roles->first()?->id) }}">{{ $user->roles->first()?->title }}</a></td>
                                     <td class="align-middle">
                                         <div class='btn-group'>
                                             <a href="{{ route('admin.user.show', $user->id) }}" class="btn btn-default"><i
