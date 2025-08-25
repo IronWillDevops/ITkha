@@ -9,7 +9,7 @@ class IndexController
     public function __invoke()
     {
         
-        $logs = Log::orderBy('id', 'desc')->paginate(25);
-        return view('admin.pages.log.index', compact('logs'));
+        $logs = Log::orderBy('id', 'desc')->paginate(35);
+        return view('admin.log.index', compact('logs'));
     }
 }

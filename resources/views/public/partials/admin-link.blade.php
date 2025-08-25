@@ -3,7 +3,7 @@
       <a href="{{ route('admin.index') }}" class="link-text link-hover flex items-center gap-2 text-sm ">
           <i class="fa fa-tachometer-alt"></i> Dashboard
       </a>
-
+{{-- 
       <a href="{{ route('admin.post.index') }}" class="link-text link-hover flex items-center gap-2 text-sm ">
           <i class="fa fa-newspaper"></i> Posts
       </a>
@@ -14,5 +14,5 @@
 
       <a href="{{ route('admin.log.index') }}" class="link-text link-hover flex items-center gap-2 text-sm ">
           <i class="fa fa-history"></i> Logs
-      </a>
+      </a> --}}
   </nav>
