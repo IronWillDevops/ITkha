@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $tags = Tag::All();
-        return view('admin.pages.tag.index', compact('tags')); // Можно заменить на вашу главную страницу
+        $tags = Tag::paginate(10);
+        return view('admin.tag.index', compact('tags')); // Можно заменить на вашу главную страницу
     }
 }

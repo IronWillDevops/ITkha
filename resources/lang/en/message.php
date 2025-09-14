@@ -10,10 +10,6 @@ return [
 
         'email_already_verified' => 'Email is already verified.',
         'email_verified_success' => 'Email has been verified. Please log in now.',
-
-
-
-
     ],
     'error' => [
         'unexpected_error' => 'An unexpected error occurred. Please try again later.',
@@ -23,4 +19,5 @@ return [
         'invalid_or_expired_link' => 'Invalid or expired link.',
         'invalid_language' => 'Invalid language.',
     ],
+    
 ];

@@ -6,6 +6,11 @@ use App\Enums\UserStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+
+use App\Rules\Public\GitHubUrl;
+use App\Rules\Public\LinkedInUrl;
+use App\Rules\Public\ValidPublicUrl;
+
 class UpdateRequest extends FormRequest
 {
     /**
@@ -24,6 +29,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'], // 2MB
             'name' => ['required', 'string', 'max:255'],
             'login' => [
                 'required',
@@ -39,12 +45,22 @@ class UpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($this->user->id),
             ],
-            'surname' => ['string', 'max:255'],
+            'surname' => ['nullable', 'string', 'max:255'],
             'role_id' => ['required', 'exists:roles,id'],
             'password' => ['nullable', 'string', 'min:8', 'max:255'],
 
             'email_verified_at' => ['required', 'boolean'],
             'status' => ['required', Rule::in(array_column(UserStatus::cases(), 'value'))],
+
+            // Profile
+            "job_title" => ['nullable', 'string', 'max:255'],
+            "address" => ['nullable', 'string', 'max:255'],
+            "website" => ['nullable', 'url', 'max:255', new ValidPublicUrl()],
+            "about_myself" => ['nullable', 'string', 'max:1000'],
+            "github" => ['nullable',  'url', 'max:255', new GitHubUrl()],
+            "linkedin" => ['nullable', 'url', 'max:255', new LinkedInUrl()],
+
+
         ];
     }
     public function messages(): array

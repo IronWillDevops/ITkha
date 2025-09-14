@@ -15,20 +15,12 @@ class DeleteController extends BaseController
     {
         try {
             $user->delete();
-            return redirect()->route('admin.user.index')->with('toast', [
-                'type' => 'success',
-                'title' => 'Success',
-                'message' => 'User successfully deleted.',
-            ]);;
+            return redirect()->route('admin.user.index')->with('success', __('admin/users.messages.delete', ['login' => $user->login]));
         }
         
         catch (CannotDeleteSelfException | CannotDeleteAdminUserException $ex) {
 
-            return redirect()->route('admin.user.index')->with('toast', [
-                'type' => 'danger', // success | info | warning | danger
-                'title' => 'Danger',
-                'message' => $ex->getMessage(),
-            ]);;
+            return redirect()->route('admin.user.index')->with('error', $ex->getMessage());
         }
     }
 }

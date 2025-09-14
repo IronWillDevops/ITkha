@@ -6,6 +6,8 @@ use Exception;
 
 class CannotUpdateProtectedRoleException extends Exception
 {
-    protected $message = "Editing system roles is prohibited.";
-    //
+     public function __construct()
+    {
+        parent::__construct(__('common/exceptions.role.CannotUpdateProtectedRoleException'));
+    }
 }

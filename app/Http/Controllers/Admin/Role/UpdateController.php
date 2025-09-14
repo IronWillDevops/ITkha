@@ -16,13 +16,9 @@ class UpdateController extends BaseController
         try {
             $data = $request->validated();
             $role = $this->service->update($data, $role);
-            return view('admin.pages.role.show', compact('role')); // Можно заменить на вашу главную страницу
+            return  redirect()->route('admin.role.show', $role->id)->with('success', __('admin/roles.messages.edit', ['title' => $role->title])); 
         } catch (CannotUpdateProtectedRoleException $ex) {
-            return redirect()->route('admin.role.index')->with('toast', [
-                'type' => 'danger', // success | info | warning | danger
-                'title' => 'Danger',
-                'message' => $ex->getMessage(),
-            ]);
+            return redirect()->route('admin.role.index')->with('error',$ex->getMessage() );
         }
     }
 }

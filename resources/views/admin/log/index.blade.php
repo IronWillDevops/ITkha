@@ -16,9 +16,7 @@
                         <th class="px-3 py-2 whitespace-nowrap">{{ __('admin/logs.fields.created_at') }}</th>
                     </tr>
                 </thead>
-
                 <tbody class="">
-
                     @foreach ($logs as $log)
                         <tr class="">
                             <td class="px-3 py-2 whitespace-nowrap">{{ $log->id }}</td>
@@ -28,13 +26,9 @@
                             <td class="px-3 py-2 whitespace-nowrap" title="{{ $log->user_agent }}">{{ $log->ip_address }}
                             </td>
                             <td class="px-3 py-2 whitespace-nowrap">{{ $log->created_at }}</td>
-
                         </tr>
                     @endforeach
-
-
                 </tbody>
-
             </table>
             <div class="flex justify-center mt-6">
                 {{ $logs->links('vendor.pagination.pagination') }}

@@ -12,8 +12,7 @@ class DeleteController extends Controller
     public function __invoke(Request $request)
     {
 
-        $ids = $request->input('selected'); // <-- правильно!
-
+        $ids = $request->input('selected');
         if ($ids && is_array($ids)) {
             Contact::whereIn('id', $ids)->delete();
             return redirect()->back()->with('toast', [

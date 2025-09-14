@@ -5,6 +5,8 @@ namespace App\Exceptions\User;
 use Exception;
 
 class CannotDeleteSelfException extends Exception
-{
-     protected $message = 'Deleting yourself is prohibited.';
+{    public function __construct()
+     {
+          parent::__construct(__('common/exceptions.user.CannotDeleteSelfException'));
+     }
 }

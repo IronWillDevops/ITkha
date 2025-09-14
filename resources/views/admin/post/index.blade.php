@@ -5,8 +5,8 @@
 @section('admin.content')
     <div class=" mx-auto p-4 bg-surface border border-border rounded-lg text-text-primary">
         <div class="flex items-center justify-between mb-6">
-            <a href="#" class="px-4 py-2 border border-border rounded-xl shadow transition">
-                Добавить пост
+            <a href="{{ route('admin.post.create') }}" class="px-4 py-2 border border-border rounded-xl shadow transition">
+                {{ __('admin/posts.actions.create') }}
             </a>
         </div>
 
@@ -28,9 +28,14 @@
                     @forelse($posts as $post)
                         <tr>
                             <td class="px-4 py-2 text-sm ">{{ $post->id }}</td>
-                            <td class="px-4 py-2 text-sm  font-medium">{{ $post->title }}</td>
-                            <td class="px-4 py-2 text-sm ">
-                                {{ $post->category?->title ?? '—' }}
+                            <td class="px-4 py-2 text-sm  font-medium link hover:link-hover hover:underline">
+                                <a href ="{{ route('admin.post.show', $post->id) }}">{{ $post->title }}</a>
+                            </td>
+                            <td class="px-4 py-2 text-sm font-medium link hover:link-hover hover:underline">
+                             <a href="{{ route('admin.post.show', $post->id) }}"
+                             >
+                                {{ $post->category->title }}
+                            </a>  
                             </td>
                             <td class="px-4 py-2 text-sm ">
                                 @forelse($post->tags as $tag)
@@ -38,7 +43,7 @@
                                         {{ $tag->title }}
                                     </span>
                                 @empty
-                                    <span class=" text-xs">нет</span>
+                                    <span class=" text-xs">-</span>
                                 @endforelse
                             </td>
                             <td class="px-4 py-2 text-sm">
@@ -47,18 +52,16 @@
                                 </span>
                             </td>
                             <td class="px-4 py-2 text-sm">
-                                {{ $post->created_at}}
+                                {{ $post->created_at }}
                             </td>
                             <td class="px-4 py-2 text-sm text-right space-x-2 flex justify-end">
                                 {{-- Кнопка редагування --}}
-                                <a href="#"
-                                    class="inline-flex items-center p-2 rounded-lg transition"
-                                    title="#">
+                                <a href="{{ route('admin.post.edit',$post->id) }}" class="inline-flex items-center p-2 rounded-lg transition" title="#">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
                                 {{-- Кнопка видалення --}}
-                                <form action="#" method="POST"
+                                <form action="{{ route('admin.post.delete', $post->id) }}" method="POST"
                                     onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')"
                                     class="inline-block">
                                     @csrf
@@ -74,7 +77,7 @@
                     @empty
                         <tr>
                             <td colspan="7" class="px-4 py-6 text-center text-sm">
-                               {{__('admin/common.messages.no_records')}}
+                                {{ __('admin/common.messages.no_records') }}
                             </td>
                         </tr>
                     @endforelse

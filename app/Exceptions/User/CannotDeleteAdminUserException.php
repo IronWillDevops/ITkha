@@ -6,5 +6,8 @@ use Exception;
 
 class CannotDeleteAdminUserException extends Exception
 {
-     protected $message = "Deleting a user from this account is prohibited.";
+     public function __construct()
+     {
+          parent::__construct(__('common/exceptions.user.CannotDeleteAdminUserException'));
+     }
 }

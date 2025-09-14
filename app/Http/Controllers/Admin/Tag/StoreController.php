@@ -15,8 +15,8 @@ class StoreController extends Controller
     {
 
         $data = $request->validated();
-        
+
         Tag::firstOrCreate($data);
-        return redirect()->route('admin.tag.index'); // Можно заменить на вашу главную страницу
+        return redirect()->route('admin.tag.index')->with('success', __('admin/tags.messages.create', ['title' => $data['title']]));
     }
 }

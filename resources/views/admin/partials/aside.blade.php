@@ -1,4 +1,4 @@
-<aside class="w-64 m-4 flex flex-col">
+<aside class="m-4 flex flex-col">
     <div class="p-4 flex flex-col flex-grow justify-between  bg-surface border border-border shadow rounded-lg">
         <ul class="space-y-2 p-2">
             <!-- Dashboard -->
@@ -9,7 +9,7 @@
             </li>
             {{-- Posts --}}
             <li>
-                <details class="group">
+                <details class="group" open>
                     <summary class="cursor-pointer link link-hover hover:underline">
                         <i class="fa-solid fa-tags mr-2"></i>{{ __('admin/posts.title') }}
                     </summary>
@@ -19,11 +19,11 @@
                                     class="fa-solid fa-newspaper mr-2"></i>{{ __('admin/posts.title') }}</a>
                         </li>
                         <li>
-                            <a href="#" class="link link-hover hover:underline"><i
+                            <a href="{{ route('admin.category.index') }}" class="link link-hover hover:underline"><i
                                     class="fa-solid fa-tag mr-2"></i>{{ __('admin/categories.title') }}</a>
                         </li>
                         <li>
-                            <a href="#" class="link link-hover hover:underline"><i
+                            <a href="{{ route('admin.tag.index') }}" class="link link-hover hover:underline"><i
                                     class="fa-solid fa-tag mr-2"></i>{{ __('admin/tags.title') }}</a>
                         </li>
                     </ul>
@@ -37,11 +37,11 @@
                     </summary>
                     <ul class="pl-8 pt-2 space-y-2">
                         <li>
-                            <a href="#" class="link link-hover hover:underline"><i
+                            <a href="{{ route('admin.user.index') }}" class="link link-hover hover:underline"><i
                                     class="fa-solid fa-user mr-2"></i>{{ __('admin/users.title') }}</a>
                         </li>
                         <li>
-                            <a href="#" class="link link-hover hover:underline"><i
+                            <a href="{{ route('admin.role.index') }}" class="link link-hover hover:underline"><i
                                     class="fas fa-user-plus mr-2"></i>{{ __('admin/roles.title') }}</a>
                         </li>
                     </ul>
@@ -55,26 +55,30 @@
                     </summary>
                     <ul class="pl-8 pt-2 space-y-2">
                         <li>
+                            <a href="{{ route('admin.info.index') }}" class="link link-hover hover:underline"><i
+                                    class="fas fa-server mr-2"></i>{{ __('admin/info.title') }}</a>
+                        </li>
+                        <li>
                             <a href="{{ route('admin.log.index') }}" class="link link-hover hover:underline"><i
                                     class="fa fa-history mr-2"></i>{{ __('admin/logs.title') }}</a>
                         </li>
                         <li>
-                            <a href="#" class="link link-hover hover:underline"><i
-                                    class="fas fa-cog mr-2"></i>{{ __('admin/socialmedia.title') }}</a>
+                            <a href="{{ route('admin.footerlink.index') }}"  class="link link-hover hover:underline"><i
+                                    class="fas fa-cog mr-2"></i>{{ __('admin/footerlink.title') }}</a>
                         </li>
                     </ul>
                 </details>
             </li>
             <li>
-                <a href="" class="link link-hover hover:underline">
-                    <i class="fa-solid fa-icons mr-2"></i>Icons</a>
+                <a href="https://fontawesome.com/" target="_blank" class="link link-hover hover:underline">
+                    <i class="fa-solid fa-icons mr-2"></i>{{ __('admin/icons.title') }}</a>
             </li>
         </ul>
     </div>
+    
     <!-- Профиль пользователя -->
-
     <div class="text-text-primary  bg-surface border border-border shadow  hover:shadow-md rounded-lg p-4 mt-4">
-        <a href="#">
+        <a href="{{ route('admin.user.show',Auth::user()->id) }}">
             <div class="flex items-center space-x-4">
                 @if (Auth::user()->avatar)
                     <img id="userMenuButton" type="button" data-dropdown-toggle="userDropdown"

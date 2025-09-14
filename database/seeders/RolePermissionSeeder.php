@@ -48,7 +48,8 @@ class RolePermissionSeeder extends Seeder
 
             ['Header' => 'Logs', 'title' => 'logs_show', 'description' => 'Show logs'],
 
-            ['Header' => 'Settings', 'title' => 'admin_access', 'description' => 'Access to the admin panel']
+            ['Header' => 'Settings', 'title' => 'admin_access', 'description' => 'Access to the admin panel'],
+            ['Header' => 'Settings', 'title' => 'server_info', 'description' => 'Server information view']
 
         ];
 

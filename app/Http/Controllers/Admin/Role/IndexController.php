@@ -11,8 +11,8 @@ class IndexController extends BaseController
     public function __invoke()
     {
 
-        $roles = Role::all();
-        return view('admin.pages.role.index', compact('roles')); // Можно заменить на вашу главную страницу
+        $roles = Role::paginate(10);
+        return view('admin.role.index', compact('roles')); // Можно заменить на вашу главную страницу
 
     }
 }

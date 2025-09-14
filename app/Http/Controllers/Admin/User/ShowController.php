@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,8 @@ class ShowController extends BaseController
      */
     public function __invoke(User $user)
     {
-        
-        return view('admin.pages.user.show', compact('user')); // Можно заменить на вашу главную страницу
+        $posts = $user->posts()->paginate(10);
+
+        return view('admin.user.show', compact('user', 'posts')); // Можно заменить на вашу главную страницу
     }
 }

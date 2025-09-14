@@ -11,7 +11,7 @@ class CreateController extends BaseController
     {
       
       $roles = Role::all();
-      $statuses = UserStatus::cases();
-        return view('admin.pages.user.create',compact('roles','statuses')); // Можно заменить на вашу главную страницу
+      $status = UserStatus::cases();
+        return view('admin.user.create',compact('roles','status')); // Можно заменить на вашу главную страницу
     }
 }

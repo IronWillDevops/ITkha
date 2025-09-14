@@ -13,7 +13,7 @@ class EditController extends Controller
      */
     public function __invoke(Tag $tag)
     {
-        return view('admin.pages.tag.edit', compact('tag')); // Можно заменить на вашу главную страницу
+        return view('admin.tag.edit', compact('tag')); // Можно заменить на вашу главную страницу
 
     }
 }

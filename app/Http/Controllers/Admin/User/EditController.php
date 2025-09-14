@@ -13,10 +13,9 @@ class EditController extends BaseController
      */
     public function __invoke(User $user)
     {
-
         $roles = Role::all();
-        $statuses = UserStatus::cases();
-        return view('admin.pages.user.edit', compact('user', 'roles', 'statuses')); // Можно заменить на вашу главную страницу
+        $status = UserStatus::cases();
+        return view('admin.user.edit', compact('user', 'roles', 'status')); // Можно заменить на вашу главную страницу
 
     }
 }
