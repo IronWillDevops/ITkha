@@ -17,7 +17,7 @@ A Laravel-based website featuring an admin panel, queue processing, and CAPTCHA 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/IronWillDevops/ITkha.git
 cd your-repo
 ```
 

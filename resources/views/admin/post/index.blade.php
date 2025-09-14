@@ -56,7 +56,7 @@
                             </td>
                             <td class="px-4 py-2 text-sm text-right space-x-2 flex justify-end">
                                 {{-- Кнопка редагування --}}
-                                <a href="{{ route('admin.post.edit',$post->id) }}" class="inline-flex items-center p-2 rounded-lg transition" title="#">
+                                <a href="{{ route('admin.post.edit',$post->id) }}" class="inline-flex items-center p-2 rounded-lg transition" title="{{ __('admin/posts.actions.edit') }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
@@ -68,7 +68,7 @@
                                     @method('DELETE')
                                     <button type="submit"
                                         class="inline-flex items-center p-2 text-text-danger rounded-lg transition cursor-pointer"
-                                        title="#">
+                                        title="{{ __('admin/posts.actions.delete') }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

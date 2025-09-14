@@ -127,4 +127,7 @@ return [
     ],
     'base_domain' => env('APP_BASE_DOMAIN', 'example.test'),
 
+    'version' => env('APP_VERSION', 'v0.0.0'),
+
+
 ];

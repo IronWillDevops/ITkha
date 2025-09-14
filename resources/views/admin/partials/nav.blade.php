@@ -3,7 +3,7 @@
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
 
             <a href="{{ route('admin.index') }}" class="text flex items-center space-x-3 rtl:space-x-reverse">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap">Admin Panel | {{ config('app.name') }}</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap">Admin Panel | {{ config('app.name') }} {{ config('app.version') }}</span>
             </a>
             <button data-collapse-toggle="navbar-default" type="button"
                 class="nav-btn  nav-btn-hover inline-flex items-center p-2 w-10 h-10 justify-center text-sm  rounded-lg md:hidden"

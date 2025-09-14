@@ -96,4 +96,6 @@ Route::name('admin.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Info\IndexController::class)->name('index')->middleware('permission:server_info');
             });
+
+ 
     });
