@@ -4,10 +4,13 @@
             &copy; 2024 - {{ date('Y') }} {{ config('app.name') }}. All Rights Reserved.
         </span>
         <div class="flex mt-4 sm:justify-center md:mt-0 space-x-2 rtl:space-x-reverse ">
-            <a href="{{ route('locale.switch', ['locale' => 'en']) }}" class="link link-hover">EN</a>
-            <a href="{{ route('locale.switch', ['locale' => 'uk']) }}" class="link link-hover">UK</a>
+            <a href="{{ route('locale.switch', ['locale' => 'en', 'redirect_to' => url()->current()]) }}"
+                class="link link-hover">EN</a>
+            <a href="{{ route('locale.switch', ['locale' => 'uk', 'redirect_to' => url()->current()]) }}"
+                class="link link-hover">UK</a>
 
-            @foreach (\App\Models\SocialLink::all() as $link)
+
+            @foreach (\App\Models\FooterLink ::all() as $link)
                 <a href="{{ $link->url }}" class="footer-btn footer-btn-hover " alt="{{ $link->title }}">
                     <i class=" fab {{ $link->icon }}"></i>
                 </a>

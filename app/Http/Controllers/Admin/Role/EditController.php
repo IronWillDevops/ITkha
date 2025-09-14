@@ -13,7 +13,7 @@ class EditController extends BaseController
     public function __invoke(Role $role)
     {
         $permissions = Permission::all()->groupBy('header');
-        return view('admin.pages.role.edit', compact('role','permissions')); // Можно заменить на вашу главную страницу
+        return view('admin.role.edit', compact('role','permissions')); // Можно заменить на вашу главную страницу
 
     }
 }

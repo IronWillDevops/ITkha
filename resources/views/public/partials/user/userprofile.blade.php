@@ -19,7 +19,11 @@
          </div>
          <h2 class=" text-2xl font-bold animate-fade-in ">{{ $user->name }} {{ $user->surname }}</h2>
          <p class="font-light">{{ $user->profile?->job_title }}</p>
-         <p class="font-light"><i class="fas fa-map-marker-alt mr-1"></i> {{ $user->profile?->address }}</p>
+
+         @if ($user->profile?->address )
+              <p class="font-light"><i class="fas fa-map-marker-alt mr-1"></i> {{ $user->profile?->address }}</p>
+         @endif
+        
      </div>
 
      <!-- Bio section with fade-in -->

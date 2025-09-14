@@ -6,5 +6,8 @@ use Exception;
 
 class CannotDeleteProtectedRoleException extends Exception
 {
-      protected $message ="Deleting system roles is prohibited.";
+     public function __construct()
+    {
+        parent::__construct(__('common/exceptions.role.CannotDeleteProtectedRoleException'));
+    }
 }

@@ -8,6 +8,6 @@ class CreateController extends Controller
 {
   public function __invoke()
   {
-    return view('admin.pages.category.create'); // Можно заменить на вашу главную страницу
+    return view('admin.category.create'); // Можно заменить на вашу главную страницу
   }
 }

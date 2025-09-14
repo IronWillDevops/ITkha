@@ -14,7 +14,7 @@ class CreateController extends BaseController
     public function __invoke(Request $request)
     {
         $permissions = Permission::all()->groupBy('header');
-        return view('admin.pages.role.create',compact('permissions')); // Можно заменить на вашу главную страницу
+        return view('admin.role.create',compact('permissions')); 
 
     }
 }

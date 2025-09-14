@@ -6,5 +6,8 @@ use Exception;
 
 class CannotDeleteLastCategoryException extends Exception
 {
-    protected $message = "Deleting the last category is prohibited.";
+    public function __construct()
+    {
+        parent::__construct(__('common/exceptions.category.CannotDeleteLastCategoryException'));
+    }
 }

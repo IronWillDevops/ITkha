@@ -15,7 +15,7 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
         $category->update($data);
-        return view('admin.pages.category.show', compact('category')); // Можно заменить на вашу главную страницу
+        return redirect()->route('admin.category.show', $category->id)->with('success', __('admin/categories.messages.edit',['title' => $category->title])); 
 
     }
 }

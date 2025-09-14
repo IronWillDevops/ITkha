@@ -4,34 +4,26 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login-redirect', fn () => redirect()->route('admin.login.index'))
-    ->name('login');
-
-// Auth routes
-Route::middleware('guest')->group(function () {
- 
-    Route::get('/login', App\Http\Controllers\Admin\Auth\IndexController::class)->name('admin.login.index');
-    Route::post('/login', App\Http\Controllers\Admin\Auth\StoreController::class)->middleware('throttle:login')->name('admin.login.store');
-});
-
-// Logout
-Route::post('admin/logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
-    ->middleware('auth')
-    ->name('admin.logout');
-
-
-
 
 Route::name('admin.')
-    ->middleware(['auth',\App\Http\Middleware\CheckUserVerifiedAndStatus::class, App\Http\Middleware\AdminMiddleware::class])
+    ->middleware(['auth', \App\Http\Middleware\CheckUserVerifiedAndStatus::class, App\Http\Middleware\AdminMiddleware::class])
     ->group(function () {
+        Route::redirect('/', '/dashboard');
+        Route::get('/dashboard', App\Http\Controllers\Admin\Dashboard\IndexController::class)->name('index');
 
-        Route::get('/dashboard', App\Http\Controllers\Admin\IndexController::class)->name('index');
-
-        Route::prefix('icons')
-            ->name('icons.')
+        Route::prefix('posts')
+            ->name('post.')
             ->group(function () {
-                Route::get('/', App\Http\Controllers\Admin\Icons\IndexController::class)->name('index');
+                Route::get('/', App\Http\Controllers\Admin\Post\IndexController::class)->name('index')->middleware('permission:posts_show');
+                Route::get('/create', App\Http\Controllers\Admin\Post\CreateController::class)->name('create')->middleware('permission:posts_create'); // 
+                Route::post('/store', App\Http\Controllers\Admin\Post\StoreController::class)->name('store')->middleware('permission:posts_create');
+                Route::post('/image-upload', App\Http\Controllers\Admin\Post\UploadImageController::class)->name('image.upload')->middleware('permission:posts_create');
+                Route::post('/image-delete', App\Http\Controllers\Admin\Post\DeleteImageController::class)->name('image.delete')->middleware('permission:posts_edit');
+
+                Route::get('/{post}', App\Http\Controllers\Admin\Post\ShowController::class)->name('show')->middleware('permission:posts_show');
+                Route::get('/{post}/edit', App\Http\Controllers\Admin\Post\EditController::class)->name('edit')->middleware('permission:posts_edit');
+                Route::patch('/{post}', App\Http\Controllers\Admin\Post\UpdateController::class)->name('update')->middleware('permission:posts_edit');
+                Route::delete('/{post}', App\Http\Controllers\Admin\Post\DeleteController::class)->name('delete')->middleware('permission:posts_delete');
             });
         Route::prefix('categories')
             ->name('category.')
@@ -44,6 +36,7 @@ Route::name('admin.')
                 Route::patch('/{category}', App\Http\Controllers\Admin\Category\UpdateController::class)->name('update')->middleware('permission:categories_edit');
                 Route::delete('/{category}', App\Http\Controllers\Admin\Category\DeleteController::class)->name('delete')->middleware('permission:categories_delete');
             });
+
         Route::prefix('tags')
             ->name('tag.')
             ->group(function () {
@@ -56,17 +49,6 @@ Route::name('admin.')
                 Route::delete('/{tag}', App\Http\Controllers\Admin\Tag\DeleteController::class)->name('delete')->middleware('permission:tags_delete');
             });
 
-        Route::prefix('posts')
-            ->name('post.')
-            ->group(function () {
-                Route::get('/', App\Http\Controllers\Admin\Post\IndexController::class)->name('index')->middleware('permission:posts_show');
-                Route::get('/create', App\Http\Controllers\Admin\Post\CreateController::class)->name('create')->middleware('permission:posts_create'); // 
-                Route::post('/store', App\Http\Controllers\Admin\Post\StoreController::class)->name('store')->middleware('permission:posts_create');
-                Route::get('/{post}', App\Http\Controllers\Admin\Post\ShowController::class)->name('show')->middleware('permission:posts_show');
-                Route::get('/{post}/edit', App\Http\Controllers\Admin\Post\EditController::class)->name('edit')->middleware('permission:posts_edit');
-                Route::patch('/{post}', App\Http\Controllers\Admin\Post\UpdateController::class)->name('update')->middleware('permission:posts_edit');
-                Route::delete('/{post}', App\Http\Controllers\Admin\Post\DeleteController::class)->name('delete')->middleware('permission:posts_delete');
-            });
         Route::prefix('users')
             ->name('user.')
             ->group(function () {
@@ -91,32 +73,27 @@ Route::name('admin.')
                 Route::delete('/{role}', App\Http\Controllers\Admin\Role\DeleteController::class)->name('delete')->middleware('permission:roles_delete');
             });
 
-        Route::prefix('contact')
-            ->name('contact.')
+        Route::prefix('footerlink')
+            ->name('footerlink.')
             ->group(function () {
-                Route::get('/', App\Http\Controllers\Admin\Contact\IndexController::class)->name('index')->middleware('permission:contacts_show');
-                Route::get('/{contact}', App\Http\Controllers\Admin\Contact\ShowController::class)->name('show')->middleware('permission:contacts_show');
-                Route::patch('/{contact}/mark-read', App\Http\Controllers\Admin\Contact\UpdateController::class)->name('update')->middleware('permission:contacts_edit');
-                Route::delete('/delete', App\Http\Controllers\Admin\Contact\DeleteController::class)->name('delete')->middleware('permission:contacts_delete');
+                Route::get('/', App\Http\Controllers\Admin\FooterLink\IndexController::class)->name('index');
+                Route::get('/create', App\Http\Controllers\Admin\FooterLink\CreateController::class)->name('create');
+                Route::post('/store', App\Http\Controllers\Admin\FooterLink\StoreController::class)->name('store');
+                Route::get('/{link}', App\Http\Controllers\Admin\FooterLink\ShowController::class)->name('show');
+                Route::get('/{link}/edit', App\Http\Controllers\Admin\FooterLink\EditController::class)->name('edit');
+                Route::patch('/{link}', App\Http\Controllers\Admin\FooterLink\UpdateController::class)->name('update');
+                Route::delete('/{link}', App\Http\Controllers\Admin\FooterLink\DeleteController::class)->name('delete');
             });
-        Route::prefix('log')
+
+
+        Route::prefix('logs')
             ->name('log.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Log\IndexController::class)->name('index')->middleware('permission:logs_show');
             });
-        Route::prefix('settings')
-            ->name('settings.')
+        Route::prefix('info')
+            ->name('info.')
             ->group(function () {
-                Route::prefix('social-link')
-                    ->name('social.')
-                    ->group(function () {
-                        Route::get('/', App\Http\Controllers\Admin\SocialLink\IndexController::class)->name('index');
-                        Route::get('/create', App\Http\Controllers\Admin\SocialLink\CreateController::class)->name('create');
-                        Route::post('/store', App\Http\Controllers\Admin\SocialLink\StoreController::class)->name('store');
-                        Route::get('/{link}', App\Http\Controllers\Admin\SocialLink\ShowController::class)->name('show');
-                        Route::get('/{link}/edit', App\Http\Controllers\Admin\SocialLink\EditController::class)->name('edit');
-                        Route::patch('/{link}', App\Http\Controllers\Admin\SocialLink\UpdateController::class)->name('update');
-                        Route::delete('/{link}', App\Http\Controllers\Admin\SocialLink\DeleteController::class)->name('delete');
-                    });
+                Route::get('/', App\Http\Controllers\Admin\Info\IndexController::class)->name('index')->middleware('permission:server_info');
             });
     });

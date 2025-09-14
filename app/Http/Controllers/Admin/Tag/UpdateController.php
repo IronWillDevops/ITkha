@@ -17,7 +17,7 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
         $tag->update($data);
-          return view('admin.pages.tag.show', compact('tag')); // Можно заменить на вашу главную страницу
- 
+
+        return redirect()->route('admin.tag.show', $tag->id)->with('success', __('admin/tags.messages.edit', ['title' => $tag->title]));
     }
 }

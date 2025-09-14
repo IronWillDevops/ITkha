@@ -16,17 +16,9 @@ class DeleteController extends BaseController
     {
         try {
             $role->delete();
-            return redirect()->route('admin.role.index')->with('toast', [
-                'type' => 'success',
-                'title' => 'Success',
-                'message' => 'Role successfully deleted.',
-            ]);
+            return redirect()->route('admin.role.index')->with('success', __('admin/roles.messages.delete', ['title' => $role->title]));
         } catch (CannotDeleteProtectedRoleException $ex) {
-            return redirect()->route('admin.role.index')->with('toast', [
-                'type' => 'danger', // success | info | warning | danger
-                'title' => 'Danger',
-                'message' => $ex->getMessage(),
-            ]);;
+            return redirect()->route('admin.role.index')->with('error', $ex->getMessage());
         }
     }
 }

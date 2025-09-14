@@ -8,8 +8,8 @@ use App\Models\Category;
 class IndexController extends Controller
 {
     public function __invoke()
-    { 
-        $categories = Category::All();
-        return view('admin.pages.category.index', compact('categories')); // Можно заменить на вашу главную страницу
+    {
+        $categories = Category::paginate(10);
+        return view('admin.category.index', compact('categories')); // Можно заменить на вашу главную страницу
     }
 }

@@ -6,7 +6,8 @@ use Exception;
 
 class CannotDeactivateLastActiveUserException extends Exception
 {
-    protected $message = "It is not possible to deactivate the last active user.";
+    public function __construct()
+    {
+        parent::__construct(__('common/exceptions.user.CannotDeactivateLastActiveUserException'));
+    }
 }
-
-

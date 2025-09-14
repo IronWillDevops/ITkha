@@ -15,6 +15,6 @@ class ShowController extends Controller
     { $posts = $category->posts()
             ->orderBy('id', 'desc') // найновіші першими
             ->paginate(10);
-        return view('admin.pages.category.show', compact('category','posts')); // Можно заменить на вашу главную страницу
+        return view('admin.category.show', compact('category','posts')); // Можно заменить на вашу главную страницу
     }
 }

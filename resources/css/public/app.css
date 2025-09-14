@@ -121,7 +121,7 @@
 
 
 pre {
-    @apply  w-full overflow-x-auto whitespace-pre-wrap break-words p-4 rounded-lg text-sm border-border border;
+    @apply w-full overflow-x-auto whitespace-pre-wrap break-words p-4 rounded-lg text-sm border-border border;
 }
 
 #post-content h1 {
@@ -268,13 +268,11 @@ input:-webkit-autofill {
         @apply hover:bg-button-bg-hover;
     }
 
-  
+
 
     .icon-hover {
         @apply hover:text-icon-hover;
     }
-
-
 
 
 

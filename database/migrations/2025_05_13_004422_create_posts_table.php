@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('main_image')->nullable();
             $table->string('title');
-            $table->text('content');
+            $table->longText('content');
             $table->enum('status', array_column(PostStatus::cases(), 'value'))->default(PostStatus::DRAFT->value);
             $table->boolean('comments_enabled')->default(true);
             $table->integer('views')->default(0);

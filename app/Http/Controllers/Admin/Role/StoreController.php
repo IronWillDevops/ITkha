@@ -12,9 +12,10 @@ class StoreController extends BaseController
    * Handle the incoming request.
    */
   public function __invoke(StoreRequest $request)
-  {
+  { 
     $data = $request->validated();
     $this->service->store($data);
-    return redirect()->route('admin.role.index');
+    
+    return redirect()->route('admin.role.index')->with('success', __('admin/roles.messages.create', ['title' => $data['title']]));
   }
 }

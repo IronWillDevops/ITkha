@@ -6,5 +6,8 @@ use Exception;
 
 class EmailNotVerifiedException extends Exception
 {
-     protected $message = 'Email address is not verified.';
+        public function __construct()
+     {
+          parent::__construct(__('common/exceptions.user.EmailNotVerifiedException'));
+     }
 }

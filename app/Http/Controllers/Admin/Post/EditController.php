@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Post;
 
+use App\Enums\PostStatus;
 use App\Http\Controllers\Controller;
 
 use App\Models\Category;
@@ -19,7 +20,8 @@ class EditController extends BaseController
         $categories = Category::all();
         $tags = Tag::all();
         $users= User::all();
-        return view('admin.pages.post.edit', compact('post','categories','tags','users')); // Можно заменить на вашу главную страницу
+        $status=PostStatus::cases();
+        return view('admin.post.edit', compact('post','categories','tags','users','status')); // Можно заменить на вашу главную страницу/
 
     }
 }

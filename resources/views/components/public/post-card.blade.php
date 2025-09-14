@@ -10,11 +10,15 @@
     <div class="p-6 w-full flex flex-col h-full overflow-hidden">
         <div class="flex justify-between items-center ">
 
-            {{-- Левая часть: --}}
-            <span class="inline-block  post-category rounded-full px-3 py-1 text-sm font-semibold  ">
-                <i class="fas fa-tag mr-1"></i>
-                {{ $post->category->title }}
-            </span>
+            {{-- Левая часть: --}} 
+            @if ($post->category)
+                <span class="inline-block  post-category rounded-full px-3 py-1 text-sm font-semibold  ">
+                    <i class="fas fa-tag mr-1"></i>
+
+                    {{ $post->category->title }}
+
+                </span>
+            @endif
 
             {{-- Правая часть: Update_at Edit_post --}}
             <div class="flex items-center space-x-4 post-footer ">
@@ -88,7 +92,7 @@
                 </div>
                 {{-- Comments --}}
                 <div class="flex items-center">
-                   <i class="far fa-comment mr-1"></i>
+                    <i class="far fa-comment mr-1"></i>
                     <span>{{ $post->allApprovedComments->count() }}</span>
                 </div>
 

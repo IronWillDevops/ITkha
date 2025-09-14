@@ -19,8 +19,9 @@ class PostService
                 $tagIds = $data['tag_ids'];
                 unset($data['tag_ids']);
             }
-
+            
             if ($request->hasFile('main_image')) {
+                
                 $data['main_image'] = $request->file('main_image')->store('images/main', 'public');
             }
 

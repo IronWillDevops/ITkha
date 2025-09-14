@@ -12,7 +12,7 @@ class EditController extends Controller
      */
     public function __invoke(Category $category)
     {
-             return view('admin.pages.category.edit', compact('category')); // Можно заменить на вашу главную страницу
+             return view('admin.category.edit', compact('category')); 
     
     }
 }

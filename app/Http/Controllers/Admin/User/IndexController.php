@@ -8,7 +8,7 @@ class IndexController extends BaseController
 {
     public function __invoke()
     {
-        $users = User::All();
-        return view('admin.pages.user.index', compact('users')); // Можно заменить на вашу главную страницу
+        $users = User::paginate(10);
+        return view('admin.user.index', compact('users')); // Можно заменить на вашу главную страницу
     }
 }
