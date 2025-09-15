@@ -27,11 +27,11 @@ class PublicRouteServiceProvider extends ServiceProvider
 
         RateLimiter::for('login', function (\Illuminate\Http\Request $request) {
             $email = strtolower($request->input('email', ''));
-            return Limit::perMinute( 5,180)->by($email . '|' . $request->ip());
+            return Limit::perMinute(5, 180)->by($email . '|' . $request->ip());
         });
+        Route::middleware('web')->group(base_path('routes/public.php'));
 
-        Route::domain(config('app.base_domain'))
-            ->middleware('web')
-            ->group(base_path('routes/public.php'));
+        // Подключение маршрутов админки
+        Route::middleware('web')->group(base_path('routes/admin.php'));
     }
 }

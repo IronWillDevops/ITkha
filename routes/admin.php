@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 
-Route::name('admin.')
+Route::prefix('admin')->name('admin.')
     ->middleware(['auth', \App\Http\Middleware\CheckUserVerifiedAndStatus::class, App\Http\Middleware\AdminMiddleware::class])
     ->group(function () {
         Route::redirect('/', '/dashboard');
@@ -96,6 +96,4 @@ Route::name('admin.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Info\IndexController::class)->name('index')->middleware('permission:server_info');
             });
-
- 
     });

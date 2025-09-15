@@ -125,7 +125,6 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-    'base_domain' => env('APP_BASE_DOMAIN', 'example.test'),
 
     'version' => env('APP_VERSION', 'v0.0.0'),
 

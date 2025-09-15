@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckPermission;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\URL;
 
 use Illuminate\Support\Facades\Gate;
 
@@ -26,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Enabled https
+
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+
         // Default Password
         Password::defaults(function () {
             return Password::min(8)
