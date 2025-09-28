@@ -1,15 +1,16 @@
-<div class="text-text-primary">
+<div class="text-card-foreground ">
     <label for="{{ $name }}" class="block text-sm font-medium mb-1">
         {{ $label }}
     </label>
 
-    <input id="{{ $name }}" type="hidden" name="{{ $name }}" value="{!! old($name, $value) !!}">
-
-    <trix-editor input="{{ $name }}" placeholder="{{ $placeholder }}"
-        class="trix-content  border border-border rounded-lg px-3 py-2 min-h-[400px] focus:outline-none focus:ring"></trix-editor>
+    <input id="{{ $name }}" type="hidden" name="{{ $name }}" value="{!! old($name, $value) !!}"
+       >
+    <trix-toolbar id="editor-toolbar" class="text-card-foreground"></trix-toolbar>
+    <trix-editor input="{{ $name }}" placeholder="{{ $placeholder }}" toolbar="editor-toolbar"
+        class=" trix-content caret-primary border border-input rounded-lg px-3 py-2 min-h-[400px] focus:ring focus:ring-primary focus:outline-none focus-visible:ring-ring"></trix-editor>
 
     @error($name)
-        <p class="text-sm text-text-danger mt-1">{{ $message }}</p>
+        <p class="text-sm text-error mt-1">{{ $message }}</p>
     @enderror
 </div>
 

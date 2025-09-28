@@ -8,7 +8,7 @@ return [
         'title'      => 'Назва',
         'count'      => 'Кількість тегів',
         'created_at' => 'Створено',
-        'posts' => 'Пости',
+        'posts' => 'Публікації',
     ],
 
     'placeholder' => [

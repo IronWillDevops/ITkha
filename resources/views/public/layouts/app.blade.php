@@ -16,7 +16,7 @@
     @livewireStyles
 </head>
 
-<body class="bg-primary flex flex-col min-h-screen">
+<body class="bg-background text-foreground flex flex-col min-h-screen">
     @if (Auth::check() && Auth::user()->hasPermission('admin_access'))
         @include('public.partials.admin-link')
     @endif
@@ -25,9 +25,7 @@
     @include('public.partials.navbar')
 
     <main class="flex-grow container mx-auto px-4 py-6">
-
         @yield('public.layouts')
-
     </main>
 
 

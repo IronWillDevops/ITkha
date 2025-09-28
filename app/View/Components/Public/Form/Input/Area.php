@@ -24,7 +24,6 @@ class Area extends Component
         $this->text = $text;
         $this->placeholder = $placeholder;
         $this->value = $value;
-
         $this->required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     }
 

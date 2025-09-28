@@ -1,7 +1,7 @@
 <button type="button" 
         wire:click="toggleLike" 
         wire:loading.attr="disabled"
-        class="flex items-center {{$isLiked ? 'post-like' : 'post-like-hover' }} like-button" 
+        class="flex items-center {{$isLiked ? 'text-primary' : '' }} hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring" 
         x-data="{ animate: false }"
         x-on:click="
             animate = true; 

@@ -5,14 +5,14 @@
 @endsection
 
 @section('admin.content')
-    <div class="mx-auto p-6  bg-surface border border-border rounded-lg text-text-primary">
+  
         <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data"
             class="space-y-6">
             @csrf
             @method('PATCH')
             {{-- Personal Information --}}
             <details class="group" open>
-                <summary class="cursor-pointer mb-4">
+                <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring">
                     <span class="text-xl font-semibold ">{{ __('admin/profile.sections.personal') }}</span>
                 </summary>
                 <section>
@@ -65,7 +65,7 @@
             
             {{-- Professional Information --}}
             <details class="group" open>
-                <summary class="cursor-pointer mb-4">
+                <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring">
                     <span class="text-xl font-semibold ">{{ __('admin/profile.sections.job') }}</span>
                 </summary>
                 <section>
@@ -90,7 +90,7 @@
             
             {{-- Social Networks --}}
             <details class="group">
-                <summary class="cursor-pointer mb-4">
+                <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring ">
                     <span class="text-xl font-semibold ">{{ __('admin/profile.sections.social') }}</span>
                 </summary>
                 <section>
@@ -105,7 +105,7 @@
             
             {{-- Setting --}}
             <details class="group">
-                <summary class="cursor-pointer mb-4">
+                <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring">
                     <span class="text-xl font-semibold ">{{ __('admin/profile.sections.setting') }}</span>
                 </summary>
                 <section>
@@ -130,5 +130,4 @@
                     label="{{ __('admin/common.actions.cancel') }}" />
             </div>
         </form>
-    </div>
 @endsection

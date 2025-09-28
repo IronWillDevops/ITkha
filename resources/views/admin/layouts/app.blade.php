@@ -15,7 +15,7 @@
     @livewireStyles
 </head>
 
-<body class="bg-primary  flex flex-col min-h-screen ">
+<body class="bg-background text-foreground flex flex-col min-h-screen ">
     <!-- Header -->
     @include('admin.partials.nav')
 
@@ -24,10 +24,12 @@
 
         <!-- Main Content -->
         <main class="flex-1 pt-4 pb-4 p-4">
-            <div class="mb-4 p-4 text-text-primary bg-surface border border-border shadow rounded-lg">
+            <div class="mb-4 p-4 bg-card text-card-foreground border border-border shadow rounded-lg">
                 <h2 class="text-2xl font-semibold ">@yield('admin.content.title')</h2>
             </div>
-            @yield('admin.content')
+            <div class="mb-4 p-4 bg-card text-card-foreground border border-border shadow rounded-lg">
+                @yield('admin.content')
+            </div>
         </main>
     </div>
 

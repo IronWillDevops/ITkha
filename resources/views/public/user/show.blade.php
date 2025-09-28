@@ -2,7 +2,7 @@
 
 @section('public.content')
     <h3
-        class="text-xl font-semibold mb-4 p-4 bg-surface shadow-sm border border-border text-text-primary hover:shadow-md rounded-lg">
+        class="text-xl font-semibold mb-4 p-4 bg-card shadow-sm border border-border text-card-foreground hover:shadow-md rounded-lg">
         <i class=" fas fa-newspaper mr-3"></i>
         Posts: {{ $posts->total() }}
     </h3>

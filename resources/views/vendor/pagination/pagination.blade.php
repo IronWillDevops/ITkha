@@ -1,31 +1,36 @@
 @if ($paginator->hasPages())
     <nav class="flex justify-center">
-        <ul class="inline-flex items-center -space-x-px text-sm">
+        <ul class="inline-flex items-center -space-x-px gap-1.5 text-sm">
             {{-- Previous --}}
             @if ($paginator->onFirstPage())
-                <li class="px-3 py-2  border border-border rounded-l">«</li>
+                <li
+                    class="w-8 h-8 justify-center bg-card border border-input focus-visible:ring-ring font-semibold rounded-sm flex items-center">
+                    «</li>
             @else
                 <li>
                     <a href="{{ $paginator->previousPageUrl() }}"
-                       class="px-3 py-2 text-text-primary border border-border hover:bg-text-hover rounded-l">«</a>
+                        class="w-8 h-8 justify-center bg-card border border-input hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring font-semibold rounded-sm flex items-center">«</a>
                 </li>
             @endif
 
             {{-- Numbers --}}
             @foreach ($elements as $element)
                 @if (is_string($element))
-                    <li class="px-3 py-2 text-text-primary">{{ $element }}</li>
+                    <li class="w-8 h-8 justify-center  font-semibold rounded-sm flex items-center">{{ $element }}
+                    </li>
                 @endif
+
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
-                            <li class="px-3 py-2 bg-text-hover text-text-primary border border-border">
+                            <li
+                                class="w-8 h-8 justify-center bg-primary text-primary-foreground border border-input focus-visible:ring-ring font-semibold rounded-sm flex items-center">
                                 {{ $page }}
                             </li>
                         @else
                             <li>
                                 <a href="{{ $url }}"
-                                   class="px-3 py-2 text-text-primary border border-border hover:bg-text-hover">
+                                    class="w-8 h-8 justify-center bg-card border border-input hover:bg-accent hover:text-accent-foreground  focus:ring focus:outline-none focus-visible:ring-ring font-semibold rounded-sm flex items-center">
                                     {{ $page }}
                                 </a>
                             </li>
@@ -38,10 +43,12 @@
             @if ($paginator->hasMorePages())
                 <li>
                     <a href="{{ $paginator->nextPageUrl() }}"
-                       class="px-3 py-2 text-text-primary border border-border hover:bg-text-hover rounded-r">»</a>
+                        class="w-8 h-8 justify-center bg-card border border-input hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring font-semibold rounded-sm flex items-center">»</a>
                 </li>
             @else
-                <li class="px-3 py-2 border border-border rounded-r">»</li>
+                <li
+                    class="w-8 h-8 justify-center bg-card border border-input focus-visible:ring-ring font-semibold rounded-sm flex items-center">
+                    »</li>
             @endif
         </ul>
     </nav>

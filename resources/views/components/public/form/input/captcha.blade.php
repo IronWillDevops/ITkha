@@ -5,7 +5,8 @@
             <i class="fas fa-key"></i>
         </div>
         <input type="text" name="{{ $name }}" id="{{ $name }}"
-            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="{{ __('form.common.captcha') }}" required />
+            class="input input-hover text-sm  block w-full ps-10 p-2.5 " placeholder="{{ __('form.common.captcha') }}"
+            required />
     </div>
     <img src="{{ route('captcha.generate') }}" alt="Captcha"
         onclick="this.src='{{ route('captcha.generate') }}?'+Math.random()" style="cursor:pointer;">
