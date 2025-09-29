@@ -1,4 +1,3 @@
-
 <div>
     {{-- Скрытое поле нужно только для одиночного чекбокса (чтобы в запросе всегда было значение) --}}
     @if (!str_ends_with($name, '[]'))
@@ -7,6 +6,7 @@
 
     <label class="block text-sm font-medium mb-1">
         <input type="checkbox" name="{{ $name }}" value="{{ $value }}"
+            class="w-4 h-4 rounded border border-primary accent-primary focus:ring focus:ring-primary focus:outline-none focus-visible:ring-ring checked:text-primary-foreground"
             @if (is_array(old(Str::beforeLast($name, '[]'))) && in_array($value, old(Str::beforeLast($name, '[]'), []))) checked
                @elseif($checked ?? false)
                    checked @endif>

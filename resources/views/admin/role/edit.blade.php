@@ -5,12 +5,12 @@
 @endsection
 
 @section('admin.content')
-    <div class="mx-auto p-6 bg-surface border border-border rounded-lg text-text-primary">
-        <form action="{{ route('admin.role.update',$role->id) }}" method="POST">
+        <form action="{{ route('admin.role.update', $role->id) }}" method="POST">
             @csrf
-@method('PATCH')
+            @method('PATCH')
             {{-- Название роли --}}
-            <x-admin.form.input name="title" label="{{ __('admin/roles.fields.title') }}" icon="fa-solid fa-user-plus" value="{{ $role->title }}" />
+            <x-admin.form.input name="title" label="{{ __('admin/roles.fields.title') }}" icon="fa-solid fa-user-plus"
+                value="{{ $role->title }}" />
 
             {{-- Permissions --}}
             <div class="mb-6">
@@ -18,7 +18,7 @@
 
                 @foreach ($permissions as $header => $group)
                     <details class="group">
-                        <summary class="cursor-pointer mb-4">
+                        <summary class="cursor-pointer mb-4  focus:ring focus:outline-none focus-visible:ring-ring">
                             <span class="text-xl font-semibold">{{ $header }}</span>
                         </summary>
                         <section>
@@ -39,5 +39,4 @@
                     label="{{ __('admin/common.actions.cancel') }}" />
             </div>
         </form>
-    </div>
 @endsection

@@ -46,14 +46,19 @@ class PostFilter extends AbstractFilter
     }
     public function search(Builder $builder, $value)
     {
-        
-         $builder->where(function ($query) use ($value) {
-        $query->where('title', 'like', "%{$value}%")
-            ->orWhere('content', 'like', "%{$value}%")
-            ->orWhereHas('author', function ($q) use ($value) {
-                $q->where('login', 'like', "%{$value}%");
-            });
-    });
+
+        $builder->where(function ($query) use ($value) {
+            $query->where('title', 'like', "%{$value}%")
+                ->orWhere('content', 'like', "%{$value}%")
+                ->orWhereHas('category', function (Builder $q) use ($value) {
+                    $q->where('title', 'like', "%{$value}%");
+                })->orWhereHas('tags', function (Builder $q) use ($value) {
+                   $q->where('title', 'like', "%{$value}%");
+                })
+                ->orWhereHas('author', function ($q) use ($value) {
+                    $q->where('login', 'like', "%{$value}%");
+                });
+        });
     }
     public function title(Builder $builder, $value)
     {
@@ -65,20 +70,20 @@ class PostFilter extends AbstractFilter
         $builder->where('content', 'like', "%{$value}%");
     }
 
-    public function category(Builder $builder, $value)
-    {
-        $builder->whereHas('category', function (Builder $q) use ($value) {
-            $q->where('title', 'like', "%{$value}%");
-        });
-    }
+    // public function category(Builder $builder, $value)
+    // {
+    //     $builder->whereHas('category', function (Builder $q) use ($value) {
+    //         $q->where('title', 'like', "%{$value}%");
+    //     });
+    // }
 
-    public function tags(Builder $builder, $value)
-    {
-        // $value — масив назв тегів
-        $builder->whereHas('tags', function (Builder $q) use ($value) {
-            $q->whereIn('tags.title', (array)$value);
-        });
-    }
+    // public function tags(Builder $builder, $value)
+    // {
+    //     // $value — масив назв тегів
+    //     $builder->whereHas('tags', function (Builder $q) use ($value) {
+    //         $q->whereIn('tags.title', (array)$value);
+    //     });
+    // }
 
     public function author(Builder $builder, $value)
     {

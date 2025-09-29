@@ -3,8 +3,7 @@
     {{ __('admin/info.title') }}
 @endsection
 @section('admin.content')
-    <div class=" mx-auto p-4 bg-surface border border-border rounded-lg text-text-primary">
-
+ 
 
         {{-- PHP --}}
         <h2 class="text-xl font-bold mt-6 mb-2">PHP</h2>
@@ -28,7 +27,7 @@
 
         {{-- Composer --}}
         <h2 class="text-xl font-bold mt-6 mb-2">Composer packeges</h2>
-        <div class="max-h-96 overflow-y-auto border rounded p-2 text-sm">
+        <div class="max-h-96 overflow-y-auto border rounded p-2 text-sm  focus:ring focus:outline-none focus-visible:ring-ring">
             <ul>
                 @foreach ($info['composer'] as $package => $version)
                     <li class="flex justify-between border-b py-1">
@@ -38,5 +37,4 @@
                 @endforeach
             </ul>
         </div>
-    </div>
 @endsection

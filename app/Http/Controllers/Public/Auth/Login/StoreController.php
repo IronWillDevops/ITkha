@@ -18,6 +18,8 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request)
     {
         try {
+
+          
             $credentials = $request->validated();
 
             if (Auth::attempt($credentials, $request->boolean('remember'))) {
@@ -25,7 +27,7 @@ class StoreController extends Controller
 
                 $user = Auth::user();
 
-              //  Перевірка верифікації email
+                //  Перевірка верифікації email
                 if ($user->status == UserStatus::PENDING->value) {
                     Auth::logout();
                     throw new EmailNotVerifiedException();
@@ -41,13 +43,10 @@ class StoreController extends Controller
                 return redirect()->intended(route('public.post.index'));
             }
 
-
             return back()->withErrors([
                 'error' => __('message.error.auth_failed'),
             ])->onlyInput('email');
         } catch (EmailNotVerifiedException $ex) {
-
-
             return redirect()->route('public.auth.reverification.index')->with('error', $ex->getMessage());
         }
     }

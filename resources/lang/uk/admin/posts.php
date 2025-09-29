@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Пости',
+    'title' => 'Публікації',
 
     'fields' => [
         'id' => 'ID',

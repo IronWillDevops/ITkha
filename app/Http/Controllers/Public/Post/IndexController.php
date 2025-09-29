@@ -21,7 +21,7 @@ class IndexController extends Controller
 
 
         $data = $request->validated();
-
+        
         // Задаємо дефолтне сортування, якщо не передано
         if (empty($data['sort_by'])) {
             $data['sort_by'] = 'created_at';

@@ -5,7 +5,6 @@
 @endsection
 
 @section('admin.content')
-    <div class="mx-auto p-6 bg-surface border border-border rounded-lg text-text-primary">
         <form action="{{ route('admin.role.store') }}" method="POST">
             @csrf
 
@@ -38,5 +37,4 @@
                     label="{{ __('admin/common.actions.cancel') }}" />
             </div>
         </form>
-    </div>
 @endsection 

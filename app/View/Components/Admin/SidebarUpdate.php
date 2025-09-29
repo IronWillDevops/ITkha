@@ -25,7 +25,7 @@ class SidebarUpdate extends Component
         $this->currentVersion = config('app.version');
 
         // Кешируем весь релизный ответ, а не только версию
-        $releaseData = Cache::remember('latest_release_data', 60, function () {
+        $releaseData = Cache::remember('latest_release_data', 60000, function () {
             $response = Http::get('https://api.github.com/repos/IronWillDevops/ITkha/releases/latest');
             if ($response->ok()) {
                 return $response->json();

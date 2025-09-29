@@ -1,7 +1,6 @@
 @foreach ($comments as $comment)
-    <div  class="ml-{{ $level ?? 0 }} border border-border p-2 rounded mt-4">
-        
-        <div class="flex justify-between items-start mb-2">
+    <div class="ml-{{ $level ?? 0 }} border border-border p-2 rounded-lg mt-4 ">
+        <div class="flex justify-between items-center mb-2">
             <div class="flex items-center gap-2">
                 @if ($comment->user->avatar)
                     <img id="userMenuButton" type="button" data-dropdown-toggle="userDropdown"
@@ -17,22 +16,32 @@
                         </span>
                     </div>
                 @endif
-                <strong><a href="{{ route('public.user.show',$comment->user->id) }}" class="post-link font-medium ">{{ $comment->user->login }}</a></strong>
+
+                <strong>
+                    <a href="{{ route('public.user.show', $comment->user->id) }}" class="hover:underline font-medium">
+                        {{ $comment->user->login }}
+                    </a>
+                </strong>
             </div>
+
             <small class="text-sm text-text-muted whitespace-nowrap">
                 {{ $comment->created_at->diffForHumans() }}
             </small>
         </div>
 
-        <p class="mb-2 text-text-secondary">{{ $comment->body }}</p>
 
-        <a href="#comment-form" class="link link-hover hover:underline"
+        <p class="mb-2 text-muted-foreground">{{ $comment->body }}</p>
+
+
+
+        <a href="#comment-form"
+            class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold p-2 rounded-sm flex items-center w-64"
             onclick="moveForm({{ $comment->id }}, '{{ $comment->user->login }}', this)">
             {{ __('post.comment.reply_title') }}
         </a>
-       
-        <div id="comment-{{ $comment->id }}" ></div>
-       
+
+        <div id="comment-{{ $comment->id }}"></div>
+
         @if ($comment->children->isNotEmpty())
             @include('public.comment.comments', [
                 'comments' => $comment->children,

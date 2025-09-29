@@ -1,4 +1,4 @@
- <section class=" bg-surface rounded-2xl border border-border">
+ <section class=" bg-card text-card-foreground rounded-2xl border border-border">
      <div class="p-6">
          @if ($post->comments_enabled)
              <h2 class="text-2xl font-semibold mb-6">{{ __('post.comment.title') }}

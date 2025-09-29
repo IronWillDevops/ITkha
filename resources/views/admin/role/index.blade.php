@@ -3,11 +3,11 @@
     {{ __('admin/roles.title') }}
 @endsection
 @section('admin.content')
-    <div class=" mx-auto p-4 bg-surface border border-border rounded-lg text-text-primary">
         <div class="flex items-center justify-between mb-6">
-            <a href="{{ route('admin.role.create') }}" class="px-4 py-2 border border-border rounded-xl shadow transition">
-                {{ __('admin/roles.actions.create') }}
-            </a>
+
+            <x-admin.form.action-button type="link" route="{{ route('admin.role.create') }}" icon="fa-solid fa-plus"
+                label=" {{ __('admin/roles.actions.create') }}" />
+           
         </div>
 
         {{-- Таблица постов --}}
@@ -26,17 +26,17 @@
                     @forelse($roles as $role)
                         <tr>
                             <td class="px-4 py-2 text-sm ">{{ $role->id }}</td>
-                            <td class="px-4 py-2 text-sm link hover:link-hover"><a
-                                    href="{{ route('admin.role.show', $role->id) }}">{{ $role->title }}</a>
+                            <td class="px-4 py-2 text-sm link hover:underline"><a
+                                    href="{{ route('admin.role.show', $role->id) }}" class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $role->title }}</a>
                             </td>
-                            
+
                             <td class="px-4 py-2 text-sm ">{{ $role->users()->count() }}</td>
                             <td class="px-4 py-2 text-sm ">{{ $role->created_at }}</td>
 
                             <td class="px-4 py-2 text-sm text-right space-x-2 flex justify-end">
                                 {{-- Кнопка редагування --}}
                                 <a href="{{ route('admin.role.edit', $role->id) }}"
-                                    class="inline-flex items-center p-2 rounded-lg transition"
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring inline-flex items-center p-2 rounded-lg transition"
                                     title="{{ __('admin/roles.actions.edit') }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -48,7 +48,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="inline-flex items-center p-2 text-text-danger rounded-lg transition cursor-pointer"
+                                        class="inline-flex items-center p-2 bg-destructive text-destructive-foreground rounded-lg transition focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer"
                                         title="{{ __('admin/roles.actions.delete') }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -70,5 +70,4 @@
         <div class="mt-6">
             {{ $roles->links('vendor.pagination.pagination') }}
         </div>
-    </div>
 @endsection
