@@ -4,7 +4,11 @@
     <div class="bg-card text-card-foreground max-w-lg mx-auto mt-10 mb-10 rounded-2xl p-10 border border-border">
 
         <div class="w-full max-w-md p-8 rounded-2xl">
-            <h2 class="text-2xl font-bold text-center mb-6">{{ config('app.name') }}</h2>
+
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold mb-2">{{ __('public/login.title') }}</h2>
+                <span class="text-muted-foreground">{{ __('public/login.description') }}</span>
+            </div>
 
             <form method="POST" action="{{ route('public.auth.forgot.password.store') }}">
                 @csrf
@@ -13,7 +17,7 @@
                     placeholder="{{ __('form.common.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Captcha --}}
-                <x-public.form.captcha name="captcha"/>
+                <x-public.form.captcha name="captcha" />
 
                 {{-- Submit --}}
                 <x-public.form.submit label="{{ __('form.forgot.submit') }}" />
