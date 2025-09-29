@@ -2,7 +2,8 @@
     <nav class="bg-card text-card-foreground shadow border-solid border-b-1 border-border">
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
 
-            <a href="{{ route('public.post.index') }}" class="text flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="{{ route('public.post.index') }}"
+                class="text flex items-center space-x-3 rtl:space-x-reverse focus:ring focus:outline-none focus-visible:ring-ring">
                 <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
             </a>
             <button data-collapse-toggle="navbar-default" type="button"
@@ -21,7 +22,9 @@
                             <div id="theme-toggle-dark-icon"><i class="fas fa-moon hidden fa-lg"></i></div>
                             <div id="theme-toggle-light-icon"><i class="fas fa-sun hidden fa-lg"></i></div>
                         </button>
+
                     </li>
+                    
                     <li>
                         <a href="{{ route('public.post.index') }}"
                             class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5 "
@@ -49,36 +52,35 @@
                                     </span>
                                 </div>
                             @endif
-                           
+
                             <div id="userDropdown"
                                 class="text-sm absolute right-0 z-50 hidden bg-card divide-y rounded-lg focus:ring focus:outline-none focus-visible:ring-ring shadow-sm w-44 border border-input overflow-hidden">
 
-                             
-                                    <div
-                                        class="p-2 font-medium truncate">
-                                        {{ Auth::user()->login }}
-                                    </div>
 
-                                    <hr class="border border-input">
+                                <div class="p-2 font-medium truncate">
+                                    {{ Auth::user()->login }}
+                                </div>
 
-                                    <ul aria-labelledby="avatarButton">
-                                        <li>
-                                            <a href="{{ route('public.user.show', Auth::user()->id) }}"
-                                                class="block p-2 bg-background border-input hover:bg-accent hover:text-accent-foreground">
-                                                {{ __('header.auth.profile') }}
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <hr class="border border-input">
 
-                                    <hr class="border border-input">
+                                <ul aria-labelledby="avatarButton">
+                                    <li>
+                                        <a href="{{ route('public.user.show', Auth::user()->id) }}"
+                                            class="block p-2 bg-background border-input hover:bg-accent hover:text-accent-foreground">
+                                            {{ __('header.auth.profile') }}
+                                        </a>
+                                    </li>
+                                </ul>
 
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit"
-                                            class="w-full text-left block p-2 bg-background border-input hover:bg-accent hover:text-accent-foreground cursor-pointer">
-                                            {{ __('header.auth.logout') }}
-                                        </button>
-                                    </form>
+                                <hr class="border border-input">
+
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="w-full text-left block p-2 bg-background border-input hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                                        {{ __('header.auth.logout') }}
+                                    </button>
+                                </form>
                             </div>
                         </li>
                     @endauth
@@ -97,7 +99,7 @@
 
 
 @push('scripts')
-    <script>
+   <script>
         document.addEventListener('DOMContentLoaded', function() {
             const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]');
             const navMenu = document.getElementById('navbar-default');
@@ -108,51 +110,7 @@
                 });
             }
         });
-
-
-        // Встановлюємо тему ДО завантаження DOM (за замовчуванням - 'light')
-        if (localStorage.getItem('color-theme') === 'dark' ||
-            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            document.documentElement.classList.remove('light');
-        } else {
-            document.documentElement.classList.add('light');
-            document.documentElement.classList.remove('dark');
-        }
-
-        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-
-        // Зміна іконок відповідно до збереженої теми
-        if (localStorage.getItem('color-theme') === 'dark' ||
-            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            themeToggleLightIcon.classList.remove('hidden');
-            themeToggleDarkIcon.classList.add('hidden');
-        } else {
-            themeToggleDarkIcon.classList.remove('hidden');
-            themeToggleLightIcon.classList.add('hidden');
-        }
-
-        var themeToggleBtn = document.getElementById('theme-toggle');
-
-        themeToggleBtn.addEventListener('click', function() {
-            // Перемикаємо іконки
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
-
-            // Перемикаємо теми
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
-                localStorage.setItem('color-theme', 'light');
-            } else {
-                document.documentElement.classList.remove('light');
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-            }
-        });
-    </script>
-
+    </script> 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const userMenuButton = document.getElementById('userMenuButton');

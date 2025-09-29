@@ -25,7 +25,7 @@
     --destructive: #ca3214;
     --destructive-foreground: #fffcfc;
     --border: #dfdfdf;
-    --input: #f6f6f6;
+    --input: #dfdfdf;
     --ring: #72e3ad;
     --chart-1: #72e3ad;
     --chart-2: #3b82f6;
@@ -178,6 +178,36 @@
 
 body {
     letter-spacing: var(--tracking-normal);
+}
+
+#post-content pre {
+    background-color: #0d1117;
+    color: #58a6ff;
+    padding: 20px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #30363d;
+    margin: 20px 0;
+    position: relative;
+}
+
+#post-content pre span {
+    padding-left: 24px;
+    /* Место под префикс "$" */
+    position: relative;
+}
+
+#post-content pre span::before {
+    content: "$ ";
+    position: absolute;
+    left: 0;
+    color: #c586c0;
+    /* Цвет префикса — фиолетовый */
 }
 
 @layer components {

@@ -5,9 +5,6 @@
         <h2 class="text-2xl font-semibold text-center mb-6">Contact Us</h2>
         <form class="max-w-md mx-auto" action="{{ route('public.pages.contact.store') }}" method="POST">
             @csrf
-
-
-            
             {{-- Name --}}
             <x-public.form.input name="name" label="{{ __('form.common.name') }}"
                 placeholder="{{ __('form.common.name') }}" icon="fas fa-solid fa-user" />
