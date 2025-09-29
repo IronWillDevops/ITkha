@@ -4,39 +4,42 @@
     <div class="text-card-foreground bg-card max-w-lg mx-auto mt-10 mb-10 rounded-2xl p-10 border border-border">
 
         <div class="w-full max-w-md p-8 text-text-primary bg-surface rounded-2xl">
-            <h2 class="text-2xl font-bold text-center mb-6">{{ config('app.name') }}</h2>
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold mb-2">{{ __('public/login.title') }}</h2>
+                <span class="text-muted-foreground">{{ __('public/login.description') }}</span>
+            </div>
 
             <form method="POST" action="{{ route('login.store') }}">
                 @csrf
 
                 {{-- Email --}}
-                <x-public.form.input type="email" name="email" label="{{ __('form.common.email') }}"
-                    placeholder="{{ __('form.common.email') }}" icon="fas fa-solid fa-at" />
+                <x-public.form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
+                    placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Password --}}
-                <x-public.form.password name="password" label="{{ __('form.common.password') }}"
-                    placeholder="{{ __('form.common.password') }}" icon="fas fa-solid fa-lock" />
+                <x-public.form.password name="password" label="{{ __('public/common.fields.password') }}"
+                    placeholder="{{ __('public/common.placeholder.password') }}" icon="fas fa-solid fa-lock" />
 
                 @error('error')
                     <p class="text-error ">{{ $message }}</p>
                 @enderror
 
                 <div class="mb-4 flex justify-between">
-                    <x-public.form.check-box name="remember" label="{{ __('form.common.remember') }}" />
+                    <x-public.form.check-box name="remember" label="{{ __('public/login.remember_me') }}" />
                     <a href="{{ route('public.auth.forgot.password.index') }}"
-                        class="text-sm text-muted-foreground hover:underline">{{ __('form.common.forgot_password') }}
+                        class="text-sm text-muted-foreground hover:underline">{{ __('public/login.forgot_password') }}
 
                     </a>
                 </div>
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('form.login.submit') }}" class="w-full"/>
+                <x-public.form.submit label="{{ __('public/login.title') }}" class="w-full" />
             </form>
 
             <p class="mt-4 text-right text-sm text-muted-foreground">
-                {{ __('form.common.dont_have_account') }}
+                {{ __('public/login.dont_have_account') }}
                 <a href="{{ route('public.auth.register.index') }}"
-                    class="hover:underline">{{ __('form.common.register_now') }}</a>
+                    class="hover:underline">{{ __('public/login.register_now') }}</a>
             </p>
         </div>
     </div>

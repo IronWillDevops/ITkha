@@ -51,5 +51,5 @@ return [
         'delete' => 'Delete user',
     ],
 
-    
+
 ];
