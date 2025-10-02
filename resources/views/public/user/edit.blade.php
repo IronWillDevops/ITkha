@@ -68,6 +68,7 @@
                     placeholder="{{ __('public/common.placeholder.about_myself') }}" value="{{ $user->profile?->about_myself }}"
                     required="false" />
             </section>
+            
             {{-- Розділ: Соціальні мережі --}}
             <section class="">
                 <h2 class="text-xl font-semibold mb-4">{{ __('public/profile.sections.social') }}</h2>

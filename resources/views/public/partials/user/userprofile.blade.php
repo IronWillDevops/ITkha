@@ -67,32 +67,32 @@
      @if (Auth::check() && Auth::user()->id == $user->id)
          <x-public.ui.separator />
          <!-- User action cards (1 col on mobile, 2 cols on md+) -->
-         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 animate-fade-in delay-500">
+         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 ">
              <a href="{{ route('public.user.show', $user->id) }}"
-                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
+                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-pen text-xl"></i>
                  <div>
-                     <p class="text-sm ">{{ __('public/profile.actions.my_posts.title') }}</p>
+                     <p class="text-sm font-semibold">{{ __('public/profile.actions.my_posts.title') }}</p>
                      <p class="text-xs text-muted-foreground font-normal">
                          {{ __('public/profile.actions.my_posts.description') }}</p>
                  </div>
              </a>
 
              <a href="{{ route('public.user.show.like', $user->id) }}"
-                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
+                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-heart text-xl"></i>
                  <div>
-                     <p class="text-sm ">{{ __('public/profile.actions.liked_posts.title') }}
+                     <p class="text-sm font-semibold">{{ __('public/profile.actions.liked_posts.title') }}
                      </p>
                      <p class="text-xs text-muted-foreground font-normal">
                          {{ __('public/profile.actions.liked_posts.description') }}</p>
                  </div>
              </a>
              <a href="{{ route('public.user.show.favorite', $user->id) }}"
-                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
+                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-bookmark text-xl"></i>
                  <div>
-                     <p class="text-sm ">
+                     <p class="text-sm font-semibold">
                          {{ __('public/profile.actions.favorite_posts.title') }}
                      </p>
                      <p class="text-xs text-muted-foreground font-normal">
@@ -102,10 +102,10 @@
              </a>
 
              <a href="{{ route('public.user.edit', $user->id) }}"
-                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
+                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-cog text-xl"></i>
                  <div>
-                     <p class="text-sm ">{{ __('public/profile.actions.edit_profile.title') }}
+                     <p class="text-sm font-semibold">{{ __('public/profile.actions.edit_profile.title') }}
                      </p>
                      <p class="text-xs text-muted-foreground font-normal">
                          {{ __('public/profile.actions.edit_profile.description') }}</p>
