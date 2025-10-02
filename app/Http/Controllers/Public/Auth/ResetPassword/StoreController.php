@@ -29,9 +29,9 @@ class StoreController extends Controller
         );
 
         if ($status == Password::PASSWORD_RESET) {
-            return redirect()->route('login')->with('success', __('message.success.reset'));
+            return redirect()->route('login')->with('success', __('public/reset.messages.reset'));
         } else {
-            return redirect()->route('login')->with('error',  __('message.error.reset'));
+            return redirect()->route('login')->with('error',   __('public/reset.messages.reset_failed'));
         }
 
         

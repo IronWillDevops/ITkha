@@ -6,28 +6,28 @@
         <div class="w-full max-w-md p-8 rounded-2xl">
 
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold mb-2">{{ __('public/login.title') }}</h2>
-                <span class="text-muted-foreground">{{ __('public/login.description') }}</span>
+                <h2 class="text-2xl font-bold mb-2">{{ __('public/forgot.title') }}</h2>
+                <span class="text-sm text-muted-foreground">{{ __('public/forgot.description') }}</span>
             </div>
 
             <form method="POST" action="{{ route('public.auth.forgot.password.store') }}">
                 @csrf
                 {{-- Email --}}
-                <x-public.form.input type="email" name="email" label="{{ __('form.common.email') }}"
-                    placeholder="{{ __('form.common.email') }}" icon="fas fa-solid fa-at" />
+                <x-public.form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
+                    placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Captcha --}}
                 <x-public.form.captcha name="captcha" />
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('form.forgot.submit') }}" />
+                <x-public.form.submit label="{{ __('public/forgot.submit') }}" class="w-full"/>
 
 
             </form>
             <div class="mb-4">
                 <p class="mt-4 text-right text-sm text-muted-foreground">
-                    {{ __('form.common.remember_your_password') }}
-                    <a href="{{ route('login') }}" class="hover:underline">{{ __('form.login.submit') }}</a>
+                    {{ __('public/forgot.links.remember_your_password') }}
+                    <a href="{{ route('login') }}" class="hover:underline">{{ __('public/forgot.links.login') }}</a>
                 </p>
             </div>
         </div>

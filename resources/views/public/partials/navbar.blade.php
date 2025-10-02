@@ -26,14 +26,9 @@
                     </li>
                     
                     <li>
-                        <a href="{{ route('public.post.index') }}"
-                            class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5 "
-                            aria-current="page">{{ __('header.main') }}</a>
-                    </li>
-
-                    <li>
                         <a href="{{ route('public.pages.contact.index') }}"
-                            class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">{{ __('header.contact_us') }}</a>
+                            class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
+                            {{ __('public/contact_us.title') }}</a>
                     </li>
 
                     @auth
@@ -67,7 +62,7 @@
                                     <li>
                                         <a href="{{ route('public.user.show', Auth::user()->id) }}"
                                             class="block p-2 bg-background border-input hover:bg-accent hover:text-accent-foreground">
-                                            {{ __('header.auth.profile') }}
+                                            {{ __('public/auth.profile') }}
                                         </a>
                                     </li>
                                 </ul>
@@ -78,7 +73,7 @@
                                     @csrf
                                     <button type="submit"
                                         class="w-full text-left block p-2 bg-background border-input hover:bg-accent hover:text-accent-foreground cursor-pointer">
-                                        {{ __('header.auth.logout') }}
+                                        {{ __('public/auth.logout') }}
                                     </button>
                                 </form>
                             </div>
@@ -87,7 +82,7 @@
                     @guest
                         <li>
                             <a href="{{ route('login') }}"
-                                class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm md:p-1.5">{{ __('header.auth.login') }}</a>
+                                class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm md:p-1.5">{{ __('public/auth.login') }}</a>
                         </li>
                     @endguest
 

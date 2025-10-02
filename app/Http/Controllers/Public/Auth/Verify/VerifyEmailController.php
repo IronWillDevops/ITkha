@@ -16,12 +16,12 @@ class VerifyEmailController extends Controller
 
         // Проверка подписи email
         if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
-            abort(403, __('message.error.invalid_or_expired_link'));
+            abort(403, __('public/verify.messages.invalid_or_expired_link'));
         }
 
         if ($user->hasVerifiedEmail()) {
 
-            return redirect()->route('login')->with('success', __('message.success.email_already_verified'));
+            return redirect()->route('login')->with('success',  __('public/verify.messages.email_already_verified'));
         }
         if ($user->status !== UserStatus::ACTIVE->value) {
             $user->status = UserStatus::ACTIVE->value;
@@ -30,6 +30,6 @@ class VerifyEmailController extends Controller
         $user->markEmailAsVerified();
         event(new Verified($user));
 
-        return redirect()->route('login')->with('success', __('message.success.email_verified_success'));
+        return redirect()->route('login')->with('success',  __('public/verify.messages.email_verified_success'));
     }
 }

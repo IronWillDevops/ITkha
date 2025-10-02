@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==========================
-# Конфигурация
+# Configuration
 # ==========================
 APP_DIR="/var/www/ITkha"
 REPO_URL="https://github.com/IronWillDevops/ITkha.git"
@@ -9,78 +9,90 @@ PHP_BIN="php"
 COMPOSER_BIN="composer"
 WEB_USER="www-data"
 WEB_GROUP="www-data"
-echo "=== Деплой Laravel проекта ITkha ==="
+
+echo "=== Deploying Laravel project ITkha ==="
+
 # ==========================
-# 1. Клонирование или обновление
+# 1. Clone or update
 # ==========================
 if [ ! -d "$APP_DIR" ]; then
-  echo "[INFO] Клонируем репозиторий..."
+  echo "[INFO] Cloning repository..."
   git clone -b $BRANCH $REPO_URL $APP_DIR
 else
-  echo "[INFO] Репозиторий существует, обновляем..."
+  echo "[INFO] Repository exists, updating..."
   cd $APP_DIR || exit
   git reset --hard
   git pull origin $BRANCH
 fi
+
 cd $APP_DIR || exit
+
 # ==========================
-# 2. Установка PHP-зависимостей
+# 2. Install PHP dependencies
 # ==========================
-echo "[INFO] Установка PHP-зависимостей..."
+echo "[INFO] Installing PHP dependencies..."
 $COMPOSER_BIN install --no-interaction --prefer-dist --optimize-autoloader
+
 # ==========================
-# 3. Установка JS-зависимостей (если есть)
+# 3. Install JS dependencies (if any)
 # ==========================
 if [ -f "package.json" ]; then
-  echo "[INFO] Установка JS-зависимостей..."
+  echo "[INFO] Installing JS dependencies..."
   npm install
   npm run build
 fi
+
 # ==========================
-# 4. Настройка окружения
+# 4. Environment setup
 # ==========================
 if [ ! -f ".env" ]; then
-  echo "[INFO] Копируем .env.example..."
+  echo "[INFO] Copying .env.example..."
   cp .env.example .env
   $PHP_BIN artisan key:generate
 fi
+
 # ==========================
-# 5. Права доступа
+# 5. Permissions
 # ==========================
-echo "[INFO] Настройка прав на storage и bootstrap/cache..."
+echo "[INFO] Setting permissions for storage and bootstrap/cache..."
 sudo chown -R $WEB_USER:$WEB_GROUP storage bootstrap/cache
 sudo chmod -R 775 storage bootstrap/cache
+
 # ==========================
-# 6. Миграции
+# 6. Database migrations
 # ==========================
-echo "[INFO] Запуск миграций..."
+echo "[INFO] Running migrations..."
 $PHP_BIN artisan migrate --force || {
-  echo "[ERROR] Ошибка при миграциях. Проверь подключение к базе данных."
+  echo "[ERROR] Migration failed. Check database connection."
   exit 1
 }
+
 # ==========================
-# 7. Очистка и кэширование
+# 7. Clearing and caching
 # ==========================
-echo "[INFO] Очистка кэша..."
+echo "[INFO] Clearing cache..."
 $PHP_BIN artisan config:clear
 $PHP_BIN artisan cache:clear
 $PHP_BIN artisan route:clear
 $PHP_BIN artisan view:clear
-echo "[INFO] Кэширование конфигов..."
+
+echo "[INFO] Caching configuration..."
 $PHP_BIN artisan config:cache
 $PHP_BIN artisan route:cache
 $PHP_BIN artisan view:cache
+
 # ==========================
-# 8. Перезапуск PHP-FPM
+# 8. Restart PHP-FPM
 # ==========================
 if systemctl is-active --quiet php8.2-fpm; then  
-echo "[INFO] Перезапуск PHP-FPM..."
+  echo "[INFO] Restarting PHP-FPM..."
   sudo systemctl restart php8.2-fpm
 elif systemctl is-active --quiet php8.1-fpm; then
-  echo "[INFO] Перезапуск PHP-FPM..."
+  echo "[INFO] Restarting PHP-FPM..."
   sudo systemctl restart php8.1-fpm
 elif systemctl is-active --quiet php7.4-fpm; then
-  echo "[INFO] Перезапуск PHP-FPM..."
+  echo "[INFO] Restarting PHP-FPM..."
   sudo systemctl restart php7.4-fpm
 fi
-echo "=== Деплой завершен успешно! ==="
+
+echo "=== Deployment completed successfully! ==="
