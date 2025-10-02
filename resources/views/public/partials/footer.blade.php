@@ -4,8 +4,8 @@
         <div class="text-center md:text-left">
             &copy; 2024 - {{ date('Y') }} <span class="font-semibold ">{{ config('app.name') }}</span>. All
             rights reserved.
+            <small> {{ $app_version_hash ?? 'unknown' }}</small>
         </div>
-
         <!-- Центр (языки) -->
         <div class="text-center my-6 md:text-left md:my-0">
             <a href="{{ route('locale.switch', ['locale' => 'en', 'redirect_to' => url()->current()]) }}"
@@ -22,5 +22,6 @@
                 </a>
             @endforeach
         </div>
+
     </div>
 </footer>

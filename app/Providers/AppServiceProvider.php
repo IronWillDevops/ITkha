@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckPermission;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +28,18 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        View::composer('*', function ($view) {
+            $version = null;
+            try {
+                if (Storage::exists('version.json')) {
+                    $data = json_decode(Storage::get('version.json'), true);
+                    $version = $data['hash'] ?? null;
+                }
+            } catch (\Throwable $e) {
+                $version = null;
+            }
+            View::share('app_version_hash', $version);
+        });
         // Enabled https
 
         if ($this->app->environment('production')) {

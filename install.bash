@@ -26,6 +26,16 @@ else
 fi
 
 cd $APP_DIR || exit
+# ==========================
+# 1.1 Write Git version
+# ==========================
+VERSION_FILE="$APP_DIR/storage/app/version.json"
+GIT_HASH=$(git rev-parse --short HEAD)
+GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+GIT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+echo "{\"hash\":\"$GIT_HASH\",\"branch\":\"$GIT_BRANCH\",\"date\":\"$GIT_DATE\"}" > $VERSION_FILE
+echo "[INFO] Git version written: $GIT_HASH"
 
 # ==========================
 # 2. Install PHP dependencies
