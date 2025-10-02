@@ -30,5 +30,11 @@ return [
         'security' => 'Security',
     ],
 
+    'messages' => [
+        'update_profile_success' => 'Your profile has been updated successfully.',
+        'update_password_success' => 'Your password has been updated successfully.',
+        'unexpected_error' => 'An unexpected error occurred. Please try again.',
+    ],
+
 
 ];

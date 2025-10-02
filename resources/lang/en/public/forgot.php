@@ -9,4 +9,9 @@ return [
         'remember_your_password' => 'Remember your password?',
         'login' => 'Sign In',
     ],
+
+    'messages' =>[
+        'password_reset_link_sent' => 'Password reset link sent successfully',
+        'unexpected_error' => 'An unexpected error occurred',
+    ],
 ];

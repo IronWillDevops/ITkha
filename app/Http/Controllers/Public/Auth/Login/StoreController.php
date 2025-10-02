@@ -37,14 +37,14 @@ class StoreController extends Controller
                 if (!$user->status == UserStatus::ACTIVE->value) {
                     Auth::logout();
                     return back()->withErrors([
-                        'error' => __('message.success.account_inactive'),
+                        'error' => __('public/login.messages.account_inactive'),
                     ])->onlyInput('email');
                 }
                 return redirect()->intended(route('public.post.index'));
             }
 
             return back()->withErrors([
-                'error' => __('message.error.auth_failed'),
+                'error' => __('public/login.messages.auth_failed'),
             ])->onlyInput('email');
         } catch (EmailNotVerifiedException $ex) {
             return redirect()->route('public.auth.reverification.index')->with('error', $ex->getMessage());

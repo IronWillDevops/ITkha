@@ -31,7 +31,7 @@ return [
         'required' => 'Please enter your current password.',
         'current_password' => 'The current password is incorrect.',
     ],
-    
+
     'login' => [
 
         'required' => 'Login is required.',
@@ -39,6 +39,7 @@ return [
         'min' => 'Login must be at least :min characters.',
         'max' => 'Login must not exceed :max characters.',
         'unique' => 'A user with this login already exists.',
+        'regex' => 'Login may contain only English letters, numbers, and underscore (_).',
     ],
 
     'token' => [
@@ -107,11 +108,13 @@ return [
         'required' => 'The name field is required.',
         'string' => 'The name must be a string.',
         'max' => 'The name may not be greater than :max characters.',
+        'regex' => 'Name may contain only English letters.',
     ],
 
     'surname' => [
         'string' => 'The surname must be a string.',
         'max' => 'The surname may not be greater than :max characters.',
+        'regex' => 'Surname may contain only English letters.',
     ],
 
     'job_title' => [
@@ -145,5 +148,21 @@ return [
         'url' => 'The LinkedIn URL format is invalid.',
         'max' => 'The LinkedIn URL may not be greater than :max characters.',
         'linkedin_url' => 'The field must contain a valid LinkedIn profile link.',
+    ],
+
+    'comment' => [
+        'post_id' => [
+            'required' => 'Post ID is required.',
+            'exists'   => 'The specified post does not exist.',
+        ],
+        'body' => [
+            'required' => 'Comment field cannot be empty.',
+            'string'   => 'Comment must be a string.',
+            'min'      => 'Comment must be at least :min characters.',
+            'max'      => 'Comment cannot exceed :max characters.',
+        ],
+        'parent_id' => [
+            'exists' => 'The specified parent comment does not exist.',
+        ],
     ],
 ];

@@ -17,6 +17,6 @@ class StoreController extends Controller
         
         Contact::create($validated);
         // Задання флеш-повідомлення і цільової адреси
-        return redirect()->route('public.post.index')->with('success', __('form.message.send_message'));
+        return redirect()->route('public.post.index')->with('success',__('public/contact_us.messages.send_message'));
     }
 }

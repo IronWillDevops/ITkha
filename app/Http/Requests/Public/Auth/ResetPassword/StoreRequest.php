@@ -31,18 +31,18 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'token.required' => __('public/validation.token.required'),
+            'token.required' => __('common/validation.token.required'),
 
-            'email.required' => __('public/validation.email.required'),
-            'email.string' => __('public/validation.email.string'),
-            'email.email' => __('public/validation.email.email'),
-            'email.max' => __('public/validation.email.max'),
+            'email.required' => __('common/validation.email.required'),
+            'email.string' => __('common/validation.email.string'),
+            'email.email' => __('common/validation.email.email'),
+            'email.max' => __('common/validation.email.max'),
 
-            'password.required' => __('public/validation.password.required'),
-            'password.string' => __('public/validation.password.string'),
-            'password.min' => __('public/validation.password.min'),
-            'password.max' => __('public/validation.password.max'),
-            'password.confirmed' => __('public/validation.password.confirmed'),
+            'password.required' => __('common/validation.password.required'),
+            'password.string' => __('common/validation.password.string'),
+            'password.min' => __('common/validation.password.min'),
+            'password.max' => __('common/validation.password.max'),
+            'password.confirmed' => __('common/validation.password.confirmed'),
         ];
     }
 }

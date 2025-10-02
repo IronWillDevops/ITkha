@@ -9,4 +9,7 @@ return [
 
     'reply_to'          => 'Відповідь для',
     'reply_to_cancel'   => 'Скасувати відповідь',
+    'messages' => [
+        'comment_added' => 'Ваш коментар успішно додано.',
+    ],
 ];

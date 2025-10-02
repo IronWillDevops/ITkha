@@ -22,13 +22,9 @@ class StoreController extends BaseController
 
             // Отправляем письмо для подтверждения email
             $user->sendEmailVerificationNotification();
-
-            // Отправляем письмо пользователю
-
-
-            return redirect()->route('login')->with('success', __('message.success.register'));
+            return redirect()->route('login')->with('success',  __('public/register.messages.register'));
         } catch (Exception $ex) {
-            return redirect()->route('login')->with('error', __('message.error.register'));
+            return redirect()->route('login')->with('error', __('public/register.messages.register_failed'));
         }
     }
 }

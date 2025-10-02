@@ -29,4 +29,11 @@ return [
         'social' => 'Соціальні мережі',
         'security' => 'Безпека',
     ],
+
+    'messages' => [
+        'update_profile_success' => 'Ваш профіль успішно оновлено.',
+
+        'update_password_success' => 'Ваш пароль успішно змінено.',
+        'unexpected_error' => 'Виникла непередбачена помилка. Спробуйте ще раз.',
+    ],
 ];

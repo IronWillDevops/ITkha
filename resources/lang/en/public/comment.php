@@ -8,4 +8,8 @@ return [
 
     'reply_to'          => 'Replying to',
     'reply_to_cancel'   => 'Cancel reply',
+
+    'messages' => [
+        'comment_added' => 'Your comment has been added successfully.',
+    ],
 ];

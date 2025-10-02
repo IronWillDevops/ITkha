@@ -32,17 +32,17 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'post_id.required' => __('post.comment.post_id.required'),
-            'post_id.exists'   => __('post.comment.post_id.exists'),
+            'post_id.required' => __('common/validation.comment.post_id.required'),
+            'post_id.exists'   => __('common/validation.comment.post_id.exists'),
 
-            'body.required' => __('post.comment.body.required'),
-            'body.string'   => __('post.comment.body.string'),
-            'body.min'      => __('post.comment.body.min'),
-            'body.max'      => __('post.comment.body.max'),
+            'body.required' => __('common/validation.comment.body.required'),
+            'body.string'   => __('common/validation.comment.body.string'),
+            'body.min'      => __('common/validation.comment.body.min'),
+            'body.max'      => __('common/validation.comment.body.max'),
 
-            'parent_id.exists' => __('post.comment.parent_id.exists'),
+            'parent_id.exists' => __('common/validation.comment.parent_id.exists'),
 
-            'captcha.required' => __('public/validation.captcha.required'),
+            'captcha.required' => __('common/validation.captcha.required'),
             // повідомлення про неправильну капчу краще обробляти у самому правилі CaptchaRule
         ];
     }

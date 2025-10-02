@@ -24,9 +24,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['string', 'max:255'],
-            'login' => ['required', 'string', 'min:5', 'max:50', 'unique:users'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z]+$/'],
+            'surname' => ['string', 'max:255', 'regex:/^[A-Za-z]+$/'],
+            'login' => ['required', 'string', 'min:5', 'max:50', 'unique:users', 'regex:/^[A-Za-z0-9_]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'max:255', 'confirmed', Password::defaults()],
             'captcha' => ['required',  new CaptchaRule()],
@@ -38,39 +38,42 @@ class StoreRequest extends FormRequest
     {
         return [
 
-            'name.required' => __('public/validation.name.required'),
-            'name.string' => __('public/validation.name.string'),
-            'name.max' => __('public/validation.name.max'),
+            'name.required' => __('common/validation.name.required'),
+            'name.string' => __('common/validation.name.string'),
+            'name.max' => __('common/validation.name.max'),
+            'name.regex' => __('common/validation.name.regex'),
 
-            'surname.string' => __('public/validation.surname.string'),
-            'surname.max' => __('public/validation.surname.max'),
+            'surname.string' => __('common/validation.surname.string'),
+            'surname.max' => __('common/validation.surname.max'),
+            'surname.regex' => __('common/validation.surname.regex'),
 
-            'login.required' => __('public/validation.login.required'),
-            'login.string' => __('public/validation.login.string'),
-            'login.min' => __('public/validation.login.min'),
-            'login.max' => __('public/validation.login.max'),
-            'login.unique' => __('public/validation.login.unique'),
+            'login.required' => __('common/validation.login.required'),
+            'login.string' => __('common/validation.login.string'),
+            'login.min' => __('common/validation.login.min'),
+            'login.max' => __('common/validation.login.max'),
+            'login.unique' => __('common/validation.login.unique'),
+            'login.regex' =>  __('common/validation.login.regex'),
 
-            'email.required' => __('public/validation.email.required'),
-            'email.string' => __('public/validation.email.string'),
-            'email.email' => __('public/validation.email.email'),
-            'email.max' => __('public/validation.email.max'),
-            'email.unique' => __('public/validation.email.unique'),
-            
-            'password.required' => __('public/validation.password.required'),
-            'password.string' => __('public/validation.password.string'),
-            'password.max' => __('public/validation.password.max'),
-            'password.confirmed' => __('public/validation.password.confirmed'),
+            'email.required' => __('common/validation.email.required'),
+            'email.string' => __('common/validation.email.string'),
+            'email.email' => __('common/validation.email.email'),
+            'email.max' => __('common/validation.email.max'),
+            'email.unique' => __('common/validation.email.unique'),
+
+            'password.required' => __('common/validation.password.required'),
+            'password.string' => __('common/validation.password.string'),
+            'password.max' => __('common/validation.password.max'),
+            'password.confirmed' => __('common/validation.password.confirmed'),
 
             // Повідомлення для правил Password::defaults()
-            'password.min' => __('public/validation.password.min'),
-            'password.letters' => __('public/validation.password.letters'),
-            'password.mixed' => __('public/validation.password.mixed'),
-            'password.numbers' => __('public/validation.password.numbers'),
-            'password.symbols' => __('public/validation.password.symbols'),
-            'password.uncompromised' => __('public/validation.password.uncompromised'),
+            'password.min' => __('common/validation.password.min'),
+            'password.letters' => __('common/validation.password.letters'),
+            'password.mixed' => __('common/validation.password.mixed'),
+            'password.numbers' => __('common/validation.password.numbers'),
+            'password.symbols' => __('common/validation.password.symbols'),
+            'password.uncompromised' => __('common/validation.password.uncompromised'),
 
-            'captcha.required' => __('public/validation.captcha.required'),
+            'captcha.required' => __('common/validation.captcha.required'),
         ];
     }
 }

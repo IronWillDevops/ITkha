@@ -21,7 +21,7 @@ class StoreController extends Controller
         $post = Post::findOrFail($data['post_id']);
 
         if (! $post->comments_enabled) {
-            abort(403, __('post.comment.comments_disabled'));
+            abort(403, __('public/comment.comments_disabled'));
         }
 
         Comment::create([
@@ -32,6 +32,6 @@ class StoreController extends Controller
             'status' => CommentStatus::APPROVED,
         ]);
 
-        return redirect()->back()->with('success', __('post.comment.comment_added'));
+        return redirect()->back()->with('success', __('public/comment.messages.comment_added'));
     }
 }
