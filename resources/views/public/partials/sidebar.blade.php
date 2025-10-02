@@ -2,7 +2,7 @@
     <div class="border border-border  shadow  p-4 rounded-lg">
         <h3 class="text-xl font-semibold mb-4">
             <i class="icon fa fa-newspaper mr-3"></i>
-            {{ __('post.popular_posts') }}
+            {{ __('public/post.popular_posts') }}
         </h3>
         <x-public.ui.separator />
         <ul class="space-y-2">

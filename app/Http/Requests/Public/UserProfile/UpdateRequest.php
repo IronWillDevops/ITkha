@@ -41,33 +41,33 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'avatar.image' => __('validation.avatar.image'),
-            'avatar.max' => __('validation.avatar.max'),
+            'avatar.image' => __('public/validation.avatar.image'),
+            'avatar.max' => __('public/validation.avatar.max'),
 
-            'name.required' => __('validation.name.required'),
-            'name.string' => __('validation.name.string'),
-            'name.max' => __('validation.name.max'),
+            'name.required' => __('public/validation.name.required'),
+            'name.string' => __('public/validation.name.string'),
+            'name.max' => __('public/validation.name.max'),
 
-            'surname.string' => __('validation.surname.string'),
-            'surname.max' => __('validation.surname.max'),
+            'surname.string' => __('public/validation.surname.string'),
+            'surname.max' => __('public/validation.surname.max'),
 
-            'job_title.string' => __('validation.job_title.string'),
-            'job_title.max' => __('validation.job_title.max'),
+            'job_title.string' => __('public/validation.job_title.string'),
+            'job_title.max' => __('public/validation.job_title.max'),
 
-            'address.string' => __('validation.address.string'),
-            'address.max' => __('validation.address.max'),
+            'address.string' => __('public/validation.address.string'),
+            'address.max' => __('public/validation.address.max'),
 
-            'about_myself.string' => __('validation.about_myself.string'),
-            'about_myself.max' => __('validation.about_myself.max'),
+            'about_myself.string' => __('public/validation.about_myself.string'),
+            'about_myself.max' => __('public/validation.about_myself.max'),
 
-            'website.url' => __('validation.website.url'),
-            'website.max' => __('validation.website.max'),
+            'website.url' => __('public/validation.website.url'),
+            'website.max' => __('public/validation.website.max'),
 
-            'github.url' => __('validation.github.url'),
-            'github.max' => __('validation.github.max'),
+            'github.url' => __('public/validation.github.url'),
+            'github.max' => __('public/validation.github.max'),
 
-            'linkedin.url' => __('validation.linkedin.url'),
-            'linkedin.max' => __('validation.linkedin.max'),
+            'linkedin.url' => __('public/validation.linkedin.url'),
+            'linkedin.max' => __('public/validation.linkedin.max'),
         ];
     }
 }

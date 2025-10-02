@@ -82,7 +82,7 @@
             {{-- Левая часть: ссылка "Read more" --}}
             <a href="{{ route('public.post.show', $post->id) }}"
                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold p-2 rounded-sm flex items-center focus:ring focus:outline-none ">
-                {{ __('post.read_more') }}
+                {{ __('public/post.read_more') }}
                 <i class="fas fa-link ml-2"></i>
             </a>
 

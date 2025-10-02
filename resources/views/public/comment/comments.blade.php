@@ -24,7 +24,7 @@
                 </strong>
             </div>
 
-            <small class="text-sm text-text-muted whitespace-nowrap">
+            <small class="text-sm text-muted-foreground whitespace-nowrap">
                 {{ $comment->created_at->diffForHumans() }}
             </small>
         </div>
@@ -37,7 +37,7 @@
         <a href="#comment-form"
             class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold p-2 rounded-sm flex items-center w-64"
             onclick="moveForm({{ $comment->id }}, '{{ $comment->user->login }}', this)">
-            {{ __('post.comment.reply_title') }}
+            {{ __('public/comment.reply_title') }}
         </a>
 
         <div id="comment-{{ $comment->id }}"></div>

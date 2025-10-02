@@ -42,7 +42,7 @@ class StoreRequest extends FormRequest
 
             'parent_id.exists' => __('post.comment.parent_id.exists'),
 
-            'captcha.required' => __('validation.captcha.required'),
+            'captcha.required' => __('public/validation.captcha.required'),
             // повідомлення про неправильну капчу краще обробляти у самому правилі CaptchaRule
         ];
     }

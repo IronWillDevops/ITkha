@@ -31,12 +31,12 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => __('validation.email.required'),
-            'email.string' => __('validation.email.string'),
-            'email.email' => __('validation.email.email'),
-            'email.max' => __('validation.email.max'),
+            'email.required' => __('public/validation.email.required'),
+            'email.string' => __('public/validation.email.string'),
+            'email.email' => __('public/validation.email.email'),
+            'email.max' => __('public/validation.email.max'),
 
-            'captcha.required' => __('validation.captcha.required'),
+            'captcha.required' => __('public/validation.captcha.required'),
         ];
     }
 }

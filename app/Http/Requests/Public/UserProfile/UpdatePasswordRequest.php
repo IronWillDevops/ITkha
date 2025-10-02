@@ -31,22 +31,22 @@ class UpdatePasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'current_password.required' => __('validation.current_password.required'),
-            'current_password.current_password' => __('validation.current_password.current_password'),
+            'current_password.required' => __('public/validation.current_password.required'),
+            'current_password.current_password' => __('public/validation.current_password.current_password'),
 
 
-            'password.required' => __('validation.password.required'),
-            'password.string' => __('validation.password.string'),
-            'password.max' => __('validation.password.max'),
-            'password.confirmed' => __('validation.password.confirmed'),
+            'password.required' => __('public/validation.password.required'),
+            'password.string' => __('public/validation.password.string'),
+            'password.max' => __('public/validation.password.max'),
+            'password.confirmed' => __('public/validation.password.confirmed'),
 
             // Повідомлення для правил Password::defaults()
-            'password.min' => __('validation.password.min'),
-            'password.letters' => __('validation.password.letters'),
-            'password.mixed' => __('validation.password.mixed'),
-            'password.numbers' => __('validation.password.numbers'),
-            'password.symbols' => __('validation.password.symbols'),
-            'password.uncompromised' => __('validation.password.uncompromised'),
+            'password.min' => __('public/validation.password.min'),
+            'password.letters' => __('public/validation.password.letters'),
+            'password.mixed' => __('public/validation.password.mixed'),
+            'password.numbers' => __('public/validation.password.numbers'),
+            'password.symbols' => __('public/validation.password.symbols'),
+            'password.uncompromised' => __('public/validation.password.uncompromised'),
 
         ];
     }

@@ -34,23 +34,23 @@ class ContactFormRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => __('validation.name.required'),
-            'name.string' => __('validation.name.string'),
-            'name.max' => __('validation.name.max'),
+            'name.required' => __('public/validation.name.required'),
+            'name.string' => __('public/validation.name.string'),
+            'name.max' => __('public/validation.name.max'),
 
-            'subject.required' => __('validation.subject.required'),
-            'subject.string' => __('validation.subject.string'),
-            'subject.max' => __('validation.subject.max'),
+            'subject.required' => __('public/validation.subject.required'),
+            'subject.string' => __('public/validation.subject.string'),
+            'subject.max' => __('public/validation.subject.max'),
 
-            'email.required' => __('validation.email.required'),
-            'email.email' => __('validation.email.email'),
+            'email.required' => __('public/validation.email.required'),
+            'email.email' => __('public/validation.email.email'),
 
-            'message.required' => __('validation.message.required'),
-            'message.string' =>  __('validation.message.string'),
-            'message.min' =>  __('validation.message.min'),
-            'message.max' =>  __('validation.message.max'),
+            'message.required' => __('public/validation.message.required'),
+            'message.string' =>  __('public/validation.message.string'),
+            'message.min' =>  __('public/validation.message.min'),
+            'message.max' =>  __('public/validation.message.max'),
 
-            'captcha.required' => __('validation.captcha.incorrect'),
+            'captcha.required' => __('public/validation.captcha.incorrect'),
         ];
     }
 }

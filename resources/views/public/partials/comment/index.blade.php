@@ -1,7 +1,7 @@
  <section class=" bg-card text-card-foreground rounded-2xl border border-border">
      <div class="p-6">
          @if ($post->comments_enabled)
-             <h2 class="text-2xl font-semibold mb-6">{{ __('post.comment.title') }}
+             <h2 class="text-2xl font-semibold mb-6">{{ __('public/comment.title') }}
                  ({{ $post->allApprovedComments()->count() }})</h2>
              <div id="default-comment-form">
                  @include('public.comment.form', ['post' => $post])
@@ -12,7 +12,7 @@
                  'post' => $post,
              ])
          @else
-             <p class="text-muted">{{ __('post.comment.comments_disabled') }}</p>
+             <p class="text-muted-foreground">{{ __('public/comment.comments_disabled') }}</p>
          @endif
      </div>
  </section>

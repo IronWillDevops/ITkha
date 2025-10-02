@@ -38,24 +38,24 @@ class FilterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'search.string' => __('validation.search.string'),
-            'search.min' => __('validation.search.min'),
+            'search.string' => __('public/validation.search.string'),
+            'search.min' => __('public/validation.search.min'),
 
-            'title.string' => __('validation.title.string'),
-            'content.string' => __('validation.content.string'),
-            'category.string' => __('validation.category.string'),
+            'title.string' => __('public/validation.title.string'),
+            'content.string' => __('public/validation.content.string'),
+            'category.string' => __('public/validation.category.string'),
 
-            'tags.array' => __('validation.tags.array'),
+            'tags.array' => __('public/validation.tags.array'),
 
-            'tags.*.string' => __('validation.tags.*.string'),
+            'tags.*.string' => __('public/validation.tags.*.string'),
 
-            'author.string' => __('validation.author.string'),
+            'author.string' => __('public/validation.author.string'),
 
-            'sort_by.string' => __('validation.sort_by.string'),
-            'sort_by.in' =>  __('validation.sort_by.in'),
+            'sort_by.string' => __('public/validation.sort_by.string'),
+            'sort_by.in' =>  __('public/validation.sort_by.in'),
 
-            'sort_dir.string' => __('validation.sort_dir.string'),
-            'sort_dir.in' => __('validation.sort_dir.in'),
+            'sort_dir.string' => __('public/validation.sort_dir.string'),
+            'sort_dir.in' => __('public/validation.sort_dir.in'),
         ];
     }
 }

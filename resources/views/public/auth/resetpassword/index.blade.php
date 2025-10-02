@@ -4,8 +4,10 @@
     <div class="text-card-foreground bg-card max-w-lg mx-auto mt-10 mb-10 rounded-2xl p-10 border border-border">
 
         <div class="w-full max-w-md p-8 rounded-2xl">
-            <h2 class="text-2xl font-bold text-center mb-6">{{ config('app.name') }}</h2>
-            <p class="mb-2 text-sm text-muted-foreground">{{ __('form.reset.different_password') }}</p>
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold mb-2">{{ __('public/reset.title') }}</h2>
+                <span class="text-sm text-muted-foreground">{{ __('public/reset.description') }}</span>
+            </div>
             <form method="POST" action="{{ route('public.auth.reset.password.store') }}">
                 @csrf
 
@@ -13,22 +15,22 @@
                 <input type="hidden" name="email" value="{{ $email }}">
 
                 {{-- Password --}}
-                <x-public.form.password name="password" label="{{ __('form.common.password') }}"
-                    placeholder="{{ __('form.common.password') }}" />
+                <x-public.form.password name="password" label="{{ __('public/common.fields.password') }}"
+                    placeholder="{{ __('public/common.placeholder.password') }}" />
+                {{-- Password --}}
+                <x-public.form.password name="password_confirmation"
+                    label="{{ __('public/common.fields.password_confirmation') }}"
+                    placeholder="{{ __('public/common.placeholder.password_confirmation') }}" />
 
-                {{-- Password confirmation --}}
-                <x-public.form.password name="password_confirmation" label="{{ __('form.common.password_repeat') }}"
-                    placeholder="{{ __('form.common.password') }}" />
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('form.reset.submit') }}" />
+                <x-public.form.submit label="{{ __('public/reset.submit') }}" class="w-full"/>
 
 
             </form>
             <div class="mb-4">
                 <p class="mt-4  text-right text-sm text-muted-foreground">
-                    {{ __('form.common.remember_your_password') }}
-                    <a href="{{ route('login') }}"
-                        class="hover:underline">{{ __('form.login.submit') }}</a>
+                    {{ __('public/reset.links.remember_your_password') }}
+                    <a href="{{ route('login') }}" class="hover:underline">{{ __('public/reset.links.login') }}</a>
                 </p>
             </div>
 

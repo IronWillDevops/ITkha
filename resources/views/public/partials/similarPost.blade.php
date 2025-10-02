@@ -1,6 +1,6 @@
  <section class=" bg-card text-muted-foreground rounded-2xl border border-border">
      <div class="p-6">
-         <h2 class="text-card-foreground text-2xl font-semibold mb-6">{{ __('post.related_posts') }}</h2>
+         <h2 class="text-card-foreground text-2xl font-semibold mb-6">{{ __('public/post.related_posts') }}</h2>
          <div class="text grid grid-cols-1 md:grid-cols-2 gap-6">
              @foreach ($similarPosts as $post)
                  <article

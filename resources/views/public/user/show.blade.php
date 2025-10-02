@@ -4,7 +4,7 @@
     <h3
         class="text-xl font-semibold mb-4 p-4 bg-card shadow-sm border border-border text-card-foreground hover:shadow-md rounded-lg">
         <i class=" fas fa-newspaper mr-3"></i>
-        Posts: {{ $posts->total() }}
+        {{ __('public/post.title') }}: {{ $posts->total() }}
     </h3>
     <div class="grid grid-cols-1 2xl:grid-cols-2 gap-6">
         @foreach ($posts as $post)

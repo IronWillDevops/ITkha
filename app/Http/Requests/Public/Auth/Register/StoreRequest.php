@@ -38,39 +38,39 @@ class StoreRequest extends FormRequest
     {
         return [
 
-            'name.required' => __('validation.name.required'),
-            'name.string' => __('validation.name.string'),
-            'name.max' => __('validation.name.max'),
+            'name.required' => __('public/validation.name.required'),
+            'name.string' => __('public/validation.name.string'),
+            'name.max' => __('public/validation.name.max'),
 
-            'surname.string' => __('validation.surname.string'),
-            'surname.max' => __('validation.surname.max'),
+            'surname.string' => __('public/validation.surname.string'),
+            'surname.max' => __('public/validation.surname.max'),
 
-            'login.required' => __('validation.login.required'),
-            'login.string' => __('validation.login.string'),
-            'login.min' => __('validation.login.min'),
-            'login.max' => __('validation.login.max'),
-            'login.unique' => __('validation.login.unique'),
+            'login.required' => __('public/validation.login.required'),
+            'login.string' => __('public/validation.login.string'),
+            'login.min' => __('public/validation.login.min'),
+            'login.max' => __('public/validation.login.max'),
+            'login.unique' => __('public/validation.login.unique'),
 
-            'email.required' => __('validation.email.required'),
-            'email.string' => __('validation.email.string'),
-            'email.email' => __('validation.email.email'),
-            'email.max' => __('validation.email.max'),
-            'email.unique' => __('validation.email.unique'),
+            'email.required' => __('public/validation.email.required'),
+            'email.string' => __('public/validation.email.string'),
+            'email.email' => __('public/validation.email.email'),
+            'email.max' => __('public/validation.email.max'),
+            'email.unique' => __('public/validation.email.unique'),
             
-            'password.required' => __('validation.password.required'),
-            'password.string' => __('validation.password.string'),
-            'password.max' => __('validation.password.max'),
-            'password.confirmed' => __('validation.password.confirmed'),
+            'password.required' => __('public/validation.password.required'),
+            'password.string' => __('public/validation.password.string'),
+            'password.max' => __('public/validation.password.max'),
+            'password.confirmed' => __('public/validation.password.confirmed'),
 
             // Повідомлення для правил Password::defaults()
-            'password.min' => __('validation.password.min'),
-            'password.letters' => __('validation.password.letters'),
-            'password.mixed' => __('validation.password.mixed'),
-            'password.numbers' => __('validation.password.numbers'),
-            'password.symbols' => __('validation.password.symbols'),
-            'password.uncompromised' => __('validation.password.uncompromised'),
+            'password.min' => __('public/validation.password.min'),
+            'password.letters' => __('public/validation.password.letters'),
+            'password.mixed' => __('public/validation.password.mixed'),
+            'password.numbers' => __('public/validation.password.numbers'),
+            'password.symbols' => __('public/validation.password.symbols'),
+            'password.uncompromised' => __('public/validation.password.uncompromised'),
 
-            'captcha.required' => __('validation.captcha.required'),
+            'captcha.required' => __('public/validation.captcha.required'),
         ];
     }
 }

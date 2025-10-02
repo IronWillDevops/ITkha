@@ -6,7 +6,7 @@
         <div class="w-full max-w-md p-8 text-text-primary bg-surface rounded-2xl">
             <div class="text-center mb-6">
                 <h2 class="text-2xl font-bold mb-2">{{ __('public/login.title') }}</h2>
-                <span class="text-muted-foreground">{{ __('public/login.description') }}</span>
+                <span class="text-sm text-muted-foreground">{{ __('public/login.description') }}</span>
             </div>
 
             <form method="POST" action="{{ route('login.store') }}">
@@ -27,7 +27,7 @@
                 <div class="mb-4 flex justify-between">
                     <x-public.form.check-box name="remember" label="{{ __('public/login.remember_me') }}" />
                     <a href="{{ route('public.auth.forgot.password.index') }}"
-                        class="text-sm text-muted-foreground hover:underline">{{ __('public/login.forgot_password') }}
+                        class="text-sm text-muted-foreground hover:underline">{{ __('public/login.links.forgot_password') }}
 
                     </a>
                 </div>
@@ -37,9 +37,9 @@
             </form>
 
             <p class="mt-4 text-right text-sm text-muted-foreground">
-                {{ __('public/login.dont_have_account') }}
+                {{ __('public/login.links.dont_have_account') }}
                 <a href="{{ route('public.auth.register.index') }}"
-                    class="hover:underline">{{ __('public/login.register_now') }}</a>
+                    class="hover:underline">{{ __('public/login.links.register_now') }}</a>
             </p>
         </div>
     </div>
