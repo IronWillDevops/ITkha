@@ -37,7 +37,8 @@
                             <button type="submit"
                                 class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5  cursor-pointer">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                <span>{{ __('header.auth.logout') }}</span></button>
+                                <span>{{ __('admin/header.logout') }}</span>
+                            </button>
                         </form>
                     </li>
                 </ul>

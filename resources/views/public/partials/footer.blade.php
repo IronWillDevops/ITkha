@@ -1,11 +1,10 @@
-<footer class="bg-card text-card-foreground  shadow border-solid border-t-1 border-border">
-    <div class="px-4 py-6 md:flex md:items-center md:justify-between md:py-6">
+<footer class="bg-card text-card-foreground shadow border-solid border-t-1 border-border">
+    <div class="px-4 py-6 md:flex md:items-center md:justify-between">
         <!-- Левый блок -->
         <div class="text-center md:text-left">
-            &copy; 2024 - {{ date('Y') }} <span class="font-semibold ">{{ config('app.name') }}</span>. All
-            rights reserved.
-            <small> {{ $app_version_hash ?? 'unknown' }}</small>
+            &copy; 2024 - {{ date('Y') }} <span class="font-semibold">{{ config('app.name') }}</span>. All rights reserved.
         </div>
+
         <!-- Центр (языки) -->
         <div class="text-center my-6 md:text-left md:my-0">
             <a href="{{ route('locale.switch', ['locale' => 'en', 'redirect_to' => url()->current()]) }}"
@@ -15,13 +14,16 @@
         </div>
 
         <!-- Правый блок (соцсети или ссылки) -->
-        <div class="text-center md:text-left ">
-            @foreach (\App\Models\FooterLink::all() as $link)
-                <a href="{{ $link->url }}" class="transition " title="{{ $link->title }}">
-                    <i class="fab {{ $link->icon }} text-lg"></i>
-                </a>
-            @endforeach
-        </div>
+       
 
+        @if (\App\Models\FooterLink::all()->isNotEmpty())
+            <div class="text-center md:text-left">
+                @foreach (\App\Models\FooterLink::all() as $link)
+                    <a href="{{ $link->url }}" class="transition" title="{{ $link->title }}">
+                        <i class="fab {{ $link->icon }} text-lg"></i>
+                    </a>
+                @endforeach
+            </div>
+        @endif
     </div>
 </footer>
