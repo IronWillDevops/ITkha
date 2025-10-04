@@ -21,7 +21,6 @@ class IndexController extends Controller
 
 
         $data = $request->validated();
-        
         // Задаємо дефолтне сортування, якщо не передано
         if (empty($data['sort_by'])) {
             $data['sort_by'] = 'created_at';
@@ -32,7 +31,6 @@ class IndexController extends Controller
         $filter = app()->make(PostFilter::class, [
             'queryParams' => array_filter($data, fn($v) => $v !== null && $v !== '')
         ]);
-        
         $posts = Post::where('status', PostStatus::PUBLISHED) // 
             ->filter($filter)
             ->orderBy($data['sort_by'], $data['sort_dir'])
