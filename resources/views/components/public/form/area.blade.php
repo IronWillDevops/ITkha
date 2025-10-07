@@ -3,7 +3,7 @@
         {{ $label }}
     </label>
     <div class="relative mb-2">
-        <textarea type="text" name="{{ $name }}" id="{{ $name }}" maxlength="1000" rows="8"
+        <textarea type="text" name="{{ $name }}" id="{{ $name }}" maxlength="1000" rows="8" data-counter="true"
             class="text-sm  border border-input caret-primary placeholder:text-muted-foreground text-foreground focus:ring focus:outline-none focus-visible:ring-ring block w-full rounded-lg px-3 py-2 p-2.5 "
             placeholder="{{ $placeholder }}" oninput="updateCharacterCount(this)"
             @if ($required) required @endif>{{ old($name, $value) }}</textarea>
@@ -30,11 +30,11 @@
         }
     }
 
-    // Ініціалізація лічильника при завантаженні сторінки (для випадку, якщо є попередньо введені дані)
+      // Після повного завантаження сторінки
     document.addEventListener('DOMContentLoaded', function() {
-        const textarea = document.getElementById('message');
-        if (textarea) {
+        // Знаходимо всі textarea з лічильником
+        document.querySelectorAll('textarea[data-counter="true"]').forEach(textarea => {
             updateCharacterCount(textarea);
-        }
+        });
     });
 </script>

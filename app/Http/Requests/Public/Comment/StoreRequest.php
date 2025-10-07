@@ -20,6 +20,16 @@ class StoreRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('body')) {
+            $this->merge([
+                'body' => str_replace(["\r\n", "\r"], "\n", $this->input('body')),
+            ]);
+        }
+    }
+
     public function rules(): array
     {
         return [

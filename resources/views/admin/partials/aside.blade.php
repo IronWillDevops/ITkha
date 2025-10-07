@@ -36,6 +36,12 @@
                                     class="fa-solid fa-tags "></i><span
                                     class="ml-2">{{ __('admin/tags.title') }}</span></a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.comment.index') }}"
+                                class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
+                                    class="fa-solid fa-comments "></i><span
+                                    class="ml-2">{{ __('admin/comments.title') }}</span></a>
+                        </li>
                     </ul>
                 </details>
             </li>
@@ -107,7 +113,8 @@
 
 
     {{-- User Profile --}}
-    <div class="bg-card text-card-foreground  hover:bg-accent hover:text-accent-foreground border border-border shadow hover:shadow-md rounded-lg p-4 mt-4">
+    <div
+        class="bg-card text-card-foreground  hover:bg-accent hover:text-accent-foreground border border-border shadow hover:shadow-md rounded-lg p-4 mt-4">
         <a href="{{ route('admin.user.show', Auth::user()->id) }}"
             class="flex items-center space-x-4 focus:ring focus:outline-none focus-visible:ring-ring ">
 

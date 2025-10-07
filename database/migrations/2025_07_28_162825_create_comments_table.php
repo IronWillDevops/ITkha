@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\CommentStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('parent_id')->nullable()->constrained('comments')->cascadeOnDelete();
             $table->text('body');
-            $table->enum('status', ['pending', 'approved', 'rejected', 'hidden'])->default('pending');
+            $table->enum('status',array_column(CommentStatus::cases(), 'value') )->default('pending');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

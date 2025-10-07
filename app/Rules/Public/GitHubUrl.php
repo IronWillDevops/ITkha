@@ -15,7 +15,7 @@ class GitHubUrl implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (!is_string($value) || !preg_match('/^https?:\/\/(www\.)?github\.com\/[A-Za-z0-9_.-]+\/?$/', $value)) {
-            $fail(__('public/validation.github.github_url'));
+            $fail(__('common/validation.github.github_url'));
         }
     }
 }

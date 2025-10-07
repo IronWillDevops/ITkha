@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Post;
 use App\Enums\PostStatus;
+use App\Services\Public\CommentService;
 use App\Services\Public\PostService;
 
 class IndexController extends Controller
@@ -16,7 +17,7 @@ class IndexController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(FilterRequest $request, PostService $postService)
+    public function __invoke(FilterRequest $request, PostService $postService,CommentService $commentService)
     {
 
 
@@ -39,7 +40,8 @@ class IndexController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         $popularPosts = $postService->popularPosts();
+        $latestComment =$commentService->latestComment();
 
-        return view('public.post.index', compact('posts', 'categories', 'tags', 'popularPosts'));
+        return view('public.post.index', compact('posts', 'categories', 'tags', 'popularPosts', 'latestComment'));
     }
 }
