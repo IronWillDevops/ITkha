@@ -18,7 +18,8 @@ class PostFactory extends Factory
      */
 
     public function definition(): array
-    {$dt= $this->faker->dateTimeBetween('2025-01-01', now());
+    {
+        $dt = $this->faker->dateTimeBetween('2025-01-01', now());
         return [
             'main_image' => $this->faker->imageUrl(800, 600, 'nature', true),
             'title' => $this->faker->sentence,
@@ -32,8 +33,8 @@ class PostFactory extends Factory
             ]),
             'category_id' => 1, // переконайтесь, що категорія з ID 1 існує
             'user_id' => 1,
-            'created_at' =>$dt,
-            'updated_at' =>$dt,
+            'created_at' => $dt,
+            'updated_at' => $dt,
         ];
     }
 }

@@ -15,7 +15,7 @@ class LinkedInUrl implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (!is_string($value) || !preg_match('/^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9\-_%]+\/?$/', $value)) {
-            $fail(__('public/validation.linkedin.linkedin_url'));
+            $fail(__('common/validation.linkedin.linkedin_url'));
         }
     }
 }

@@ -31,6 +31,11 @@ class RolePermissionSeeder extends Seeder
             ['Header' => 'Tags', 'title' => 'tags_delete', 'description' => 'Delete tags'],
             ['Header' => 'Tags', 'title' => 'tags_show', 'description' => 'Show tags'],
 
+            ['Header' => 'Comments', 'title' => 'comments_create', 'description' => 'Create comments'],
+            ['Header' => 'Comments', 'title' => 'comments_edit', 'description' => 'Edit comments'],
+            ['Header' => 'Comments', 'title' => 'comments_delete', 'description' => 'Delete comments'],
+            ['Header' => 'Comments', 'title' => 'comments_show', 'description' => 'Show comments'],
+
             ['Header' => 'Users', 'title' => 'users_create', 'description' => 'Create users'],
             ['Header' => 'Users', 'title' => 'users_edit', 'description' => 'Edit users'],
             ['Header' => 'Users', 'title' => 'users_delete', 'description' => 'Delete users'],

@@ -48,6 +48,15 @@ Route::prefix('admin')->name('admin.')
                 Route::patch('/{tag}', App\Http\Controllers\Admin\Tag\UpdateController::class)->name('update')->middleware('permission:tags_edit');
                 Route::delete('/{tag}', App\Http\Controllers\Admin\Tag\DeleteController::class)->name('delete')->middleware('permission:tags_delete');
             });
+        Route::prefix('comments')
+            ->name('comment.')
+            ->group(function () {
+                Route::get('/', App\Http\Controllers\Admin\Comment\IndexController::class)->name('index')->middleware('permission:comments_show');
+                Route::get('/{comment}', App\Http\Controllers\Admin\Comment\ShowController::class)->name('show')->middleware('permission:comments_show');
+                Route::get('/{comment}/edit', App\Http\Controllers\Admin\Comment\EditController::class)->name('edit')->middleware('permission:comments_edit');
+                Route::patch('/{comment}', App\Http\Controllers\Admin\Comment\UpdateController::class)->name('update')->middleware('permission:comments_edit');
+                Route::delete('/{comment}', App\Http\Controllers\Admin\Comment\DeleteController::class)->name('delete')->middleware('permission:comments_delete');
+            });
 
         Route::prefix('users')
             ->name('user.')

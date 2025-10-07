@@ -3,7 +3,7 @@
         {{ $label }}
     </label>
 
-    <textarea type="text" name="{{ $name }}" id="{{ $name }}" maxlength="1000" rows="8"
+    <textarea type="text" name="{{ $name }}" id="{{ $name }}" maxlength="1000" rows="8" data-counter="true"
         class="w-full border border-border rounded-lg px-3 py-2 focus:ring focus:outline-none focus-visible:ring-ring  caret-primary  "
         placeholder="{{ $placeholder }}" oninput="updateCharacterCount(this)"
         @if ($required) required @endif>{{ old($name, $value) }}</textarea>
@@ -20,19 +20,19 @@
         countElement.textContent = `${currentLength} / ${maxLength}`;
 
         if (currentLength > maxLength) {
-            countElement.classList.remove('text-muted');
-            countElement.classList.add('text-danger');
+            countElement.classList.remove('text-muted-foreground');
+            countElement.classList.add('text-error');
         } else {
-            countElement.classList.remove('text-danger');
-            countElement.classList.add('text-muted');
+            countElement.classList.remove('text-error');
+            countElement.classList.add('text-muted-foreground');
         }
     }
 
-    // Ініціалізація лічильника при завантаженні сторінки (для випадку, якщо є попередньо введені дані)
+      // Після повного завантаження сторінки
     document.addEventListener('DOMContentLoaded', function() {
-        const textarea = document.getElementById('message');
-        if (textarea) {
+        // Знаходимо всі textarea з лічильником
+        document.querySelectorAll('textarea[data-counter="true"]').forEach(textarea => {
             updateCharacterCount(textarea);
-        }
+        });
     });
 </script>
