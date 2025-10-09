@@ -16,8 +16,10 @@ class Area extends Component
     public $placeholder;
     public $value;
     public $required;
+    public $maxCharactersLenght;
+    public $minCharactersLenght;
 
-    public function __construct($name, $label, $placeholder, $value = "", $required = true)
+    public function __construct($name, $label, $placeholder, $value = "", $required = true, $minCharactersLenght = 20, $maxCharactersLenght = 1000)
     {
 
         $this->name = $name;
@@ -26,6 +28,8 @@ class Area extends Component
         $this->value = $value;
 
         $this->required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
+        $this->minCharactersLenght = $minCharactersLenght;
+        $this->maxCharactersLenght = $maxCharactersLenght;
     }
 
     /**

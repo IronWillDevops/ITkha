@@ -60,6 +60,7 @@ abstract class BaseObserver
             \App\Models\Category::class => ['title'],
             \App\Models\Tag::class      => ['title'],
             \App\Models\Role::class     => ['title'],
+            \App\Models\Setting::class  => ['key'],
             // Додайте інші моделі за потреби
         ];
 

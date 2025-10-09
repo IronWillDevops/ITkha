@@ -30,12 +30,12 @@ class StoreRequest extends FormRequest
     {
         return [
 
-            'email.required' => 'Email є обов’язковим.',
-            'email.string' => 'Email повинен бути текстовим.',
-            'email.email' => 'Email повинен бути дійсною адресою.',
+            'email.required' => __('validation/auth.email.required'),
+            'email.string' => __('validation/auth.email.string'),
+            'email.email' => __('validation/auth.email.email'),
 
-            'password.required' => 'Пароль є обов’язковим.',
-            'password.string' => 'Пароль повинен бути текстовим.',
+            'password.required' =>  __('validation/auth.password.required'),
+            'password.string' =>  __('validation/auth.password.string'),
         ];
     }
 }

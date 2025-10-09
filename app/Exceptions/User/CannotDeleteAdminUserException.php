@@ -8,6 +8,6 @@ class CannotDeleteAdminUserException extends Exception
 {
      public function __construct()
      {
-          parent::__construct(__('common/exceptions.user.CannotDeleteAdminUserException'));
+          parent::__construct(__('exception/user.CannotDeleteAdminUserException'));
      }
 }

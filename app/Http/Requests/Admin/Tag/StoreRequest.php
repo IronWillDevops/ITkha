@@ -28,11 +28,11 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Вкажіть назву тегу.',
-            'title.string' => 'Назва тегу повинна бути текстовою.',
-            'title.min' => 'Назва тегу повинна містити щонайменше :min символи.',
-            'title.max' => 'Назва тегу не повинна перевищувати :max символів.',
-            'title.unique' => 'Така назва тегу вже існує.',
+            'title.required' => __('validation/tag.title.required'),
+            'title.string' => __('validation/tag.title.string'),
+            'title.min' => __('validation/tag.title.min'),
+            'title.max' => __('validation/tag.title.max'),
+            'title.unique' => __('validation/tag.title.unique'),
         ];
     }
 }

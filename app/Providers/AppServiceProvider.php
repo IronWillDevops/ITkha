@@ -47,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\User::observe(\App\Observers\UserObserver::class);
         \App\Models\Post::observe(\App\Observers\PostObserver::class);
         \App\Models\Category::observe(\App\Observers\CategoryObserver::class);
+        \App\Models\Setting::observe(\App\Observers\SettingObserver::class);
 
 
 
@@ -57,6 +58,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(\App\Models\Role::class,  \App\Policies\Admin\RolePolicy::class);
         Gate::policy(\App\Models\Role::class,  \App\Policies\Admin\RolePolicy::class);
         Gate::policy(\App\Models\Contact::class,  \App\Policies\Admin\ContactPolicy::class);
+        
+        Gate::policy(\App\Models\Setting::class,  \App\Policies\Admin\SettingPolicy::class);
         Gate::policy(\App\Models\Log::class,  \App\Policies\Admin\LogPolicy::class);
     }
 }

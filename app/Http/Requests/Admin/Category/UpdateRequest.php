@@ -28,11 +28,11 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Вкажіть назву категорії.',
-            'title.string' => 'Назва категорії повинна бути текстовою.',
-            'title.min' => 'Назва категорії повинна містити щонайменше :min символи.',
-            'title.max' => 'Назва категорії не повинна перевищувати :max символів.',
-            'title.unique' => 'Така назва категорії вже існує.',
+            'title.required' =>__('validation/category.title.required'),
+            'title.string' => __('validation/category.title.string'),
+            'title.min' => __('validation/category.title.min'),
+            'title.max' => __('validation/category.title.max'),
+            'title.unique' => __('validation/category.title.unique'),
         ];
     }
 }

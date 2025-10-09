@@ -30,12 +30,13 @@ class UpdateRequest extends FormRequest
     {
         return [
             'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'], // 2MB
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z]+$/'],
             'login' => [
                 'required',
                 'string',
                 'min:5',
                 'max:50',
+                'regex:/^[A-Za-z0-9_]+$/',
                 Rule::unique('users')->ignore($this->user->id)
             ],
             'email' => [
@@ -45,7 +46,7 @@ class UpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($this->user->id),
             ],
-            'surname' => ['nullable', 'string', 'max:255'],
+            'surname' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-z]+$/'],
             'role_id' => ['required', 'exists:roles,id'],
             'password' => ['nullable', 'string', 'min:8', 'max:255'],
 
@@ -66,37 +67,41 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Ім’я є обов’язковим.',
-            'name.string' => 'Ім’я повинно бути текстовим.',
-            'name.max' => 'Ім’я не повинно перевищувати :max символів.',
+            'name.required' => __('validation/user.name.required'),
+            'name.string' => __('validation/user.name.string'),
+            'name.max' => __('validation/user.name.max'),
+            'name.regex' => __('validation/user.name.regex'),
 
-            'surname.string' => 'Прізвище повинно бути текстовим.',
-            'surname.max' => 'Прізвище не повинно перевищувати :max символів.',
+            'surname.string' => __('validation/user.surname.string'),
+            'surname.max' => __('validation/user.surname.max'),
+            'surname.regex' => __('validation/user.surname.regex'),
 
-            'login.required' => 'Login є обов’язковим.',
-            'login.string' => 'Login повинен бути текстовим.',
-            'login.min' => 'Login повинен містити щонайменше :min символів.',
-            'login.max' => 'Login повинен містити щонайбільше :max символів.',
-            'login.unique' => 'Користувач з таким login вже існує.',
+            'login.required' => __('validation/user.login.required'),
+            'login.string' =>  __('validation/user.login.string'),
+            'login.min' =>  __('validation/user.login.min'),
+            'login.max' =>  __('validation/user.login.max'),
+            'login.unique' =>  __('validation/user.login.unique'),
+            'login.regex' =>  __('validation/user.login.regex'),
 
-            'email.required' => 'Email є обов’язковим.',
-            'email.string' => 'Email повинен бути текстовим.',
-            'email.email' => 'Email повинен бути дійсною адресою.',
-            'email.max' => 'Email не повинен перевищувати :max символів.',
-            'email.unique' => 'Користувач з таким email вже існує.',
+            'email.required' =>  __('validation/user.email.required'),
+            'email.string' =>  __('validation/user.email.string'),
+            'email.email' => __('validation/user.email.email'),
+            'email.max' =>  __('validation/user.email.max'),
+            'email.unique' =>  __('validation/user.email.unique'),
 
-            'password.string' => 'Пароль повинен бути текстовим.',
-            'password.min' => 'Пароль повинен містити щонайменше :min символів.',
-            'password.max' => 'Пароль повинен містити щонайбільше :max символів.',
+            'password.required' =>  __('validation/user.password.required'),
+            'password.string' =>  __('validation/user.password.string'),
+            'password.min' =>  __('validation/user.password.min'),
+            'password.max' =>  __('validation/user.password.max'),
 
-            'role_id.required' => 'Роль є обов’язковим.',
-            'role_id.exists' => 'Вибрана роль не існує або була видалена.',
+            'role_id.required' => __('validation/user.role_id.required'),
+            'role_id.exists' => __('validation/user.role_id.exists'),
 
-            'email_verified_at.required' => 'Поле "Підтвердження" є обов’язковим.',
-            'email_verified_at.boolean' => 'Поле "Підтвердження" повинно мати значення true або false.',
+            'email_verified_at.required' => __('validation/user.email_verified_at.required'),
+            'email_verified_at.boolean' => __('validation/user.email_verified_at.boolean'),
 
-            'status.required' => 'Поле "Статус" є обов’язковим.',
-            'status.in' => 'Неприпустиме значення для поля "Статус".',
+            'status.required' =>__('validation/user.status.required'),
+            'status.in' => __('validation/user.status.in'),
 
         ];
     }

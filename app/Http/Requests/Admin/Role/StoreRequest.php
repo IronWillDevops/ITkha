@@ -31,16 +31,15 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'title.required' => __('validation/role.title.required'),
+            'title.string' => __('validation/role.title.string'),
+            'title.min' => __('validation/role.title.min'),
+            'title.max' => __('validation/role.title.max'),
+            'title.unique' => __('validation/role.title.unique'),
 
-            'title.required' => 'Вкажіть назву ролі.',
-            'title.string' => 'Назва ролі повинна бути текстовою.',
-            'title.min' => 'Назва ролі повинна містити щонайменше 2 символи.',
-            'title.max' => 'Назва ролі не повинна перевищувати 50 символів.',
-            'title.unique' => 'Така назва ролі вже існує.',
-            
-            'permissions.array' => 'Список дозволів повинен бути у форматі масиву.',
-            'permissions.*.integer' => 'Кожен дозвіл повинен бути числовим ідентифікатором.',
-            'permissions.*.exists' => 'Обраний дозвіл не знайдено в базі даних.',
+            'permissions.array'        => __('validation/role.permissions.array'),
+            'permissions.*.integer'    => __('validation/role.permissions.*.integer'),
+            'permissions.*.exists'     => __('validation/role.permissions.*.exists'),
         ];
     }
 }

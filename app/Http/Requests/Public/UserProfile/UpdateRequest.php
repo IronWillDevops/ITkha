@@ -41,36 +41,36 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'avatar.image' => __('common/validation.avatar.image'),
-            'avatar.max' => __('common/validation.avatar.max'),
+            'avatar.image' => __('validation/userupdate.avatar.image'),
+            'avatar.max' => __('validation/userupdate.avatar.max'),
 
-            'name.required' => __('common/validation.name.required'),
-            'name.string' => __('common/validation.name.string'),
-            'name.max' => __('common/validation.name.max'),
-            'name.regex' => __('common/validation.name.regex'),
+            'name.required' => __('validation/userupdate.name.required'),
+            'name.string' => __('validation/userupdate.name.string'),
+            'name.max' => __('validation/userupdate.name.max'),
+            'name.regex' => __('validation/userupdate.name.regex'),
 
-            'surname.string' => __('common/validation.surname.string'),
-            'surname.max' => __('common/validation.surname.max'),
-            'surname.regex' => __('common/validation.surname.regex'),
+            'surname.string' => __('validation/userupdate.surname.string'),
+            'surname.max' => __('validation/userupdate.surname.max'),
+            'surname.regex' => __('validation/userupdate.surname.regex'),
 
 
-            'job_title.string' => __('common/validation.job_title.string'),
-            'job_title.max' => __('common/validation.job_title.max'),
+            'job_title.string' => __('validation/userupdate.job_title.string'),
+            'job_title.max' => __('validation/userupdate.job_title.max'),
 
-            'address.string' => __('common/validation.address.string'),
-            'address.max' => __('common/validation.address.max'),
+            'address.string' => __('validation/userupdate.address.string'),
+            'address.max' => __('validation/userupdate.address.max'),
 
-            'about_myself.string' => __('common/validation.about_myself.string'),
-            'about_myself.max' => __('common/validation.about_myself.max'),
+            'about_myself.string' => __('validation/userupdate.about_myself.string'),
+            'about_myself.max' => __('validation/userupdate.about_myself.max'),
 
-            'website.url' => __('common/validation.website.url'),
-            'website.max' => __('common/validation.website.max'),
+            'website.url' => __('validation/userupdate.website.url'),
+            'website.max' => __('validation/userupdate.website.max'),
 
-            'github.url' => __('common/validation.github.url'),
-            'github.max' => __('common/validation.github.max'),
+            'github.url' => __('validation/userupdate.github.url'),
+            'github.max' => __('validation/userupdate.github.max'),
 
-            'linkedin.url' => __('common/validation.linkedin.url'),
-            'linkedin.max' => __('common/validation.linkedin.max'),
+            'linkedin.url' => __('validation/userupdate.linkedin.url'),
+            'linkedin.max' => __('validation/userupdate.linkedin.max'),
         ];
     }
 }

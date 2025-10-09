@@ -12,5 +12,7 @@ return [
     'reply_to_cancel'   => 'Скасувати відповідь',
     'messages' => [
         'comment_added' => 'Ваш коментар успішно додано.',
+        'contains_prohibited_words' => 'Коментар містить заборонені слова.',
+        'links_not_allowed' => 'Коментарі з посиланнями заборонені.',
     ],
 ];

@@ -38,24 +38,24 @@ class FilterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'search.string' => __('common/validation.search.string'),
-            'search.min' => __('common/validation.search.min'),
+            'search.string' => __('validation/filter.search.string'),
+            'search.min' => __('validation/filter.search.min'),
 
-            'title.string' => __('common/validation.title.string'),
-            'content.string' => __('common/validation.content.string'),
-            'category.string' => __('common/validation.category.string'),
+            'title.string' => __('validation/filter.title.string'),
+            'content.string' => __('validation/filter.content.string'),
+            'category.string' => __('validation/filter.category.string'),
 
-            'tags.array' => __('common/validation.tags.array'),
+            'tags.array' => __('validation/filter.tags.array'),
 
-            'tags.*.string' => __('common/validation.tags.*.string'),
+            'tags.*.string' => __('validation/filter.tags.*.string'),
 
-            'author.string' => __('common/validation.author.string'),
+            'author.string' => __('validation/filter.author.string'),
 
-            'sort_by.string' => __('common/validation.sort_by.string'),
-            'sort_by.in' =>  __('common/validation.sort_by.in'),
+            'sort_by.string' => __('validation/filter.sort_by.string'),
+            'sort_by.in' =>  __('validation/filter.sort_by.in'),
 
-            'sort_dir.string' => __('common/validation.sort_dir.string'),
-            'sort_dir.in' => __('common/validation.sort_dir.in'),
+            'sort_dir.string' => __('validation/filter.sort_dir.string'),
+            'sort_dir.in' => __('validation/filter.sort_dir.in'),
         ];
     }
 }

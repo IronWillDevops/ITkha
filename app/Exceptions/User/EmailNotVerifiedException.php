@@ -8,6 +8,6 @@ class EmailNotVerifiedException extends Exception
 {
         public function __construct()
      {
-          parent::__construct(__('common/exceptions.user.EmailNotVerifiedException'));
+          parent::__construct(__('exception/user.EmailNotVerifiedException'));
      }
 }
