@@ -30,10 +30,10 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => __('common/validation.email.required'),
-            'email.string' => __('common/validation.email.string'),
-            'email.email' => __('common/validation.email.email'),
-            'email.max' => __('common/validation.email.max'),
+            'email.required' => __('validation/reverify.email.required'),
+            'email.string' => __('validation/reverify.email.string'),
+            'email.email' => __('validation/reverify.email.email'),
+            'email.max' => __('validation/reverify.email.max'),
 
         ];
     }

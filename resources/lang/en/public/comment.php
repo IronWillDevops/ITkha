@@ -12,5 +12,7 @@ return [
 
     'messages' => [
         'comment_added' => 'Your comment has been added successfully.',
+        'contains_prohibited_words' => 'Comment contains prohibited words.',
+        'links_not_allowed' => 'Comments containing links are not allowed.',
     ],
 ];

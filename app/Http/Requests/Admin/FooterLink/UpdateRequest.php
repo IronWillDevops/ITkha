@@ -31,24 +31,25 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
+
             // icon
-            'icon.required' => 'Вкажіть іконку для соц. мережі.',
-            'icon.string' => 'Іконка повинна бути у вигляді тексту.',
-            'icon.min' => 'Іконка повинна містити щонайменше :min символи.',
-            'icon.max' => 'Іконка не повинна перевищувати :max символів.',
+            'icon.required' => __('validation/footerlink.icon.required'),
+            'icon.string' => __('validation/footerlink.icon.string'),
+            'icon.min' => __('validation/footerlink.icon.min'),
+            'icon.max' => __('validation/footerlink.icon.max'),
 
             // title
-            'title.required' => 'Вкажіть назву соц. мережі.',
-            'title.string' => 'Назва соц. мережі повинна бути текстовою.',
-            'title.min' => 'Назва соц. мережі повинна містити щонайменше :min символи.',
-            'title.max' => 'Назва соц. мережі не повинна перевищувати :max символів.',
+            'title.required' => __('validation/footerlink.title.required'),
+            'title.string' => __('validation/footerlink.title.string'),
+            'title.min' => __('validation/footerlink.title.min'),
+            'title.max' => __('validation/footerlink.title.max'),
 
             // url
-            'url.required' => 'Вкажіть URL соц. мережі.',
-            'url.string' => 'URL повинен бути текстовим.',
-            'url.min' => 'URL повинен містити щонайменше :min символи.',
-            'url.max' => 'URL не повинен перевищувати :max символів.',
-            'url.url' => 'URL повинен бути дійсною інтернет-адресою.',
+            'url.required' => __('validation/footerlink.url.required'),
+            'url.string' => __('validation/footerlink.url.string'),
+            'url.min' => __('validation/footerlink.url.min'),
+            'url.max' => __('validation/footerlink.url.max'),
+            'url.url' => __('validation/footerlink.url.url'),
         ];
     }
 }

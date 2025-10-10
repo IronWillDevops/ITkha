@@ -95,6 +95,12 @@
                                     class="fas fa-cog "></i><span
                                     class="ml-2">{{ __('admin/footerlink.title') }}</span></a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.setting.comment.edit') }}"
+                                class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
+                                    class="fa-solid fa-comments"></i><span
+                                    class="ml-2">{{ __('admin/comments.title') }}</span></a>
+                        </li>
                     </ul>
                 </details>
             </li>

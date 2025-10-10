@@ -103,6 +103,19 @@ Route::prefix('admin')->name('admin.')
         Route::prefix('info')
             ->name('info.')
             ->group(function () {
-                Route::get('/', App\Http\Controllers\Admin\Info\IndexController::class)->name('index')->middleware('permission:server_info');
+                Route::get('/', App\Http\Controllers\Admin\Info\IndexController::class)->name('index')->middleware('permission:settings_show');
+            });
+
+
+        Route::prefix('settings')
+            ->name('setting.')
+            ->group(function () {
+
+                Route::prefix('comments')
+                    ->name('comment.')
+                    ->group(function () {
+                        Route::get('/', App\Http\Controllers\Admin\Setting\Comment\EditController::class)->name('edit')->middleware('permission:settings_show');;
+                        Route::patch('/', App\Http\Controllers\Admin\Setting\Comment\UpdateController::class)->name('update')->middleware('permission:settings_edit');;
+                    });
             });
     });

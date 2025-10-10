@@ -15,7 +15,7 @@ class ValidPublicUrl implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (!is_string($value) || !filter_var($value, FILTER_VALIDATE_URL)) {
-            $fail(__('common/validation.website.public_url'));
+            $fail(__('validation/common.website.public_url'));
             return;
         }
     }

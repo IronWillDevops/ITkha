@@ -15,7 +15,7 @@ class CaptchaRule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if ($value !== session('captcha')) {
-            $fail(__('common/validation.captcha.incorrect'));
+            $fail(__('validation/common.captcha.incorrect'));
         }
     }
 }

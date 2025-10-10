@@ -38,16 +38,15 @@ class UpdateRequest extends FormRequest
     {
         return [
 
-            'title.required' => 'Вкажіть назву ролі.',
-            'title.string' => 'Назва ролі повинна бути текстовою.',
-            'title.min' => 'Назва ролі повинна містити щонайменше :min символи.',
-            'title.max' => 'Назва ролі не повинна перевищувати :max символів.',
-            'title.unique' => 'Така назва ролі вже існує.',
+            'title.required' => __('validation/role.title.required'),
+            'title.string' => __('validation/role.title.string'),
+            'title.min' => __('validation/role.title.min'),
+            'title.max' => __('validation/role.title.max'),
+            'title.unique' => __('validation/role.title.unique'),
 
-            
-            'permissions.array' => 'Список дозволів повинен бути у форматі масиву.',
-            'permissions.*.integer' => 'Кожен дозвіл повинен бути числовим ідентифікатором.',
-            'permissions.*.exists' => 'Обраний дозвіл не знайдено в базі даних.',
+            'permissions.array'        => __('validation/role.permissions.array'),
+            'permissions.*.integer'    => __('validation/role.permissions.*.integer'),
+            'permissions.*.exists'     => __('validation/role.permissions.*.exists'),
         ];
     }
 }

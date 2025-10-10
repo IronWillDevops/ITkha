@@ -48,36 +48,38 @@ class UpdateRequest extends FormRequest
     {
         return [
             // Повідомлення для title
-            'title.required' => 'Вкажіть назву посту.',
-            'title.string' => 'Назва посту повинна бути текстовою.',
-            'title.min' => 'Назва посту повинна містити щонайменше :min символи.',
-            'title.max' => 'Назва посту не повинна перевищувати :max символів.',
+            'title.required' => __('validation/post.title.required'),
+            'title.string' => __('validation/post.title.string'),
+            'title.min' => __('validation/post.title.min'),
+            'title.max' => __('validation/post.title.max'),
 
             // Повідомлення для content
-            'content.required' => 'Вкажіть зміст посту.',
-            'content.string' => 'Зміст посту повинен бути текстовим.',
+            'content.required' => __('validation/post.content.required'),
+            'content.string' => __('validation/post.content.string'),
 
             // Main image
-            'main_image.file' => 'Основне зображення повинно бути коректним файлом.',
-            'main_image.mimes' => 'Основне зображення повинно бути у форматі JPG, PNG.',
-            'main_image.max' => 'Основне зображення не повинно перевищувати :max KB.',
+            'main_image.file' => __('validation/post.main_image.file'),
+            'main_image.mimes' => __('validation/post.main_image.mimes'),
+            'main_image.max' => __('validation/post.main_image.max'),
 
-            'status.required' => 'Вкажіть статус посту.',
-            'status.string' => 'Статус посту повинен бути рядком.',
-            'status.in' => 'Вказано некоректний статус посту. Доступні значення: draft, published, archived.',
+            'status.required' => __('validation/post.status.required'),
+            'status.string' => __('validation/post.status.string'),
+            'status.in' => __('validation/post.status.in'),
 
-            'category_id.required' => 'Поле "Категорія" є обов’язковим.',
-            'category_id.integer' => 'Категорія повинна бути числом.',
-            'category_id.exists' => 'Вибрана категорія не існує або була видалена.',
+            'comments_enabled.required' => __('validation/post.comments_enabled.required'),
+            'comments_enabled.boolean' => __('validation/post.comments_enabled.boolean'),
 
-            'tag_ids.array' => 'Необхідно надіслати масив даних',
-            'tag_ids.*.integer' => 'Ідентифікатор тега повинен бути числом.',
-            'tag_ids.*.exists' => 'Один або декілька вибраних тегів не існують.',
+            'category_id.required' =>  __('validation/post.category_id.required'),
+            'category_id.integer' =>  __('validation/post.category_id.integer'),
+            'category_id.exists' =>  __('validation/post.category_id.exists'),
 
+            'tag_ids.array' =>  __('validation/post.tag_ids.array'),
+            'tag_ids.*.integer' =>  __('validation/post.tag_ids.*.integer'),
+            'tag_ids.*.exists' =>  __('validation/post.tag_ids.*.exists'),
 
-            'user_id.required' => 'Поле "Автор" є обов’язковим.',
-            'user_id.integer' => 'Вкажіть ID автора.',
-            'user_id.exists' => 'Вказаний автор не існує або був видалений.',
+            'user_id.required' =>  __('validation/post.user_id.required'),
+            'user_id.integer' =>  __('validation/post.user_id.integer'),
+            'user_id.exists' =>  __('validation/post.user_id.exists'),
         ];
     }
 }

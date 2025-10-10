@@ -38,42 +38,42 @@ class StoreRequest extends FormRequest
     {
         return [
 
-            'name.required' => __('common/validation.name.required'),
-            'name.string' => __('common/validation.name.string'),
-            'name.max' => __('common/validation.name.max'),
-            'name.regex' => __('common/validation.name.regex'),
+            'name.required' => __('validation/register.name.required'),
+            'name.string' => __('validation/register.name.string'),
+            'name.max' => __('validation/register.name.max'),
+            'name.regex' => __('validation/register.name.regex'),
 
-            'surname.string' => __('common/validation.surname.string'),
-            'surname.max' => __('common/validation.surname.max'),
-            'surname.regex' => __('common/validation.surname.regex'),
+            'surname.string' => __('validation/register.surname.string'),
+            'surname.max' => __('validation/register.surname.max'),
+            'surname.regex' => __('validation/register.surname.regex'),
 
-            'login.required' => __('common/validation.login.required'),
-            'login.string' => __('common/validation.login.string'),
-            'login.min' => __('common/validation.login.min'),
-            'login.max' => __('common/validation.login.max'),
-            'login.unique' => __('common/validation.login.unique'),
-            'login.regex' =>  __('common/validation.login.regex'),
+            'login.required' => __('validation/register.login.required'),
+            'login.string' => __('validation/register.login.string'),
+            'login.min' => __('validation/register.login.min'),
+            'login.max' => __('validation/register.login.max'),
+            'login.unique' => __('validation/register.login.unique'),
+            'login.regex' =>  __('validation/register.login.regex'),
 
-            'email.required' => __('common/validation.email.required'),
-            'email.string' => __('common/validation.email.string'),
-            'email.email' => __('common/validation.email.email'),
-            'email.max' => __('common/validation.email.max'),
-            'email.unique' => __('common/validation.email.unique'),
+            'email.required' => __('validation/register.email.required'),
+            'email.string' => __('validation/register.email.string'),
+            'email.email' => __('validation/register.email.email'),
+            'email.max' => __('validation/register.email.max'),
+            'email.unique' => __('validation/register.email.unique'),
 
-            'password.required' => __('common/validation.password.required'),
-            'password.string' => __('common/validation.password.string'),
-            'password.max' => __('common/validation.password.max'),
-            'password.confirmed' => __('common/validation.password.confirmed'),
+            'password.required' => __('validation/register.password.required'),
+            'password.string' => __('validation/register.password.string'),
+            'password.max' => __('validation/register.password.max'),
+            'password.confirmed' => __('validation/register.password.confirmed'),
 
             // Повідомлення для правил Password::defaults()
-            'password.min' => __('common/validation.password.min'),
-            'password.letters' => __('common/validation.password.letters'),
-            'password.mixed' => __('common/validation.password.mixed'),
-            'password.numbers' => __('common/validation.password.numbers'),
-            'password.symbols' => __('common/validation.password.symbols'),
-            'password.uncompromised' => __('common/validation.password.uncompromised'),
+            'password.min' => __('validation/register.password.min'),
+            'password.letters' => __('validation/register.password.letters'),
+            'password.mixed' => __('validation/register.password.mixed'),
+            'password.numbers' => __('validation/register.password.numbers'),
+            'password.symbols' => __('validation/register.password.symbols'),
+            'password.uncompromised' => __('validation/register.password.uncompromised'),
 
-            'captcha.required' => __('common/validation.captcha.required'),
+            'captcha.required' => __('validation/register.captcha.required'),
         ];
     }
 }

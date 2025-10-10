@@ -43,19 +43,19 @@ class UpdateRequest extends FormRequest
     {
         return [
 
-            'body.required' => 'Поле обов`язкове для заповнення',
-            'body.string'   => 'Коментар повинен бути рядком.',
-            'body.min'      => 'Коментар повинен містити щонайменше :min символи.',
-            'body.max'      =>  'Коментар повинен містити щонайбільше :min символи.',
+            'body.required' => __('validation/comment.body.required'),
+            'body.string'   => __('validation/comment.body.string'),
+            'body.min'      => __('validation/comment.body.min'),
+            'body.max'      =>  __('validation/comment.body.max'),
 
-            'status.required' => 'Вкажіть статус посту.',
-            'status.string' => 'Статус посту повинен бути рядком.',
-            'status.in' => 'Вказано некоректний статус посту. Доступні значення: draft, published, archived.',
+            'status.required' =>  __('validation/comment.status.required'),
+            'status.string' =>  __('validation/comment.status.string'),
+            'status.in' => __('validation/comment.status.in'),
 
 
-            'user_id.required' => 'Поле "Автор" є обов’язковим.',
-            'user_id.integer' => 'Вкажіть ID автора.',
-            'user_id.exists' => 'Вказаний автор не існує або був видалений.',
+            'user_id.required' => __('validation/comment.user_id.required'),
+            'user_id.integer' => __('validation/comment.user_id.integer'),
+            'user_id.exists' => __('validation/comment.user_id.exists'),
             // повідомлення про неправильну капчу краще обробляти у самому правилі CaptchaRule
         ];
     }

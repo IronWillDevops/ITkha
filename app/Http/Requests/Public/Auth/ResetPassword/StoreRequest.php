@@ -31,18 +31,18 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'token.required' => __('common/validation.token.required'),
+            'token.required' => __('validation/reset.token.required'),
 
-            'email.required' => __('common/validation.email.required'),
-            'email.string' => __('common/validation.email.string'),
-            'email.email' => __('common/validation.email.email'),
-            'email.max' => __('common/validation.email.max'),
+            'email.required' => __('validation/reset.email.required'),
+            'email.string' => __('validation/reset.email.string'),
+            'email.email' => __('validation/reset.email.email'),
+            'email.max' => __('validation/reset.email.max'),
 
-            'password.required' => __('common/validation.password.required'),
-            'password.string' => __('common/validation.password.string'),
-            'password.min' => __('common/validation.password.min'),
-            'password.max' => __('common/validation.password.max'),
-            'password.confirmed' => __('common/validation.password.confirmed'),
+            'password.required' => __('validation/reset.password.required'),
+            'password.string' => __('validation/reset.password.string'),
+            'password.min' => __('validation/reset.password.min'),
+            'password.max' => __('validation/reset.password.max'),
+            'password.confirmed' => __('validation/reset.password.confirmed'),
         ];
     }
 }

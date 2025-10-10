@@ -5,7 +5,6 @@ namespace App\Services\Admin;
 use App\Models\Post;
 use Exception;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PostService
