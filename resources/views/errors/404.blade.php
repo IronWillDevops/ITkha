@@ -1,5 +1,9 @@
-@extends('errors::minimal')
+@extends('errors.minimal')
 
-@section('title', __('Not Found'))
+@section('icon')
+    <i class="fa-solid fa-search"></i>
+@endsection
+
+@section('title', 'Page Not Found')
 @section('code', '404')
-@section('message',  $exception->getMessage() ?:'The requested resource could not be found.')
+@section('message', 'The requested page could not be found.')

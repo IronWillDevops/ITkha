@@ -1,5 +1,9 @@
-@extends('errors::minimal')
+@extends('errors.minimal')
 
-@section('title', __('Forbidden'))
+@section('icon')
+    <i class="fa-solid fa-ban"></i>
+@endsection
+
+@section('title', 'Forbidden')
 @section('code', '403')
-@section('message',  $exception->getMessage() ?:'You do not have permission to access this resource.')
+@section('message', 'You do not have permission to view this page.')

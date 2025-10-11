@@ -1,5 +1,9 @@
-@extends('errors::minimal')
+@extends('errors.minimal')
 
-@section('title', __('Service Unavailable'))
+@section('icon')
+  <i class="fa-solid fa-tools"></i>
+@endsection
+
 @section('code', '503')
-@section('message',  $exception->getMessage() ?:'The server is temporarily unable to handle the request.')
+@section('title', 'Service Unavailable')
+@section('message', 'The server is temporarily unable to handle the request. Please try again later.')

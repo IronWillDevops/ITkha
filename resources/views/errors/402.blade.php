@@ -1,5 +1,9 @@
-@extends('errors::minimal')
+@extends('errors.minimal')
 
-@section('title', __('Payment Required'))
+@section('icon')
+    <i class="fa-solid fa-credit-card"></i>
+@endsection
+
+@section('title', 'Payment Required')
 @section('code', '402')
-@section('message',  $exception->getMessage() ?:'Payment Required')
+@section('message', 'Payment is required to access this content.')
