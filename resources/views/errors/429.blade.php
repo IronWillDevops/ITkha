@@ -1,5 +1,9 @@
-@extends('errors::minimal')
+@extends('errors.minimal')
 
-@section('title', __('Too Many Requests'))
+@section('icon')
+    <i class="fa-solid fa-exclamation-triangle"></i>
+@endsection
+
+@section('title', 'Too Many Requests')
 @section('code', '429')
-@section('message',  'Too many requests in a short period (rate limit exceeded).')
+@section('message',  'You have sent too many requests. Please try again later.')

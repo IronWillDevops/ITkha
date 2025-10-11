@@ -1,5 +1,9 @@
-@extends('errors::minimal')
+@extends('errors.minimal')
 
-@section('title', __('Unauthorized'))
+@section('icon')
+    <i class="fa-solid fa-user-lock"></i>
+@endsection
+
+@section('title', 'Unauthorized')
 @section('code', '401')
-@section('message',  $exception->getMessage() ?:'Authentication is required to access the resource.')
+@section('message', 'You are not authorized to access this page.')
