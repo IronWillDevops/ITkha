@@ -31,7 +31,7 @@
                     </div>
                     <div class="flex-1">
                         <span>{{ $user->login }}</span>
-                        <x-public.form.input type="file" name="avatar" label="{{ __('public/common.fields.avatar') }}" icon="fas fa-solid fa-user" />
+                        <x-public.form.input type="file" name="avatar" label="{{ __('public/common.fields.avatar') }}" icon="fas fa-solid fa-user" :required="false" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -51,22 +51,22 @@
                 {{-- Job Title --}}
                 <x-public.form.input type="jobtitle" name="job_title" label="{{ __('public/common.fields.job_title') }}"
                     placeholder="{{ __('public/common.placeholder.job_title') }}" icon="fas fa-solid fa-user"
-                    value="{{ $user->profile?->job_title }}" required="false" />
+                    value="{{ $user->profile?->job_title }}" :required="false" />
 
                 {{-- Address --}}
                 <x-public.form.input type="address" name="address" label="{{ __('public/common.fields.address') }}"
                     placeholder="{{ __('public/common.placeholder.address') }}" icon="fas fa-solid fa-user"
-                    value="{{ $user->profile?->address }}" required="false" />
+                    value="{{ $user->profile?->address }}" :required="false" />
 
                 {{-- Web site --}}
                 <x-public.form.input type="website" name="website" label="{{ __('public/common.fields.website') }}"
                     placeholder="https://example.com" icon="fas fa-link" value="{{ $user->profile?->website }}"
-                    required="false" />
+                    :required="false" />
 
                 {{-- About myself --}}
                 <x-public.form.area name="about_myself" label="{{ __('public/common.fields.about_myself') }}"
                     placeholder="{{ __('public/common.placeholder.about_myself') }}" value="{{ $user->profile?->about_myself }}"
-                    required="false" />
+                    :required="false" />
             </section>
             
             {{-- Розділ: Соціальні мережі --}}
@@ -74,11 +74,11 @@
                 <h2 class="text-xl font-semibold mb-4">{{ __('public/profile.sections.social') }}</h2>
                 {{-- Web site --}}
                 <x-public.form.input type="website" name="github" label="Git Hub" placeholder="https://github.com/"
-                    icon="fab fa-github" value="{{ $user->profile?->github }}" required="false" />
+                    icon="fab fa-github" value="{{ $user->profile?->github }}" :required="false" />
                 {{-- LinkeIn --}}
 
                 <x-public.form.input type="website" name="linkedin" label="LinkedIn" placeholder="https://www.linkedin.com/"
-                    icon="fab fa-linkedin" value="{{ $user->profile?->linkedin }}" required="false" />
+                    icon="fab fa-linkedin" value="{{ $user->profile?->linkedin }}" :required="false" />
             </section>
 
             <div class="text-right inline-block">
