@@ -4,7 +4,7 @@
     </label>
 
     <textarea type="text" name="{{ $name }}" id="{{ $name }}" minlength="{{ $minCharactersLenght }}"  maxlength="{{ $maxCharactersLenght }}" rows="8" data-counter="true"
-        class="w-full border border-border rounded-lg px-3 py-2 focus:ring focus:outline-none focus-visible:ring-ring  caret-primary  "
+        class="w-full border border-border rounded-lg px-3 py-2 focus:ring focus:outline-none focus-visible:ring-ring  caret-primary text-sm "
         placeholder="{{ $placeholder }}" oninput="updateCharacterCount(this)"
         @if ($required) required @endif>{{ old($name, $value) }}</textarea>
     @error($name)

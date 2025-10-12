@@ -34,7 +34,7 @@
 
             {{-- Автор --}}
             <x-admin.form.select name="user_id" label="{{ __('admin/posts.fields.author') }}" :options="$users"
-                value-field="id" label-field="name" value="{{ $post->user_id }}" />
+                value-field="id" label-field="email" value="{{ $post->user_id }}" />
 
             {{-- Разрешить комментарии --}}
             <x-admin.form.checkbox name="comments_enabled" label="{{ __('admin/posts.fields.comments_enabled') }}"
