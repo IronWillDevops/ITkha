@@ -3,10 +3,9 @@
         {{ $label }}
     </label>
 
-    <input id="{{ $name }}" type="hidden" name="{{ $name }}" value="{!! old($name, $value) !!}"
-       >
+    <input id="{{ $name }}" type="hidden" name="{{ $name }}" value="{!! old($name, $value) !!}">
     <trix-toolbar id="editor-toolbar" class="text-card-foreground"></trix-toolbar>
-    <trix-editor input="{{ $name }}" placeholder="{{ $placeholder }}" toolbar="editor-toolbar"
+    <trix-editor input="{{ $name }}" placeholder="{{ $placeholder }}" toolbar="editor-toolbar"  id="post-content"
         class=" trix-content caret-primary border border-input rounded-lg px-3 py-2 min-h-[400px] focus:ring focus:ring-primary focus:outline-none focus-visible:ring-ring"></trix-editor>
 
     @error($name)
@@ -16,11 +15,24 @@
 
 @once
     @push('head')
-        <link rel="stylesheet" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+        <link rel="stylesheet" href="https://unpkg.com/trix@2.1.15/dist/trix.css">
+        <style>
+            /* Общий стиль для кнопок: задать фон и цвет */
+            trix-toolbar .trix-button {
+                background-color: var(--color-card-foreground);
+                color: white;
+                background-image: none !important;
+            }
+
+            /* Цвет фона при активной кнопке */
+            trix-toolbar .trix-button:active {
+                background-color: var(--color-accent-foreground);
+            }
+        </style>
     @endpush
 
     @push('scripts')
-        <script src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+        <script src="https://unpkg.com/trix@2.1.15/dist/trix.umd.min.js"></script>
 
         <script>
             document.addEventListener("trix-attachment-add", function(event) {

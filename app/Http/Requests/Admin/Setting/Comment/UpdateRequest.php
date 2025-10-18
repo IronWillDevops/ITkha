@@ -22,13 +22,14 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'comments_enabled' => ['nullable', 'boolean'],
             'comments_auto_approve' => ['nullable', 'boolean'],
             'comments_filter_words' => ['nullable', 'string'],
             'comments_links_policy' => ['required', 'in:allow,remove,reject'],
         ];
     }
 
-      public function messages(): array
+    public function messages(): array
     {
         return [
             'comments_auto_approve.boolean' => __('validation/setting.comments.auto_approve.boolean'),

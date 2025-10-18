@@ -24,7 +24,7 @@
 
         <div class="mb-4">
             <a href="{{ route('public.post.index') }}"
-                class="border-border border text-destructive-foreground focus:ring focus:outline-none focus-visible:ring-ring px-3 py-2 rounded  flex items-center justify-center h-10 hover:bg-accent"
+                class="border-border border bg-destructive text-destructive-foreground hover:bg-destructive/80 focus:ring focus:outline-none focus-visible:ring-ring px-3 py-2 rounded  flex items-center justify-center h-10 "
                 title="{{ __('public/filter.reset') }}">
                 <i class="fa fa-times "></i>
             </a>
@@ -80,17 +80,6 @@
     }
 
     const searchInput = document.getElementById('search-input');
-
-    searchInput.addEventListener('blur', () => {
-        document.getElementById('filter-form').submit();
-    });
-
-    searchInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            document.getElementById('filter-form').submit();
-        }
-    });
 
     // Переключення напрямку сортування
     function toggleSortDir() {

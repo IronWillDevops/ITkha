@@ -17,6 +17,8 @@ class UpdateController extends Controller
 
         $data = $request->validated();
     
+        
+        Setting::set('comments_enabled', (bool)$data['comments_enabled']);
         Setting::set('comments_auto_approve', (bool)$data['comments_auto_approve']);
         Setting::set('comments_filter_words', $data['comments_filter_words']);
         Setting::set('comments_links_policy', $data['comments_links_policy']);
