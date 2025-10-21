@@ -4,7 +4,7 @@
             {{-- Левая часть --}}
             <div class="flex items-center space-x-2">
                 {{-- Логотип --}}
-                <a href="{{ route('public.post.index') }}"
+                <a href="{{ route('admin.index') }}"
                     class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
                     <span class="text-2xl font-semibold whitespace-nowrap leading-none">
                         Admin Panel | {{ config('app.name') }}
@@ -15,6 +15,7 @@
                     </span>
                 </a>
             </div>
+
             {{-- Правая часть --}}
             <div class="flex items-center space-x-2 md:space-x-2">
                 {{-- Кнопка смены темы --}}
@@ -24,54 +25,73 @@
                     <div id="theme-toggle-dark-icon"><i class="fas fa-moon hidden fa-lg"></i></div>
                     <div id="theme-toggle-light-icon"><i class="fas fa-sun hidden fa-lg"></i></div>
                 </button>
+
                 {{-- Основное меню (только на больших экранах) --}}
+                <ul class="hidden md:flex font-medium items-center space-x-2">
 
-                <div class="hidden md:block relative">
+                    @auth
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit"
+                                    class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5  cursor-pointer">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    <span>{{ __('admin/header.logout') }}</span>
+                                </button>
+                            </form>
+                        </li>
+                    @endauth
 
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                            class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5  cursor-pointer">
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            <span>{{ __('admin/header.logout') }}</span>
-                        </button>
-                    </form>
+                </ul>
 
-                </div>
+                {{-- Иконка пользователя вместо аватара --}}
+
+
+
                 {{-- Кнопка бургер-меню (только мобильные) --}}
                 <button data-collapse-toggle="navbar-default" type="button"
                     class="bg-background border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg focus:ring focus:outline-none focus-visible:ring-ring md:hidden"
                     aria-controls="navbar-default" aria-expanded="false">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
-            </div> {{-- Мобильное меню --}}
-            <div class="hidden w-full md:hidden mt-3" id="navbar-default">
+            </div>
 
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit"
-                        class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5  cursor-pointer">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        <span>{{ __('admin/header.logout') }}</span>
-                    </button>
-                </form>
+            {{-- Мобильное меню --}}
+            <div class="hidden w-full md:hidden mt-3" id="navbar-default">
+                <ul class="font-medium flex flex-col border-t border-input pt-3 space-y-2">
+
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit"
+                                    class="w-full text-left block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer">
+                                       <span>{{ __('admin/header.logout') }}</span>
+                                </button>
+                            </form>
+                        </li>
+                </ul>
             </div>
         </div>
     </nav>
 </header>
+
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]');
             const navMenu = document.getElementById('navbar-default');
             const userMenuButton = document.getElementById('userMenuButton');
-            const userDropdown = document.getElementById('userDropdown'); // Бургер-меню
-            toggleButton?.addEventListener('click', () => navMenu.classList.toggle(
-                'hidden')); // Выпадающее меню пользователя
+            const userDropdown = document.getElementById('userDropdown');
+
+            // Бургер-меню
+            toggleButton?.addEventListener('click', () => navMenu.classList.toggle('hidden'));
+
+            // Выпадающее меню пользователя
             userMenuButton?.addEventListener('click', (e) => {
                 e.stopPropagation();
                 userDropdown.classList.toggle('hidden');
             });
+
             document.addEventListener('click', (e) => {
                 if (!userDropdown.contains(e.target) && !userMenuButton.contains(e.target)) {
                     userDropdown.classList.add('hidden');

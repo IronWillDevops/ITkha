@@ -14,6 +14,7 @@ class SettingsSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            ['key' => 'comments_enabled', 'value' => '1'],
             ['key' => 'comments_auto_approve', 'value' => '1'],
             ['key' => 'comments_filter_words', 'value' => 'www, .com, .net, .ru, .xyz, click here, buy now, free money, work from home, earn cash, visit site, subscribe now, promo, discount, deal, sale, crypto, bitcoin, nft, investment, forex, casino, gambling, bet now, 1xbet, telegram, whatsapp, t.me, bit.ly'],
             ['key' => 'comments_links_policy', 'value' => 'allow'],

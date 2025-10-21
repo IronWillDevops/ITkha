@@ -31,11 +31,14 @@
 
             {{-- Автор --}}
             <x-admin.form.select name="user_id" label="{{ __('admin/posts.fields.author') }}" :options="$users"
-                value-field="id" label-field="email" />
+                value-field="id" label-field="email" value="{{ Auth::user()->id }}" />
 
             {{-- Разрешить комментарии --}}
+            {{-- <x-admin.form.checkbox name="comments_enabled" label="{{ __('admin/posts.fields.comments_enabled') }}"
+                value="1" :checked="old('comments_enabled', true)" />:checked="$autoApprove" --}}
             <x-admin.form.checkbox name="comments_enabled" label="{{ __('admin/posts.fields.comments_enabled') }}"
-                value="1" :checked="old('comments_enabled', true)" />
+                value="1" :checked="$commentsEnabled" />
+
 
             {{-- Кнопки --}}
             <div class="flex space-x-3">

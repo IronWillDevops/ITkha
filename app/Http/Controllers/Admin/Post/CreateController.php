@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Post;
 
 use App\Enums\PostStatus;
 use App\Models\Category;
+use App\Models\Setting;
 use App\Models\Tag;
 use App\Models\User;
 
@@ -15,6 +16,7 @@ class CreateController extends BaseController
     $tags = Tag::all();
     $users = User::all();
     $status = PostStatus::cases();
-    return view('admin.post.create', compact('categories', 'tags', 'users','status')); // Можно заменить на вашу главную страницу
+    $commentsEnabled = (bool) Setting::get('comments_enabled');
+    return view('admin.post.create', compact('categories', 'tags', 'users', 'status', 'commentsEnabled')); // Можно заменить на вашу главную страницу
   }
 }

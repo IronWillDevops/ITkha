@@ -9,6 +9,7 @@
                     <span class="text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
                 </a>
             </div>
+
             {{-- Правая часть --}}
             <div class="flex items-center space-x-2 md:space-x-2">
                 {{-- Кнопка смены темы --}}
@@ -17,7 +18,9 @@
                     aria-label="Change theme">
                     <div id="theme-toggle-dark-icon"><i class="fas fa-moon hidden fa-lg"></i></div>
                     <div id="theme-toggle-light-icon"><i class="fas fa-sun hidden fa-lg"></i></div>
-                </button>                {{-- Основное меню (только на больших экранах) --}}
+                </button>
+
+                {{-- Основное меню (только на больших экранах) --}}
                 <ul class="hidden md:flex font-medium items-center space-x-2">
                     <li class="flex items-center">
                         <a href="{{ route('public.pages.contact.index') }}"
@@ -33,7 +36,9 @@
                             </a>
                         </li>
                     @endguest
-                </ul>                {{-- Иконка пользователя вместо аватара --}}
+                </ul>
+
+                {{-- Иконка пользователя вместо аватара --}}
                 @auth
                     <div class="hidden md:block relative">
                         <button id="userMenuButton" type="button"
@@ -50,7 +55,9 @@
                                     </span>
                                 </div>
                             @endif
-                        </button>                        {{-- Выпадающее меню --}}
+                        </button>
+
+                        {{-- Выпадающее меню --}}
                         <div id="userDropdown"
                             class="absolute right-0 mt-2 hidden w-44 bg-card border border-input rounded-lg shadow-md z-50 text-sm">
                             <div class="p-2 font-medium truncate border-b border-input">
@@ -69,13 +76,17 @@
                             </form>
                         </div>
                     </div>
-                @endauth                {{-- Кнопка бургер-меню (только мобильные) --}}
+                @endauth
+
+                {{-- Кнопка бургер-меню (только мобильные) --}}
                 <button data-collapse-toggle="navbar-default" type="button"
                     class="bg-background border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg focus:ring focus:outline-none focus-visible:ring-ring md:hidden"
                     aria-controls="navbar-default" aria-expanded="false">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
-            </div>            {{-- Мобильное меню --}}
+            </div>
+
+            {{-- Мобильное меню --}}
             <div class="hidden w-full md:hidden mt-3" id="navbar-default">
                 <ul class="font-medium flex flex-col border-t border-input pt-3 space-y-2">
                     <li>
@@ -83,7 +94,9 @@
                             class="block py-2 px-3 rounded-md  hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
                             {{ __('public/contact_us.title') }}
                         </a>
-                    </li>                    @auth
+                    </li>
+
+                    @auth
                         <li>
                             <a href="{{ route('public.user.show', Auth::user()->id) }}"
                                 class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
@@ -99,30 +112,40 @@
                                 </button>
                             </form>
                         </li>
-                    @endauth                    @guest
+                    @endauth
+
+                    @guest
                         <li>
                             <a href="{{ route('login') }}"
                                 class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
                                 {{ __('public/auth.login') }}
                             </a>
                         </li>
-                    @endguest                </ul>
+                    @endguest
+                </ul>
             </div>
         </div>
     </nav>
 </header>
+
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]');
             const navMenu = document.getElementById('navbar-default');
             const userMenuButton = document.getElementById('userMenuButton');
-            const userDropdown = document.getElementById('userDropdown');            // Бургер-меню
-            toggleButton?.addEventListener('click', () => navMenu.classList.toggle('hidden'));            // Выпадающее меню пользователя
+            const userDropdown = document.getElementById('userDropdown');
+
+            // Бургер-меню
+            toggleButton?.addEventListener('click', () => navMenu.classList.toggle('hidden'));
+
+            // Выпадающее меню пользователя
             userMenuButton?.addEventListener('click', (e) => {
                 e.stopPropagation();
                 userDropdown.classList.toggle('hidden');
-            });            document.addEventListener('click', (e) => {
+            });
+
+            document.addEventListener('click', (e) => {
                 if (!userDropdown.contains(e.target) && !userMenuButton.contains(e.target)) {
                     userDropdown.classList.add('hidden');
                 }

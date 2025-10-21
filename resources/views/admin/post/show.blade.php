@@ -52,7 +52,7 @@
 
 
     {{-- Контент --}}
-    <div class="prose max-w-none" id="post-content">
+    <div class="prose max-w-none"  id="post-content">
         {!! $post->content !!}
     </div>
 @endsection

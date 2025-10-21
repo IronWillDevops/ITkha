@@ -1,6 +1,10 @@
 <?php
 return [
-    'comment' => [
+    'comments' => [
+        'enabled' => [
+            'boolean' => 'The comments enabled setting must be true or false.',
+        ],
+
         'auto_approve' => [
             'boolean' => 'The auto-approve setting must be true or false.',
         ],

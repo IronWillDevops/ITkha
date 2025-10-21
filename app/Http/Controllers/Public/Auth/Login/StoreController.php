@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\Auth\Login\StoreRequest;
 use App\Enums\UserStatus;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 
 class StoreController extends Controller
 {
@@ -18,12 +19,11 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request)
     {
         try {
-
-          
             $credentials = $request->validated();
 
             if (Auth::attempt($credentials, $request->boolean('remember'))) {
                 $request->session()->regenerate();
+
 
                 $user = Auth::user();
 
