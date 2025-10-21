@@ -2,7 +2,7 @@
 
 return [
     'title' => 'Email Verification',
-    'info'  => 'Please enter your email so we can resend the verification link.',
+    'description'  => 'Please enter your email so we can resend the verification link.',
     'submit' => 'Resend Link',
        'messages' => [
         'link_sent' => 'A verification link has been sent to your email.',

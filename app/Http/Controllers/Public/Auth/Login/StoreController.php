@@ -28,7 +28,7 @@ class StoreController extends Controller
                 $user = Auth::user();
 
                 //  Перевірка верифікації email
-                if ($user->status == UserStatus::PENDING->value) {
+                if ($user->email_verified_at == null) {
                     Auth::logout();
                     throw new EmailNotVerifiedException();
                 }

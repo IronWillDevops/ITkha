@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum CommentStatus: string
 {
-    case PENDING = 'pending';     // Очікує перевірки
-    case APPROVED = 'approved';   // Схвалений
-    case REJECTED = 'rejected';   // Відхилений
-    case HIDDEN = 'hidden';       // Прихований вручну
+    case PENDING = 'Pending';     // Очікує перевірки
+    case APPROVED = 'Approved';   // Схвалений
+    case REJECTED = 'Rejected';   // Відхилений
+    case HIDDEN = 'Hidden';       // Прихований вручну
 }

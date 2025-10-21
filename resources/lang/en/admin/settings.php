@@ -15,4 +15,10 @@ return [
         'links_reject' => 'Reject comments containing links',
         'comment_cannot_be_empty' => 'Comment cannot be empty.',
     ],
+    'users' => [
+        'title' => 'User settings',
+        'default_status' => 'Default Status',
+        'default_role' => 'Default Role',
+        'require_email_verification' => 'Require Email Verification',
+    ]
 ];
