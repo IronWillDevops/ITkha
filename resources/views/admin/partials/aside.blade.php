@@ -89,17 +89,24 @@
                                     class="fa fa-history "></i><span
                                     class="ml-2">{{ __('admin/logs.title') }}</span></a>
                         </li>
+
                         <li>
-                            <a href="{{ route('admin.footerlink.index') }}"
+                            <a href="{{ route('admin.setting.user.edit') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fas fa-cog "></i><span
-                                    class="ml-2">{{ __('admin/footerlink.title') }}</span></a>
+                                    class="fa-solid fa-users"></i><span
+                                    class="ml-2">{{ __('admin/users.title') }}</span></a>
                         </li>
                         <li>
                             <a href="{{ route('admin.setting.comment.edit') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
                                     class="fa-solid fa-comments"></i><span
                                     class="ml-2">{{ __('admin/comments.title') }}</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.footerlink.index') }}"
+                                class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
+                                    class="fas fa-cog "></i><span
+                                    class="ml-2">{{ __('admin/footerlink.title') }}</span></a>
                         </li>
                     </ul>
                 </details>

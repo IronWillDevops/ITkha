@@ -17,6 +17,11 @@ class SettingsSeeder extends Seeder
             ['key' => 'comments_auto_approve', 'value' => '1'],
             ['key' => 'comments_filter_words', 'value' => 'www, .com, .net, .ru, .xyz, click here, buy now, free money, work from home, earn cash, visit site, subscribe now, promo, discount, deal, sale, crypto, bitcoin, nft, investment, forex, casino, gambling, bet now, 1xbet, telegram, whatsapp, t.me, bit.ly'],
             ['key' => 'comments_links_policy', 'value' => 'allow'],
+
+            
+            ['key' => 'user_default_status', 'value' => 'Active'],
+            ['key' => 'user_default_role', 'value' => '3'], // id ролі "user"
+            ['key' => 'user_require_email_verification', 'value' => '1'],
         ];
         foreach ($data as $item) {
             Setting::firstOrCreate(

@@ -15,7 +15,7 @@
                     placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Submit --}}
-                <x-public.form.submit text="{{ __('public/verify.submit') }}" />
+                <x-public.form.submit label="{{ __('public/verify.submit') }}" class="w-full"/>
 
             </form>
 
