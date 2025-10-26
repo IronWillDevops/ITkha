@@ -7,14 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Traits\Filterable;
+use App\Models\Traits\Cacheable;
+use App\Models\Traits\Viewable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Redis;
 
 class Post extends Model
 {
     use SoftDeletes,
         HasFactory,
-        Filterable;
+        Filterable,
+        Cacheable,
+        Viewable;
     protected $fillable = [
         'title',
         'content',
@@ -32,7 +37,7 @@ class Post extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
+   protected $appends = ['actual_views'];
     // Post
     public function category()
     {

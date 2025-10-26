@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\VerifyEmailNotification;
 use App\Notifications\ResetPasswordNotification;
 use App\Enums\PostStatus;
+use App\Models\Traits\Cacheable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory,
+        Notifiable,
+        SoftDeletes,
+        Cacheable;
 
     /**
      * The attributes that are mass assignable.
@@ -155,6 +159,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function favoritePosts()
     {
-        return $this->belongsToMany(Post::class,'favorites')->withTimestamps();
+        return $this->belongsToMany(Post::class, 'favorites')->withTimestamps();
     }
 }
