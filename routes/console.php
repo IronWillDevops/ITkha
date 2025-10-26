@@ -8,11 +8,3 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-
-
-Schedule::call(function () {
-    Artisan::call('views:sync');
-})
-->name('sync-post-views')   // обязательно уникальное имя
-->everyFiveSeconds()
-->withoutOverlapping();
