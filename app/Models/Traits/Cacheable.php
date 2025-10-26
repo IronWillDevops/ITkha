@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
@@ -86,15 +87,33 @@ trait Cacheable
      */
     protected static function isRedisAvailable(): bool
     {
+        // Проверяем, установлено ли расширение php-redis
+    if (class_exists(\Redis::class)) {
         try {
-            Redis::ping();
+            $redis = new \Redis();
+            $redis->connect(config('database.redis.default.host', '127.0.0.1'), 
+                            config('database.redis.default.port', 6379));
+            $redis->ping();
             return true;
         } catch (\Exception $e) {
             Log::warning('Redis unavailable: ' . $e->getMessage());
             return false;
         }
     }
-   
 
-  
+    // Можно добавить поддержку predis, если он установлен через composer
+    if (class_exists(\Predis\Client::class)) {
+        try {
+            $client = new \Predis\Client(config('database.redis.default'));
+            $client->ping();
+            return true;
+        } catch (\Exception $e) {
+            Log::warning('Predis unavailable: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    Log::warning('Redis extension or Predis not installed.');
+    return false;
+    }
 }
