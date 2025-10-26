@@ -27,9 +27,9 @@ class PostService
 
     public function similarPosts(Post $post, int $limit = 6)
     {
-         $similarKey = $post->cacheKey() . ":similar:$limit";
+       
 
-        return Post::cacheGet($similarKey, function () use ($post, $limit) {
+
             return Post::where('id', '!=', $post->id)
                 ->where('status', PostStatus::PUBLISHED->value)
                 ->where(function ($query) use ($post) {
@@ -45,6 +45,6 @@ class PostService
                 ->latest()
                 ->take($limit)
                 ->get();
-        }, 3600); // TTL 1 час
+        
     }
 }

@@ -106,7 +106,7 @@
                 {{-- View --}}
                 <div class="flex items-center">
                     <i class="fas fa-eye mr-1"></i>
-                    <span>{{ Number::abbreviate($post->actual_views) ?? 0 }}</span>
+                    <span>{{ Number::abbreviate($post->views) ?? 0 }}</span>
                 </div>
 
                 {{-- bookmark --}}

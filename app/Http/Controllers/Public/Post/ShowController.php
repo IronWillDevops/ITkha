@@ -20,14 +20,9 @@ class ShowController extends Controller
   {
     $postId = $post->id;
 
-    // Используем объектный метод
-    $postKey = $post->cacheKey();
-
-    $post = Post::cacheGet($postKey, function () use ($postId) {
-      return Post::where('id', $postId)
+    $post = Post::where('id', $postId)
         ->where('status', PostStatus::PUBLISHED->value)
         ->firstOrFail();
-    });
 
     $post->load([
       'comments' => fn($query) => $query->approved()->whereNull('parent_id')->with([
@@ -38,13 +33,12 @@ class ShowController extends Controller
 
     $sessionKey = 'post_viewed_' . $post->id;
 
-    // if (!session()->has($sessionKey)) {
-    //   $post->timestamps = false;
-    //   $post->views += 1;
-    //   $post->save();
-    //   session()->put($sessionKey, true);
-    // }
-    $post->recordView($post->id);
+    if (!session()->has($sessionKey)) {
+      $post->timestamps = false;
+      $post->views += 1;
+      $post->save();
+      session()->put($sessionKey, true);
+    }
 
 
     $popularPosts = $postService->popularPosts();

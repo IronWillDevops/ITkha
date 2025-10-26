@@ -17,9 +17,7 @@ class Post extends Model
 {
     use SoftDeletes,
         HasFactory,
-        Filterable,
-        Cacheable,
-        Viewable;
+        Filterable;
     protected $fillable = [
         'title',
         'content',
@@ -37,7 +35,6 @@ class Post extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-   protected $appends = ['actual_views'];
     // Post
     public function category()
     {

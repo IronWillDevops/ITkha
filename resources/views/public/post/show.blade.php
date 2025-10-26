@@ -51,7 +51,7 @@
                     <span>|</span>
                     <span class="inline-flex items-center">
                         <i class="fa fa-eye "></i>
-                        <span class="font-medium ml-2">{{ Number::abbreviate($post->actual_views) }}</span>
+                        <span class="font-medium ml-2">{{ Number::abbreviate($post->views) }}</span>
                     </span>
                     <span>|</span>
 
