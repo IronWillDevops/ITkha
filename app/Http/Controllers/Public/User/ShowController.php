@@ -14,8 +14,8 @@ class ShowController extends Controller
    * Handle the incoming request.
    */
   public function __invoke(User $user, PostService $postService)
-  {
-    $posts = $postService->popularPostsByUser($user->id)->paginate(10);
+  { 
+    $posts = $postService->postsByUser($user->id)->paginate(10);
     return view('public.user.show', compact('user', 'posts'));
   }
 }

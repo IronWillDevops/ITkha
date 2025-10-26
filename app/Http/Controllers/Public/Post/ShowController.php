@@ -8,6 +8,7 @@ use App\Enums\PostStatus;
 use App\Services\Public\CommentService;
 use App\Services\Public\PostService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class ShowController extends Controller
 {
@@ -15,32 +16,43 @@ class ShowController extends Controller
    * Handle the incoming request.
    */
 
-  public function __invoke(Post $post, PostService $postService,CommentService $commentService)
+  public function __invoke(Post $post, PostService $postService, CommentService $commentService)
   {
-    $post = Post::with([
-      'comments' => fn($query) =>
-      $query->approved()->whereNull('parent_id')->with([
+    $postId = $post->id;
+
+    // Используем объектный метод
+    $postKey = $post->cacheKey();
+
+    $post = Post::cacheGet($postKey, function () use ($postId) {
+      return Post::where('id', $postId)
+        ->where('status', PostStatus::PUBLISHED->value)
+        ->firstOrFail();
+    });
+
+    $post->load([
+      'comments' => fn($query) => $query->approved()->whereNull('parent_id')->with([
         'children' => fn($q) => $q->approved()->with('user'),
         'user'
       ])
-    ])
-      ->where('id', $post->id)
-      ->where('status', PostStatus::PUBLISHED->value)
-      ->firstOrFail();
+    ]);
 
     $sessionKey = 'post_viewed_' . $post->id;
 
-    if (!session()->has($sessionKey)) {
-      $post->timestamps = false;
-      $post->views += 1;
-      $post->save();
-      session()->put($sessionKey, true);
-    }
+    // if (!session()->has($sessionKey)) {
+    //   $post->timestamps = false;
+    //   $post->views += 1;
+    //   $post->save();
+    //   session()->put($sessionKey, true);
+    // }
+    $post->recordView($post->id);
+
 
     $popularPosts = $postService->popularPosts();
-    $similarPosts = $postService->similarPosts($post);
-        $latestComment =$commentService->latestComment();
 
-    return view('public.post.show', compact('post', 'popularPosts', 'similarPosts','latestComment'));
+    $similarPosts =  $postService->similarPosts($post);
+
+    $latestComment = $commentService->latestComment();
+
+    return view('public.post.show', compact('post', 'popularPosts', 'similarPosts', 'latestComment'));
   }
 }

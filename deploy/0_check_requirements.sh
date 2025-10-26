@@ -7,7 +7,8 @@ PHP_BIN="php"
 COMPOSER_BIN="composer"
 MIN_PHP_VERSION="8.3"
 MIN_COMPOSER_VERSION="2.0"
-REQUIRED_EXTENSIONS=("bcmath" "calendar" "Core" "ctype" "curl" "date" "dom" "exif" "FFI" "fileinfo" "filter" "ftp" "gd" "gettext" "hash" "iconv" "intl" "json" "libxml" "mbstring" "mysqli" "mysqlnd" "openssl" "pcntl" "pcre" "PDO" "pdo_mysql" "Phar" "posix" "random" "readline" "Reflection" "session" "shmop" "SimpleXML" "sockets" "sodium" "SPL" "standard" "sysvmsg" "sysvsem" "sysvshm" "tokenizer" "xml" "xmlreader" "xmlwriter" "xsl" "Zend OPcache" "zip" "zlib")
+REQUIRED_EXTENSIONS=("bcmath" "calendar" "Core" "ctype" "curl" "date" "dom" "exif" "FFI" "fileinfo" "filter" "ftp" "gd" "gettext" "hash" "iconv" "intl" "json" "libxml" "mbstring" "mysqli" "mysqlnd" "openssl" "pcntl" "pcre" "PDO" "pdo_mysql" "Phar" "posix" "random" "readline" "Reflection" "session" "shmop" "SimpleXML" "sockets" "sodium" "SPL" "standard" "sysvmsg" "sysvsem" "sysvshm" "tokenizer" "xml" "xmlreader" "xmlwriter" "xsl" "zip" "zlib")
+OPTIONAL_EXTENSIONS=("redis")
 
 # Color definitions
 GREEN='\033[0;32m'
@@ -21,6 +22,10 @@ success_step() {
 
 error_step() {
   echo -e "[${RED}ERROR${RESET}] $1"
+}
+
+warning_step() {
+  echo -e "[${YELLOW}WARNING${RESET}] $1"
 }
 
 check_php_version() {
@@ -62,6 +67,18 @@ check_required_extensions() {
     done
 }
 
+check_optional_extensions() {
+    echo -e "[${YELLOW}CHECK${RESET}] Checking optional PHP extensions..."
+
+    for EXT in "${OPTIONAL_EXTENSIONS[@]}"; do
+        if ! php -m | grep -q "$EXT"; then
+            warning_step "Optional PHP extension ${EXT} is not installed."
+        else
+            success_step "Optional PHP extension ${EXT} is installed."
+        fi
+    done
+}
+
 check_php_fpm() {
     echo -e "[${YELLOW}CHECK${RESET}] Checking if PHP-FPM is running..."
 
@@ -83,6 +100,7 @@ echo "==========================================="
 check_php_version
 check_composer_version
 check_required_extensions
+check_optional_extensions
 check_php_fpm
 
 echo "==========================================="

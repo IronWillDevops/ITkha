@@ -33,7 +33,7 @@ class PostService
             $post->comments_enabled = $request->boolean('comments_enabled');
             DB::commit();
         } catch (Exception $expt) {
-            Db::rollback();
+            DB::rollback();
             abort(500);
         }
     }
@@ -67,7 +67,7 @@ class PostService
             $post->comments_enabled = $request->boolean('comments_enabled');
             DB::commit();
         } catch (Exception $expt) {
-            Db::rollback();
+            DB::rollback();
             abort(500);
         }
         return $post;

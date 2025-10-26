@@ -17,7 +17,7 @@ class IndexController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(FilterRequest $request, PostService $postService,CommentService $commentService)
+    public function __invoke(FilterRequest $request, PostService $postService, CommentService $commentService)
     {
 
 
@@ -32,7 +32,8 @@ class IndexController extends Controller
         $filter = app()->make(PostFilter::class, [
             'queryParams' => array_filter($data, fn($v) => $v !== null && $v !== '')
         ]);
-        $posts = Post::where('status', PostStatus::PUBLISHED) // 
+
+        $posts = Post::where('status', PostStatus::PUBLISHED)
             ->filter($filter)
             ->orderBy($data['sort_by'], $data['sort_dir'])
             ->paginate(30);
@@ -40,7 +41,7 @@ class IndexController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         $popularPosts = $postService->popularPosts();
-        $latestComment =$commentService->latestComment();
+        $latestComment = $commentService->latestComment();
 
         return view('public.post.index', compact('posts', 'categories', 'tags', 'popularPosts', 'latestComment'));
     }

@@ -38,7 +38,7 @@
         </div>
 
 
-        <p class="mb-2 text-muted-foreground">{{ $comment->body }}</p>
+        <p class="mb-2 text-muted-foreground break-all">{{ $comment->body }}</p>
 
 
 

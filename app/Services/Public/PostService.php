@@ -16,7 +16,7 @@ class PostService
             ->get();
     }
 
-    public function popularPostsByUser(int $user_id)
+    public function postsByUser(int $user_id)
     {
         return Post::withCount('likedByUsers')
             ->where('status', PostStatus::PUBLISHED)
@@ -27,21 +27,24 @@ class PostService
 
     public function similarPosts(Post $post, int $limit = 6)
     {
+         $similarKey = $post->cacheKey() . ":similar:$limit";
 
-        return Post::where('id', '!=', $post->id)
-            ->where('status', PostStatus::PUBLISHED)
-            ->where(function ($query) use ($post) {
-                // Та ж категорія
-                $query->where('category_id', $post->category_id);
+        return Post::cacheGet($similarKey, function () use ($post, $limit) {
+            return Post::where('id', '!=', $post->id)
+                ->where('status', PostStatus::PUBLISHED->value)
+                ->where(function ($query) use ($post) {
+                    // Та же категория
+                    $query->where('category_id', $post->category_id);
 
-                // АБО ті ж теги
-                $query->orWhereHas('tags', function ($q) use ($post) {
-                    $q->whereIn('tags.id', $post->tags->pluck('id'));
-                });
-            })
-            ->with(['category', 'tags'])
-            ->latest()
-            ->take($limit)
-            ->get();
+                    // АБО те же теги
+                    $query->orWhereHas('tags', function ($q) use ($post) {
+                        $q->whereIn('tags.id', $post->tags->pluck('id'));
+                    });
+                })
+                ->with(['category', 'tags'])
+                ->latest()
+                ->take($limit)
+                ->get();
+        }, 3600); // TTL 1 час
     }
 }

@@ -30,7 +30,7 @@
                             <span
                                 class="text-xs text-muted-foreground">{{ $comment->created_at->diffForHumans() }}</span>
                             <a href="{{ route('public.post.show', $comment->post_id) }}"
-                                class=" hover:underline focus:ring focus:outline-none focus-visible:ring-ring">{{ Str::limit(strip_tags(html_entity_decode($comment->body)), 50) }}</a>
+                                class=" hover:underline focus:ring focus:outline-none focus-visible:ring-ring break-all">{{ Str::limit(strip_tags(html_entity_decode($comment->body)), 50) }}</a>
                         </div>
                     </li>
                 @endforeach
