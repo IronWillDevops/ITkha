@@ -20,5 +20,21 @@ return [
         'default_status' => 'Default Status',
         'default_role' => 'Default Role',
         'require_email_verification' => 'Require Email Verification',
-    ]
+    ],
+    'site' => [
+        'title' => 'General Settings',
+        'name' => 'Site Name',
+        'description' => 'Site Description',
+        'keywords' => 'Meta Keywords',
+        'favicon' => 'Favicon',
+        'timezone' => 'Timezone',
+
+        'placeholders' => [
+            'name' => 'Enter your website name (e.g., My Company)',
+            'description' => 'Briefly describe your website purpose or content',
+            'keywords' => 'Enter meta keywords separated by commas (e.g., blog, tech, news)',
+            'favicon' => 'Upload a small icon (16x16 or 32x32)',
+            'timezone' => 'Select your site timezone (e.g., Europe/Kyiv)',
+        ],
+    ],
 ];

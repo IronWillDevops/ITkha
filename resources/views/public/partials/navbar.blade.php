@@ -6,7 +6,7 @@
                 {{-- Логотип --}}
                 <a href="{{ route('public.post.index') }}"
                     class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
-                    <span class="text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
+                    <span class="text-2xl font-semibold whitespace-nowrap">{{ setting('site_name', config('app.name')) }}</span>
                 </a>
             </div>
 

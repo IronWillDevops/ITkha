@@ -31,4 +31,25 @@ return [
         ],
     ],
 
+    'site' => [
+        'name' => [
+            'required' => 'The site name is required.',
+            'string' => 'The site name must be a string.',
+            'max' => 'The site name may not be greater than :max characters.',
+        ],
+        'description' => [
+            'string' => 'The site description must be a string.',
+            'max' => 'The site description may not be greater than :max characters.',
+        ],
+        'keywords' => [
+            'string' => 'The site keywords must be a string.',
+            'max' => 'The site keywords may not be greater than :max characters.',
+        ],
+        'favicon' => [
+            'image' => 'The favicon must be an image file.',
+            'mimes' => 'The favicon must be a file of type: png, ico, jpg, jpeg, or svg.',
+            'max' => 'The favicon may not be greater than :max kilobytes.',
+        ],
+    ],
+
 ];

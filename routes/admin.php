@@ -114,14 +114,20 @@ Route::prefix('admin')->name('admin.')
                 Route::prefix('comments')
                     ->name('comment.')
                     ->group(function () {
-                        Route::get('/', App\Http\Controllers\Admin\Setting\Comment\EditController::class)->name('edit')->middleware('permission:settings_show');;
-                        Route::patch('/', App\Http\Controllers\Admin\Setting\Comment\UpdateController::class)->name('update')->middleware('permission:settings_edit');;
+                        Route::get('/', App\Http\Controllers\Admin\Setting\Comment\EditController::class)->name('edit')->middleware('permission:settings_show');
+                        Route::patch('/', App\Http\Controllers\Admin\Setting\Comment\UpdateController::class)->name('update')->middleware('permission:settings_edit');
                     });
                 Route::prefix('users')
                     ->name('user.')
                     ->group(function () {
-                        Route::get('/', App\Http\Controllers\Admin\Setting\User\EditController::class)->name('edit')->middleware('permission:settings_show');;
-                        Route::patch('/', App\Http\Controllers\Admin\Setting\User\UpdateController::class)->name('update')->middleware('permission:settings_edit');;
+                        Route::get('/', App\Http\Controllers\Admin\Setting\User\EditController::class)->name('edit')->middleware('permission:settings_show');
+                        Route::patch('/', App\Http\Controllers\Admin\Setting\User\UpdateController::class)->name('update')->middleware('permission:settings_edit');
+                    });
+                Route::prefix('site')
+                    ->name('site.')
+                    ->group(function () {
+                        Route::get('/', App\Http\Controllers\Admin\Setting\Site\EditController::class)->name('edit')->middleware('permission:settings_edit');
+                        Route::patch('/',  App\Http\Controllers\Admin\Setting\Site\UpdateController::class)->name('update')->middleware('permission:settings_edit');
                     });
             });
     });

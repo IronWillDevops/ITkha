@@ -78,17 +78,12 @@
                     </summary>
                     <ul class="pl-8 pt-2 space-y-2">
                         <li>
-                            <a href="{{ route('admin.info.index') }}"
+                            <a href="{{ route('admin.setting.site.edit') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fas fa-server "></i><span
-                                    class="ml-2">{{ __('admin/info.title') }}</span></a>
+                                    class="fa-solid fa-globe"></i><span
+                                    class="ml-2">{{ __('admin/settings.site.title') }}</span></a>
                         </li>
-                        <li>
-                            <a href="{{ route('admin.log.index') }}"
-                                class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fa fa-history "></i><span
-                                    class="ml-2">{{ __('admin/logs.title') }}</span></a>
-                        </li>
+
 
                         <li>
                             <a href="{{ route('admin.setting.user.edit') }}"
@@ -107,6 +102,18 @@
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
                                     class="fas fa-cog "></i><span
                                     class="ml-2">{{ __('admin/footerlink.title') }}</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.info.index') }}"
+                                class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
+                                    class="fas fa-server "></i><span
+                                    class="ml-2">{{ __('admin/info.title') }}</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.log.index') }}"
+                                class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
+                                    class="fa fa-history "></i><span
+                                    class="ml-2">{{ __('admin/logs.title') }}</span></a>
                         </li>
                     </ul>
                 </details>
