@@ -7,7 +7,7 @@
                 <a href="{{ route('admin.index') }}"
                     class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
                     <span class="text-2xl font-semibold whitespace-nowrap leading-none">
-                        Admin Panel | {{ config('app.name') }}
+                        Admin Panel | {{ setting('site_name', config('app.name')) }}
                     </span>
 
                     <span class="text-sm font-semibold whitespace-nowrap leading-none">

@@ -27,4 +27,14 @@ class UpdateRequest extends FormRequest
             'user_require_email_verification' => ['nullable', 'boolean'],
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'user_default_status.string' => __('validation/setting.user.user_default_role.string'),
+            'user_default_role.string' => __('validation/setting.user.user_default_role.string'),
+            'user_require_email_verification.boolean' => __('validation/setting.user.user_require_email_verification.boolean'),
+
+            
+        ];
+    }
 }
