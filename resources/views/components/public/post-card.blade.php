@@ -12,7 +12,7 @@
 
             {{-- Левая часть: --}}
             @if ($post->category)
-                <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1  ">
+                <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1">
                     <i class="fas fa-tag mr-1"></i>
                     <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}"
                         class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -27,7 +27,7 @@
                 <div class="flex items-center">
                     <div class="inline-flex items-center space-x-1">
                         <i class="fas fa-calendar-day"></i>
-                        <span>{{ $post->updated_at->format('d.m.Y H:i') }}</span>
+                        <span>{{ $post->created_at->format('d.m.Y H:i') }}</span>
                     </div>
                 </div>
 
@@ -106,7 +106,7 @@
                 {{-- View --}}
                 <div class="flex items-center">
                     <i class="fas fa-eye mr-1"></i>
-                    <span>{{ Number::abbreviate($post->views) ?? 0 }}</span>
+                    <span>{{ Number::abbreviate($post->actual_views) ?? 0 }}</span>
                 </div>
 
                 {{-- bookmark --}}

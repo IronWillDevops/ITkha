@@ -17,7 +17,8 @@ class Post extends Model
 {
     use SoftDeletes,
         HasFactory,
-        Filterable;
+        Filterable,
+        Cacheable;
     protected $fillable = [
         'title',
         'content',
@@ -74,5 +75,13 @@ class Post extends Model
     public function allApprovedComments()
     {
         return $this->hasMany(Comment::class)->with('children')->where('status', CommentStatus::APPROVED);
+    }
+
+    public function getActualViewsAttribute(): int
+    {
+        $key = "post:views:{$this->id}";
+        $cached = self::getCacheCounter($key);
+
+        return $this->views + $cached;
     }
 }
