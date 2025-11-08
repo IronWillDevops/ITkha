@@ -23,7 +23,7 @@
                 <div class="flex flex-wrap items-center text-sm space-x-4 ">
                     <div class="inline-flex items-center space-x-1">
                         <i class="fas fa-calendar-day"></i>
-                        <span>{{ $post->updated_at->format('d/m/Y') }}</span>
+                        <span>{{ $post->created_at->format('d/m/Y') }}</span>
                     </div>
 
                     <span>|</span>
@@ -51,7 +51,7 @@
                     <span>|</span>
                     <span class="inline-flex items-center">
                         <i class="fa fa-eye "></i>
-                        <span class="font-medium ml-2">{{ Number::abbreviate($post->views) }}</span>
+                        <span class="font-medium ml-2">{{ Number::abbreviate($post->actual_views) }}</span>
                     </span>
                     <span>|</span>
 
