@@ -41,13 +41,13 @@ class RolePermissionSeeder extends Seeder
             ['Header' => 'Users', 'title' => 'users_delete', 'description' => 'Delete users'],
             ['Header' => 'Users', 'title' => 'users_show', 'description' => 'Show users'],
 
-            ['Header' => 'Roles', 'title' => 'roles_edit', 'description' => 'Edit roles'],
             ['Header' => 'Roles', 'title' => 'roles_create', 'description' => 'Create roles'],
+            ['Header' => 'Roles', 'title' => 'roles_edit', 'description' => 'Edit roles'],
             ['Header' => 'Roles', 'title' => 'roles_delete', 'description' => 'Delete roles'],
             ['Header' => 'Roles', 'title' => 'roles_show', 'description' => 'Show roles'],
 
-            ['Header' => 'Contacts', 'title' => 'contacts_edit', 'description' => 'Edit contact'],
             ['Header' => 'Contacts', 'title' => 'contacts_create', 'description' => 'Create contact'],
+            ['Header' => 'Contacts', 'title' => 'contacts_edit', 'description' => 'Edit contact'],
             ['Header' => 'Contacts', 'title' => 'contacts_delete', 'description' => 'Delete contact'],
             ['Header' => 'Contacts', 'title' => 'contacts_show', 'description' => 'Show contact'],
 

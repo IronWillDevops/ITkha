@@ -3,12 +3,6 @@
     {{ __('admin/comments.title') }}
 @endsection
 @section('admin.content')
-    <div class="flex items-center justify-between mb-6">
-        {{-- <x-admin.form.action-button type="link" route="{{ route('admin.comment.create') }}" icon="fa-solid fa-plus"
-            label="{{ __('admin/comments.actions.create') }}" /> --}}
-
-    </div>
-
     {{-- Таблица постов --}}
     <div class="overflow-x-auto shadow ">
         <table class="min-w-full divide-y ">

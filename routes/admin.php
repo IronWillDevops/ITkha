@@ -123,6 +123,16 @@ Route::prefix('admin')->name('admin.')
                         Route::get('/', App\Http\Controllers\Admin\Setting\User\EditController::class)->name('edit')->middleware('permission:settings_show');
                         Route::patch('/', App\Http\Controllers\Admin\Setting\User\UpdateController::class)->name('update')->middleware('permission:settings_edit');
                     });
+                Route::prefix('contacts')
+                    ->name('contact.')
+                    ->group(function () {
+                        Route::get('/', App\Http\Controllers\Admin\Setting\Contact\IndexController::class)->name('index')->middleware('permission:contacts_show');
+                         Route::get('/{contact}', App\Http\Controllers\Admin\Setting\Contact\ShowController::class)->name('show')->middleware('permission:contacts_show');
+                         Route::post('/{contact}/reply', App\Http\Controllers\Admin\Setting\Contact\ReplyController::class)->name('reply')->middleware('permission:contacts_create');
+                        // Route::get('/', App\Http\Controllers\Admin\Setting\Contact\EditController::class)->name('edit')->middleware('permission:settings_show');
+                        // Route::patch('/', App\Http\Controllers\Admin\Setting\Contact\UpdateController::class)->name('update')->middleware('permission:settings_edit');
+                    });
+
                 Route::prefix('site')
                     ->name('site.')
                     ->group(function () {
