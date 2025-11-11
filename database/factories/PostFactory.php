@@ -20,12 +20,13 @@ class PostFactory extends Factory
     public function definition(): array
     {
         $dt = $this->faker->dateTimeBetween('2025-01-01', now());
+        $text = urlencode($this->faker->words(2, true));
         return [
-            'main_image' => $this->faker->imageUrl(800, 600, 'nature', true),
+            'main_image' => "https://placehold.co/800x600?text={$text}&font=roboto",
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(3, true),
 
-            
+
             'status' => $this->faker->randomElement([
                 PostStatus::DRAFT,
                 PostStatus::PUBLISHED,

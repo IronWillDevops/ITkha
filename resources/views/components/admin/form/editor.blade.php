@@ -19,7 +19,7 @@
         <style>
             /* Общий стиль для кнопок: задать фон и цвет */
             trix-toolbar .trix-button {
-                background-color: var(--color-card-foreground);
+                background-color: white;
                 color: white;
                 background-image: none !important;
             }

@@ -6,8 +6,7 @@
             <li>
                 <a href="{{ route('admin.index') }}"
                     class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                    <i class="fas fas fa-tachometer-alt "></i><span
-                        class="ml-2">{{ __('admin/dashboard.title') }}</span>
+                    <i class="fas fa-tachometer-alt"></i><span class="ml-2">{{ __('admin/dashboard.title') }}</span>
                 </a>
             </li>
             {{-- Posts --}}
@@ -15,36 +14,37 @@
                 <details class="group" open>
                     <summary
                         class="cursor-pointer hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                        <i class="fa-solid fa-newspaper "></i><span class="ml-2">{{ __('admin/posts.title') }}</span>
+                        <i class="fa-solid fa-newspaper"></i><span class="ml-2">{{ __('admin/posts.title') }}</span>
                     </summary>
                     <ul class="pl-8 pt-2 space-y-2">
                         <li>
                             <a href="{{ route('admin.post.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fa-solid fa-newspaper "></i><span
+                                    class="fa-solid fa-newspaper"></i><span
                                     class="ml-2">{{ __('admin/posts.title') }}</span></a>
                         </li>
                         <li>
                             <a href="{{ route('admin.category.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fa-solid fa-tag "></i><span
+                                    class="fa-solid fa-tag"></i><span
                                     class="ml-2">{{ __('admin/categories.title') }}</span></a>
                         </li>
                         <li>
                             <a href="{{ route('admin.tag.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fa-solid fa-tags "></i><span
+                                    class="fa-solid fa-tags"></i><span
                                     class="ml-2">{{ __('admin/tags.title') }}</span></a>
                         </li>
                         <li>
                             <a href="{{ route('admin.comment.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fa-solid fa-comments "></i><span
+                                    class="fa-solid fa-comments"></i><span
                                     class="ml-2">{{ __('admin/comments.title') }}</span></a>
                         </li>
                     </ul>
                 </details>
             </li>
+
             {{-- Users --}}
             <li>
                 <details class="group">
@@ -56,25 +56,34 @@
                         <li>
                             <a href="{{ route('admin.user.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fa-solid fa-users "></i><span
+                                    class="fa-solid fa-users"></i><span
                                     class="ml-2">{{ __('admin/users.title') }}</span></a>
                         </li>
                         <li>
                             <a href="{{ route('admin.role.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fas fa-user-plus "></i><span
+                                    class="fas fa-user-plus"></i><span
                                     class="ml-2">{{ __('admin/roles.title') }}</span></a>
                         </li>
                     </ul>
                 </details>
             </li>
 
+
+            {{-- Contacts --}}
+            <li>
+                <a href="{{ route('admin.setting.contact.index') }}" class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
+                        class="fa-solid fa-envelope"></i><span
+                        class="ml-2">{{ __('admin/contacts.title') }}</span></a>
+            </li>
+
+
             {{-- Settings --}}
             <li>
                 <details class="group">
                     <summary
                         class="cursor-pointer hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                        <i class="fas fa-cog "></i><span class="ml-2">{{ __('admin/settings.title') }}</span>
+                        <i class="fas fa-cog"></i><span class="ml-2">{{ __('admin/settings.title') }}</span>
                     </summary>
                     <ul class="pl-8 pt-2 space-y-2">
                         <li>
@@ -83,7 +92,6 @@
                                     class="fa-solid fa-globe"></i><span
                                     class="ml-2">{{ __('admin/settings.site.title') }}</span></a>
                         </li>
-
 
                         <li>
                             <a href="{{ route('admin.setting.user.edit') }}"
@@ -100,19 +108,19 @@
                         <li>
                             <a href="{{ route('admin.footerlink.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fas fa-cog "></i><span
+                                    class="fas fa-cog"></i><span
                                     class="ml-2">{{ __('admin/footerlink.title') }}</span></a>
                         </li>
                         <li>
                             <a href="{{ route('admin.info.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fas fa-server "></i><span
+                                    class="fas fa-server"></i><span
                                     class="ml-2">{{ __('admin/info.title') }}</span></a>
                         </li>
                         <li>
                             <a href="{{ route('admin.log.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring"><i
-                                    class="fa fa-history "></i><span
+                                    class="fa fa-history"></i><span
                                     class="ml-2">{{ __('admin/logs.title') }}</span></a>
                         </li>
                     </ul>
@@ -123,7 +131,7 @@
             <li>
                 <a href="https://fontawesome.com/" target="_blank"
                     class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                    <i class="fa-solid fa-icons "></i><span class="ml-2">{{ __('admin/icons.title') }}</span></a>
+                    <i class="fa-solid fa-icons"></i><span class="ml-2">{{ __('admin/icons.title') }}</span></a>
             </li>
         </ul>
     </div>

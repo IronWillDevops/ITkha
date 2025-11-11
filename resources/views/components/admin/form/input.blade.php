@@ -8,8 +8,8 @@
         </div>
         <input type="{{ $type }}" id="{{ $name }}" name="{{ $name }}"
             value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}"
-            class="w-full caret-primary border border-input rounded-lg px-3 py-2  ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring "
-            {{ $required ? 'required' : '' }}>
+            class="w-full caret-primary border border-input rounded-lg px-3 py-2  ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring"
+            {{ $required ? 'required' : '' }} {{ $readonly ? 'readonly' : '' }}>
     </div>
     @error($name)
         <p class="text-sm text-error mt-1">{{ $message }}</p>

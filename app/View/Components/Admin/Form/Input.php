@@ -18,8 +18,10 @@ class Input extends Component
     public $icon;
     public $placeholder;
     public $required;
+    public $readonly;
 
-    public function __construct($name, $label, $type = 'text', $value = '', $icon = null, $placeholder = null, $required = true)
+    public function __construct($name, $label, $type = 'text', $value = '', $icon = null, $placeholder = null, $required = true,
+        $readonly = false)
     {
         $this->name = $name;
         $this->label = $label;
@@ -28,6 +30,8 @@ class Input extends Component
         $this->icon = $icon;
         $this->placeholder = $placeholder;
         $this->required = $required;
+        $this->readonly = $readonly;
+
     }
     /**
      * Get the view / contents that represent the component.
