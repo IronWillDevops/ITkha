@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Setting\Contact;
+
 use App\Mail\ContactReplyMail;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Setting\Contacts\ReplyRequest;
 use App\Models\Contact;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ReplyController extends Controller
@@ -12,11 +13,9 @@ class ReplyController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, Contact $contact)
+    public function __invoke(ReplyRequest $request, Contact $contact)
     {
-        $validated = $request->validate([
-            'message' => ['required', 'string', 'min:3'],
-        ]);
+        $validated = $request->validated();
 
         // Тема листа
         $subject = "Request Ticket#{$contact->id} - {$contact->subject}";
@@ -24,11 +23,10 @@ class ReplyController extends Controller
         // Відправка листа через Mailable
          Mail::to($contact->email)->send(new ContactReplyMail($contact, $validated['message'], $subject));
 
-        // Можна відмітити, що контакт оброблено
         $contact->update(['is_read' => true]);
 
         return redirect()
-            ->route('admin.setting.contact.show', $contact)
-            ->with('success', 'Відповідь успішно надіслано.');
+            ->route('admin.setting.contact.index', $contact)
+            ->with('success', __('admin/contacts.messages.send'));
     }
 }
