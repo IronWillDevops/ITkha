@@ -19,4 +19,7 @@ return [
         'placeholder' => 'Write your reply here...',
         'original_message' => 'Original message',
     ],
+      'messages' => [
+        'send' => 'The response was successfully sent.',
+    ],
 ];

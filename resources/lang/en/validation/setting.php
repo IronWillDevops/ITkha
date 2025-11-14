@@ -52,4 +52,12 @@ return [
         ],
     ],
 
+    'contacts' => [
+        'message' => [
+            'required' => 'The message field is required.',
+            'string'   => 'The message must be a string.',
+            'min'      => 'The message must be at least :min characters.',
+        ],
+    ],
+
 ];
