@@ -4,6 +4,7 @@ namespace App\Services\Public;
 
 use App\Models\Post;
 use App\Enums\PostStatus;
+use App\Models\User;
 
 class PostService
 {

@@ -70,7 +70,7 @@ Route::prefix('admin')->name('admin.')
                 Route::delete('/{user}', App\Http\Controllers\Admin\User\DeleteController::class)->name('delete')->middleware('permission:users_delete');
             });
 
-        Route::prefix('roles')
+        Route::prefix('role')
             ->name('role.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Role\IndexController::class)->name('index')->middleware('permission:roles_show');
@@ -111,13 +111,13 @@ Route::prefix('admin')->name('admin.')
             ->name('setting.')
             ->group(function () {
 
-                Route::prefix('comments')
+                Route::prefix('comment')
                     ->name('comment.')
                     ->group(function () {
                         Route::get('/', App\Http\Controllers\Admin\Setting\Comment\EditController::class)->name('edit')->middleware('permission:settings_show');
                         Route::patch('/', App\Http\Controllers\Admin\Setting\Comment\UpdateController::class)->name('update')->middleware('permission:settings_edit');
                     });
-                Route::prefix('users')
+                Route::prefix('user')
                     ->name('user.')
                     ->group(function () {
                         Route::get('/', App\Http\Controllers\Admin\Setting\User\EditController::class)->name('edit')->middleware('permission:settings_show');

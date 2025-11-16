@@ -5,6 +5,7 @@ return [
 
     'fields' => [
         'id' => 'ID',
+        'slug' => 'Slug',
         'title' => 'Назва',
         'main_image' => 'Головне зображення',
         'categories' => 'Категорії',
@@ -17,6 +18,7 @@ return [
     ],
 
     'placeholder' => [
+        'slug' => 'Введіть слаг (наприклад my-first-post)',
         'title' => 'Введіть заголовок',
         'content' => 'Введіть контент',
     ],

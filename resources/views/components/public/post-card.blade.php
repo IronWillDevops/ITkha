@@ -34,7 +34,7 @@
                 {{-- Edit --}}
                 @if (Auth::check() && Auth::user()->hasPermission('posts_edit'))
                     <div class="flex items-center">
-                        <a href="{{ route('admin.post.edit', $post->id) }}"
+                        <a href="{{ route('admin.post.edit', $post) }}"
                             class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
@@ -48,7 +48,7 @@
 
         <div class="flex-grow">
             <h4 class="mb-2 text-card-foreground text-xl font-semibold">
-                <a href="{{ route('public.post.show', $post->id) }}"
+                <a href="{{ route('public.post.show', $post) }}"
                     class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
                     {!! highlight($post->title, request('search')) !!}
                 </a>
@@ -80,7 +80,7 @@
         <div class="flex justify-between items-center text-muted-foreground flex-wrap gap-4 ">
 
             {{-- Левая часть: ссылка "Read more" --}}
-            <a href="{{ route('public.post.show', $post->id) }}"
+            <a href="{{ route('public.post.show', $post) }}"
                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold p-2 rounded-sm flex items-center focus:ring focus:outline-none ">
                 {{ __('public/post.read_more') }}
                 <i class="fas fa-link ml-2"></i>
@@ -92,7 +92,7 @@
                 {{-- Автор --}}
                 <div class="flex items-center">
                     <i class="fas fa-user mr-1"></i>
-                    <a href="{{ route('public.user.show', $post->author->id) }}"
+                    <a href="{{ route('public.user.show', $post->author) }}"
                         class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
                         <span>{!! highlight($post->author->login ?? 'Unknown', request('search')) !!}</span>
                     </a>

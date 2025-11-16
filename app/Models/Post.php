@@ -8,17 +8,22 @@ use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Traits\Filterable;
 use App\Models\Traits\Cacheable;
-use App\Models\Traits\Viewable;
+use App\Models\Traits\HasSlug;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Redis;
 
 class Post extends Model
 {
     use SoftDeletes,
         HasFactory,
         Filterable,
-        Cacheable;
+        Cacheable,
+        HasSlug;
+
+
+    protected $slugSource = 'title';   // генерируем slug из title
+    protected $slugColumn = 'slug';    // сохраняем в колонку slug
+    protected $slugShouldUpdate = true; // если хочешь перегенерировать при изменении title
     protected $fillable = [
         'title',
         'content',
@@ -84,4 +89,9 @@ class Post extends Model
 
         return $this->views + $cached;
     }
+
+    public function getRouteKeyName(): string
+{
+    return $this->getSlugColumn();
+}
 }

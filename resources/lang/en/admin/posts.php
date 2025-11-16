@@ -5,6 +5,7 @@ return [
 
     'fields' => [
         'id' => 'ID',
+        'slug' => 'Slug',
         'title' => 'Title',
         'main_image' => 'Main image',
         'categories' => 'Categories',
@@ -17,6 +18,7 @@ return [
     ],
 
     'placeholder' => [
+        'slug' => 'Enter slug (e.g. my-first-post)',
         'title' => 'Enter title',
         'content' => 'Enter content',
     ],

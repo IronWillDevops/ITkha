@@ -4,9 +4,9 @@
 @endsection
 @section('admin.content')
     <div class="flex items-center gap-4 mb-4">
-        <x-admin.form.action-button type='link' route="{{ route('admin.post.edit', $post->id) }}" icon="fas fa-edit"
+        <x-admin.form.action-button type='link' route="{{ route('admin.post.edit', $post) }}" icon="fas fa-edit"
             label="{{ __('admin/posts.actions.edit') }}" />
-        <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.post.delete', $post->id) }}"
+        <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.post.delete', $post) }}"
             icon="fas fa-trash-alt" label="{{ __('admin/posts.actions.delete') }}" />
     </div>
 
@@ -47,12 +47,17 @@
                 <span class="text-xs text-text-secondary">-</span>
             @endforelse
         </div>
+        
+        <div>
+            <span class="font-medium">{{ __('admin/posts.fields.slug') }}:</span>
+            {{ $post->slug }}
+        </div>
     </div>
 
 
 
     {{-- Контент --}}
-    <div class="prose max-w-none"  id="post-content">
+    <div class="prose max-w-none" id="post-content">
         {!! $post->content !!}
     </div>
 @endsection

@@ -5,7 +5,7 @@
 @endsection
 
 @section('admin.content')
-        <form action="{{ route('admin.role.update', $role->id) }}" method="POST">
+        <form action="{{ route('admin.role.update', $role) }}" method="POST">
             @csrf
             @method('PATCH')
             {{-- Название роли --}}

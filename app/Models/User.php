@@ -160,4 +160,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Post::class, 'favorites')->withTimestamps();
     }
+
+    //Slug 
+    public function getRouteKeyName(): string
+    {
+        return 'login';
+    }
 }

@@ -24,7 +24,7 @@
         </div>
         <div>
             <span class="font-medium">{{ __('admin/comments.fields.author') }}:</span>
-            <a href="{{ route('admin.user.show',$comment->user->id) }}" class="hover:underline">{{ $comment->user->login }}</a>
+            <a href="{{ route('admin.user.show',$comment->user) }}" class="hover:underline">{{ $comment->user->login }}</a>
         </div>
 
         <div>
@@ -41,7 +41,7 @@
 
         @if ($comment->post)
             <div>
-                <a href="{{ route('admin.post.show', $comment->post->id) }}"
+                <a href="{{ route('admin.post.show', $comment->post) }}"
                     class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
                     {{ $comment->post->title }}
                 </a>

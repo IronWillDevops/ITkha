@@ -5,7 +5,7 @@
 
     @section('admin.content')
         {{-- Форма --}}
-        <form action="{{ route('admin.post.update', $post->id) }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('admin.post.update', $post) }}" method="POST" enctype="multipart/form-data"
             class="space-y-6">
             @csrf
             @method('PATCH')

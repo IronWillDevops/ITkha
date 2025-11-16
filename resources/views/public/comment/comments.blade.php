@@ -18,7 +18,7 @@
                 @endif
 
                 <strong>
-                    <a href="{{ route('public.user.show', $comment->user->id) }}" class="hover:underline font-medium">
+                    <a href="{{ route('public.user.show', $comment->user) }}" class="hover:underline font-medium">
                         {{ $comment->user->login }}
                     </a>
                 </strong>

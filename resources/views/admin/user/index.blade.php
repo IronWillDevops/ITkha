@@ -28,7 +28,7 @@
                     <tr>
                         <td class="px-4 py-2 text-sm ">{{ $user->id }}</td>
                         <td class="px-4 py-2 text-sm link  hover:underline "><a
-                                href="{{ route('admin.user.show', $user->id) }}"
+                                href="{{ route('admin.user.show', $user) }}"
                                 class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $user->login }}</a></td>
                         <td class="px-4 py-2 text-sm ">{{ $user->email }}</td>
                         <td class="px-4 py-2 text-sm link  hover:underline"><a
@@ -43,14 +43,14 @@
                         </td>
                         <td class="px-4 py-2 text-sm text-right space-x-2 flex justify-end">
                             {{-- Кнопка редагування --}}
-                            <a href="{{ route('admin.user.edit', $user->id) }}"
+                            <a href="{{ route('admin.user.edit', $user) }}"
                                 class="focus:ring focus:outline-none focus-visible:ring-ring inline-flex items-center p-2 rounded-lg transition"
                                 title="{{ __('admin/users.actions.edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
                             {{-- Кнопка видалення --}}
-                            <form action="{{ route('admin.user.delete', $user->id) }}" method="POST"
+                            <form action="{{ route('admin.user.delete', $user) }}" method="POST"
                                 onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')"
                                 class="inline-block">
                                 @csrf

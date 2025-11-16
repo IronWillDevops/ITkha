@@ -26,4 +26,9 @@ class Role extends Model
             }
         });
     }
+      //Slug 
+    public function getRouteKeyName(): string
+    {
+        return 'title';
+    }
 }

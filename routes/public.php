@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 // Redirect from root to /posts
-Route::redirect('/', '/posts');
+Route::redirect('/', '/post');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', App\Http\Controllers\Public\Auth\Login\IndexController::class)->name('login');
@@ -65,7 +65,7 @@ Route::prefix('/')
     ->name('public.')
     ->group(function () {
 
-        Route::prefix('/posts')
+        Route::prefix('/post')
             ->name('post.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Public\Post\IndexController::class)->name('index');
@@ -86,7 +86,7 @@ Route::prefix('/')
             });
 
 
-        Route::prefix('/users')
+        Route::prefix('/user')
             ->name('user.')
             ->group(function () {
                 Route::get('/{user}', App\Http\Controllers\Public\User\ShowController::class)->name('show');

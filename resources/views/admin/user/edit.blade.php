@@ -5,7 +5,7 @@
 @endsection
 
 @section('admin.content')
-    <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.user.update', $user) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @method('PATCH')
         {{-- Personal Information --}}

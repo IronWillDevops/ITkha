@@ -27,11 +27,11 @@
                            
                         </td>
                         <td class="px-4 py-2 text-sm  font-medium hover:underline">
-                            <a href ="{{ route('admin.user.show', $comment->user->id) }}"
+                            <a href ="{{ route('admin.user.show', $comment->user) }}"
                                 class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $comment->user->login }}</a>
                         </td>
                         <td class="px-4 py-2 text-sm  font-medium hover:underline">
-                            <a href ="{{ route('admin.post.show', $comment->post->id) }}"
+                            <a href ="{{ route('admin.post.show', $comment->post) }}"
                                 class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $comment->post->title }}</a>
                         </td>
                         <td class="px-4 py-2 text-sm  font-medium ">
