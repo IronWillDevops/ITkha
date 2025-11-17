@@ -27,7 +27,7 @@
                         <tr>
                             <td class="px-4 py-2 text-sm ">{{ $role->id }}</td>
                             <td class="px-4 py-2 text-sm link hover:underline"><a
-                                    href="{{ route('admin.role.show', $role->id) }}" class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $role->title }}</a>
+                                    href="{{ route('admin.role.show', $role) }}" class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $role->title }}</a>
                             </td>
 
                             <td class="px-4 py-2 text-sm ">{{ $role->users()->count() }}</td>
@@ -35,14 +35,14 @@
 
                             <td class="px-4 py-2 text-sm text-right space-x-2 flex justify-end">
                                 {{-- Кнопка редагування --}}
-                                <a href="{{ route('admin.role.edit', $role->id) }}"
+                                <a href="{{ route('admin.role.edit', $role) }}"
                                     class="focus:ring focus:outline-none focus-visible:ring-ring inline-flex items-center p-2 rounded-lg transition"
                                     title="{{ __('admin/roles.actions.edit') }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
                                 {{-- Кнопка видалення --}}
-                                <form action="{{ route('admin.role.delete', $role->id) }}" method="POST"
+                                <form action="{{ route('admin.role.delete', $role) }}" method="POST"
                                     onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')"
                                     class="inline-block">
                                     @csrf

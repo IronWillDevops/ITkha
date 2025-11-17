@@ -143,7 +143,7 @@
     {{-- User Profile --}}
     <div
         class="bg-card text-card-foreground  hover:bg-accent hover:text-accent-foreground border border-border shadow hover:shadow-md rounded-lg p-4 mt-4">
-        <a href="{{ route('admin.user.show', Auth::user()->id) }}"
+        <a href="{{ route('admin.user.show', Auth::user()) }}"
             class="flex items-center space-x-4 focus:ring focus:outline-none focus-visible:ring-ring ">
 
             @if (Auth::user()->avatar)

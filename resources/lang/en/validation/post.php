@@ -1,5 +1,6 @@
 <?php
 return [
+
     // Title
     'title' => [
         'required' => 'The title field is required.',
@@ -54,5 +55,5 @@ return [
         'integer'  => 'The user ID must be an integer.',
         'exists'   => 'The specified user does not exist.',
     ],
-    
+
 ];

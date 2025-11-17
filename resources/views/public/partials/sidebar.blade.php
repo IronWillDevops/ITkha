@@ -10,7 +10,7 @@
                 <li>
                     <div class="mb-4 flex flex-col ">
                         <span class="text-xs text-muted-foreground">{{ $post->created_at->format('d/m/Y') }}</span>
-                        <a href="{{ route('public.post.show', $post->id) }}"
+                        <a href="{{ route('public.post.show', $post) }}"
                             class=" hover:underline focus:ring focus:outline-none focus-visible:ring-ring">{{ $post->title }}</a>
                     </div>
                 </li>
@@ -29,7 +29,7 @@
                         <div class="mb-4 flex flex-col ">
                             <span
                                 class="text-xs text-muted-foreground">{{ $comment->created_at->diffForHumans() }}</span>
-                            <a href="{{ route('public.post.show', $comment->post_id) }}"
+                            <a href="{{ route('public.post.show',$comment->post) }}"
                                 class=" hover:underline focus:ring focus:outline-none focus-visible:ring-ring break-all">{{ Str::limit(strip_tags(html_entity_decode($comment->body)), 50) }}</a>
                         </div>
                     </li>

@@ -68,7 +68,7 @@
          <x-public.ui.separator />
          <!-- User action cards (1 col on mobile, 2 cols on md+) -->
          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 ">
-             <a href="{{ route('public.user.show', $user->id) }}"
+             <a href="{{ route('public.user.show', $user) }}"
                  class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-pen text-xl"></i>
                  <div>
@@ -78,7 +78,7 @@
                  </div>
              </a>
 
-             <a href="{{ route('public.user.show.like', $user->id) }}"
+             <a href="{{ route('public.user.show.like', $user) }}"
                  class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-heart text-xl"></i>
                  <div>
@@ -88,7 +88,7 @@
                          {{ __('public/profile.actions.liked_posts.description') }}</p>
                  </div>
              </a>
-             <a href="{{ route('public.user.show.favorite', $user->id) }}"
+             <a href="{{ route('public.user.show.favorite', $user) }}"
                  class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-bookmark text-xl"></i>
                  <div>
@@ -101,7 +101,7 @@
                  </div>
              </a>
 
-             <a href="{{ route('public.user.edit', $user->id) }}"
+             <a href="{{ route('public.user.edit', $user) }}"
                  class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-cog text-xl"></i>
                  <div>

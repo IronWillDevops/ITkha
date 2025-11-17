@@ -3,7 +3,7 @@
 @section('public.content')
     <div
         class="text-xl mb-4 p-4 bg-card shadow-sm border border-border text-card-foreground hover:shadow-md rounded-lg">
-        <form action="{{ route('public.user.update', $user->id) }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('public.user.update', $user) }}" method="POST" enctype="multipart/form-data"
             class="space-y-10">
             @csrf
             @method('PATCH')
@@ -88,7 +88,7 @@
 
         <x-public.ui.separator />
 
-        <form action="{{ route('public.user.password.update', $user->id) }}" method="POST" class="space-y-10">
+        <form action="{{ route('public.user.password.update', $user) }}" method="POST" class="space-y-10">
             @csrf
             @method('PATCH')
             {{-- Розділ: Безпека --}}

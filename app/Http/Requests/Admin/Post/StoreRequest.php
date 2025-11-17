@@ -23,6 +23,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+          
             'title' => ['required', 'string', 'min:2', 'max:100'],
 
             'content' => ['required', 'string'],
@@ -45,6 +46,7 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
+         
             // Повідомлення для title
             'title.required' => __('validation/post.title.required'),
             'title.string' => __('validation/post.title.string'),

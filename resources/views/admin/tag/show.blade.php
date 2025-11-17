@@ -36,7 +36,7 @@
                 @foreach ($posts as $post)
                     <li>
                         <span>{{ $post->id }})</span>
-                        <a href="{{ route('admin.post.show', $post->id) }}"
+                        <a href="{{ route('admin.post.show', $post) }}"
                             class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
                             {{ $post->title }}
                         </a>

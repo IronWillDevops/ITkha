@@ -28,11 +28,11 @@
                     <tr>
                         <td class="px-4 py-2 text-sm ">{{ $post->id }}</td>
                         <td class="px-4 py-2 text-sm  font-medium  hover:underline">
-                            <a href ="{{ route('admin.post.show', $post->id) }}"
+                            <a href ="{{ route('admin.post.show', $post) }}"
                                 class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $post->title }}</a>
                         </td>
                         <td class="px-4 py-2 text-sm font-medium  hover:underline">
-                            <a href="{{ route('admin.post.show', $post->id) }}"
+                            <a href="{{ route('admin.post.show', $post) }}"
                                 class="focus:ring focus:outline-none focus-visible:ring-ring">
                                 {{ $post->category->title }}
                             </a>
@@ -56,14 +56,14 @@
                         </td>
                         <td class="px-4 py-2 text-sm text-right space-x-2 flex justify-end ">
                             {{-- Кнопка редагування --}}
-                            <a href="{{ route('admin.post.edit', $post->id) }}"
+                            <a href="{{ route('admin.post.edit', $post) }}"
                                 class="inline-flex items-center p-2 rounded-lg transition focus:ring focus:outline-none focus-visible:ring-ring"
                                 title="{{ __('admin/posts.actions.edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
                             {{-- Кнопка видалення --}}
-                            <form action="{{ route('admin.post.delete', $post->id) }}" method="POST"
+                            <form action="{{ route('admin.post.delete', $post) }}" method="POST"
                                 onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')"
                                 class="inline-block">
                                 @csrf

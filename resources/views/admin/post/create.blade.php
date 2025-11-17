@@ -7,6 +7,8 @@
         {{-- Форма --}}
         <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
+
+                
             <x-admin.form.input name="title" label="{{ __('admin/posts.fields.title') }}"
                 placeholder="{{ __('admin/posts.placeholder.title') }}" icon="fa-solid fa-heading" />
 

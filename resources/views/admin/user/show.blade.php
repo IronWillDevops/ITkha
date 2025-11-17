@@ -6,9 +6,9 @@
 
 @section('admin.content')
     <div class="flex items-center gap-4 mb-4">
-        <x-admin.form.action-button type='link' route="{{ route('admin.user.edit', $user->id) }}" icon="fas fa-edit"
+        <x-admin.form.action-button type='link' route="{{ route('admin.user.edit', $user) }}" icon="fas fa-edit"
             label="{{ __('admin/users.actions.edit') }}" />
-        <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.user.delete', $user->id) }}"
+        <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.user.delete', $user) }}"
             icon="fas fa-trash-alt" label="{{ __('admin/users.actions.delete') }}" />
     </div>
 
@@ -149,11 +149,11 @@
                         <tr>
                             <td class="px-4 py-2 text-sm ">{{ $post->id }}</td>
                             <td class="px-4 py-2 text-sm  font-medium  hover:underline">
-                                <a href ="{{ route('admin.post.show', $post->id) }}"
+                                <a href ="{{ route('admin.post.show', $post) }}"
                                     class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $post->title }}</a>
                             </td>
                             <td class="px-4 py-2 text-sm font-medium  hover:underline">
-                                <a href="{{ route('admin.post.show', $post->id) }}"
+                                <a href="{{ route('admin.post.show', $post) }}"
                                     class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     {{ $post->category->title }}
                                 </a>
@@ -177,14 +177,14 @@
                             </td>
                             <td class="px-4 py-2 text-sm text-right space-x-2 flex justify-end ">
                                 {{-- Кнопка редагування --}}
-                                <a href="{{ route('admin.post.edit', $post->id) }}"
+                                <a href="{{ route('admin.post.edit', $post) }}"
                                     class="inline-flex items-center p-2 rounded-lg transition focus:ring focus:outline-none focus-visible:ring-ring"
                                     title="{{ __('admin/posts.actions.edit') }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
                                 {{-- Кнопка видалення --}}
-                                <form action="{{ route('admin.post.delete', $post->id) }}" method="POST"
+                                <form action="{{ route('admin.post.delete', $post) }}" method="POST"
                                     onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')"
                                     class="inline-block">
                                     @csrf

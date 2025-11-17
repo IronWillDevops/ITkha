@@ -16,7 +16,7 @@ class UpdateController extends BaseController
         try {
             $data = $request->validated();
             $role = $this->service->update($data, $role);
-            return  redirect()->route('admin.role.show', $role->id)->with('success', __('admin/roles.messages.edit', ['title' => $role->title])); 
+            return  redirect()->route('admin.role.show', $role)->with('success', __('admin/roles.messages.edit', ['title' => $role->title])); 
         } catch (CannotUpdateProtectedRoleException $ex) {
             return redirect()->route('admin.role.index')->with('error',$ex->getMessage() );
         }

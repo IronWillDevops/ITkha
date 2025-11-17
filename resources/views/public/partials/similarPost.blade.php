@@ -6,14 +6,14 @@
                  <article
                      class="border border-border rounded-xl overflow-hidden flex flex-col hover:shadow-md transition">
                      @if (!empty($post->main_image) && Storage::disk('public')->exists($post->main_image))
-                         <a href="{{ route('public.post.show', $post->id) }}" class="block w-full h-40 overflow-hidden  focus:ring focus:outline-none focus-visible:ring-ring">
+                         <a href="{{ route('public.post.show', $post) }}" class="block w-full h-40 overflow-hidden  focus:ring focus:outline-none focus-visible:ring-ring">
                              <img src="{{ asset('storage/' . $post->main_image) }}" alt="post-image"
                                  class="w-full h-full object-cover  " />
                          </a>
                      @endif
                      <div class="p-4 flex flex-col flex-grow">
                          <h3 class=" font-bold mb-2 text-card-foreground ">
-                             <a href="{{ route('public.post.show', $post->id) }}" class="hover:underline  focus:ring focus:outline-none focus-visible:ring-ring">
+                             <a href="{{ route('public.post.show', $post) }}" class="hover:underline  focus:ring focus:outline-none focus-visible:ring-ring">
                                  {{ $post->title }}
                              </a>
                          </h3>
@@ -28,7 +28,7 @@
 
                              <span class="inline-flex items-center">
                                  <i class="fa fa-user ml-2"></i>
-                                 <a href="{{ route('public.user.show', $post->author->id) ?? '#' }}"
+                                 <a href="{{ route('public.user.show', $post->author) ?? '#' }}"
                                      class="hover:underline font-medium ml-2  focus:ring focus:outline-none focus-visible:ring-ring">
                                      {{ $post->author->login ?? 'Author' }}
                                  </a>
