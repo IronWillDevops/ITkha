@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Development;
 
 use App\Models\Contact;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
