@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Setting\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Setting\Site\UpdateRequest;
 use App\Models\Setting;
-use Illuminate\Http\Request;
 
 class UpdateController extends Controller
 {

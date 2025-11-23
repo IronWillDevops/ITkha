@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
             'site_name' => ['required', 'string', 'max:255'],
             'site_description' => ['nullable', 'string', 'max:1000'],
             'site_keywords' => ['nullable', 'string', 'max:500'],
-            'site_favicon' => ['nullable', 'image', 'mimes:png,ico,jpg', 'max:2048'],
+            'site_favicon' => ['nullable',  'mimes:ico', 'max:2048'],
         ];
     }
     public function messages(): array
@@ -42,7 +42,6 @@ class UpdateRequest extends FormRequest
             'site_keywords.string' => __('validation/setting.site.keywords.string'),
             'site_keywords.max' => __('validation/setting.site.keywords.max'),
 
-            'site_favicon.image' => __('validation/setting.site.favicon.image'),
             'site_favicon.mimes' => __('validation/setting.site.favicon.mimes'),
             'site_favicon.max' => __('validation/setting.site.favicon.max'),
 

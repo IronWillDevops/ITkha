@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Info;
+namespace App\Http\Controllers\Admin\Setting\Info;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -59,7 +59,7 @@ class IndexController extends Controller
             ];
         });
 
-        return view('admin.info.index', compact('info'));
+        return view('admin.setting.info.index', compact('info'));
     }
 
     protected function bytesToHuman($bytes, $decimals = 2)

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Setting\Contacts;
+namespace App\Http\Requests\Admin\Contacts;
 
 use Illuminate\Foundation\Http\FormRequest;
 

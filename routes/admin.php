@@ -100,12 +100,16 @@ Route::prefix('admin')->name('admin.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Log\IndexController::class)->name('index')->middleware('permission:logs_show');
             });
-        Route::prefix('info')
-            ->name('info.')
-            ->group(function () {
-                Route::get('/', App\Http\Controllers\Admin\Info\IndexController::class)->name('index')->middleware('permission:settings_show');
-            });
 
+        Route::prefix('contacts')
+            ->name('contact.')
+            ->group(function () {
+                Route::get('/', App\Http\Controllers\Admin\Contact\IndexController::class)->name('index')->middleware('permission:contacts_show');
+                Route::get('/{contact}', App\Http\Controllers\Admin\Contact\ShowController::class)->name('show')->middleware('permission:contacts_show');
+                Route::post('/{contact}/reply', App\Http\Controllers\Admin\Contact\ReplyController::class)->name('reply')->middleware('permission:contacts_create');
+                // Route::get('/', App\Http\Controllers\Admin\Setting\Contact\EditController::class)->name('edit')->middleware('permission:settings_show');
+                // Route::patch('/', App\Http\Controllers\Admin\Setting\Contact\UpdateController::class)->name('update')->middleware('permission:settings_edit');
+            });
 
         Route::prefix('settings')
             ->name('setting.')
@@ -123,14 +127,11 @@ Route::prefix('admin')->name('admin.')
                         Route::get('/', App\Http\Controllers\Admin\Setting\User\EditController::class)->name('edit')->middleware('permission:settings_show');
                         Route::patch('/', App\Http\Controllers\Admin\Setting\User\UpdateController::class)->name('update')->middleware('permission:settings_edit');
                     });
-                Route::prefix('contacts')
-                    ->name('contact.')
+
+                Route::prefix('info')
+                    ->name('info.')
                     ->group(function () {
-                        Route::get('/', App\Http\Controllers\Admin\Setting\Contact\IndexController::class)->name('index')->middleware('permission:contacts_show');
-                         Route::get('/{contact}', App\Http\Controllers\Admin\Setting\Contact\ShowController::class)->name('show')->middleware('permission:contacts_show');
-                         Route::post('/{contact}/reply', App\Http\Controllers\Admin\Setting\Contact\ReplyController::class)->name('reply')->middleware('permission:contacts_create');
-                        // Route::get('/', App\Http\Controllers\Admin\Setting\Contact\EditController::class)->name('edit')->middleware('permission:settings_show');
-                        // Route::patch('/', App\Http\Controllers\Admin\Setting\Contact\UpdateController::class)->name('update')->middleware('permission:settings_edit');
+                        Route::get('/', App\Http\Controllers\Admin\Setting\Info\IndexController::class)->name('index')->middleware('permission:settings_show');
                     });
 
                 Route::prefix('site')
@@ -138,6 +139,13 @@ Route::prefix('admin')->name('admin.')
                     ->group(function () {
                         Route::get('/', App\Http\Controllers\Admin\Setting\Site\EditController::class)->name('edit')->middleware('permission:settings_edit');
                         Route::patch('/',  App\Http\Controllers\Admin\Setting\Site\UpdateController::class)->name('update')->middleware('permission:settings_edit');
+                    });
+
+                Route::prefix('telegram')
+                    ->name('telegram.')
+                    ->group(function () {
+                        Route::get('/', App\Http\Controllers\Admin\Setting\Telegram\EditController::class)->name('edit')->middleware('permission:settings_edit');
+                        Route::patch('/',  App\Http\Controllers\Admin\Setting\Telegram\UpdateController::class)->name('update')->middleware('permission:settings_edit');
                     });
             });
     });

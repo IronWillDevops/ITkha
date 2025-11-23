@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Setting\Telegram;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Setting\Telegram\UpdateRequest;
+use App\Models\Setting;
+
+class UpdateController extends Controller
+{
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(UpdateRequest $request)
+    {
+        $data = $request->validated();
+
+        Setting::set('telegram_enabled', $data['telegram_enabled']);
+
+        if ($data['telegram_token']) {
+            Setting::set('telegram_token', $data['telegram_token']);
+        }
+        if ($data['telegram_chatid']) {
+            Setting::set('telegram_chat_id', $data['telegram_chatid']);
+        }
+
+        if ($data['telegram_template']) {
+            Setting::set('telegram_template', $data['telegram_template']);
+        }
+        Setting::set('telegram_send_without_sound', $data['telegram_send_without_sound']);
+
+        return redirect()
+            ->route('admin.setting.telegram.edit')
+            ->with('success', __('admin/settings.updated'));
+    }
+}

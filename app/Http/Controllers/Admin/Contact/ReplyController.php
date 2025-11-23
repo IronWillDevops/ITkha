@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Setting\Contact;
+namespace App\Http\Controllers\Admin\Contact;
 
 use App\Mail\ContactReplyMail;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Setting\Contacts\ReplyRequest;
+use App\Http\Requests\Admin\Contacts\ReplyRequest;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 
@@ -26,7 +26,7 @@ class ReplyController extends Controller
         $contact->update(['is_read' => true]);
 
         return redirect()
-            ->route('admin.setting.contact.index', $contact)
+            ->route('admin.contact.index', $contact)
             ->with('success', __('admin/contacts.messages.send'));
     }
 }

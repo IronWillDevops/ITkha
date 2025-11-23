@@ -60,15 +60,15 @@
             <div class="hidden w-full md:hidden mt-3" id="navbar-default">
                 <ul class="font-medium flex flex-col border-t border-input pt-3 space-y-2">
 
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit"
-                                    class="w-full text-left block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer">
-                                       <span>{{ __('admin/header.logout') }}</span>
-                                </button>
-                            </form>
-                        </li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                class="w-full text-left block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer">
+                                <span>{{ __('admin/header.logout') }}</span>
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -80,23 +80,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]');
             const navMenu = document.getElementById('navbar-default');
-            const userMenuButton = document.getElementById('userMenuButton');
-            const userDropdown = document.getElementById('userDropdown');
 
             // Бургер-меню
             toggleButton?.addEventListener('click', () => navMenu.classList.toggle('hidden'));
 
-            // Выпадающее меню пользователя
-            userMenuButton?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                userDropdown.classList.toggle('hidden');
-            });
 
-            document.addEventListener('click', (e) => {
-                if (!userDropdown.contains(e.target) && !userMenuButton.contains(e.target)) {
-                    userDropdown.classList.add('hidden');
-                }
-            });
         });
     </script>
 @endpush

@@ -63,7 +63,7 @@
                             <div class="p-2 font-medium truncate border-b border-input">
                                 {{ Auth::user()->login }}
                             </div>
-                            <a href="{{ route('public.user.show', Auth::user()->id) }}"
+                            <a href="{{ route('public.user.show', Auth::user()) }}"
                                 class="block p-2 hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
                                 {{ __('public/auth.profile') }}
                             </a>
@@ -98,7 +98,7 @@
 
                     @auth
                         <li>
-                            <a href="{{ route('public.user.show', Auth::user()->id) }}"
+                            <a href="{{ route('public.user.show', Auth::user()) }}"
                                 class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
                                 {{ __('public/auth.profile') }}
                             </a>
