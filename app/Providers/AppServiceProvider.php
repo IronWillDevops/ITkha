@@ -26,10 +26,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-             // Enabled https
-        // if ($this->app->environment('production')) {
-        //     URL::forceScheme('https');
-        // }
+        // Enabled https
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
 
         // Default Password
         Password::defaults(function () {
@@ -58,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(\App\Models\Role::class,  \App\Policies\Admin\RolePolicy::class);
         Gate::policy(\App\Models\Role::class,  \App\Policies\Admin\RolePolicy::class);
         Gate::policy(\App\Models\Contact::class,  \App\Policies\Admin\ContactPolicy::class);
-        
+
         Gate::policy(\App\Models\Setting::class,  \App\Policies\Admin\SettingPolicy::class);
         Gate::policy(\App\Models\Log::class,  \App\Policies\Admin\LogPolicy::class);
     }
