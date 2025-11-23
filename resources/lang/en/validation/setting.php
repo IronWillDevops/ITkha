@@ -46,7 +46,6 @@ return [
             'max' => 'The site keywords may not be greater than :max characters.',
         ],
         'favicon' => [
-            'image' => 'The favicon must be an image file.',
             'mimes' => 'The favicon must be a file of type: png, ico, jpg, jpeg, or svg.',
             'max' => 'The favicon may not be greater than :max kilobytes.',
         ],
@@ -58,6 +57,26 @@ return [
             'string'   => 'The message must be a string.',
             'min'      => 'The message must be at least :min characters.',
         ],
+    ],
+
+    'telegram' => [
+        'enabled' => [
+            'boolean' => 'This field must be true or false.'
+        ],
+        'token' => [
+            'string' => 'The bot token must be a valid string.'
+        ],
+        'chatid' => [
+            'string' => 'The chat ID must be a valid string.'
+        ],
+        'send_without_sound' => [
+            'boolean' => 'This field must be true or false.'
+        ],
+        'telegram_template' => [
+            'required' => 'The field is required.',
+            'string'   => 'The field must be a string.',
+        ]
+
     ],
 
 ];

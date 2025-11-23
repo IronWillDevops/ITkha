@@ -2,8 +2,12 @@
 
 return [
     'title' => 'Налаштування',
-
     'updated' => 'Налаштування збережено',
+    'section' => [
+        'main' => 'Основні',
+        'additional' => 'Додаткові',
+        'integrations' => 'Інтеграції',
+    ],
 
     'comments' => [
         'title' => 'Налаштування коментарів',
@@ -32,13 +36,24 @@ return [
         'favicon' => 'Favicon',
         'timezone' => 'Часовий пояс',
 
-          // Placeholders
+        // Placeholders
         'placeholders' => [
             'name' => 'Введіть назву сайту (наприклад, Моя компанія)',
             'description' => 'Коротко опишіть призначення або зміст сайту',
             'keywords' => 'Введіть ключові слова через кому (наприклад, блог, техно, новини)',
             'favicon' => 'Завантажте невелику іконку (16x16 або 32x32)',
-            'timezone' => 'Оберіть часовий пояс сайту (наприклад, Europe/Kyiv)',
         ],
+    ],
+    'telegram' => [
+        'title' => 'Telegram',
+        'enabled' => 'Увімкнути публікацію в Telegram',
+        'token' => "Токен бота",
+        'chatid' => 'Chat ID',
+        'send_without_sound' => 'Надсилати без звуку',
+
+        'placeholder' => [
+            'token' => 'Введіть API токен вашого Telegram-бота (наприклад: 1234567890:AAH1aBcD2EfG3...)',
+            'chatid' => 'Введіть ID чату або каналу (наприклад: -1009876543210)',
+        ]
     ],
 ];

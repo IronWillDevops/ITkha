@@ -6,7 +6,7 @@
 
 @section('admin.content')
     <div class="space-y-6">
-        <form action="{{ route('admin.setting.contact.reply', $contact) }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.contact.reply', $contact) }}" method="POST" class="space-y-6">
             @csrf
 
             {{-- Відправник / Отримувач --}}

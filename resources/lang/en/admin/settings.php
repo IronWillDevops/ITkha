@@ -2,6 +2,11 @@
 
 return [
     'title' => 'Settings',
+    'section' => [
+        'main' => 'Main',
+        'additional' => 'Additional',
+        'integrations' => 'Integrations',
+    ],
     'updated' => 'Settings saved',
     'comments' => [
         'title' => 'Comment Settings',
@@ -27,7 +32,6 @@ return [
         'description' => 'Site Description',
         'keywords' => 'Meta Keywords',
         'favicon' => 'Favicon',
-        'timezone' => 'Timezone',
 
         'placeholders' => [
             'name' => 'Enter your website name (e.g., My Company)',
@@ -36,5 +40,16 @@ return [
             'favicon' => 'Upload a small icon (16x16 or 32x32)',
             'timezone' => 'Select your site timezone (e.g., Europe/Kyiv)',
         ],
+    ],
+    'telegram' => [
+        'title' => 'Telegram',
+        'enabled' => 'Enable Telegram posting',
+        'token' => "Bot Token",
+        'chatid' => 'Chat ID',
+        'send_without_sound' => 'Send without sound',
+        'placeholder' => [
+            'token' => "Enter your Telegram Bot API token (e.g. 1234567890:AAH1aBcD2EfG3...)",
+            'chatid' => 'Enter the Telegram chat or channel ID (e.g. -1009876543210)',
+        ]
     ],
 ];

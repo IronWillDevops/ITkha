@@ -31,6 +31,20 @@ class SettingsSeeder extends Seeder
             ['key' => 'user_default_status', 'value' => 'Active'],
             ['key' => 'user_default_role', 'value' => '3'], // id ролі "user"
             ['key' => 'user_require_email_verification', 'value' => '1'],
+
+            //Telegram
+            ['key' => 'telegram_enabled', 'value' => '0'],
+            ['key' => 'telegram_token', 'value' => ''],
+            ['key' => 'telegram_chat_id', 'value' => ''],
+            ['key' => 'telegram_send_without_sound', 'value' => '0'],
+            ['key' => 'telegram_template', 'value' => '<b>{{ title }}</b>
+
+{{ excerpt }}
+
+{{ url }}'],
+            ['key' => ' telegram_message_limit', 'value' => '450'],
+
+
         ];
         foreach ($data as $item) {
             Setting::firstOrCreate(
