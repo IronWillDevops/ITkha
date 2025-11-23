@@ -16,6 +16,8 @@ class EditController extends Controller
         $telegramEnabled = (bool) Setting::get('telegram_enabled');
         $telegramSendWithoutSound =(bool)Setting::get('telegram_send_without_sound');
         $telegramTemplate = Setting::get('telegram_template');
-        return view('admin.setting.telegram.edit', compact('telegramEnabled','telegramSendWithoutSound','telegramTemplate'));
+        $telegramMessageLimit= Setting::get('telegram_message_limit');
+        $telegramButtonText = Setting::get('telegram_button_text');
+        return view('admin.setting.telegram.edit', compact('telegramEnabled','telegramSendWithoutSound','telegramTemplate','telegramMessageLimit','telegramButtonText'));
     }
 }

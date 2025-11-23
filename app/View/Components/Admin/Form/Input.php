@@ -19,10 +19,21 @@ class Input extends Component
     public $placeholder;
     public $required;
     public $readonly;
+    public $min;
+    public $max;
 
-    public function __construct($name, $label, $type = 'text', $value = '', $icon = null, $placeholder = null, $required = true,
-        $readonly = false)
-    {
+    public function __construct(
+        $name,
+        $label,
+        $type = 'text',
+        $value = '',
+        $icon = null,
+        $placeholder = null,
+        $required = true,
+        $readonly = false,
+        $min = null,
+        $max = null
+    ) {
         $this->name = $name;
         $this->label = $label;
         $this->type = $type;
@@ -31,7 +42,8 @@ class Input extends Component
         $this->placeholder = $placeholder;
         $this->required = $required;
         $this->readonly = $readonly;
-
+        $this->min = $min;
+        $this->max = $max;
     }
     /**
      * Get the view / contents that represent the component.
