@@ -27,6 +27,14 @@ class UpdateController extends Controller
         if ($data['telegram_template']) {
             Setting::set('telegram_template', $data['telegram_template']);
         }
+
+        if ($data['telegram_message_limit']) {
+            Setting::set('telegram_message_limit', $data['telegram_message_limit']);
+        }
+        if ($data['telegram_button_text']) {
+            Setting::set('telegram_button_text', $data['telegram_button_text']);
+        }
+
         Setting::set('telegram_send_without_sound', $data['telegram_send_without_sound']);
 
         return redirect()

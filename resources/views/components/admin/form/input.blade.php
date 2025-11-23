@@ -7,7 +7,8 @@
             <i class="{{ $icon }}"></i>
         </div>
         <input type="{{ $type }}" id="{{ $name }}" name="{{ $name }}"
-            value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}"
+            value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}" {{ $min ? "min=$min" : '' }}
+            {{ $max ? "max=$max" : '' }}
             class="w-full caret-primary border border-input rounded-lg px-3 py-2  ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring"
             {{ $required ? 'required' : '' }} {{ $readonly ? 'readonly' : '' }}>
     </div>

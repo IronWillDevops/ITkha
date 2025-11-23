@@ -37,12 +37,12 @@ class SettingsSeeder extends Seeder
             ['key' => 'telegram_token', 'value' => ''],
             ['key' => 'telegram_chat_id', 'value' => ''],
             ['key' => 'telegram_send_without_sound', 'value' => '0'],
-            ['key' => 'telegram_template', 'value' => '<b>{{ title }}</b>
+            ['key' => 'telegram_template', 'value' =>'
+<b>{{title}}</b>
 
-{{ excerpt }}
-
-{{ url }}'],
-            ['key' => ' telegram_message_limit', 'value' => '450'],
+{{excerpt}}'],
+            ['key' => 'telegram_message_limit', 'value' => '450'],
+            ['key' => 'telegram_button_text', 'value' => 'Read more...'],
 
 
         ];

@@ -25,7 +25,6 @@ class PostFactory extends Factory
 
         $text = urlencode($this->faker->words(2, true));
         return [
-            'main_image' => "https://placehold.co/800x600?text={$text}&font=roboto",
             'slug' => Str::slug($title), // автоматически генерируем slug
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(3, true),

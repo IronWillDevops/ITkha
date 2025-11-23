@@ -72,10 +72,22 @@ return [
         'send_without_sound' => [
             'boolean' => 'This field must be true or false.'
         ],
-        'telegram_template' => [
+        'template' => [
             'required' => 'The field is required.',
             'string'   => 'The field must be a string.',
-        ]
+            'max' => 'The field may not be greater than :max characters.',
+        ],
+        'button_text' => [
+            'required' => 'The field is required.',
+            'string'   => 'The field must be a string.',
+            'max' => 'The field may not be greater than :max characters.',
+        ],
+        'message_limit'=>[
+            'required'=> 'The field is required.',
+            'integer'=>  'The field must be a integer.',
+            'max'=> 'The field may not be greater than :max characters.',
+        ],
+        
 
     ],
 

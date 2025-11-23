@@ -25,10 +25,19 @@
             label="{{ __('admin/settings.telegram.send_without_sound') }}" :checked="$telegramSendWithoutSound" />
         @php
             $placeholder =
-                "<b>{{ title }}</b>\n\nCategory: {{ category }}\nTags: {{ tags }}\n\n{{ excerpt }}";
+                "<b>{{title}}</b>\n\nCategory: {{category}}\nTags: {{tags}}\n\n{{excerpt}}";
         @endphp
 
-        <x-admin.form.area name="telegram_template" label="Шаблон сообщения" :placeholder="$placeholder" :value="$telegramTemplate"/>
+        <x-admin.form.area name="telegram_template" label="{{ __('admin/settings.telegram.template') }}" :placeholder="$placeholder"
+            :value="$telegramTemplate" />
+        <x-admin.form.input name="telegram_message_limit" min="10" max="750" type="number"
+            label="{{ __('admin/settings.telegram.message_limit') }}"
+            placeholder="{{ __('admin/settings.telegram.placeholder.message_limit') }}" icon="fa-solid fa-heading"
+            :value="$telegramMessageLimit" />
+
+        <x-admin.form.input name="telegram_button_text" label="{{ __('admin/settings.telegram.button_text') }}"
+            placeholder="{{ __('admin/settings.telegram.placeholder.button_text') }}" icon="fa-solid fa-heading"
+            :value="$telegramButtonText" />
 
         <div class="flex space-x-3">
 
