@@ -79,6 +79,17 @@ else
 fi
 
 # ==========================================
+# STEP 2.1. Create storage symlink
+# ==========================================
+increment_step "Creating storage symbolic link..."
+if [ ! -L "$APP_DIR/public/storage" ]; then
+    $PHP_BIN artisan storage:link
+    success_step "Storage symbolic link created."
+else
+    success_step "Storage symbolic link already exists."
+fi
+
+# ==========================================
 # STEP 3. Update JS dependencies (if package.json exists)
 # ==========================================
 if [ -f "package.json" ]; then
