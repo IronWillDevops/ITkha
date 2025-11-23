@@ -20,7 +20,7 @@ cd $APP_DIR || exit
 # ==========================================
 # 0. Initialize variables
 # ==========================================
-TOTAL_STEPS=10
+TOTAL_STEPS=11
 CURRENT_STEP=0
 
 increment_step() {
@@ -79,14 +79,25 @@ else
 fi
 
 # ==========================================
-# STEP 2.1. Create storage symlink
+# STEP 2.1. Create storage symbolic link
 # ==========================================
 increment_step "Creating storage symbolic link..."
-if [ ! -L "$APP_DIR/public/storage" ]; then
-    $PHP_BIN artisan storage:link
-    success_step "Storage symbolic link created."
+
+STORAGE_LINK="$APP_DIR/public/storage"
+TARGET="$APP_DIR/storage/app/public"
+
+if [ -L "$STORAGE_LINK" ]; then
+    sudo rm "$STORAGE_LINK"
+    echo -e "[${YELLOW}INFO${RESET}] Old storage link removed."
+fi
+
+# Создание ссылки от имени веб-пользователя
+$PHP_BIN artisan storage:link
+
+if [ -L "$STORAGE_LINK" ] && [ "$(readlink -f $STORAGE_LINK)" = "$TARGET" ]; then
+    success_step "Storage symbolic link created correctly."
 else
-    success_step "Storage symbolic link already exists."
+    error_step "Failed to create correct storage link."
 fi
 
 # ==========================================
