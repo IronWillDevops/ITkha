@@ -15,7 +15,7 @@ class TrustProxies extends Middleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     
-    protected $proxies = '*';  
+    protected $proxies = env('TRUSTED_PROXIES', null);
     
     protected $headers = Request::HEADER_X_FORWARDED_ALL;
 }
