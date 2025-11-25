@@ -11,6 +11,11 @@ abstract class BaseObserver
 {
     protected function log(string $event, Model $model, ?array $changes = null): void
     {
+        dd([
+            'request_ip' => request()->ip(),
+            'server_remote_addr' => $_SERVER['REMOTE_ADDR'] ?? null,
+            'forwarded_for' => request()->header('x-forwarded-for'),
+        ]);
         Log::create([
             'model_type'  => get_class($model),
             'model_id'    => $model->getKey(),
@@ -19,7 +24,7 @@ abstract class BaseObserver
             'description' => $this->generateDescription($event, $model),
             'user_email'  => (Auth::user())->email ?? "System",
             'ip_address'  => request()->ip(),
-            'user_agent'  => Request::header('User-Agent'),
+            'user_agent' => request()->header('User-Agent'),
             'created_at'  => now(),
 
         ]);
@@ -39,8 +44,6 @@ abstract class BaseObserver
 
     protected function trimOldLogs(int $maxLogs = 25)
     {
-        $maxLogs = 25;
-
         $excess = Log::orderBy('id', 'desc')
             ->skip($maxLogs)
             ->take(PHP_INT_MAX)
