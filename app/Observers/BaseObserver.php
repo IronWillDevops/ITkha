@@ -12,7 +12,12 @@ abstract class BaseObserver
     protected function log(string $event, Model $model, ?array $changes = null): void
     {
         $ip = request()->ip();
-
+        //  $ip = request()->header('X-Forwarded-For');
+        // if ($ip) {
+        //     $ip = explode(',', $ip)[0]; // get first IP in the list
+        // } else {
+        //     $ip = request()->ip();
+        // }
         Log::create([
             'model_type'  => get_class($model),
             'model_id'    => $model->getKey(),
