@@ -97,4 +97,13 @@ Route::prefix('/')
                 Route::patch('/{user}/password', App\Http\Controllers\Public\User\UpdatePasswordController::class)->middleware('auth')->name('password.update');
             });
     });
+
+    Route::get('/ip', function (\Illuminate\Http\Request $request) {
+    return [
+        'request_ip' => $request->ip(),
+        'forwarded_for' => $_SERVER['HTTP_X_FORWARDED_FOR'] ?? null,
+        'real_ip' => $_SERVER['HTTP_X_REAL_IP'] ?? null,
+        'remote_addr' => $_SERVER['REMOTE_ADDR'] ?? null,
+    ];
+});
 // routes/web.php
