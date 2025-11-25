@@ -18,7 +18,7 @@ abstract class BaseObserver
             'changes'     => $changes,
             'description' => $this->generateDescription($event, $model),
             'user_email'  => (Auth::user())->email ?? "System",
-            'ip_address'  => Request::ip(),
+            'ip_address'  => request()->ip(),
             'user_agent'  => Request::header('User-Agent'),
             'created_at'  => now(),
 
