@@ -37,8 +37,6 @@ class UpdateController extends Controller
 
         Setting::set('telegram_send_without_sound', $data['telegram_send_without_sound']);
 
-        return redirect()
-            ->route('admin.setting.telegram.edit')
-            ->with('success', __('admin/settings.updated'));
+        return redirect()->route('admin.setting.telegram.edit')->with('success', __('admin/settings.updated'));
     }
 }
