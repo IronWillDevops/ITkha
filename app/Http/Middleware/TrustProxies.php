@@ -9,13 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TrustProxies extends Middleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
+    
     
     protected $proxies = env('TRUSTED_PROXIES', null);
     
-    protected $headers = Request::HEADER_X_FORWARDED_ALL;
+    
+    protected $headers = 
+        Request::HEADER_X_FORWARDED_FOR |
+        Request::HEADER_X_FORWARDED_HOST |
+        Request::HEADER_X_FORWARDED_PORT |
+        Request::HEADER_X_FORWARDED_PROTO;
 }
