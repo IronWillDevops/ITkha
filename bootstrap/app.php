@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
          //
-         
+
         $middleware->trustProxies(TrustProxies::class);
         $middleware->web(append: [
             LocaleMiddleware::class,

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Middleware\TrustProxies as Middleware;
 use Symfony\Component\HttpFoundation\Response;
 
-class TrustProxies extends Middleware
+class TrustProxies 
 {
     
     

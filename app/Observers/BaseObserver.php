@@ -11,10 +11,18 @@ abstract class BaseObserver
 {
     protected function log(string $event, Model $model, ?array $changes = null): void
     {
-        dd([
+        $ip =request()->header('X-Forwarded-For');
+        if ($ip) {
+            $ip = explode(',', $ip)[0]; // get first IP in the list
+        } else {
+            $ip =request()->ip();
+        }
+        dump([
             'request_ip' => request()->ip(),
-            'forwarded_for' => request()->header('x-forwarded-for'),
+        
+            'forwarded_for' => request()->header('X-Forwarded-For'),
             'server_remote_addr' => $_SERVER['REMOTE_ADDR'],
+            'ip'=>$ip,
         ]);
         Log::create([
             'model_type'  => get_class($model),
