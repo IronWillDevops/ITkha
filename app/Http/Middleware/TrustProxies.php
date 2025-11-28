@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Middleware;
-
-use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Http\Middleware\TrustProxies as Middleware;
-use Symfony\Component\HttpFoundation\Response;
+
+use Symfony\Component\HttpFoundation\Request;
 
 class TrustProxies extends Middleware
 {
