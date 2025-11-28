@@ -6,6 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\LocaleMiddleware;
+use App\Http\Middleware\TrustProxies;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
 
     )
     ->withMiddleware(function (Middleware $middleware) {
+         //
+
+        $middleware->trustProxies(TrustProxies::class);
         $middleware->web(append: [
             LocaleMiddleware::class,
         ]);

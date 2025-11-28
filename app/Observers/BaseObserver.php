@@ -11,6 +11,12 @@ abstract class BaseObserver
 {
     protected function log(string $event, Model $model, ?array $changes = null): void
     {
+         $ip = request()->header('X-Forwarded-For');
+        if ($ip) {
+            $ip = explode(',', $ip)[0]; // get first IP in the list
+        } else {
+            $ip = request()->ip();
+        }
         Log::create([
             'model_type'  => get_class($model),
             'model_id'    => $model->getKey(),
@@ -18,8 +24,8 @@ abstract class BaseObserver
             'changes'     => $changes,
             'description' => $this->generateDescription($event, $model),
             'user_email'  => (Auth::user())->email ?? "System",
-            'ip_address'  => Request::ip(),
-            'user_agent'  => Request::header('User-Agent'),
+            'ip_address'  => $ip,
+            'user_agent'  => request()->header('User-Agent'),
             'created_at'  => now(),
 
         ]);
@@ -39,17 +45,13 @@ abstract class BaseObserver
 
     protected function trimOldLogs(int $maxLogs = 25)
     {
-        $maxLogs = 25;
+        $lastIdToKeep = Log::orderByDesc('id')->skip($maxLogs)->value('id');
 
-        $excess = Log::orderBy('id', 'desc')
-            ->skip($maxLogs)
-            ->take(PHP_INT_MAX)
-            ->pluck('id');
-
-        if ($excess->isNotEmpty()) {
-            Log::whereIn('id', $excess)->delete();
+        if ($lastIdToKeep) {
+            Log::where('id', '<', $lastIdToKeep)->delete();
         }
     }
+
 
     protected function resolveModelLabel(Model $model): string
     {
