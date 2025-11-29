@@ -15,7 +15,7 @@ class EditController extends BaseController
     {
         $roles = Role::all();
         $status = UserStatus::cases();
-        return view('admin.user.edit', compact('user', 'roles', 'status')); // Можно заменить на вашу главную страницу
+        return view('admin.users.user.edit', compact('user', 'roles', 'status')); // Можно заменить на вашу главную страницу
 
     }
 }

@@ -10,7 +10,7 @@ class IndexController extends BaseController
     {
 
         $roles = Role::paginate(10);
-        return view('admin.role.index', compact('roles')); // Можно заменить на вашу главную страницу
+        return view('admin.users.role.index', compact('roles')); // Можно заменить на вашу главную страницу
 
     }
 }

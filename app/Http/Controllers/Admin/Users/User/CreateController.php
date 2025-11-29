@@ -18,6 +18,6 @@ class CreateController extends BaseController
     $user_require_email_verification = (bool)Setting::get('user_require_email_verification');
 
 
-    return view('admin.user.create', compact('roles', 'status','user_default_status','user_default_role', 'user_require_email_verification'));
+    return view('admin.users.user.create', compact('roles', 'status','user_default_status','user_default_role', 'user_require_email_verification'));
   }
 }

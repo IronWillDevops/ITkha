@@ -21,7 +21,7 @@ class EditController extends BaseController
         $tags = Tag::all();
         $users= User::all();
         $status=PostStatus::cases();
-        return view('admin.post.edit', compact('post','categories','tags','users','status')); // Можно заменить на вашу главную страницу/
+        return view('admin.posts.post.edit', compact('post','categories','tags','users','status')); // Можно заменить на вашу главную страницу/
 
     }
 }

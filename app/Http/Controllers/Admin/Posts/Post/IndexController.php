@@ -14,6 +14,6 @@ class IndexController extends BaseController
         ->paginate(10);
         $tags = Tag::all();
 
-        return view('admin.post.index', compact('posts', 'tags'));
+        return view('admin.posts.post.index', compact('posts', 'tags'));
     }
 }

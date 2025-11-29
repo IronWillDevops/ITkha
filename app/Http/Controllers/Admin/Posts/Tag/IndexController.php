@@ -11,6 +11,6 @@ class IndexController extends Controller
     public function __invoke()
     {
         $tags = Tag::paginate(10);
-        return view('admin.tag.index', compact('tags')); // Можно заменить на вашу главную страницу
+        return view('admin.posts.tag.index', compact('tags')); // Можно заменить на вашу главную страницу
     }
 }

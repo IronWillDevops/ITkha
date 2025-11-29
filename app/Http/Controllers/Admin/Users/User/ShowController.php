@@ -13,6 +13,6 @@ class ShowController extends BaseController
     {
         $posts = $user->posts()->paginate(10);
 
-        return view('admin.user.show', compact('user', 'posts')); // Можно заменить на вашу главную страницу
+        return view('admin.users.user.show', compact('user', 'posts')); // Можно заменить на вашу главную страницу
     }
 }

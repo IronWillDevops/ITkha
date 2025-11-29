@@ -9,6 +9,6 @@ class CreateController extends Controller
 {
   public function __invoke()
     {
-        return view('admin.tag.create'); // Можно заменить на вашу главную страницу
+        return view('admin.posts.tag.create'); // Можно заменить на вашу главную страницу
     }
 }

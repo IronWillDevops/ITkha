@@ -14,6 +14,6 @@ class ShowController extends BaseController
      */
     public function __invoke(Post $post)
     {
-        return view('admin.post.show', compact('post')); // Можно заменить на вашу главную страницу
+        return view('admin.posts.post.show', compact('post')); // Можно заменить на вашу главную страницу
     }
 }

@@ -13,6 +13,6 @@ class ShowController extends Controller
      */
     public function __invoke(Comment $comment)
     {
-             return view('admin.comment.show', compact('comment')); // Можно заменить на вашу главную страницу
+             return view('admin.posts.comment.show', compact('comment')); // Можно заменить на вашу главную страницу
     }
 }

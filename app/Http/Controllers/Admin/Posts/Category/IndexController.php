@@ -10,6 +10,6 @@ class IndexController extends Controller
     public function __invoke()
     {
         $categories = Category::paginate(10);
-        return view('admin.category.index', compact('categories')); // Можно заменить на вашу главную страницу
+        return view('admin.posts.category.index', compact('categories')); // Можно заменить на вашу главную страницу
     }
 }

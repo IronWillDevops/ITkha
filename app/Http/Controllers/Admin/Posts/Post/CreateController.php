@@ -17,6 +17,6 @@ class CreateController extends BaseController
     $users = User::all();
     $status = PostStatus::cases();
     $commentsEnabled = (bool) Setting::get('comments_enabled');
-    return view('admin.post.create', compact('categories', 'tags', 'users', 'status', 'commentsEnabled')); // Можно заменить на вашу главную страницу
+    return view('admin.posts.post.create', compact('categories', 'tags', 'users', 'status', 'commentsEnabled')); // Можно заменить на вашу главную страницу
   }
 }

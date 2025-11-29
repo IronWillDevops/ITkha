@@ -17,6 +17,6 @@ class ShowController extends Controller
         $posts = $tag->posts()
             ->orderBy('id', 'desc') // найновіші першими
             ->paginate(10);
-        return view('admin.tag.show', compact('tag','posts')); // Можно заменить на вашу главную страницу
+        return view('admin.posts.tag.show', compact('tag','posts')); // Можно заменить на вашу главную страницу
     }
 }

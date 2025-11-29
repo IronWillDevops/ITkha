@@ -13,6 +13,6 @@ class IndexController extends Controller
     public function __invoke()
     {
         $comments = Comment::paginate(10);
-        return view('admin.comment.index', compact('comments')); 
+        return view('admin.posts.comment.index', compact('comments')); 
     }
 }

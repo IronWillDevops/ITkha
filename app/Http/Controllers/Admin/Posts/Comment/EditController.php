@@ -17,6 +17,6 @@ class EditController extends Controller
         
         $users= User::all();
         $status=CommentStatus::cases();
-        return view('admin.comment.edit', compact('comment','status','users'));
+        return view('admin.posts.comment.edit', compact('comment','status','users'));
     }
 }

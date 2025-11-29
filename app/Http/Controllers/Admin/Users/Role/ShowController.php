@@ -15,7 +15,7 @@ class ShowController extends BaseController
         $users = $role->users()->paginate(10);
         
          $permissions = Permission::all()->groupBy('header');
-        return view('admin.role.show', compact('role', 'users','permissions')); // Можно заменить на вашу главную страницу
+        return view('admin.users.role.show', compact('role', 'users','permissions')); // Можно заменить на вашу главную страницу
 
     }
 }
