@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Posts\Category;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\Admin\Category\StoreRequest;
+use App\Http\Requests\Admin\Posts\Category\StoreRequest;
 use App\Models\Category;
 
 class StoreController extends Controller

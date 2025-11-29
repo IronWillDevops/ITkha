@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Setting\FooterLink;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\FooterLink\StoreRequest;
+use App\Http\Requests\Admin\Setting\FooterLink\StoreRequest;
 use App\Models\FooterLink;
 
 class StoreController extends Controller

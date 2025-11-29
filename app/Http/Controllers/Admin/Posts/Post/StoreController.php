@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Posts\Post;
 
 
 
-use App\Http\Requests\Admin\Post\StoreRequest;
+use App\Http\Requests\Admin\Posts\Post\StoreRequest;
 
 
 class StoreController extends BaseController

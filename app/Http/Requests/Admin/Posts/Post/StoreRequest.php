@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Post;
+namespace App\Http\Requests\Admin\Posts\Post;
 
 use App\Enums\PostStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,32 +23,30 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+          
             'title' => ['required', 'string', 'min:2', 'max:100'],
 
             'content' => ['required', 'string'],
 
-            'main_image' => ['file', 'mimes:jpg,jpeg,png', 'max:2048'],
-
+            'main_image' => ['file', 'mimes:jpg,png', 'max:2048'],
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],
             'comments_enabled' => ['required', 'boolean'],
+
 
             'category_id' => ['required', 'integer', 'exists:categories,id'],
 
             'tag_ids' => ['nullable', 'array'],
             'tag_ids.*' => ['nullable', 'integer', 'exists:tags,id'],
 
-
             'user_id' => ['required', 'integer', 'exists:users,id'],
-
 
         ];
     }
     public function messages(): array
     {
         return [
-
+         
             // Повідомлення для title
             'title.required' => __('validation/post.title.required'),
             'title.string' => __('validation/post.title.string'),

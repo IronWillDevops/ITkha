@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Comment;
+namespace App\Http\Requests\Admin\Posts\Comment;
 
 use App\Enums\CommentStatus;
 use Illuminate\Foundation\Http\FormRequest;

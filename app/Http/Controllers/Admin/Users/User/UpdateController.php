@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Users\User;
 
 use App\Exceptions\User\CannotDeactivateLastActiveUserException;
-use App\Http\Requests\Admin\User\UpdateRequest;
+use App\Http\Requests\Admin\Users\User\UpdateRequest;
 use App\Models\User;
 
 

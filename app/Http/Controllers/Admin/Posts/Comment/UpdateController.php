@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Posts\Comment;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Comment\UpdateRequest;
+use App\Http\Requests\Admin\Posts\Comment\UpdateRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 

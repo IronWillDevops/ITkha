@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\FooterLink;
+namespace App\Http\Requests\Admin\Setting\FooterLink;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Setting\FooterLink;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\FooterLink\UpdateRequest;
+use App\Http\Requests\Admin\Setting\FooterLink\UpdateRequest;
 use App\Models\FooterLink;
 
 class UpdateController extends Controller

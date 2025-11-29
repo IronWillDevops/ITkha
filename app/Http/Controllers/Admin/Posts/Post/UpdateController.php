@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Posts\Post;
 
-use App\Http\Requests\Admin\Post\UpdateRequest;
+use App\Http\Requests\Admin\Posts\Post\UpdateRequest;
 use App\Models\Post;
 
 

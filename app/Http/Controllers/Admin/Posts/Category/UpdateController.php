@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Posts\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Category\UpdateRequest;
+use App\Http\Requests\Admin\Posts\Category\UpdateRequest;
 use App\Models\Category;
 
 class UpdateController extends Controller

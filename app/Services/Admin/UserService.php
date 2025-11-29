@@ -70,6 +70,7 @@ class UserService
         }
 
         // Оновлення або створення профілю користувача
+
         $user->profile()->updateOrCreate(
             ['user_id' => $user->id],
             [

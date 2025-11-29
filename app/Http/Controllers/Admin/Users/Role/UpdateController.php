@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Users\Role;
 
 use App\Exceptions\Role\CannotUpdateProtectedRoleException;
-use App\Http\Requests\Admin\Role\UpdateRequest;
+use App\Http\Requests\Admin\Users\Role\UpdateRequest;
 use App\Models\Role;
 
 class UpdateController extends BaseController
