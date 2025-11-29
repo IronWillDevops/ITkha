@@ -46,7 +46,7 @@ return [
             'max' => 'The site keywords may not be greater than :max characters.',
         ],
         'favicon' => [
-            'mimes' => 'The favicon must be a file of type: png, ico, jpg, jpeg, or svg.',
+            'mimes' => 'The favicon must be a file of type: ico.',
             'max' => 'The favicon may not be greater than :max kilobytes.',
         ],
     ],
