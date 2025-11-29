@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\VerifyEmailNotification;
 use App\Notifications\ResetPasswordNotification;
 use App\Enums\PostStatus;
-use App\Models\Traits\Cacheable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {

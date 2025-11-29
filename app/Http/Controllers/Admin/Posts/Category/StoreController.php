@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Posts\Category;
+
+use App\Http\Controllers\Controller;
+
+use App\Http\Requests\Admin\Posts\Category\StoreRequest;
+use App\Models\Category;
+
+class StoreController extends Controller
+{
+    public function __invoke(StoreRequest $request)
+    {
+
+        $data = $request->validated();
+        Category::firstOrCreate($data);
+
+        return redirect()->route('admin.category.index')->with('success', __('admin/categories.messages.create',['title' => $data['title']]));
+    }
+}
