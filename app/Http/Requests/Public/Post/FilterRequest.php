@@ -38,24 +38,24 @@ class FilterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'search.string' => __('validation/filter.search.string'),
-            'search.min' => __('validation/filter.search.min'),
+            'search.string' => __('validation.string'),
+            'search.min' => __('validation.min.string'),
 
-            'title.string' => __('validation/filter.title.string'),
-            'content.string' => __('validation/filter.content.string'),
-            'category.string' => __('validation/filter.category.string'),
+            'title.string' => __('validation.string'),
+            'content.string' => __('validation.string'),
+            'category.string' => __('validation.string'),
 
-            'tags.array' => __('validation/filter.tags.array'),
+            'tags.array' => __('validation.array'),
 
-            'tags.*.string' => __('validation/filter.tags.*.string'),
+            'tags.*.string' => __('validation.string'),
 
-            'author.string' => __('validation/filter.author.string'),
+            'author.string' => __('validation.string'),
 
-            'sort_by.string' => __('validation/filter.sort_by.string'),
-            'sort_by.in' =>  __('validation/filter.sort_by.in'),
+            'sort_by.string' => __('validation.string'),
+            'sort_by.in' =>  __('validation.in'),
 
-            'sort_dir.string' => __('validation/filter.sort_dir.string'),
-            'sort_dir.in' => __('validation/filter.sort_dir.in'),
+            'sort_dir.string' => __('validation.string'),
+            'sort_dir.in' => __('validation.in'),
         ];
     }
 }

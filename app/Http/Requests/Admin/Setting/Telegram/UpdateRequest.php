@@ -35,23 +35,23 @@ class UpdateRequest extends FormRequest
     {
         return [
 
-            'telegram_enabled.boolean' => __('validation/setting.telegram.enabled.boolean'),
-            'telegram_token.string' => __('validation/setting.telegram.token.string'),
-            'telegram_chatid.string' => __('validation/setting.telegram.chatid.string'),
-            'telegram_send_without_sound.boolean' => __('validation/setting.telegram.send_without_sound.boolean'),
+            'telegram_enabled.boolean' => __('validation.boolean'),
+            'telegram_token.string' => __('validation.string'),
+            'telegram_chatid.string' => __('validation.string'),
+            'telegram_send_without_sound.boolean' => __('validation.boolean'),
 
-            'telegram_template.reqired' => __('validation/setting.telegram.template.reqired'),
-            'telegram_template.string' => __('validation/setting.telegram.template.string'),
-            'telegram_template.max' => __('validation/setting.telegram.template.max'),
+            'telegram_template.required' => __('validation.required'),
+            'telegram_template.string' => __('validation.string'),
+            'telegram_template.max' => __('validation.max.string'),
 
             
-            'telegram_message_limit.required' => __('validation/setting.telegram.message_limit.required'),
-            'telegram_message_limit.integer' => __('validation/setting.telegram.message_limit.integer'),
-            'telegram_message_limit.max' => __('validation/setting.telegram.message_limit.max'),
+            'telegram_message_limit.required' => __('validation.required'),
+            'telegram_message_limit.integer' => __('validation.integer'),
+            'telegram_message_limit.max' => __('validation.max.string'),
             
-            'telegram_button_text.required' => __('validation/setting.telegram.button_text.required'),
-            'telegram_button_text.string' => __('validation/setting.telegram.button_text.string'),
-            'telegram_button_text.max' => __('validation/setting.telegram.button_text.max'),
+            'telegram_button_text.required' => __('validation.required'),
+            'telegram_button_text.string' => __('validation.string'),
+            'telegram_button_text.max' => __('validation.max.string'),
         ];
     }
 }

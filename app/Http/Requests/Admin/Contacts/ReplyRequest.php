@@ -29,9 +29,9 @@ class ReplyRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'message.required' => __('validation/setting.contacts.message.required'),
-            'message.string' => __('validation/setting.contacts.message.string'),
-            'message.min' => __('validation/setting.contacts.message.min'),
+            'message.required' => __('validation.required'),
+            'message.string' => __('validation.string'),
+            'message.min' => __('validation.min.string'),
         ];
     }
 }

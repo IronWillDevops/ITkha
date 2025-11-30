@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
 
             'content' => ['required', 'string'],
 
-            'main_image' => ['file', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'main_image' => ['nullable','file', 'mimes:jpg,jpeg,png', 'max:2048'],
 
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],
@@ -37,7 +37,7 @@ class UpdateRequest extends FormRequest
             'category_id' => ['required', 'integer', 'exists:categories,id'],
 
             'tag_ids' => ['nullable', 'array'],
-            'tag_ids.*' => ['nullable', 'integer', 'exists:tags,id'],
+            'tag_ids.*' => [ 'integer', 'exists:tags,id'],
 
 
             'user_id' => ['required', 'integer', 'exists:users,id'],
@@ -50,38 +50,38 @@ class UpdateRequest extends FormRequest
         return [
 
             // Повідомлення для title
-            'title.required' => __('validation/post.title.required'),
-            'title.string' => __('validation/post.title.string'),
-            'title.min' => __('validation/post.title.min'),
-            'title.max' => __('validation/post.title.max'),
+            'title.required' => __('validation.required'),
+            'title.string' => __('validation.string'),
+            'title.min' => __('validation.min.string'),
+            'title.max' => __('validation.max.string'),
 
             // Повідомлення для content
-            'content.required' => __('validation/post.content.required'),
-            'content.string' => __('validation/post.content.string'),
+            'content.required' => __('validation.required'),
+            'content.string' => __('validation.string'),
 
             // Main image
-            'main_image.file' => __('validation/post.main_image.file'),
-            'main_image.mimes' => __('validation/post.main_image.mimes'),
-            'main_image.max' => __('validation/post.main_image.max'),
+            'main_image.file' => __('validation.file'),
+            'main_image.mimes' => __('validation.mimes'),
+            'main_image.max' => __('validation.max.file'),
 
-            'status.required' => __('validation/post.status.required'),
-            'status.string' => __('validation/post.status.string'),
-            'status.in' => __('validation/post.status.in'),
+            'status.required' => __('validation.required'),
+            'status.string' => __('validation.string'),
+            'status.in' => __('validation.in'),
 
-            'comments_enabled.required' => __('validation/post.comments_enabled.required'),
-            'comments_enabled.boolean' => __('validation/post.comments_enabled.boolean'),
+            'comments_enabled.required' => __('validation.required'),
+            'comments_enabled.boolean' => __('validation.boolean'),
 
-            'category_id.required' =>  __('validation/post.category_id.required'),
-            'category_id.integer' =>  __('validation/post.category_id.integer'),
-            'category_id.exists' =>  __('validation/post.category_id.exists'),
+            'category_id.required' =>  __('validation.required'),
+            'category_id.integer' =>  __('validation.integer'),
+            'category_id.exists' =>  __('validation.exists'),
 
-            'tag_ids.array' =>  __('validation/post.tag_ids.array'),
-            'tag_ids.*.integer' =>  __('validation/post.tag_ids.*.integer'),
-            'tag_ids.*.exists' =>  __('validation/post.tag_ids.*.exists'),
+            'tag_ids.array' =>  __('validation.array'),
+            'tag_ids.*.integer' =>  __('validation.integer'),
+            'tag_ids.*.exists' =>  __('validation.exists'),
 
-            'user_id.required' =>  __('validation/post.user_id.required'),
-            'user_id.integer' =>  __('validation/post.user_id.integer'),
-            'user_id.exists' =>  __('validation/post.user_id.exists'),
+            'user_id.required' =>  __('validation.required'),
+            'user_id.integer' =>  __('validation.integer'),
+            'user_id.exists' =>  __('validation.exists'),
         ];
     }
 }

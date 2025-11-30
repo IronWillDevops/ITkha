@@ -28,11 +28,11 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => __('validation/tag.title.required'),
-            'title.string' => __('validation/tag.title.string'),
-            'title.min' => __('validation/tag.title.min'),
-            'title.max' => __('validation/tag.title.max'),
-            'title.unique' => __('validation/tag.title.unique'),
+            'title.required' => __('validation.required'),
+            'title.string' => __('validation.string'),
+            'title.min' => __('validation.min.string'),
+            'title.max' => __('validation.max.string'),
+            'title.unique' => __('validation.unique'),
         ];
     }
 }

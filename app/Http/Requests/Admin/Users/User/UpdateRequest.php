@@ -67,41 +67,41 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => __('validation/user.name.required'),
-            'name.string' => __('validation/user.name.string'),
-            'name.max' => __('validation/user.name.max'),
-            'name.regex' => __('validation/user.name.regex'),
+            'name.required' => __('validation.required'),
+            'name.string' => __('validation.string'),
+            'name.max' => __('validation.max.string'),
+            'name.regex' => __('validation.regex'),
 
-            'surname.string' => __('validation/user.surname.string'),
-            'surname.max' => __('validation/user.surname.max'),
-            'surname.regex' => __('validation/user.surname.regex'),
+            'surname.string' => __('validation.string'),
+            'surname.max' => __('validation.max.string'),
+            'surname.regex' => __('validation.regex'),
 
-            'login.required' => __('validation/user.login.required'),
-            'login.string' =>  __('validation/user.login.string'),
-            'login.min' =>  __('validation/user.login.min'),
-            'login.max' =>  __('validation/user.login.max'),
-            'login.unique' =>  __('validation/user.login.unique'),
-            'login.regex' =>  __('validation/user.login.regex'),
+            'login.required' => __('validation.required'),
+            'login.string' =>  __('validation.string'),
+            'login.min' =>  __('validation.min.string'),
+            'login.max' =>  __('validation.max.string'),
+            'login.unique' =>  __('validation.unique'),
+            'login.regex' =>  __('validation.regex'),
 
-            'email.required' =>  __('validation/user.email.required'),
-            'email.string' =>  __('validation/user.email.string'),
-            'email.email' => __('validation/user.email.email'),
-            'email.max' =>  __('validation/user.email.max'),
-            'email.unique' =>  __('validation/user.email.unique'),
+            'email.required' =>  __('validation.required'),
+            'email.string' =>  __('validation.string'),
+            'email.email' => __('validation.email'),
+            'email.max' =>  __('validation.max.string'),
+            'email.unique' =>  __('validation.unique'),
 
-            'password.required' =>  __('validation/user.password.required'),
-            'password.string' =>  __('validation/user.password.string'),
-            'password.min' =>  __('validation/user.password.min'),
-            'password.max' =>  __('validation/user.password.max'),
+            'password.required' =>  __('validation.required'),
+            'password.string' =>  __('validation.string'),
+            'password.min' =>  __('validation.min.string'),
+            'password.max' =>  __('validation.max.string'),
 
-            'role_id.required' => __('validation/user.role_id.required'),
-            'role_id.exists' => __('validation/user.role_id.exists'),
+            'role_id.required' => __('validation.required'),
+            'role_id.exists' => __('validation.exists'),
 
-            'email_verified_at.required' => __('validation/user.email_verified_at.required'),
-            'email_verified_at.boolean' => __('validation/user.email_verified_at.boolean'),
+            'email_verified_at.required' => __('validation.required'),
+            'email_verified_at.boolean' => __('validation.boolean'),
 
-            'status.required' =>__('validation/user.status.required'),
-            'status.in' => __('validation/user.status.in'),
+            'status.required' =>__('validation.required'),
+            'status.in' => __('validation.in'),
 
         ];
     }

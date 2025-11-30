@@ -30,12 +30,12 @@ class StoreRequest extends FormRequest
     {
         return [
 
-            'email.required' => __('validation/auth.email.required'),
-            'email.string' => __('validation/auth.email.string'),
-            'email.email' => __('validation/auth.email.email'),
+            'email.required' => __('validation.required'),
+            'email.string' => __('validation.string'),
+            'email.email' => __('validation.email'),
 
-            'password.required' =>  __('validation/auth.password.required'),
-            'password.string' =>  __('validation/auth.password.string'),
+            'password.required' =>  __('validation.required'),
+            'password.string' =>  __('validation.string'),
         ];
     }
 }
