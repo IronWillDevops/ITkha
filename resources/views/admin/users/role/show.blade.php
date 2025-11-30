@@ -1,35 +1,35 @@
 @extends('admin.layouts.app')
 
 @section('admin.content.title')
-    {{ __('admin/roles.title') }} | {{ $role->title }}
+    {{ __('admin/role.title') }} | {{ $role->title }}
 @endsection
 
 @section('admin.content')
     <div class="flex items-center gap-4 mb-4">
         <x-admin.form.action-button type='link' route="{{ route('admin.role.edit', $role) }}" icon="fas fa-edit"
-            label="{{ __('admin/roles.actions.edit') }}" />
+            label="{{ __('admin/common.buttons.edit') }}" />
         <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.role.delete', $role) }}"
-            icon="fas fa-trash-alt" label="{{ __('admin/roles.actions.delete') }}" />
+            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" />
     </div>
 
 
 
     {{-- Метаданные --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm ">
         <div>
-            <span class="font-medium">{{ __('admin/roles.fields.title') }}:</span>
+            <span class="font-medium">{{ __('admin/common.fields.title') }}:</span>
             {{ $role->title }}
         </div>
         <div>
-            <span class="font-medium">{{ __('admin/roles.fields.created_at') }}:</span>
+            <span class="font-medium">{{ __('admin/common.fields.created_at') }}:</span>
             {{ $role->created_at }}
         </div>
     </div>
 
-    <div>
+    <div class="border-t border-border pt-4 mb-6">
         {{-- Permissions --}}
 
-        <h2 class="font-semibold mb-2">{{ __('admin/permissions.title') }}</h2>
+        <h2 class="text-lg font-semibold mb-2">{{ __('admin/role.permission.title') }}</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @foreach ($permissions as $header => $group)
@@ -52,22 +52,25 @@
         </div>
     </div>
 
-    <div>
-        <h2 class="font-semibold mb-2 mt-6">{{ __('admin/users.title') }}</h2>
+    <div class="border-t border-border pt-4">
+        <h2 class="text-lg font-semibold mb-2">
+            {{ __('admin/user.title') }}
+        </h2>
         {{-- Таблица постов --}}
         <div class="overflow-x-auto shadow ">
             <table class="min-w-full divide-y ">
                 <thead>
                     <tr>
-                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/users.fields.id') }}</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/users.fields.login') }}</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/users.fields.email') }}</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/users.fields.role') }}</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/users.fields.status') }}</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/users.fields.count') }}</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/users.fields.created_at') }}
+                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.id') }}</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/user.fields.login') }}</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.email') }}</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.role') }}</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.status') }}</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.count') }}</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.created_at') }}
                         </th>
-                        <th class="px-4 py-2 text-center text-sm font-semibold">{{ __('admin/common.actions.title') }}</th>
+                        <th class="px-4 py-2 text-center text-sm font-semibold">{{ __('admin/common.fields.actions') }}
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="divide-y ">
@@ -93,7 +96,7 @@
                                 {{-- Кнопка редагування --}}
                                 <a href="{{ route('admin.user.edit', $user) }}"
                                     class="focus:ring focus:outline-none focus-visible:ring-ring inline-flex items-center p-2 rounded-lg transition"
-                                    title="{{ __('admin/users.actions.edit') }}">
+                                    title="{{ __('admin/common.buttons.edit') }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
@@ -105,7 +108,7 @@
                                     @method('DELETE')
                                     <button type="submit"
                                         class="inline-flex items-center p-2 bg-destructive text-destructive-foreground rounded-lg transition focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer"
-                                        title="{{ __('admin/users.actions.delete') }}">
+                                        title="{{ __('admin/common.buttons.delete') }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

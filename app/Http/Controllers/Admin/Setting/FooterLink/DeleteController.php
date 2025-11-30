@@ -14,6 +14,6 @@ class DeleteController extends Controller
     public function __invoke(FooterLink $link)
     {
         $link->delete();
-        return redirect()->route('admin.footerlink.index')->with('success', __('admin/footerlink.messages.delete', ['title' => $link->title]));
+        return redirect()->route('admin.setting.footerlink.index')->with('success', __('admin/settings/footerlink.messages.deleted', ['title' => $link->title]));
     }
 }

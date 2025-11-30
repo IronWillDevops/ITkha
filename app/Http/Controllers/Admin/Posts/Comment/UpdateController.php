@@ -17,6 +17,6 @@ class UpdateController extends Controller
         $data = $request->validated();
         $comment->update($data);
         
-        return redirect()->route('admin.comment.show',$comment->id)->with('success', __('admin/comments.messages.edit', ['body' => $data['body']]));
+        return redirect()->route('admin.comment.show',$comment->id)->with('success', __('admin/comment.messages.updated', ['body' => $data['body']]));
     }
 }

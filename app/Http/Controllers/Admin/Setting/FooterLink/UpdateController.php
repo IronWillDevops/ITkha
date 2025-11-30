@@ -16,6 +16,6 @@ class UpdateController extends Controller
 
     $data = $request->validated();
     $link->update($data);
-    return redirect()->route('admin.footerlink.show', $link->id)->with('success', __('admin/footerlink.messages.edit', ['title' => $link->title]));
+    return redirect()->route('admin.setting.footerlink.show', $link->id)->with('success', __('admin/settings/footerlink.messages.updated', ['title' => $link->title]));
   }
 }

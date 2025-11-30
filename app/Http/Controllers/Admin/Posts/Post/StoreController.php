@@ -14,6 +14,6 @@ class StoreController extends BaseController
         $data = $request->validated();
         $this->service->store($data, $request);
 
-        return redirect()->route('admin.post.index')->with('success', __('admin/posts.messages.create', ['title' => $data['title']]));
+        return redirect()->route('admin.post.index')->with('success', __('admin/post.messages.created', ['title' => $data['title']]));
     }
 }

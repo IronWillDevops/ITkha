@@ -12,7 +12,7 @@ class ShowController extends Controller
      */
     public function __invoke(FooterLink $link)
     {
-          return view('admin.footerlink.show',compact('link')); // Можно заменить на вашу главную страницу
+          return view('admin.setting.footerlink.show',compact('link')); // Можно заменить на вашу главную страницу
 
     }
 }

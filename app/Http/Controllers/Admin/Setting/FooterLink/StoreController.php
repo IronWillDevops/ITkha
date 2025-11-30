@@ -16,6 +16,6 @@ class StoreController extends Controller
         $data = $request->validated();
         FooterLink::firstOrCreate($data);
 
-        return redirect()->route('admin.footerlink.index')->with('success', __('admin/footerlink.messages.create', ['title' => $data['title']]));
+        return redirect()->route('admin.setting.footerlink.index')->with('success', __('admin/settings/footerlink.messages.created', ['title' => $data['title']]));
     }
 }

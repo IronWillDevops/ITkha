@@ -8,6 +8,6 @@ class CannotDeleteLastCategoryException extends Exception
 {
     public function __construct()
     {
-        parent::__construct(__('exception/category.CannotDeleteLastCategoryException'));
+        parent::__construct(__('errors/category.delete.last'));
     }
 }

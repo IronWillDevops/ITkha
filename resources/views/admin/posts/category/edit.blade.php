@@ -1,6 +1,6 @@
     @extends('admin.layouts.app')
     @section('admin.content.title')
-        {{ __('admin/categories.actions.edit') }}
+        {{ __('admin/category.title') }}
     @endsection
 
     @section('admin.content')
@@ -9,14 +9,14 @@
             @csrf
             @method('PATCH')
 
-            <x-admin.form.input name="title" label="{{ __('admin/categories.fields.title') }}" value="{{ $category->title }}"
-                placeholder="{{ __('admin/categories.placeholder.title') }}" icon="fa-solid fa-heading" />
+            <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}" value="{{ $category->title }}"
+                placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-heading" />
 
             {{-- Кнопки --}}
             <div class="flex space-x-3">
-                <x-admin.form.submit label="{{ __('admin/common.actions.edit') }}" />
+                <x-admin.form.submit label="{{ __('admin/common.buttons.edit') }}" />
                 <x-admin.form.button href="{{ route('admin.category.index') }}"
-                    label="{{ __('admin/common.actions.cancel') }}" />
+                    label="{{ __('admin/common.buttons.cancel') }}" />
             </div>
         </form>
     @endsection

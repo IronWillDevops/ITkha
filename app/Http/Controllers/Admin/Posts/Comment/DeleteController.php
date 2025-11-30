@@ -14,6 +14,6 @@ class DeleteController extends Controller
     public function __invoke(Comment $comment)
     {
         $comment->delete();
-        return redirect()->route('admin.comment.index')->with('success', __('admin/comment.messages.delete', ['body' => $comment->body]));
+        return redirect()->route('admin.comment.index')->with('success', __('admin/comment.messages.deleted', ['body' => $comment->body]));
     }
 }

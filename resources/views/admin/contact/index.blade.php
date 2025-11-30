@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('admin.content.title')
-    {{ __('admin/contacts.title') }}
+    {{ __('admin/contact.title') }}
 @endsection
 
 @section('admin.content')
@@ -12,11 +12,11 @@
         <table class="min-w-full divide-y">
             <thead>
                 <tr class="font-semibold">
-                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/contacts.fields.id') }}</th>
-                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/contacts.fields.name') }}</th>
-                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/contacts.fields.subject') }}</th>
-                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/contacts.fields.email') }}</th>
-                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/contacts.fields.created_at') }}</th>
+                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/common.fields.id') }}</th>
+                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/common.fields.name') }}</th>
+                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/contact.fields.subject') }}</th>
+                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/common.fields.email') }}</th>
+                    <th class="px-4 py-2 text-left text-sm">{{ __('admin/common.fields.created_at') }}</th>
                 </tr>
             </thead>
             <tbody class="divide-y">

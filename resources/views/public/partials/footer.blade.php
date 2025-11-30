@@ -20,7 +20,7 @@
             <div class="text-center md:text-left">
                 @foreach (\App\Models\FooterLink::all() as $link)
                     <a href="{{ $link->url }}" class="transition" title="{{ $link->title }}">
-                        <i class="fab {{ $link->icon }} text-lg"></i>
+                        <i class="{{ $link->icon }} text-lg"></i>
                     </a>
                 @endforeach
             </div>

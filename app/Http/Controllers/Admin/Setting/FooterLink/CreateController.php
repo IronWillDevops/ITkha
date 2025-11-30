@@ -12,6 +12,6 @@ class CreateController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('admin.footerlink.create');
+        return view('admin.setting.footerlink.create');
     }
 }

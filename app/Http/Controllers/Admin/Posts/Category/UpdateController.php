@@ -15,7 +15,7 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
         $category->update($data);
-        return redirect()->route('admin.category.show', $category->id)->with('success', __('admin/categories.messages.edit',['title' => $category->title])); 
+        return redirect()->route('admin.category.show', $category->id)->with('success', __('admin/category.messages.updated',['title' => $category->title])); 
 
     }
 }

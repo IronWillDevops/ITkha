@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('admin.content.title')
-    {{ __('admin/settings.telegram.title') }}
+    {{ __('admin/settings/telegram.title') }}
 @endsection
 
 @section('admin.content')
@@ -10,40 +10,40 @@
         @method('PATCH')
 
         {{-- Разрешить комментарии под постами --}}
-        <x-admin.form.checkbox name="telegram_enabled" label="{{ __('admin/settings.telegram.enabled') }}"
+        <x-admin.form.checkbox name="telegram_enabled" label="{{ __('admin/settings/telegram.fields.enabled') }}"
             :checked="$telegramEnabled" />
 
         {{-- Telegram Token --}}
-        <x-public.form.password name="telegram_token" label="{{ __('admin/settings.telegram.token') }}"
-            placeholder="{{ __('admin/settings.telegram.placeholder.token') }}" :required='false' />
+        <x-public.form.password name="telegram_token" label="{{ __('admin/settings/telegram.fields.token') }}"
+            placeholder="{{ __('admin/settings/telegram.placeholder.token') }}" :required='false' />
 
         {{-- Telegram ChatID --}}
-        <x-public.form.password name="telegram_chatid" label="{{ __('admin/settings.telegram.chatid') }}"
-            placeholder="{{ __('admin/settings.telegram.placeholder.chatid') }}" :required='false' />
+        <x-public.form.password name="telegram_chatid" label="{{ __('admin/settings/telegram.fields.chatid') }}"
+            placeholder="{{ __('admin/settings/telegram.placeholder.chatid') }}" :required='false' />
 
         <x-admin.form.checkbox name="telegram_send_without_sound"
-            label="{{ __('admin/settings.telegram.send_without_sound') }}" :checked="$telegramSendWithoutSound" />
+            label="{{ __('admin/settings/telegram.fields.send_without_sound') }}" :checked="$telegramSendWithoutSound" />
         @php
             $placeholder =
                 "<b>{{title}}</b>\n\nCategory: {{category}}\nTags: {{tags}}\n\n{{excerpt}}";
         @endphp
 
-        <x-admin.form.area name="telegram_template" label="{{ __('admin/settings.telegram.template') }}" :placeholder="$placeholder"
+        <x-admin.form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}" :placeholder="$placeholder"
             :value="$telegramTemplate" />
         <x-admin.form.input name="telegram_message_limit" min="10" max="750" type="number"
-            label="{{ __('admin/settings.telegram.message_limit') }}"
-            placeholder="{{ __('admin/settings.telegram.placeholder.message_limit') }}" icon="fa-solid fa-heading"
+            label="{{ __('admin/settings/telegram.fields.message_limit') }}"
+            placeholder="{{ __('admin/settings/telegram.placeholder.message_limit') }}" icon="fa-solid fa-heading"
             :value="$telegramMessageLimit" />
 
-        <x-admin.form.input name="telegram_button_text" label="{{ __('admin/settings.telegram.button_text') }}"
-            placeholder="{{ __('admin/settings.telegram.placeholder.button_text') }}" icon="fa-solid fa-heading"
+        <x-admin.form.input name="telegram_button_text" label="{{ __('admin/settings/telegram.fields.button_text') }}"
+            placeholder="{{ __('admin/settings/telegram.placeholder.button_text') }}" icon="fa-solid fa-heading"
             :value="$telegramButtonText" />
 
         <div class="flex space-x-3">
 
-            <x-admin.form.submit label="{{ __('admin/common.actions.save') }}" />
+            <x-admin.form.submit label="{{ __('admin/common.buttons.save') }}" />
             <x-admin.form.button href="{{ route('admin.setting.comment.edit') }}"
-                label="{{ __('admin/common.actions.cancel') }}" />
+                label="{{ __('admin/common.buttons.cancel') }}" />
 
         </div>
     </form>

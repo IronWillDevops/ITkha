@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('admin.content.title')
-    {{ __('admin/settings.site.title') }}
+    {{ __('admin/settings/general.title') }}
 @endsection
 
 @section('admin.content')
@@ -10,14 +10,14 @@
         @method('PATCH')
 
 
-        <x-admin.form.input name="site_name" label="{{ __('admin/settings.site.name') }}" icon="fa-solid fa-heading"
-            placeholder="{{ __('admin/settings.site.placeholders.name') }}" value="{{ $site_name }}" />
+        <x-admin.form.input name="site_name" label="{{ __('admin/settings/general.fields.name') }}" icon="fa-solid fa-heading"
+            placeholder="{{ __('admin/settings/general.placeholder.name') }}" value="{{ $site_name }}" />
 
-        <x-admin.form.area name="site_description" label="{{ __('admin/settings.site.description') }}"
-            placeholder="{{ __('admin/settings.site.placeholders.description') }}" value="{{ $site_description }}" />
+        <x-admin.form.area name="site_description" label="{{ __('admin/settings/general.fields.description') }}"
+            placeholder="{{ __('admin/settings/general.placeholder.description') }}" value="{{ $site_description }}" />
 
-        <x-admin.form.input name="site_keywords" label="{{ __('admin/settings.site.keywords') }}" icon="fa-solid fa-heading"
-            placeholder="{{ __('admin/settings.site.placeholders.keywords') }}" value="{{ $site_keywords }}" />
+        <x-admin.form.input name="site_keywords" label="{{ __('admin/settings/general.fields.keywords') }}" icon="fa-solid fa-heading"
+            placeholder="{{ __('admin/settings/general.placeholder.keywords') }}" value="{{ $site_keywords }}" />
 
         <x-admin.form.file-input name="site_favicon" label="Favicon" />
 
@@ -25,9 +25,9 @@
 
 
         <div class="flex space-x-3">
-            <x-admin.form.submit label="{{ __('admin/common.actions.save') }}" />
+            <x-admin.form.submit label="{{ __('admin/common.buttons.save') }}" />
             <x-admin.form.button href="{{ route('admin.setting.site.edit') }}"
-                label="{{ __('admin/common.actions.cancel') }}" />
+                label="{{ __('admin/common.buttons.cancel') }}" />
         </div>
     </form>
 @endsection

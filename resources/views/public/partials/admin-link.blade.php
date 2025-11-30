@@ -23,7 +23,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.log.index') }}"
+            <a href="{{ route('admin.setting.log.index') }}"
                class="flex items-center gap-2 rounded-sm bg-background border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 focus:ring focus:outline-none focus-visible:ring-ring">
                 <i class="fa fa-history" aria-hidden="true"></i> {{ __('public/admin.logs') }}
             </a>

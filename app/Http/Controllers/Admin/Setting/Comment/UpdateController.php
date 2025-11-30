@@ -16,8 +16,8 @@ class UpdateController extends Controller
     {
 
         $data = $request->validated();
-    
-        
+
+
         Setting::set('comments_enabled', (bool)$data['comments_enabled']);
         Setting::set('comments_auto_approve', (bool)$data['comments_auto_approve']);
         Setting::set('comments_filter_words', $data['comments_filter_words']);
@@ -25,6 +25,6 @@ class UpdateController extends Controller
 
         return redirect()
             ->route('admin.setting.comment.edit')
-            ->with('success', __('admin/settings.updated'));
+            ->with('success',  __('admin/common.messages.settings_saved'));
     }
 }

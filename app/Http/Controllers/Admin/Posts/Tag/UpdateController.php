@@ -17,6 +17,6 @@ class UpdateController extends Controller
         $data = $request->validated();
         $tag->update($data);
 
-        return redirect()->route('admin.tag.show', $tag->id)->with('success', __('admin/tags.messages.edit', ['title' => $tag->title]));
+        return redirect()->route('admin.tag.show', $tag->id)->with('success', __('admin/tag.messages.updated', ['title' => $tag->title]));
     }
 }

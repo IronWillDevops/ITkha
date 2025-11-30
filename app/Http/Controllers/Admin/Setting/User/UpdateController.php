@@ -22,6 +22,6 @@ class UpdateController extends Controller
 
         return redirect()
             ->route('admin.setting.user.edit')
-            ->with('success', __('admin/settings.updated'));
+            ->with('success', __('admin/common.messages.settings_saved'));
     }
 }

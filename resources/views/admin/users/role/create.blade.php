@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('admin.content.title')
-    {{ __('admin/roles.actions.create') }}
+    {{ __('admin/role.title') }}
 @endsection
 
 @section('admin.content')
@@ -9,11 +9,12 @@
             @csrf
 
             {{-- Название роли --}}
-            <x-admin.form.input name="title" label="{{ __('admin/roles.fields.title') }}" icon="fa-solid fa-user-plus" />
+            <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}" 
+            placeholder="{{__('admin/common.placeholder.title') }}" icon="fa-solid fa-user-plus" />
 
             {{-- Permissions --}}
             <div class="mb-6">
-                <h2 class="font-semibold mb-2">{{ __('admin/permissions.title') }}</h2>
+                <h2 class="font-semibold mb-2">{{ __('admin/role.permission.title') }}</h2>
 
                 @foreach ($permissions as $header => $group)
                     <details class="group">
@@ -32,9 +33,9 @@
 
             {{-- Кнопки --}}
             <div class="flex space-x-3">
-                <x-admin.form.submit label="{{ __('admin/common.actions.save') }}" />
+                <x-admin.form.submit label="{{ __('admin/common.buttons.create') }}" />
                 <x-admin.form.button href="{{ route('admin.role.index') }}"
-                    label="{{ __('admin/common.actions.cancel') }}" />
+                    label="{{ __('admin/common.buttons.cancel') }}" />
             </div>
         </form>
 @endsection 
