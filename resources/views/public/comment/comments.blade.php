@@ -37,15 +37,12 @@
 
         </div>
 
-
         <p class="mb-2 text-muted-foreground break-all">{{ $comment->body }}</p>
-
-
 
         <a href="#comment-form"
             class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold p-2 rounded-sm flex items-center w-64"
             onclick="moveForm({{ $comment->id }}, '{{ $comment->user->login }}', this)">
-            {{ __('public/comment.reply_title') }}
+            {{ __('public/comment.buttons.reply') }}
         </a>
 
         <div id="comment-{{ $comment->id }}"></div>

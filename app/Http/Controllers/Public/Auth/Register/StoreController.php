@@ -21,9 +21,9 @@ class StoreController extends BaseController
             $this->service->store($data);
 
             
-            return redirect()->route('login')->with('success',  __('public/register.messages.register'));
+            return redirect()->route('login')->with('success',  __('public/auth/register.messages.register'));
         } catch (Exception $ex) {
-            return redirect()->route('login')->with('error', __('public/register.messages.register_failed'));
+            return redirect()->route('login')->with('error', __('public/auth/register.messages.register_failed'));
         }
     }
 }

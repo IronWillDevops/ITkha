@@ -25,14 +25,14 @@
                     <li class="flex items-center">
                         <a href="{{ route('public.pages.contact.index') }}"
                             class="block px-3 py-2 rounded-md bg-background hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
-                            {{ __('public/contact_us.title') }}
+                            {{ __('public/header.fields.contact') }}
                         </a>
                     </li>
                     @guest
                         <li class="flex items-center">
                             <a href="{{ route('login') }}"
                                 class="block px-3 py-2 rounded-md bg-background hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
-                                {{ __('public/auth.login') }}
+                               {{ __('public/header.fields.login') }}
                             </a>
                         </li>
                     @endguest
@@ -65,13 +65,13 @@
                             </div>
                             <a href="{{ route('public.user.show', Auth::user()) }}"
                                 class="block p-2 hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
-                                {{ __('public/auth.profile') }}
+                                {{ __('public/header.fields.profile') }}
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
                                     class="w-full text-left block p-2 hover:bg-accent hover:text-accent-foreground cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring">
-                                    {{ __('public/auth.logout') }}
+                                    {{ __('public/header.fields.logout') }}
                                 </button>
                             </form>
                         </div>
@@ -92,7 +92,7 @@
                     <li>
                         <a href="{{ route('public.pages.contact.index') }}"
                             class="block py-2 px-3 rounded-md  hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
-                            {{ __('public/contact_us.title') }}
+                            {{ __('public/header.fields.contact') }}
                         </a>
                     </li>
 
@@ -100,7 +100,7 @@
                         <li>
                             <a href="{{ route('public.user.show', Auth::user()) }}"
                                 class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
-                                {{ __('public/auth.profile') }}
+                                {{ __('public/header.fields.profile') }}
                             </a>
                         </li>
                         <li>
@@ -108,7 +108,7 @@
                                 @csrf
                                 <button type="submit"
                                     class="w-full text-left block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer">
-                                    {{ __('public/auth.logout') }}
+                                    {{ __('public/header.fields.logout') }}
                                 </button>
                             </form>
                         </li>
@@ -118,7 +118,7 @@
                         <li>
                             <a href="{{ route('login') }}"
                                 class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
-                                {{ __('public/auth.login') }}
+                                {{ __('public/header.fields.login') }}
                             </a>
                         </li>
                     @endguest

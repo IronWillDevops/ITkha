@@ -23,12 +23,12 @@ class UpdatePasswordController extends Controller
                 'password' => Hash::make($data['password']),
             ]);
 
-            $request->session()->flash('success', __('public/profile.messages.update_password_success'));
+            $request->session()->flash('success', __('public/user.messages.update_password_success'));
             Auth::logout();
 
             return redirect()->route('login');
         } catch (Exception $ex) {
-            return redirect()->back()->with('error', __('public/profile.messages.unexpected_error'));
+            return redirect()->back()->with('error', __('public/user.messages.unexpected_error'));
         }
     }
 }

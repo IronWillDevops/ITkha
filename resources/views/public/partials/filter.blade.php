@@ -4,14 +4,14 @@
         <div class="relative flex-grow min-w-52 ">
             <div class="">
                 <x-public.form.input type="search" name="search" value="{{ request('search') }}"
-                    placeholder="{{ __('public/filter.search') }}" icon="fa fa-search " />
+                    placeholder="{{ __('public/filter.placeholder.search') }}" icon="fa fa-search " />
             </div>
         </div>
         <div class="mb-4">
             <!-- Кнопка напрямку сортування (asc/desc) -->
             <button type="button"
                 class="border-border border focus:ring focus:outline-none focus-visible:ring-ring text-foreground rounded px-3 py-2 flex items-center justify-center h-10 hover:bg-accent "
-                title="{{ __('public/filter.sort.direction') }}" onclick="toggleSortDir()">
+                title="{{ __('public/filter.buttons.sort') }}" onclick="toggleSortDir()">
                 @if (request('sort_dir') === 'desc')
                     <i class="fas fa-sort-alpha-down-alt"></i>
                 @else
@@ -25,7 +25,7 @@
         <div class="mb-4">
             <a href="{{ route('public.post.index') }}"
                 class="border-border border bg-destructive text-destructive-foreground hover:bg-destructive/80 focus:ring focus:outline-none focus-visible:ring-ring px-3 py-2 rounded  flex items-center justify-center h-10 "
-                title="{{ __('public/filter.reset') }}">
+                title="{{ __('public/filter.buttons.reset') }}">
                 <i class="fa fa-times "></i>
             </a>
         </div>

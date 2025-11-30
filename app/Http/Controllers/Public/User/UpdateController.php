@@ -52,9 +52,9 @@ class UpdateController extends Controller
                 ]
             );
 
-            return redirect()->back()->with('success', __('public/profile.messages.update_profile_success'));
+            return redirect()->back()->with('success', __('public/user.messages.update_profile_success'));
         } catch (Exception $ex) {
-            return redirect()->back()->with('error', __('public/profile.messages.unexpected_error'));
+            return redirect()->back()->with('error', __('public/user.messages.unexpected_error'));
         }
     }
 }

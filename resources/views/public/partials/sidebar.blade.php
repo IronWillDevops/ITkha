@@ -2,7 +2,7 @@
     <div class=" bg-card text-card-foreground border border-border  shadow  p-4 rounded-lg">
         <h3 class="text-xl font-semibold mb-4">
             <i class="icon fa fa-newspaper"></i>
-            <span>{{ __('public/post.popular_posts') }}</span>
+            <span>{{ __('public/post.labels.popular_posts') }}</span>
         </h3>
         <x-public.ui.separator />
         <ul class="space-y-2">
@@ -20,7 +20,7 @@
         <div class=" bg-card text-card-foreground border border-border  shadow  p-4 rounded-lg">
             <h3 class="text-xl font-semibold mb-4">
                 <i class="fa-solid fa-comments"></i>
-                <span>{{ __('public/comment.latest_comment') }}</span>
+                <span>{{ __('public/comment.labels.latest_comment') }}</span>
             </h3>
             <x-public.ui.separator />
             <ul class="space-y-2">

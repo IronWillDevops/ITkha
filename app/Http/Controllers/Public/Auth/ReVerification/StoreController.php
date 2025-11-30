@@ -25,13 +25,13 @@ class StoreController extends Controller
 
             if ($user && !$user->hasVerifiedEmail()) {
                 $user->sendEmailVerificationNotification();
-                return redirect()->route('login')->with('success',  __('public/verify.messages.link_sent'));
+                return redirect()->route('login')->with('success',  __('public/auth/verify.messages.link_sent'));
             }
 
 
-            return redirect()->route('login')->with('success', __('public/verify.messages.link_generic'));
+            return redirect()->route('login')->with('success', __('public/auth/verify.messages.link_generic'));
         } catch (Exception $ex) {
-            return redirect()->route('login')->with('error', __('public/verify.messages.unexpected_error'));
+            return redirect()->route('login')->with('error', __('public/auth/verify.messages.unexpected_error'));
         }
     }
 }

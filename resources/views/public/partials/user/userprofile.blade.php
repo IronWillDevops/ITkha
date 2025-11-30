@@ -72,9 +72,9 @@
                  class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-pen text-xl"></i>
                  <div>
-                     <p class="text-sm font-semibold">{{ __('public/profile.actions.my_posts.title') }}</p>
+                     <p class="text-sm font-semibold">{{ __('public/user.buttons.my_post.title') }}</p>
                      <p class="text-xs text-muted-foreground font-normal">
-                         {{ __('public/profile.actions.my_posts.description') }}</p>
+                         {{ __('public/user.buttons.my_post.description') }}</p>
                  </div>
              </a>
 
@@ -82,10 +82,10 @@
                  class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-heart text-xl"></i>
                  <div>
-                     <p class="text-sm font-semibold">{{ __('public/profile.actions.liked_posts.title') }}
+                     <p class="text-sm font-semibold">{{ __('public/user.buttons.liked_post.title') }}
                      </p>
                      <p class="text-xs text-muted-foreground font-normal">
-                         {{ __('public/profile.actions.liked_posts.description') }}</p>
+                         {{ __('public/user.buttons.liked_post.description') }}</p>
                  </div>
              </a>
              <a href="{{ route('public.user.show.favorite', $user) }}"
@@ -93,10 +93,10 @@
                  <i class="fas fa-bookmark text-xl"></i>
                  <div>
                      <p class="text-sm font-semibold">
-                         {{ __('public/profile.actions.favorite_posts.title') }}
+                         {{ __('public/user.buttons.favorite_post.title') }}
                      </p>
                      <p class="text-xs text-muted-foreground font-normal">
-                         {{ __('public/profile.actions.favorite_posts.description') }}
+                         {{ __('public/user.buttons.favorite_post.description') }}
                      </p>
                  </div>
              </a>
@@ -105,10 +105,10 @@
                  class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-cog text-xl"></i>
                  <div>
-                     <p class="text-sm font-semibold">{{ __('public/profile.actions.edit_profile.title') }}
+                     <p class="text-sm font-semibold">{{ __('public/user.buttons.edit_profile.title') }}
                      </p>
                      <p class="text-xs text-muted-foreground font-normal">
-                         {{ __('public/profile.actions.edit_profile.description') }}</p>
+                         {{ __('public/user.buttons.edit_profile.description') }}</p>
                  </div>
              </a>
          </div>
