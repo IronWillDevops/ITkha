@@ -28,11 +28,11 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' =>__('validation/category.title.required'),
-            'title.string' => __('validation/category.title.string'),
-            'title.min' => __('validation/category.title.min'),
-            'title.max' => __('validation/category.title.max'),
-            'title.unique' => __('validation/category.title.unique'),
+            'title.required' =>__('validation.required'),
+            'title.string' => __('validation.string'),
+            'title.min' => __('validation.min.string'),
+            'title.max' => __('validation.max.string'),
+            'title.unique' => __('validation.unique'),
         ];
     }
 }

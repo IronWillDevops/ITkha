@@ -11,6 +11,6 @@ class DeleteController extends BaseController
     public function __invoke(Post $post)
     {
         $post->delete();
-        return redirect()->route('admin.post.index')->with('success', __('admin/posts.messages.delete', ['title' => $post->title]));
+        return redirect()->route('admin.post.index')->with('success', __('admin/post.messages.deleted', ['title' => $post->title]));
     }
 }

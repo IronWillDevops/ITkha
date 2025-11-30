@@ -27,6 +27,6 @@ class ReplyController extends Controller
 
         return redirect()
             ->route('admin.contact.index', $contact)
-            ->with('success', __('admin/contacts.messages.send'));
+            ->with('success', __('admin/contact.messages.sent'));
     }
 }

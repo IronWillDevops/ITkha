@@ -4,8 +4,8 @@
     <div class="bg-card text-card-foreground max-w-lg mx-auto mt-10 mb-10 rounded-2xl p-10 border border-border">
         <div class="w-full max-w-md p-8 bg-card text-card-foreground rounded-2xl">
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold mb-2">{{ __('public/register.title') }}</h2>
-                <span class="text-sm text-muted-foreground">{{ __('public/register.description') }}</span>
+                <h2 class="text-2xl font-bold mb-2">{{ __('public/auth/register.title') }}</h2>
+                <span class="text-sm text-muted-foreground">{{ __('public/auth/register.description') }}</span>
             </div>
 
             <form method="POST" action="{{ route('public.auth.register.store') }}">
@@ -30,13 +30,13 @@
                 <x-public.form.captcha name="captcha" />
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/register.submit') }}" class="w-full"/>
+                <x-public.form.submit label="{{ __('public/auth/register.buttons.submit') }}" class="w-full"/>
 
             </form>
 
             <p class="mt-4 text-right text-sm text-muted-foreground">
-                {{ __('public/register.links.already_have_an_account') }}
-                <a href="{{ route('login') }}" class="hover:underline">{{ __('public/register.links.login') }}</a>
+                {{ __('public/common.links.already_have_an_account') }}
+                <a href="{{ route('login') }}" class="hover:underline">{{ __('public/common.links.login') }}</a>
             </p>
         </div>
     </div>

@@ -23,10 +23,10 @@ class StoreController extends Controller
 
             return redirect()->route('login')->with(
                 'success',
-                __('public/forgot.messages.password_reset_link_sent')
+                __('public/auth/forgot.messages.password_reset_link_sent')
             );
         } catch (Exception $e) {
-            return redirect()->route('login')->with('error', __('public/forgot.messages.unexpected_error'));
+            return redirect()->route('login')->with('error', __('public/auth/forgot.messages.unexpected_error'));
         }
     }
 }

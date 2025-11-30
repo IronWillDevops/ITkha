@@ -10,7 +10,7 @@
 
             {{-- Розділ: Персональні дані --}}
             <section class="">
-                <h2 class="text-xl font-semibold mb-4">{{ __('public/profile.sections.personal') }}</h2>
+                <h2 class="text-xl font-semibold mb-4">{{ __('public/user.sections.personal') }}</h2>
                 <div class="flex items-center gap-6 mb-6">
 
                     <div id="avatarContainer" class="w-24 h-24 rounded-full overflow-hidden border border-border">
@@ -47,7 +47,7 @@
             </section>
             {{-- Розділ: Професійна інформація --}}
             <section class="">
-                <h2 class="text-xl font-semibold mb-4">{{ __('public/profile.sections.job_title') }}</h2>
+                <h2 class="text-xl font-semibold mb-4">{{ __('public/user.sections.job_title') }}</h2>
                 {{-- Job Title --}}
                 <x-public.form.input type="jobtitle" name="job_title" label="{{ __('public/common.fields.job_title') }}"
                     placeholder="{{ __('public/common.placeholder.job_title') }}" icon="fas fa-solid fa-user"
@@ -60,7 +60,7 @@
 
                 {{-- Web site --}}
                 <x-public.form.input type="website" name="website" label="{{ __('public/common.fields.website') }}"
-                    placeholder="https://example.com" icon="fas fa-link" value="{{ $user->profile?->website }}"
+                    placeholder="{{ __('public/common.placeholder.website') }}" icon="fas fa-link" value="{{ $user->profile?->website }}"
                     :required="false" />
 
                 {{-- About myself --}}
@@ -71,18 +71,18 @@
             
             {{-- Розділ: Соціальні мережі --}}
             <section class="">
-                <h2 class="text-xl font-semibold mb-4">{{ __('public/profile.sections.social') }}</h2>
+                <h2 class="text-xl font-semibold mb-4">{{ __('public/user.sections.social') }}</h2>
                 {{-- Web site --}}
-                <x-public.form.input type="website" name="github" label="Git Hub" placeholder="https://github.com/"
+                <x-public.form.input type="website" name="github" label="{{__('public/common.fields.github')}}" placeholder="{{__('public/common.placeholder.github')}}"
                     icon="fab fa-github" value="{{ $user->profile?->github }}" :required="false" />
                 {{-- LinkeIn --}}
 
-                <x-public.form.input type="website" name="linkedin" label="LinkedIn" placeholder="https://www.linkedin.com/"
+                <x-public.form.input type="website" name="linkedin" label="{{__('public/common.fields.linkedin')}}" placeholder="{{__('public/common.placeholder.linkedin')}}"
                     icon="fab fa-linkedin" value="{{ $user->profile?->linkedin }}" :required="false" />
             </section>
 
             <div class="text-right inline-block">
-                <x-public.form.submit label="{{ __('public/profile.submit') }}" />
+                <x-public.form.submit label="{{ __('public/user.buttons.submit') }}" />
             </div>
         </form>
 
@@ -93,7 +93,7 @@
             @method('PATCH')
             {{-- Розділ: Безпека --}}
             <section class="">
-                <h2 class="text-xl font-semibold mb-4">{{ __('public/profile.sections.security') }}</h2>
+                <h2 class="text-xl font-semibold mb-4">{{ __('public/user.sections.security') }}</h2>
                 <x-public.form.password name="current_password" label="{{ __('public/common.fields.password_current') }}"
                     placeholder="{{ __('public/common.placeholder.password_current') }}" />
                 <x-public.form.password name="password" label="{{ __('public/common.fields.password') }}"
@@ -104,7 +104,7 @@
             </section>
 
             <div class="text-right inline-block">
-                <x-public.form.submit label="{{ __('public/profile.submit') }}" />
+                <x-public.form.submit label="{{ __('public/user.buttons.submit') }}" />
             </div>
 
         </form>

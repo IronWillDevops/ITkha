@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('admin.content.title')
-    {{ __('admin/roles.actions.edit') }}
+    {{ __('admin/role.title') }}
 @endsection
 
 @section('admin.content')
@@ -9,12 +9,12 @@
             @csrf
             @method('PATCH')
             {{-- Название роли --}}
-            <x-admin.form.input name="title" label="{{ __('admin/roles.fields.title') }}" icon="fa-solid fa-user-plus"
+            <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}" icon="fa-solid fa-user-plus"
                 value="{{ $role->title }}" />
 
             {{-- Permissions --}}
             <div class="mb-6">
-                <h2 class="font-semibold mb-2">{{ __('admin/permissions.title') }}</h2>
+                <h2 class="font-semibold mb-2">{{ __('admin/role.permission.title') }}</h2>
 
                 @foreach ($permissions as $header => $group)
                     <details class="group">
@@ -23,9 +23,9 @@
                         </summary>
                         <section>
                             @foreach ($group as $permission)
-                                <x-admin.form.checkbox name="permissions[]" label="{{ $permission->description }}"
+                                 <x-admin.form.checkbox name="permissions[]" label="{{ $permission->description }}"
                                     value="{{ $permission->id }}"
-                                    checked="{{ $role->permissions->contains($permission->id) ? true : false }}" />
+                                    checked="{{ $role->permissions->contains($permission->id) ? true : false }}" /> 
                             @endforeach
                         </section>
                     </details>
@@ -34,9 +34,9 @@
 
             {{-- Кнопки --}}
             <div class="flex space-x-3">
-                <x-admin.form.submit label="{{ __('admin/common.actions.save') }}" />
+                <x-admin.form.submit label="{{ __('admin/common.buttons.edit') }}" />
                 <x-admin.form.button href="{{ route('admin.role.index') }}"
-                    label="{{ __('admin/common.actions.cancel') }}" />
+                    label="{{ __('admin/common.buttons.cancel') }}" />
             </div>
         </form>
 @endsection

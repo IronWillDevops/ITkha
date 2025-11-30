@@ -43,19 +43,19 @@ class UpdateRequest extends FormRequest
     {
         return [
 
-            'body.required' => __('validation/comment.body.required'),
-            'body.string'   => __('validation/comment.body.string'),
-            'body.min'      => __('validation/comment.body.min'),
-            'body.max'      =>  __('validation/comment.body.max'),
+            'body.required' => __('validation.required'),
+            'body.string'   => __('validation.string'),
+            'body.min'      => __('validation.min.string'),
+            'body.max'      =>  __('validation.max.string'),
 
-            'status.required' =>  __('validation/comment.status.required'),
-            'status.string' =>  __('validation/comment.status.string'),
-            'status.in' => __('validation/comment.status.in'),
+            'status.required' =>  __('validation.required'),
+            'status.string' =>  __('validation.string'),
+            'status.in' => __('validation.in'),
 
 
-            'user_id.required' => __('validation/comment.user_id.required'),
-            'user_id.integer' => __('validation/comment.user_id.integer'),
-            'user_id.exists' => __('validation/comment.user_id.exists'),
+            'user_id.required' => __('validation.required'),
+            'user_id.integer' => __('validation.integer'),
+            'user_id.exists' => __('validation.exists'),
             // повідомлення про неправильну капчу краще обробляти у самому правилі CaptchaRule
         ];
     }

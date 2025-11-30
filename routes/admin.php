@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 
@@ -11,7 +9,7 @@ Route::prefix('admin')->name('admin.')
         Route::redirect('/', '/dashboard');
         Route::get('/dashboard', App\Http\Controllers\Admin\Dashboard\IndexController::class)->name('index');
 
-        Route::prefix('posts')
+        Route::prefix('post')
             ->name('post.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Posts\Post\IndexController::class)->name('index')->middleware('permission:posts_show');
@@ -25,7 +23,7 @@ Route::prefix('admin')->name('admin.')
                 Route::patch('/{post}', App\Http\Controllers\Admin\Posts\Post\UpdateController::class)->name('update')->middleware('permission:posts_edit');
                 Route::delete('/{post}', App\Http\Controllers\Admin\Posts\Post\DeleteController::class)->name('delete')->middleware('permission:posts_delete');
             });
-        Route::prefix('categories')
+        Route::prefix('category')
             ->name('category.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Posts\Category\IndexController::class)->name('index')->middleware('permission:categories_show');
@@ -37,7 +35,7 @@ Route::prefix('admin')->name('admin.')
                 Route::delete('/{category}', App\Http\Controllers\Admin\Posts\Category\DeleteController::class)->name('delete')->middleware('permission:categories_delete');
             });
 
-        Route::prefix('tags')
+        Route::prefix('tag')
             ->name('tag.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Posts\Tag\IndexController::class)->name('index')->middleware('permission:tags_show');
@@ -48,7 +46,7 @@ Route::prefix('admin')->name('admin.')
                 Route::patch('/{tag}', App\Http\Controllers\Admin\Posts\Tag\UpdateController::class)->name('update')->middleware('permission:tags_edit');
                 Route::delete('/{tag}', App\Http\Controllers\Admin\Posts\Tag\DeleteController::class)->name('delete')->middleware('permission:tags_delete');
             });
-        Route::prefix('comments')
+        Route::prefix('comment')
             ->name('comment.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Posts\Comment\IndexController::class)->name('index')->middleware('permission:comments_show');
@@ -58,7 +56,7 @@ Route::prefix('admin')->name('admin.')
                 Route::delete('/{comment}', App\Http\Controllers\Admin\Posts\Comment\DeleteController::class)->name('delete')->middleware('permission:comments_delete');
             });
 
-        Route::prefix('users')
+        Route::prefix('user')
             ->name('user.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Users\User\IndexController::class)->name('index')->middleware('permission:users_show');
@@ -82,36 +80,19 @@ Route::prefix('admin')->name('admin.')
                 Route::delete('/{role}', App\Http\Controllers\Admin\Users\Role\DeleteController::class)->name('delete')->middleware('permission:roles_delete');
             });
 
-        Route::prefix('footerlink')
-            ->name('footerlink.')
-            ->group(function () {
-                Route::get('/', App\Http\Controllers\Admin\Setting\FooterLink\IndexController::class)->name('index');
-                Route::get('/create', App\Http\Controllers\Admin\Setting\FooterLink\CreateController::class)->name('create');
-                Route::post('/store', App\Http\Controllers\Admin\Setting\FooterLink\StoreController::class)->name('store');
-                Route::get('/{link}', App\Http\Controllers\Admin\Setting\FooterLink\ShowController::class)->name('show');
-                Route::get('/{link}/edit', App\Http\Controllers\Admin\Setting\FooterLink\EditController::class)->name('edit');
-                Route::patch('/{link}', App\Http\Controllers\Admin\Setting\FooterLink\UpdateController::class)->name('update');
-                Route::delete('/{link}', App\Http\Controllers\Admin\Setting\FooterLink\DeleteController::class)->name('delete');
-            });
 
 
-        Route::prefix('logs')
-            ->name('log.')
-            ->group(function () {
-                Route::get('/', App\Http\Controllers\Admin\Setting\Log\IndexController::class)->name('index')->middleware('permission:logs_show');
-            });
 
-        Route::prefix('contacts')
+
+        Route::prefix('contact')
             ->name('contact.')
             ->group(function () {
                 Route::get('/', App\Http\Controllers\Admin\Contact\IndexController::class)->name('index')->middleware('permission:contacts_show');
                 Route::get('/{contact}', App\Http\Controllers\Admin\Contact\ShowController::class)->name('show')->middleware('permission:contacts_show');
                 Route::post('/{contact}/reply', App\Http\Controllers\Admin\Contact\ReplyController::class)->name('reply')->middleware('permission:contacts_create');
-                // Route::get('/', App\Http\Controllers\Admin\Setting\Contact\EditController::class)->name('edit')->middleware('permission:settings_show');
-                // Route::patch('/', App\Http\Controllers\Admin\Setting\Contact\UpdateController::class)->name('update')->middleware('permission:settings_edit');
             });
 
-        Route::prefix('settings')
+        Route::prefix('setting')
             ->name('setting.')
             ->group(function () {
 
@@ -120,6 +101,17 @@ Route::prefix('admin')->name('admin.')
                     ->group(function () {
                         Route::get('/', App\Http\Controllers\Admin\Setting\Comment\EditController::class)->name('edit')->middleware('permission:settings_show');
                         Route::patch('/', App\Http\Controllers\Admin\Setting\Comment\UpdateController::class)->name('update')->middleware('permission:settings_edit');
+                    });
+                Route::prefix('footerlink')
+                    ->name('footerlink.')
+                    ->group(function () {
+                        Route::get('/', App\Http\Controllers\Admin\Setting\FooterLink\IndexController::class)->name('index');
+                        Route::get('/create', App\Http\Controllers\Admin\Setting\FooterLink\CreateController::class)->name('create');
+                        Route::post('/store', App\Http\Controllers\Admin\Setting\FooterLink\StoreController::class)->name('store');
+                        Route::get('/{link}', App\Http\Controllers\Admin\Setting\FooterLink\ShowController::class)->name('show');
+                        Route::get('/{link}/edit', App\Http\Controllers\Admin\Setting\FooterLink\EditController::class)->name('edit');
+                        Route::patch('/{link}', App\Http\Controllers\Admin\Setting\FooterLink\UpdateController::class)->name('update');
+                        Route::delete('/{link}', App\Http\Controllers\Admin\Setting\FooterLink\DeleteController::class)->name('delete');
                     });
                 Route::prefix('user')
                     ->name('user.')
@@ -140,6 +132,13 @@ Route::prefix('admin')->name('admin.')
                         Route::get('/', App\Http\Controllers\Admin\Setting\Site\EditController::class)->name('edit')->middleware('permission:settings_edit');
                         Route::patch('/',  App\Http\Controllers\Admin\Setting\Site\UpdateController::class)->name('update')->middleware('permission:settings_edit');
                     });
+
+                Route::prefix('log')
+                    ->name('log.')
+                    ->group(function () {
+                        Route::get('/', App\Http\Controllers\Admin\Setting\Log\IndexController::class)->name('index')->middleware('permission:logs_show');
+                    });
+
 
                 Route::prefix('telegram')
                     ->name('telegram.')

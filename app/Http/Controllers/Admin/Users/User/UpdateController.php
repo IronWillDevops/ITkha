@@ -20,7 +20,7 @@ class UpdateController extends BaseController
             $data = $request->validated();
             $user = $this->service->update($data, $user);
 
-            return redirect()->route('admin.user.show', compact('user'))->with('success', __('admin/users.messages.edit', ['login' => $user->login]));
+            return redirect()->route('admin.user.show', compact('user'))->with('success', __('admin/user.messages.updated', ['login' => $user->login]));
         } catch (CannotDeactivateLastActiveUserException $ex) {
             return redirect()->back()->with('error', $ex->getMessage());
         }

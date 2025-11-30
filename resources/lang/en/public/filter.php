@@ -1,9 +1,15 @@
 <?php
 
 return [
-    'search' => 'Search...',
-    'sort' => [
-        'direction' => 'Change sort direction',
+
+    'fields' => [],
+    'placeholder' => [
+        'search' => 'Search...',
     ],
-    'reset' => 'Reset filters',
+    'buttons' => [
+        'sort' => 'Change sort direction',
+        'reset' => 'Reset filters',
+
+    ],
+    'messages' => [],
 ];

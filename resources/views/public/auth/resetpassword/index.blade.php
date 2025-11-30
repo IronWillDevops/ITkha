@@ -5,8 +5,8 @@
 
         <div class="w-full max-w-md p-8 rounded-2xl">
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold mb-2">{{ __('public/reset.title') }}</h2>
-                <span class="text-sm text-muted-foreground">{{ __('public/reset.description') }}</span>
+                <h2 class="text-2xl font-bold mb-2">{{ __('public/auth/reset.title') }}</h2>
+                <span class="text-sm text-muted-foreground">{{ __('public/auth/reset.description') }}</span>
             </div>
             <form method="POST" action="{{ route('public.auth.reset.password.store') }}">
                 @csrf
@@ -23,14 +23,14 @@
                     placeholder="{{ __('public/common.placeholder.password_confirmation') }}" />
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/reset.submit') }}" class="w-full"/>
+                <x-public.form.submit label="{{ __('public/auth/reset.buttons.submit') }}" class="w-full" />
 
 
             </form>
             <div class="mb-4">
                 <p class="mt-4  text-right text-sm text-muted-foreground">
-                    {{ __('public/reset.links.remember_your_password') }}
-                    <a href="{{ route('login') }}" class="hover:underline">{{ __('public/reset.links.login') }}</a>
+                    {{ __('public/common.links.remember_your_password') }}
+                    <a href="{{ route('login') }}" class="hover:underline">{{ __('public/common.links.login') }}</a>
                 </p>
             </div>
 

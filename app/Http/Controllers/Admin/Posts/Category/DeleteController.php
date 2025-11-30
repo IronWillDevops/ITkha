@@ -16,7 +16,7 @@ class DeleteController extends Controller
     {
         try {
             $category->delete();
-             return redirect()->route('admin.category.index')->with('success', __('admin/categories.messages.delete',['title' => $category->title])); 
+             return redirect()->route('admin.category.index')->with('success', __('admin/category.messages.deleted',['title' => $category->title])); 
         } 
         catch (CannotDeleteLastCategoryException $ex) {
             return redirect()->back()->with('error', $ex->getMessage());

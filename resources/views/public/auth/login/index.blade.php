@@ -5,8 +5,8 @@
 
         <div class="w-full max-w-md p-8 text-text-primary bg-surface rounded-2xl">
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold mb-2">{{ __('public/login.title') }}</h2>
-                <span class="text-sm text-muted-foreground">{{ __('public/login.description') }}</span>
+                <h2 class="text-2xl font-bold mb-2">{{ __('public/auth/login.title') }}</h2>
+                <span class="text-sm text-muted-foreground">{{ __('public/auth/login.description') }}</span>
             </div>
 
             <form method="POST" action="{{ route('login.store') }}">
@@ -25,21 +25,21 @@
                 @enderror
 
                 <div class="mb-4 flex justify-between">
-                    <x-public.form.check-box name="remember" label="{{ __('public/login.remember_me') }}" />
+                    <x-public.form.check-box name="remember" label="{{ __('public/auth/login.fields.remember_me') }}" />
                     <a href="{{ route('public.auth.forgot.password.index') }}"
-                        class="text-sm text-muted-foreground hover:underline">{{ __('public/login.links.forgot_password') }}
+                        class="text-sm text-muted-foreground hover:underline">{{ __('public/common.links.forgot') }}
 
                     </a>
                 </div>
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/login.title') }}" class="w-full" />
+                <x-public.form.submit label="{{ __('public/auth/login.buttons.submit') }}" class="w-full" />
             </form>
 
             <p class="mt-4 text-right text-sm text-muted-foreground">
-                {{ __('public/login.links.dont_have_account') }}
+                {{ __('public/common.links.dont_have_account') }}
                 <a href="{{ route('public.auth.register.index') }}"
-                    class="hover:underline">{{ __('public/login.links.register_now') }}</a>
+                    class="hover:underline">{{ __('public/common.links.register') }}</a>
             </p>
         </div>
     </div>

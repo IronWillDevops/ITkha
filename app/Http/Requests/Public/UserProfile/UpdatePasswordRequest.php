@@ -31,22 +31,22 @@ class UpdatePasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'current_password.required' => __('validation/passwordupdate.current_password.required'),
-            'current_password.current_password' => __('validation/passwordupdate.current_password.current_password'),
+            'current_password.required' => __('validation.required'),
+            'current_password.current_password' => __('validation.current_password'),
 
 
-            'password.required' => __('validation/passwordupdate.password.required'),
-            'password.string' => __('validation/passwordupdate.password.string'),
-            'password.max' => __('validation/passwordupdate.password.max'),
-            'password.confirmed' => __('validation/passwordupdate.password.confirmed'),
+            'password.required' => __('validation.required'),
+            'password.string' => __('validation.string'),
+            'password.max' => __('validation.max.string'),
+            'password.confirmed' => __('validation.confirmed'),
+            'password.min' => __('validation.min.string'),
 
             // Повідомлення для правил Password::defaults()
-            'password.min' => __('validation/passwordupdate.password.min'),
-            'password.letters' => __('validation/passwordupdate.password.letters'),
-            'password.mixed' => __('validation/passwordupdate.password.mixed'),
-            'password.numbers' => __('validation/passwordupdate.password.numbers'),
-            'password.symbols' => __('validation/passwordupdate.password.symbols'),
-            'password.uncompromised' => __('validation/passwordupdate.password.uncompromised'),
+            'password.letters' => __('validation.custom.password.letters'),
+            'password.mixed' => __('validation.custom.password.mixed'),
+            'password.numbers' => __('validation.custom.password.numbers'),
+            'password.symbols' => __('validation.custom.password.symbols'),
+            'password.uncompromised' => __('validation.custom.password.uncompromised'),
 
         ];
     }

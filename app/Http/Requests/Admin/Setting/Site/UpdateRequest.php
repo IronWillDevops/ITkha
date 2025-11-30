@@ -32,18 +32,18 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'site_name.required' => __('validation/setting.site.name.required'),
-            'site_name.string' => __('validation/setting.site.name.string'),
-            'site_name.max' => __('validation/setting.site.name.max'),
+            'site_name.required' => __('validation.required'),
+            'site_name.string' => __('validation.string'),
+            'site_name.max' => __('validation.max.string'),
 
-            'site_description.string' => __('validation/setting.site.description.string'),
-            'site_description.max' => __('validation/setting.site.description.max'),
+            'site_description.string' => __('validation.string'),
+            'site_description.max' => __('validation.max.string'),
 
-            'site_keywords.string' => __('validation/setting.site.keywords.string'),
-            'site_keywords.max' => __('validation/setting.site.keywords.max'),
+            'site_keywords.string' => __('validation.string'),
+            'site_keywords.max' => __('validation.max.string'),
 
-            'site_favicon.mimes' => __('validation/setting.site.favicon.mimes'),
-            'site_favicon.max' => __('validation/setting.site.favicon.max'),
+            'site_favicon.mimes' => __('validation.mimes'),
+            'site_favicon.max' => __('validation.max.string'),
 
          
         ];

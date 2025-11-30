@@ -1,11 +1,11 @@
 @extends('admin.layouts.app')
 @section('admin.content.title')
-    {{ __('admin/tags.title') }}
+    {{ __('admin/tag.title') }}
 @endsection
 @section('admin.content')
     <div class="flex items-center justify-between mb-6">
         <x-admin.form.action-button type="link" route="{{ route('admin.tag.create') }}" icon="fa-solid fa-plus"
-            label="{{ __('admin/tags.actions.create') }}" />
+            label="{{ __('admin/common.buttons.create') }}" />
 
     </div>
 
@@ -14,12 +14,12 @@
         <table class="min-w-full divide-y ">
             <thead>
                 <tr>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/tags.fields.id') }}</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/tags.fields.title') }}</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/tags.fields.count') }}</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/tags.fields.created_at') }}
+                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.id') }}</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.title') }}</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.count') }}</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.created_at') }}
                     </th>
-                    <th class="px-4 py-2 text-center text-sm font-semibold">{{ __('admin/common.actions.title') }}</th>
+                    <th class="px-4 py-2 text-center text-sm font-semibold">{{ __('admin/common.fields.actions') }}</th>
                 </tr>
             </thead>
             <tbody class="divide-y ">
@@ -40,7 +40,7 @@
                             {{-- Кнопка редагування --}}
                             <a href="{{ route('admin.tag.edit', $tag->id) }}"
                                 class="inline-flex items-center p-2 rounded-lg transition focus:ring focus:outline-none focus-visible:ring-ring"
-                                title="{{ __('admin/tags.actions.edit') }}">
+                                title="{{ __('admin/common.buttons.edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
@@ -52,7 +52,7 @@
                                 @method('DELETE')
                                 <button type="submit"
                                     class="inline-flex items-center p-2 bg-destructive text-destructive-foreground rounded-lg transition focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer"
-                                    title="{{ __('admin/tags.actions.delete') }}">
+                                    title="{{ __('admin/common.buttons.delete') }}">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form>

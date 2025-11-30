@@ -13,6 +13,6 @@ class EditController extends Controller
      */
     public function __invoke(FooterLink $link)
     {
-        return view('admin.footerlink.edit', compact('link')); // Можно заменить на вашу главную страницу
+        return view('admin.setting.footerlink.edit', compact('link')); // Можно заменить на вашу главную страницу
     }
 }

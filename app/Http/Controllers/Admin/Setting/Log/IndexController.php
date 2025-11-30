@@ -10,6 +10,6 @@ class IndexController
     {
         
         $logs = Log::orderBy('id', 'desc')->paginate(35);
-        return view('admin.log.index', compact('logs'));
+        return view('admin.setting.log.index', compact('logs'));
     }
 }

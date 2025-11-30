@@ -1,34 +1,34 @@
 @extends('admin.layouts.app')
 
 @section('admin.content.title')
-    {{ __('admin/categories.title') }} | {{ $category->title }}
+    {{ __('admin/category.title') }} | {{ $category->title }}
 @endsection
 
 @section('admin.content')
 
     <div class="flex items-center gap-4 mb-4">
         <x-admin.form.action-button type='link' route="{{ route('admin.category.edit', $category->id) }}" icon="fas fa-edit"
-            label="{{ __('admin/categories.actions.edit') }}" />
+            label="{{ __('admin/common.buttons.edit') }}" />
         <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.category.delete', $category->id) }}"
-            icon="fas fa-trash-alt" label="{{ __('admin/categories.actions.delete') }}" />
+            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" />
     </div>
 
     {{-- Метаданные --}}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm">
         <div>
-            <span class="font-medium">{{ __('admin/categories.fields.title') }}:</span>
+            <span class="font-medium">{{ __('admin/common.fields.title') }}:</span>
             {{ $category->title }}
         </div>
         <div>
-            <span class="font-medium">{{ __('admin/categories.fields.created_at') }}:</span>
+            <span class="font-medium">{{ __('admin/common.fields.created_at') }}:</span>
             {{ $category->created_at }}
         </div>
     </div>
 
     {{-- Связанные посты --}}
-    <div class="mb-6">
+    <div class="border-t border-border pt-4">
         <h2 class="text-lg font-semibold mb-2">
-            {{ __('admin/categories.fields.posts') }}
+            {{ __('admin/common.fields.post') }}
         </h2>
 
         @if ($posts->isNotEmpty())
@@ -48,7 +48,7 @@
             </ul>
         @else
             <p class="text-sm text-muted-foreground">
-                {{ __('admin/posts.messages.no_posts') }}
+                {{ __('admin/common.messages.no_posts') }}
             </p>
         @endif
         {{-- Пагинация --}}

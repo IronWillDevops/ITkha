@@ -7,6 +7,6 @@ use Exception;
 class CannotDeleteSelfException extends Exception
 {    public function __construct()
      {
-          parent::__construct(__('exception/user.CannotDeleteSelfException'));
+          parent::__construct(__('errors/user.delete.self'));
      }
 }

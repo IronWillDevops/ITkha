@@ -15,7 +15,7 @@ class DeleteController extends BaseController
     {
         try {
             $user->delete();
-            return redirect()->route('admin.user.index')->with('success', __('admin/users.messages.delete', ['login' => $user->login]));
+            return redirect()->route('admin.user.index')->with('success', __('admin/user.messages.deleted', ['login' => $user->login]));
         }
         
         catch (CannotDeleteSelfException | CannotDeleteAdminUserException $ex) {

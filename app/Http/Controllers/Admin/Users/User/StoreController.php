@@ -13,6 +13,6 @@ class StoreController extends BaseController
 
         $this->service->store($data);
         // Логіка збереження або обробки...
-        return redirect()->route('admin.user.index')->with('success', __('admin/users.messages.create', ['login' => $data['login']]));
+        return redirect()->route('admin.user.index')->with('success', __('admin/user.messages.created', ['login' => $data['login']]));
     }
 }

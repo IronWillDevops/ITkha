@@ -33,23 +33,23 @@ class UpdateRequest extends FormRequest
         return [
 
             // icon
-            'icon.required' => __('validation/footerlink.icon.required'),
-            'icon.string' => __('validation/footerlink.icon.string'),
-            'icon.min' => __('validation/footerlink.icon.min'),
-            'icon.max' => __('validation/footerlink.icon.max'),
+            'icon.required' => __('validation.required'),
+            'icon.string' => __('validation.string'),
+            'icon.min' => __('validation.min.string'),
+            'icon.max' => __('validation.max.string'),
 
             // title
-            'title.required' => __('validation/footerlink.title.required'),
-            'title.string' => __('validation/footerlink.title.string'),
-            'title.min' => __('validation/footerlink.title.min'),
-            'title.max' => __('validation/footerlink.title.max'),
+            'title.required' => __('validation.required'),
+            'title.string' => __('validation.string'),
+            'title.min' => __('validation.min.string'),
+            'title.max' => __('validation.max.string'),
 
             // url
-            'url.required' => __('validation/footerlink.url.required'),
-            'url.string' => __('validation/footerlink.url.string'),
-            'url.min' => __('validation/footerlink.url.min'),
-            'url.max' => __('validation/footerlink.url.max'),
-            'url.url' => __('validation/footerlink.url.url'),
+            'url.required' => __('validation.required'),
+            'url.string' => __('validation.string'),
+            'url.min' => __('validation.min.string'),
+            'url.max' => __('validation.max.string'),
+            'url.url' => __('validation.url'),
         ];
     }
 }

@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('admin.content.title')
-    {{ __('admin/info.title') }}
+    {{ __('admin/settings/info.title') }}
 @endsection
 @section('admin.content')
  

@@ -6,8 +6,8 @@
         <div class="w-full max-w-md p-8 rounded-2xl">
 
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold mb-2">{{ __('public/forgot.title') }}</h2>
-                <span class="text-sm text-muted-foreground">{{ __('public/forgot.description') }}</span>
+                <h2 class="text-2xl font-bold mb-2">{{ __('public/auth/forgot.title') }}</h2>
+                <span class="text-sm text-muted-foreground">{{ __('public/auth/forgot.description') }}</span>
             </div>
 
             <form method="POST" action="{{ route('public.auth.forgot.password.store') }}">
@@ -20,14 +20,14 @@
                 <x-public.form.captcha name="captcha" />
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/forgot.submit') }}" class="w-full"/>
+                <x-public.form.submit label="{{ __('public/auth/forgot.buttons.submit') }}" class="w-full"/>
 
 
             </form>
             <div class="mb-4">
                 <p class="mt-4 text-right text-sm text-muted-foreground">
-                    {{ __('public/forgot.links.remember_your_password') }}
-                    <a href="{{ route('login') }}" class="hover:underline">{{ __('public/forgot.links.login') }}</a>
+                    {{ __('public/common.links.remember_your_password') }}
+                    <a href="{{ route('login') }}" class="hover:underline">{{ __('public/common.links.login') }}</a>
                 </p>
             </div>
         </div>

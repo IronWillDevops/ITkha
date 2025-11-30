@@ -8,6 +8,6 @@ class CannotDeleteProtectedRoleException extends Exception
 {
      public function __construct()
     {
-        parent::__construct(__('exception/role.CannotDeleteProtectedRoleException'));
+        parent::__construct(__('errors/role.delete.protected'));
     }
 }

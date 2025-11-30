@@ -7,17 +7,17 @@
         <input type="hidden" name="parent_id" value="{{ $parentId }}">
     @endif
     <div id="reply-to-info" class="my-2 hidden text-sm">
-        {{ __('public/comment.reply_to') }} <span id="reply-author" class="font-semibold"></span>
+        {{ __('public/comment.labels.reply_to') }} <span id="reply-author" class="font-semibold"></span>
         <button type="button" onclick="cancelReply()"
-            class=" hover:underline cursor-pointer">{{ __('public/comment.reply_to_cancel') }}</button>
+            class=" hover:underline cursor-pointer">{{ __('public/comment.labels.reply_to_cancel') }}</button>
     </div>
 
-    <x-public.form.area name="body" label="{{ __('public/common.fields.write_comment') }}"
-        placeholder="{{ __('public/common.placeholder.write_comment') }}" />
+    <x-public.form.area name="body" label="{{ __('public/comment.fields.write_comment') }}"
+        placeholder="{{ __('public/comment.placeholder.write_comment') }}" />
         
     <x-public.form.captcha name="captcha" />
 
-    <x-public.form.submit label="{{ __('public/comment.submit') }}" />
+    <x-public.form.submit label="{{ __('public/comment.buttons.submit') }}" />
 
 </form>
 

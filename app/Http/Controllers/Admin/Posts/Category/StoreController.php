@@ -15,6 +15,6 @@ class StoreController extends Controller
         $data = $request->validated();
         Category::firstOrCreate($data);
 
-        return redirect()->route('admin.category.index')->with('success', __('admin/categories.messages.create',['title' => $data['title']]));
+        return redirect()->route('admin.category.index')->with('success', __('admin/category.messages.created',['title' => $data['title']]));
     }
 }

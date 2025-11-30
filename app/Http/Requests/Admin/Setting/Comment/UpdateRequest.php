@@ -32,10 +32,10 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'comments_auto_approve.boolean' => __('validation/setting.comments.auto_approve.boolean'),
-            'comments_filter_words.string' => __('validation/setting.comments.filter_words.string'),
-            'comments_links_policy.required' => __('validation/setting.comments.links_policy.required'),
-            'comments_links_policy.in' => __('validation/setting.comments.links_policy.in'),
+            'comments_auto_approve.boolean' => __('validation.boolean'),
+            'comments_filter_words.string' => __('validation.string'),
+            'comments_links_policy.required' => __('validation.required'),
+            'comments_links_policy.in' => __('validation.in'),
         ];
     }
 }

@@ -39,6 +39,6 @@ class UpdateController extends Controller
         }
         return redirect()
             ->route('admin.setting.site.edit')
-            ->with('success', __('admin/settings.updated'));
+            ->with('success', __('admin/common.messages.settings_saved'));
     }
 }

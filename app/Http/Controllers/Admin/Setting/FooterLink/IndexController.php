@@ -14,6 +14,6 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         $footerlinks  = FooterLink::paginate(10);
-        return view('admin.footerlink.index', compact('footerlinks'));
+        return view('admin.setting.footerlink.index', compact('footerlinks'));
     }
 }
