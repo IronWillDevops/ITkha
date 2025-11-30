@@ -1,5 +1,7 @@
 <?php
 
-return[
-    'logout'=>'Logout',
+return [
+    'fields' => [
+        'logout' => 'Logout',
+    ],
 ];

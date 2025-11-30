@@ -36,7 +36,7 @@
                                 <button type="submit"
                                     class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5  cursor-pointer">
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                    <span>{{ __('admin/header.logout') }}</span>
+                                    <span>{{ __('admin/header.fields.logout') }}</span>
                                 </button>
                             </form>
                         </li>
@@ -65,7 +65,7 @@
                             @csrf
                             <button type="submit"
                                 class="w-full text-left block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer">
-                                <span>{{ __('admin/header.logout') }}</span>
+                                <span>{{ __('admin/header.fields.logout') }}</span>
                             </button>
                         </form>
                     </li>
