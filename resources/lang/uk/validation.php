@@ -94,10 +94,8 @@ return [
         'github'        => 'GitHub profile',
         'linkedin'      => 'LinkedIn profile',
 
-
         'telegram_template' => 'Telegram template',
         'telegram_button_text' => 'Telegram button text',
         'telegram_message_limit' => 'Telegram message limit',
-
     ],
 ];
