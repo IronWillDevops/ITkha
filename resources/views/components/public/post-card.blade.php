@@ -32,7 +32,7 @@
                 </div>
 
                 {{-- Edit --}}
-                @if (Auth::check() && Auth::user()->hasPermission('posts_edit'))
+                @if (Auth::check() && Auth::user()->hasPermission('post.update'))
                     <div class="flex items-center">
                         <a href="{{ route('admin.post.edit', $post) }}"
                             class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">

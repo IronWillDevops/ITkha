@@ -12,7 +12,7 @@ class LogPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermission('logs_show');
+        return $user->hasPermission('log.view');
     }
 
     /**
@@ -20,7 +20,7 @@ class LogPolicy
      */
     public function view(User $user, Log $log): bool
     {
-        return $user->hasPermission('logs_show');
+        return $user->hasPermission('log.view');
     }
 
     /**
@@ -28,7 +28,7 @@ class LogPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermission('logs_create');
+        return $user->hasPermission('log.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class LogPolicy
      */
     public function update(User $user, Log $log): bool
     {
-        return $user->hasPermission('logs_update');
+        return $user->hasPermission('log.update');
     }
 
     /**
@@ -44,7 +44,7 @@ class LogPolicy
      */
     public function delete(User $user, Log $log): bool
     {
-        return $user->hasPermission('logs_delete');
+        return $user->hasPermission('log.delete');
     }
 
     /**

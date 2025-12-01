@@ -17,7 +17,7 @@
 </head>
 
 <body class="bg-background text-foreground flex flex-col min-h-screen">
-    @if (Auth::check() && Auth::user()->hasPermission('admin_access'))
+    @if (Auth::check() && Auth::user()->hasPermission('setting.access'))
         @include('public.partials.admin-link')
     @endif
 

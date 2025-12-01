@@ -57,6 +57,7 @@ return [
         'avatar' => [
             'image' => 'The :attribute must be an image (jpg, jpeg, png, webp).',
         ],
+        
         'github' => [
             'incorrect' => 'The entered :attribute is not a valid GitHub profile URL.',
         ],
@@ -120,5 +121,4 @@ return [
             'telegram_message_limit' => 'Telegram message limit',
         ],
     ],
-
 ];

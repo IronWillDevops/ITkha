@@ -17,7 +17,7 @@ class AdminMiddleware
     {
         $user = auth()->user();
 
-        if (!$user->hasPermission('admin_access')) {
+        if (!$user->hasPermission('setting.access')) {
             abort(403, 'Doesn`t have permission');
         }
             return $next($request);

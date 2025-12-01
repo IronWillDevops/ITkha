@@ -14,7 +14,7 @@ class SettingPolicy
      */
     public function viewAny(Setting $setting): bool
     {
-         return $setting->hasPermission('settings_show');
+         return $setting->hasPermission('setting.view');
     }
 
     /**
@@ -22,7 +22,7 @@ class SettingPolicy
      */
     public function view(Setting $setting, Setting $model): bool
     {
-         return $setting->hasPermission('settings_show');
+         return $setting->hasPermission('setting.view');
     }
 
     /**
@@ -30,7 +30,7 @@ class SettingPolicy
      */
     public function create(Setting $setting): bool
     {
-         return $setting->hasPermission('settings_create');
+         return $setting->hasPermission('setting.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class SettingPolicy
      */
     public function update(Setting $setting, Setting $model): bool
     {
-         return $setting->hasPermission('settings_edit');
+         return $setting->hasPermission('setting.update');
     }
 
     /**
@@ -46,7 +46,7 @@ class SettingPolicy
      */
     public function delete(Setting $setting, Setting $model): bool
     {
-         return $setting->hasPermission('settings_delete');
+         return $setting->hasPermission('setting.delete');
     }
 
     /**

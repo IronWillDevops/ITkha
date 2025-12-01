@@ -5,37 +5,36 @@
 @endsection
 
 @section('admin.content')
-        <form action="{{ route('admin.role.store') }}" method="POST">
-            @csrf
+    <form action="{{ route('admin.role.store') }}" method="POST">
+        @csrf
 
-            {{-- Название роли --}}
-            <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}" 
-            placeholder="{{__('admin/common.placeholder.title') }}" icon="fa-solid fa-user-plus" />
+        {{-- Название роли --}}
+        <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}"
+            placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-user-plus" />
 
-            {{-- Permissions --}}
-            <div class="mb-6">
-                <h2 class="font-semibold mb-2">{{ __('admin/role.permission.title') }}</h2>
+        {{-- Permissions --}}
+        <div class="mb-6">
+            <h2 class="font-semibold mb-2">{{ __('admin/permission.title') }}</h2>
 
-                @foreach ($permissions as $header => $group)
-                    <details class="group">
-                        <summary class="cursor-pointer mb-4">
-                            <span class="text-xl font-semibold">{{ $header }}</span>
-                        </summary>
-                        <section >
-                            @foreach ($group as $permission)
-                                <x-admin.form.checkbox name="permissions[]" label="{{ $permission->description }}"
-                                    value="{{ $permission->id }}" />
-                            @endforeach
-                        </section>
-                    </details>
-                @endforeach
-            </div>
+            @foreach ($permissions as $header => $group)
+                <details class="group">
+                    <summary class="cursor-pointer mb-4">
+                        <span class="text-xl font-semibold">{{ __('admin/permission.' . $header . '.label') }}</span>
+                    </summary>
+                    <section>
+                        @foreach ($group as $permission)
+                            <x-admin.form.checkbox name="permissions[]" label="{{ __('admin/permission.' . $permission->key) }}"
+                                value="{{ $permission->id }}" />
+                        @endforeach
+                    </section>
+                </details>
+            @endforeach
+        </div>
 
-            {{-- Кнопки --}}
-            <div class="flex space-x-3">
-                <x-admin.form.submit label="{{ __('admin/common.buttons.create') }}" />
-                <x-admin.form.button href="{{ route('admin.role.index') }}"
-                    label="{{ __('admin/common.buttons.cancel') }}" />
-            </div>
-        </form>
-@endsection 
+        {{-- Кнопки --}}
+        <div class="flex space-x-3">
+            <x-admin.form.submit label="{{ __('admin/common.buttons.create') }}" />
+            <x-admin.form.button href="{{ route('admin.role.index') }}" label="{{ __('admin/common.buttons.cancel') }}" />
+        </div>
+    </form>
+@endsection
