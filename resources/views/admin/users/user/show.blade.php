@@ -80,16 +80,16 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
                     <span class="font-medium">{{ __('admin/user.fields.address') }}:</span>
-                    {{ $user->profile->address ?? '-' }}
+                    {{ $user->profile?->address ?? '-' }}
                 </div>
                 <div>
                     <span class="font-medium">{{ __('admin/user.fields.job_title') }}:</span>
-                    {{ $user->profile->job_title ?? '-' }}
+                    {{ $user->profile?->job_title ?? '-' }}
                 </div>
                 <div class="md:col-span-2">
                     <span class="font-medium">{{ __('admin/user.fields.about_myself') }}:</span>
                     <p class="mt-1 text-text-secondary">
-                        {{ $user->profile->about_myself ?? '-' }}
+                        {{ $user->profile?->about_myself ?? '-' }}
                     </p>
                 </div>
 
@@ -105,10 +105,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
                 <span class="font-medium">Website:</span>
-                @if ($user->profile->website)
-                    <a href="{{ $user->profile->website }}" target="_blank"
+                @if ($user->profile?->website)
+                    <a href="{{ $user->profile?->website }}" target="_blank"
                         class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                        {{ $user->profile->website }}
+                        {{ $user->profile?->website }}
                     </a>
                 @else
                     -
@@ -116,10 +116,10 @@
             </div>
             <div>
                 <span class="font-medium">GitHub:</span>
-                @if ($user->profile->github)
-                    <a href="{{ $user->profile->github }}" target="_blank"
+                @if ($user->profile?->github)
+                    <a href="{{ $user->profile?->github }}" target="_blank"
                         class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                        {{ $user->profile->github }}
+                        {{ $user->profile?->github }}
                     </a>
                 @else
                     -
@@ -127,10 +127,10 @@
             </div>
             <div>
                 <span class="font-medium">LinkedIn:</span>
-                @if ($user->profile->linkedin)
-                    <a href="{{ $user->profile->linkedin }}" target="_blank"
+                @if ($user->profile?->linkedin)
+                    <a href="{{ $user->profile?->linkedin }}" target="_blank"
                         class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                        {{ $user->profile->linkedin }}
+                        {{ $user->profile?->linkedin }}
                     </a>
                 @else
                     -
