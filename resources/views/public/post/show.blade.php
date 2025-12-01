@@ -13,7 +13,7 @@
 
             <div class="p-6 space-y-6">
                 <h1 class="text-card-foreground text-3xl font-bold">{{ $post->title }}
-                    @if (Auth::check() && Auth::user()->hasPermission('posts_edit'))
+                    @if (Auth::check() && Auth::user()->hasPermission('post.update'))
                         <a href="{{ route('admin.post.edit', $post) }}" class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
                             <i class="fas fa-pencil-alt"></i>
                         </a>

@@ -68,26 +68,34 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Role::class);
     }
-
-    public function hasRole(string $roleTitle): bool
+    public function permissions()
     {
-        return $this->roles()->where('title', $roleTitle)->exists();
+        return $this->roles->flatMap->permissions->pluck('key')->unique();
     }
 
-    public function hasPermission(string $permissionTitle): bool
+    public function hasPermission($key): bool
     {
-        return $this->roles()
-            ->whereHas('permissions', function ($query) use ($permissionTitle) {
-                $query->where('title', $permissionTitle);
-            })->exists();
+        return $this->permissions()->contains($key);
     }
+    // public function hasRole(string $roleTitle): bool
+    // {
+    //     return $this->roles()->where('title', $roleTitle)->exists();
+    // }
 
-    public function hasHeaderPermission(string $header): bool
-    {
-        return $this->roles()->whereHas('permissions', function ($query) use ($header) {
-            $query->where('header', $header);
-        })->exists();
-    }
+    // public function hasPermission(string $permissionKey): bool
+    // {
+    //     return $this->roles()
+    //         ->whereHas('permissions', function ($query) use ($permissionKey) {
+    //             $query->where('key', $permissionKey);
+    //         })->exists();
+    // }
+
+    // public function hasHeaderPermission(string $header): bool
+    // {
+    //     return $this->roles()->whereHas('permissions', function ($query) use ($header) {
+    //         $query->where('header', $header);
+    //     })->exists();
+    // }
 
     public function hasAnyHeaderPermissions(array $headers): bool
     {

@@ -27,7 +27,7 @@
 
             <small class="text-sm text-muted-foreground whitespace-nowrap">
                 {{ $comment->created_at->diffForHumans() }}
-                @if (Auth::check() && Auth::user()->hasPermission('comments_edit'))
+                @if (Auth::check() && Auth::user()->hasPermission('comment.update'))
                 <a href="{{ route('admin.comment.edit',$comment->id) }}"
                     class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
                     <i class="fas fa-pencil-alt"></i>

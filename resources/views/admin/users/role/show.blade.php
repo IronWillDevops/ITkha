@@ -29,12 +29,12 @@
     <div class="border-t border-border pt-4 mb-6">
         {{-- Permissions --}}
 
-        <h2 class="text-lg font-semibold mb-2">{{ __('admin/role.permission.title') }}</h2>
+        <h2 class="text-lg font-semibold mb-2">{{ __('admin/permission.title') }}</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @foreach ($permissions as $header => $group)
                 <div class="border border-border rounded-lg p-4 shadow-sm">
-                    <h3 class="font-semibold text-lg mb-3">{{ $header }}</h3>
+                    <h3 class="font-semibold text-lg mb-3">{{ __('admin/permission.' . $header . '.label') }}</h3>
                     <ul class="space-y-1 text-sm">
                         @foreach ($group as $permission)
                             <li class="flex items-center gap-2">
@@ -43,12 +43,13 @@
                                 @else
                                     <i class="fas fa-times text-error"></i>
                                 @endif
-                                <span>{{ $permission->description }}</span>
+                                <span>{{ __('admin/permission.' . $permission->key) }}</span>
                             </li>
                         @endforeach
                     </ul>
                 </div>
-            @endforeach
+                @endforeach 
+                
         </div>
     </div>
 

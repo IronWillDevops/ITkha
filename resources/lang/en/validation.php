@@ -57,6 +57,7 @@ return [
         'avatar' => [
             'image' => 'The :attribute must be an image (jpg, jpeg, png, webp).',
         ],
+
         'github' => [
             'incorrect' => 'The entered :attribute is not a valid GitHub profile URL.',
         ],
@@ -93,32 +94,10 @@ return [
         'github'        => 'GitHub profile',
         'linkedin'      => 'LinkedIn profile',
 
-        'attributes' => [
-            'name'          => 'name',
-            'surname'       => 'surname',
-            'login'         => 'login',
-            'email'         => 'email',
-            'password'      => 'password',
-            'avatar'        => 'avatar',
 
-            'title'         => 'title',
-            'content'       => 'content',
-            'main_image'    => 'main image',
-            'status'        => 'status',
+        'telegram_template' => 'Telegram template',
+        'telegram_button_text' => 'Telegram button text',
+        'telegram_message_limit' => 'Telegram message limit',
 
-            'user_id'       => 'user',
-            'category_id'   => 'category',
-            'tag_ids'       => 'tags',
-            'permissions'   => 'permissions',
-
-            'website'       => 'website',
-            'github'        => 'GitHub profile',
-            'linkedin'      => 'LinkedIn profile',
-
-            'telegram_template' => 'Telegram template',
-            'telegram_button_text' => 'Telegram button text',
-            'telegram_message_limit' => 'Telegram message limit',
-        ],
     ],
-
 ];

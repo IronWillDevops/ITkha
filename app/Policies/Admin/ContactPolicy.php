@@ -12,7 +12,7 @@ class ContactPolicy
      */
     public function viewAny(User $user): bool
     {
-         return $user->hasPermission('contacts_show');
+         return $user->hasPermission('contact.view');
     }
 
     /**
@@ -20,7 +20,7 @@ class ContactPolicy
      */
     public function view(User $user, Contact $model): bool
     {
-         return $user->hasPermission('contacts_show');
+         return $user->hasPermission('contact.view');
     }
 
     /**
@@ -28,7 +28,7 @@ class ContactPolicy
      */
     public function create(User $user): bool
     {
-         return $user->hasPermission('contacts_create');
+         return $user->hasPermission('contact.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class ContactPolicy
      */
     public function update(User $user, Contact $model): bool
     {
-         return $user->hasPermission('contacts_edit');
+         return $user->hasPermission('contact.update');
     }
 
     /**
@@ -44,7 +44,7 @@ class ContactPolicy
      */
     public function delete(User $user, Contact $model): bool
     {
-         return $user->hasPermission('contacts_delete');
+         return $user->hasPermission('contact.delete');
     }
 
     /**
