@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==========================================
-# Laravel project update script
+# Laravel project update script (improved)
 # ==========================================
 APP_DIR="/var/www/ITkha"
 BRANCH="master"
@@ -8,6 +8,7 @@ PHP_BIN="php"
 COMPOSER_BIN="composer"
 WEB_USER="www-data"
 WEB_GROUP="www-data"
+DEPLOY_USER="deploy"  # укажи реального деплой-пользователя, если другой
 
 # Color definitions
 GREEN='\033[0;32m'
@@ -20,7 +21,7 @@ cd $APP_DIR || exit
 # ==========================================
 # 0. Initialize variables
 # ==========================================
-TOTAL_STEPS=11
+TOTAL_STEPS=12
 CURRENT_STEP=0
 
 increment_step() {
@@ -36,7 +37,6 @@ error_step() {
   echo -e "[${RED}ERROR${RESET}] $1"
 }
 
-
 # ==========================================
 # Generate random key for maintenance mode
 # ==========================================
@@ -46,13 +46,10 @@ RANDOM_KEY=$(openssl rand -base64 32)
 # Enable maintenance mode
 # ==========================================
 increment_step "Putting the site into maintenance mode..."
-$PHP_BIN artisan down --secret="$RANDOM_KEY" 
+$PHP_BIN artisan down --secret="$RANDOM_KEY"
 
-# Show the info for the user
-echo -e "[${YELLOW}INFO${RESET}] The site is in maintenance mode. You can access it using the following key:"
+echo -e "[${YELLOW}INFO${RESET}] The site is in maintenance mode."
 echo -e "[${GREEN}ACCESS KEY${RESET}]: $RANDOM_KEY"
-echo -e "[${YELLOW}INFO${RESET}] Share this key with authorized users to access the site during the update process."
-
 
 # ==========================================
 # STEP 1. Update source code from Git
@@ -60,7 +57,10 @@ echo -e "[${YELLOW}INFO${RESET}] Share this key with authorized users to access 
 increment_step "Updating repository..."
 cd $APP_DIR || { error_step "Application directory not found."; exit 1; }
 
-if git fetch origin $BRANCH> /dev/null 2>&1  && git reset --hard origin/$BRANCH > /dev/null 2>&1;  then
+git fetch origin $BRANCH > /dev/null 2>&1 && \
+ git reset --hard origin/$BRANCH > /dev/null 2>&1
+
+if [ $? -eq 0 ]; then
   success_step "Repository updated."
 else
   error_step "Git update failed."
@@ -68,10 +68,25 @@ else
 fi
 
 # ==========================================
-# STEP 2. Update PHP dependencies
+# STEP 2. Fix permissions BEFORE build
+# ==========================================
+# Чтобы PHP мог удалять favicon и писать в public
+
+increment_step "Fixing permissions for public directory..."
+if sudo chown -R $WEB_USER:$WEB_GROUP public && \
+   sudo chmod -R 775 public; then
+    success_step "Public directory permissions fixed."
+else
+    error_step "Failed to set public directory permissions."
+    exit 1
+fi
+
+# ==========================================
+# STEP 3. Update PHP dependencies
 # ==========================================
 increment_step "Updating Composer dependencies..."
-if $COMPOSER_BIN install --no-interaction --prefer-dist --optimize-autoloader > /dev/null 2>&1; then
+$COMPOSER_BIN install --no-interaction --prefer-dist --optimize-autoloader > /dev/null 2>&1
+if [ $? -eq 0 ]; then
   success_step "Composer dependencies updated."
 else
   error_step "Composer install failed."
@@ -79,7 +94,7 @@ else
 fi
 
 # ==========================================
-# STEP 2.1. Create storage symbolic link
+# STEP 4. Create storage symbolic link
 # ==========================================
 increment_step "Creating storage symbolic link..."
 
@@ -91,7 +106,6 @@ if [ -L "$STORAGE_LINK" ]; then
     echo -e "[${YELLOW}INFO${RESET}] Old storage link removed."
 fi
 
-# Создание ссылки от имени веб-пользователя
 $PHP_BIN artisan storage:link
 
 if [ -L "$STORAGE_LINK" ] && [ "$(readlink -f $STORAGE_LINK)" = "$TARGET" ]; then
@@ -101,11 +115,12 @@ else
 fi
 
 # ==========================================
-# STEP 3. Update JS dependencies (if package.json exists)
+# STEP 5. Update NPM dependencies (if exists)
 # ==========================================
 if [ -f "package.json" ]; then
   increment_step "Updating NPM dependencies..."
-  if npm install --silent > /dev/null 2>&1 && npm run build > /dev/null 2>&1; then
+  npm install --silent > /dev/null 2>&1 && npm run build > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
     success_step "NPM dependencies updated."
   else
     error_step "NPM build failed."
@@ -113,10 +128,11 @@ if [ -f "package.json" ]; then
 fi
 
 # ==========================================
-# STEP 4. Run migrations (safe mode)
+# STEP 6. Run migrations
 # ==========================================
 increment_step "Running database migrations..."
-if $PHP_BIN artisan migrate --force > /dev/null 2>&1; then
+$PHP_BIN artisan migrate --force > /dev/null 2>&1
+if [ $? -eq 0 ]; then
   success_step "Database migrations completed."
 else
   error_step "Migration failed."
@@ -124,10 +140,13 @@ else
 fi
 
 # ==========================================
-# STEP 5. Clear and rebuild caches
+# STEP 7. Clear and rebuild caches
 # ==========================================
 increment_step "Clearing and rebuilding caches..."
-if $PHP_BIN artisan config:clear > /dev/null 2>&1 && $PHP_BIN artisan cache:clear > /dev/null 2>&1 && $PHP_BIN artisan route:clear > /dev/null 2>&1 && $PHP_BIN artisan view:clear > /dev/null 2>&1 && $PHP_BIN artisan config:cache > /dev/null 2>&1 && $PHP_BIN artisan route:cache > /dev/null 2>&1 && $PHP_BIN artisan view:cache > /dev/null 2>&1; then
+$PHP_BIN artisan optimize:clear > /dev/null 2>&1
+$PHP_BIN artisan optimize > /dev/null 2>&1
+
+if [ $? -eq 0 ]; then
   success_step "Caches cleared and rebuilt."
 else
   error_step "Cache clear/rebuild failed."
@@ -135,10 +154,11 @@ else
 fi
 
 # ==========================================
-# STEP 6. Set correct permissions
+# STEP 8. Set correct storage permissions
 # ==========================================
-increment_step "Setting permissions..."
-if sudo chown -R $WEB_USER:$WEB_GROUP storage bootstrap/cache && sudo chmod -R 775 storage bootstrap/cache; then
+increment_step "Setting storage/bootstrap permissions..."
+if sudo chown -R $WEB_USER:$WEB_GROUP storage bootstrap/cache && \
+   sudo chmod -R 775 storage bootstrap/cache; then
   success_step "Permissions set successfully."
 else
   error_step "Failed to set permissions."
@@ -146,7 +166,7 @@ else
 fi
 
 # ==========================================
-# STEP 7. Restart PHP-FPM
+# STEP 9. Restart PHP-FPM
 # ==========================================
 increment_step "Restarting PHP-FPM..."
 for version in 8.3; do
@@ -159,7 +179,7 @@ for version in 8.3; do
 done
 
 # ==========================================
-# STEP 8. Check queue worker status (optional)
+# STEP 10. Check queue worker
 # ==========================================
 increment_step "Checking queue worker status..."
 if ! ps aux | grep -v grep | grep "queue:work" > /dev/null; then
@@ -170,9 +190,9 @@ else
 fi
 
 # ==========================================
-# STEP 9. Done
+# STEP 11. Bring site up
 # ==========================================
-increment_step "Update completed successfully."
+increment_step "Finishing..."
 $PHP_BIN artisan up
 if [ -n "$ACTIVE_VERSION" ]; then
   success_step "PHP-FPM restarted (version ${ACTIVE_VERSION})."
