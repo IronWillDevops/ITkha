@@ -16,10 +16,13 @@ class TelegramPublisherService
 
         $token = setting('telegram_token');
         $chatId = setting('telegram_chat_id');
-        $buttonText = setting('telegram_button_text', 'Читать подробнее');
+        $buttonText = setting('telegram_button_text', 'Read more...');
+        $buttonText = $this->applyPlaceholders($buttonText, $post);
+
 
         // Формируем сообщение без htmlspecialchars, чтобы теги HTML работали
-        $text = $this->buildMessage($post);
+        $text = $this->applyPlaceholders(setting('telegram_template'), $post);
+
 
         $url  = route('public.post.show', $post->slug);
         $keyboard = [
@@ -60,22 +63,35 @@ class TelegramPublisherService
         logger()->info('Telegram response', ['body' => $response->body()]);
     }
 
-    private function buildMessage(Post $post): string
+    private function applyPlaceholders(string $template, Post $post): string
     {
-        $template = setting('telegram_template');
+        $template = $this->normalizePlaceholders($template);
 
         $limit = setting('telegram_message_limit', 450);
-        $excerpt = Str::limit(strip_tags($post->content), $limit);
-        $tagsFormatted = $post->tags
+        $excerpt = \Illuminate\Support\Str::limit(strip_tags($post->content), $limit);
+
+        $tagsFormatted = $post->tags->isNotEmpty()
+            ? $post->tags
             ->map(fn($t) => '#' . Str::slug($t->title))
-            ->implode(' ');
+            ->implode(' ')
+            : null;
+
         $replacements = [
-            '{{title}}'    => "$post->title",
-            '{{category}}' => $post->category?->title ?? '',
-            '{{tags}}'     => $tagsFormatted,
-            '{{excerpt}}'  => $excerpt,
+            '{{title}}'       => $post->title,
+            '{{category}}'    => $post->category?->title ?? '',
+            '{{tags}}'        => $tagsFormatted,
+            '{{excerpt}}'     => $excerpt,
+            '{{author}}'      => $post->author->login,
+            '{{author_url}}'  => route('public.user.show', $post->author),
+            '{{data}}'        => $post->created_at->format('d.m.Y H:i'),
+            '{{url}}'         => route('public.post.show', $post->slug),
         ];
 
         return str_replace(array_keys($replacements), array_values($replacements), $template);
+    }
+
+    private function normalizePlaceholders(string $template): string
+    {
+        return preg_replace('/\{\{\s*(.*?)\s*\}\}/', '{{$1}}', $template);
     }
 }

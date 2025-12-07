@@ -25,11 +25,32 @@
             label="{{ __('admin/settings/telegram.fields.send_without_sound') }}" :checked="$telegramSendWithoutSound" />
         @php
             $placeholder =
-                "<b>{{title}}</b>\n\nCategory: {{category}}\nTags: {{tags}}\n\n{{excerpt}}";
+                "<b>{{ title }}</b>\n\nCategory: {{ category }}\nTags: {{ tags }}\n\n{{ excerpt }}";
         @endphp
-
-        <x-admin.form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}" :placeholder="$placeholder"
-            :value="$telegramTemplate" />
+        <div class="flex space-x-2 mt-2">
+            @php
+                $placeholders = [
+                    '{{ title }}',
+                    '{{ category }}',
+                    '{{ tags }}',
+                    '{{ author }}',
+                    '{{ author_url }}',
+                    '{{ data }}',
+                    '{{ excerpt }}',
+                    '{{ url }}',
+                ];
+            @endphp
+            @foreach ($placeholders as $ph)
+                <button type="button" class="text-xs "
+                    onclick="insertAtCursor(document.getElementById('telegram_template'), '{{ $ph }}')">
+                    <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1 cursor-pointer hover:bg-secondary/80">
+                        {{ $ph }}
+                    </span>
+                </button>
+            @endforeach
+        </div>
+        <x-admin.form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}"
+            :placeholder="$placeholder" :value="$telegramTemplate" />
         <x-admin.form.input name="telegram_message_limit" min="10" max="750" type="number"
             label="{{ __('admin/settings/telegram.fields.message_limit') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.message_limit') }}" icon="fa-solid fa-heading"
@@ -48,3 +69,17 @@
         </div>
     </form>
 @endsection
+@push('scripts')
+    <script>
+        function insertAtCursor(textarea, text) {
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const before = textarea.value.substring(0, start);
+            const after = textarea.value.substring(end);
+            textarea.value = before + text + after;
+            textarea.focus();
+            textarea.selectionStart = textarea.selectionEnd = start + text.length;
+            updateCharacterCount(textarea); // обновляем счетчик
+        }
+    </script>
+@endpush
