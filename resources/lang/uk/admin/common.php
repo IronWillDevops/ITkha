@@ -7,6 +7,8 @@ return [
         'id'          => 'ID',
         'created_at'  => 'Створено',
         'updated_at'  => 'Оновлено',
+        
+        'published_at'=> 'Публікувати о',
         'title'       => 'Заголовок',
         'name'        => 'Ім’я',
         'surname'     => 'Прізвище',

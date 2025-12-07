@@ -23,12 +23,12 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-          
+
             'title' => ['required', 'string', 'min:2', 'max:100'],
 
             'content' => ['required', 'string'],
 
-            'main_image' => ['nullable','file', 'mimes:jpg,png', 'max:2048'],
+            'main_image' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],
             'comments_enabled' => ['required', 'boolean'],
@@ -37,16 +37,26 @@ class StoreRequest extends FormRequest
             'category_id' => ['required', 'integer', 'exists:categories,id'],
 
             'tag_ids' => ['nullable', 'array'],
-            'tag_ids.*' => [ 'integer', 'exists:tags,id'],
+            'tag_ids.*' => ['integer', 'exists:tags,id'],
 
             'user_id' => ['required', 'integer', 'exists:users,id'],
+            // Добавляем published_at
+            'published_at' => [
+                'nullable',
+                'date',
+                function ($attribute, $value, $fail) {
+                    if ($this->input('status') === PostStatus::SCHEDULED->value && !$value) {
+                        $fail(__('validation.required', ['attribute' => $attribute]));
+                    }
+                },
+            ],
 
         ];
     }
     public function messages(): array
     {
         return [
-         
+
             // Повідомлення для title
             'title.required' => __('validation.required'),
             'title.string' => __('validation.string'),
@@ -80,6 +90,10 @@ class StoreRequest extends FormRequest
             'user_id.required' =>  __('validation.required'),
             'user_id.integer' =>  __('validation.integer'),
             'user_id.exists' =>  __('validation.exists'),
+
+            'published_at.required' => __('validation.required'),
+            'published_at.date' => __('validation.date'),
+            'published_at.after_now' => __('validation.after', ['attribute' => 'published_at']),
         ];
     }
 }

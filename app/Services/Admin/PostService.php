@@ -11,83 +11,121 @@ use Illuminate\Support\Facades\DB;
 
 class PostService
 {
-    public function store($data, $request)
+    public function store(array $data, $request): Post
     {
-        // try {
         DB::beginTransaction();
 
-        if (isset($data['tag_ids'])) {
-            $tagIds = $data['tag_ids'];
-            unset($data['tag_ids']);
-        }
-
-        if ($request->hasFile('main_image')) {
-
-            $data['main_image'] = $request->file('main_image')->store('images/main', 'public');
-        }
-
-
-
-        $post = Post::firstOrCreate($data);
-        if (isset($tagIds)) {
-            $post->tags()->attach($tagIds);
-        }
-        $post->comments_enabled = $request->boolean('comments_enabled');
-
-
-
-        if ($post->status === PostStatus::PUBLISHED->value) {
-              
-            event(new PostPublished($post));
-        }
-        DB::commit();
-        // } catch (Exception $expt) {
-        //     DB::rollback();
-        //     abort(500);
-        // }
-    }
-
-    public function update($data, $request, $post)
-    {
         try {
-            DB::beginTransaction();
+            // Сохраняем теги отдельно
+            $tagIds = $data['tag_ids'] ?? null;
+            unset($data['tag_ids']);
 
-            if (isset($data['tag_ids'])) {
-                $tagIds = $data['tag_ids'];
-                unset($data['tag_ids']);
+            // Обработка главного изображения
+            if ($request->hasFile('main_image')) {
+                $data['main_image'] = $request->file('main_image')->store('images/main', 'public');
             }
 
-            if ($request->hasFile('main_image')) {
+            // Обработка published_at (формат datetime-local -> MySQL)
+            if (!empty($data['published_at'])) {
+                $data['published_at'] = str_replace('T', ' ', $data['published_at']) . ':00';
+            } else {
+                $data['published_at'] = null;
+            }
 
-                // Удаляем старый файл, если он есть
+            // Создаём пост
+            $post = Post::create($data);
+
+            // Привязываем теги
+            if ($tagIds) {
+                $post->tags()->attach($tagIds);
+            }
+
+            // Устанавливаем комментарии
+            $post->comments_enabled = $request->boolean('comments_enabled');
+            $post->save();
+
+            // Публикуем пост, если время уже наступило или статус PUBLISHED
+            $this->publishIfNeeded($post);
+
+            DB::commit();
+            return $post;
+        } catch (Exception $ex) {
+            DB::rollback();
+            abort(500, $ex->getMessage());
+        }
+    }
+
+    /**
+     * Обновление поста
+     */
+    public function update(array $data, $request, Post $post): Post
+    {
+        DB::beginTransaction();
+
+        try {
+            // Сохраняем теги отдельно
+            $tagIds = $data['tag_ids'] ?? null;
+            unset($data['tag_ids']);
+
+            // Обработка главного изображения
+            if ($request->hasFile('main_image')) {
                 if ($post->main_image && Storage::disk('public')->exists($post->main_image)) {
                     Storage::disk('public')->delete($post->main_image);
                 }
-
                 $data['main_image'] = $request->file('main_image')->store('images/main', 'public');
             }
+
+            // Обработка published_at (формат datetime-local -> MySQL)
+            if (!empty($data['published_at'])) {
+                $data['published_at'] = str_replace('T', ' ', $data['published_at']) . ':00';
+            } else {
+                $data['published_at'] = null;
+            }
+
             $oldStatus = $post->status;
 
+            // Обновляем пост
             $post->update($data);
-            if (isset($tagIds)) {
+
+            // Синхронизация тегов
+            if ($tagIds) {
                 $post->tags()->sync($tagIds);
             }
 
+            // Обновляем комментарии
             $post->comments_enabled = $request->boolean('comments_enabled');
-
-
+            $post->save();
 
             $newStatus = $post->status;
-            if ($oldStatus !== PostStatus::PUBLISHED->value && $newStatus === PostStatus::PUBLISHED->value) {
-          
-                event(new PostPublished($post));
-            }
+
+            // Публикуем пост, если нужно
+            $this->publishIfNeeded($post);
 
             DB::commit();
-        } catch (Exception $expt) {
+            return $post;
+        } catch (Exception $ex) {
             DB::rollback();
-            abort(500);
+            abort(500, $ex->getMessage());
         }
-        return $post;
+    }
+
+    /**
+     * Проверяет, нужно ли публиковать пост, и публикует его
+     */
+    private function publishIfNeeded(Post $post): void
+    {
+        $shouldPublish = $post->status === PostStatus::PUBLISHED->value
+            || ($post->status === PostStatus::SCHEDULED->value
+                && $post->published_at
+                && $post->published_at <= date('Y-m-d H:i:s'));
+
+        if ($shouldPublish) {
+            if ($post->status !== PostStatus::PUBLISHED->value) {
+                $post->status = PostStatus::PUBLISHED->value;
+                $post->save();
+            }
+
+            event(new PostPublished($post));
+        }
     }
 }
