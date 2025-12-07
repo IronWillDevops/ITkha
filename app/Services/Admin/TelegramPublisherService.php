@@ -70,22 +70,25 @@ class TelegramPublisherService
         $limit = setting('telegram_message_limit', 450);
         $excerpt = \Illuminate\Support\Str::limit(strip_tags($post->content), $limit);
 
-        $tagsFormatted = $post->tags->isNotEmpty()
-            ? $post->tags
-            ->map(fn($t) => '#' . Str::slug($t->title))
-            ->implode(' ')
-            : null;
 
         $replacements = [
             '{{title}}'       => $post->title,
             '{{category}}'    => $post->category?->title ?? '',
-            '{{tags}}'        => $tagsFormatted,
+
             '{{excerpt}}'     => $excerpt,
             '{{author}}'      => $post->author->login,
             '{{author_url}}'  => route('public.user.show', $post->author),
             '{{data}}'        => $post->created_at->format('d.m.Y H:i'),
             '{{url}}'         => route('public.post.show', $post->slug),
         ];
+        if ($post->tags->isNotEmpty()) {
+            $replacements['{{tags}}'] = $post->tags
+                ->map(fn($t) => '#' . Str::slug($t->title))
+                ->implode(' ');
+        } else {
+            // Убираем плейсхолдер и один перенос строки после него
+            $template = preg_replace('/\{\{tags\}\}\r?\n?/', '', $template);
+        }
 
         return str_replace(array_keys($replacements), array_values($replacements), $template);
     }
