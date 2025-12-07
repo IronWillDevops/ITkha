@@ -9,3 +9,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('cache:sync-post-views')->everyTenMinutes();
+Schedule::command('posts:publish-scheduled')->everyMinute();

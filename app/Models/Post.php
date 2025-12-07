@@ -33,11 +33,13 @@ class Post extends Model
         'likes',
         'views',
         'category_id',
-        'user_id'
+        'user_id',
+        'published_at',
     ];
 
     protected $casts = [
         'comments_enabled' => 'boolean',
+        'published_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -91,7 +93,7 @@ class Post extends Model
     }
 
     public function getRouteKeyName(): string
-{
-    return $this->getSlugColumn();
-}
+    {
+        return $this->getSlugColumn();
+    }
 }

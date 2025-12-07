@@ -7,6 +7,7 @@ return [
         'id'          => 'ID',
         'created_at'  => 'Created at',
         'updated_at'  => 'Updated at',
+        'published_at'=> 'Published at',
         'title'       => 'Title',
         'name'        => 'Name',
         'surname'     => 'Surname',

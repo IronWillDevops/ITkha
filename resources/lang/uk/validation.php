@@ -2,100 +2,103 @@
 
 return [
 
-    'required'  => 'The :attribute field is required.',
-    'string'    => 'The :attribute must be a valid string.',
-    'email'     => 'The :attribute must be a valid email address.',
-    'url'       => 'The :attribute format is invalid.',
-    'regex'     => 'The :attribute format is invalid.',
-    'boolean'   => 'The :attribute field must be true or false.',
-    'array'     => 'The :attribute must be an array.',
-    'integer'   => 'The :attribute must be an integer.',
-    'exists'    => 'The selected :attribute does not exist.',
-    'unique'    => 'The :attribute has already been taken.',
-    'confirmed' => 'The :attribute confirmation does not match.',
-    'in'        => 'The selected :attribute is invalid.',
-    'file'      => 'The :attribute must be a valid file.',
-    'mimes'     => 'The :attribute must be a file of type: :values.',
-    'incorrect' => 'The entered :attribute is incorrect.',
+    'required'  => 'Поле :attribute обов’язкове для заповнення.',
+    'string'    => 'Поле :attribute повинно бути рядком.',
+    'email'     => 'Поле :attribute повинно бути дійсною електронною адресою.',
+    'url'       => 'Формат поля :attribute недійсний.',
+    'regex'     => 'Формат поля :attribute недійсний.',
+    'boolean'   => 'Поле :attribute повинно бути true або false.',
+    'array'     => 'Поле :attribute повинно бути масивом.',
+    'integer'   => 'Поле :attribute повинно бути цілим числом.',
+    'exists'    => 'Вибране :attribute не існує.',
+    'unique'    => ':attribute вже зайнято.',
+    'confirmed' => 'Підтвердження :attribute не збігається.',
+    'in'        => 'Вибране :attribute недійсне.',
+    'file'      => 'Поле :attribute повинно бути файлом.',
+    'mimes'     => 'Поле :attribute повинно бути файлом типу: :values.',
+    'incorrect' => 'Введене :attribute некоректне.',
+    'after'     => 'Поле :attribute повинно бути датою після :date.',
+    'after_now' => 'Поле :attribute повинно бути датою в майбутньому.',
 
     'max' => [
-        'string' => 'The :attribute may not be greater than :max characters.',
-        'file'   => 'The :attribute may not be greater than :max kilobytes.',
+        'string' => 'Поле :attribute не може містити більше ніж :max символів.',
+        'file'   => 'Поле :attribute не може перевищувати :max кілобайт.',
     ],
 
     'min' => [
-        'string' => 'The :attribute must be at least :min characters.',
+        'string' => 'Поле :attribute повинно містити щонайменше :min символів.',
     ],
 
     'custom' => [
 
         'name' => [
-            'regex' => 'The :attribute may contain only English letters.',
+            'regex' => 'Поле :attribute може містити лише літери англійського алфавіту.',
         ],
 
         'surname' => [
-            'regex' => 'The :attribute may contain only English letters.',
+            'regex' => 'Поле :attribute може містити лише літери англійського алфавіту.',
         ],
 
         'login' => [
-            'regex' => 'The :attribute may contain only English letters, numbers, and underscores.',
+            'regex' => 'Поле :attribute може містити лише літери англійського алфавіту, цифри та підкреслення.',
         ],
 
         'password' => [
-            'letters'           => 'The :attribute must contain at least one letter.',
-            'mixed'             => 'The :attribute must include both uppercase and lowercase letters.',
-            'numbers'           => 'The :attribute must contain at least one number.',
-            'symbols'           => 'The :attribute must contain at least one special character.',
-            'uncompromised'     => 'The provided :attribute appears in a data leak. Please choose a different one.',
-            'current_password'  => 'The current password you entered is incorrect.',
+            'letters'           => 'Поле :attribute повинно містити принаймні одну літеру.',
+            'mixed'             => 'Поле :attribute повинно містити великі та малі літери.',
+            'numbers'           => 'Поле :attribute повинно містити принаймні одну цифру.',
+            'symbols'           => 'Поле :attribute повинно містити принаймні один спеціальний символ.',
+            'uncompromised'     => 'Введене :attribute потрапило до витоку даних. Будь ласка, оберіть інший.',
+            'current_password'  => 'Введений поточний пароль некоректний.',
         ],
 
         'captcha' => [
-            'incorrect' => 'The entered :attribute is incorrect.',
+            'incorrect' => 'Введене :attribute некоректне.',
         ],
 
         'avatar' => [
-            'image' => 'The :attribute must be an image (jpg, jpeg, png, webp).',
+            'image' => 'Поле :attribute повинно бути зображенням (jpg, jpeg, png, webp).',
         ],
 
         'github' => [
-            'incorrect' => 'The entered :attribute is not a valid GitHub profile URL.',
+            'incorrect' => 'Введене :attribute не є дійсним профілем GitHub.',
         ],
 
         'linkedin' => [
-            'incorrect' => 'The entered :attribute is not a valid LinkedIn profile URL.',
+            'incorrect' => 'Введене :attribute не є дійсним профілем LinkedIn.',
         ],
 
         'website' => [
-            'incorrect' => 'The entered :attribute is not a valid public URL.',
+            'incorrect' => 'Введене :attribute не є дійсним публічним URL.',
         ],
 
     ],
 
     'attributes' => [
-        'name'          => 'name',
-        'surname'       => 'surname',
-        'login'         => 'login',
-        'email'         => 'email',
-        'password'      => 'password',
-        'avatar'        => 'avatar',
+        'name'          => 'ім’я',
+        'surname'       => 'прізвище',
+        'login'         => 'логін',
+        'email'         => 'електронна адреса',
+        'password'      => 'пароль',
+        'avatar'        => 'аватар',
 
-        'title'         => 'title',
-        'content'       => 'content',
-        'main_image'    => 'main image',
-        'status'        => 'status',
+        'title'         => 'назва',
+        'content'       => 'контент',
+        'main_image'    => 'головне зображення',
+        'status'        => 'статус',
+        'published_at'  => 'дата публікації',
 
-        'user_id'       => 'user',
-        'category_id'   => 'category',
-        'tag_ids'       => 'tags',
-        'permissions'   => 'permissions',
+        'user_id'       => 'користувач',
+        'category_id'   => 'категорія',
+        'tag_ids'       => 'теги',
+        'permissions'   => 'дозволи',
 
-        'website'       => 'website',
-        'github'        => 'GitHub profile',
-        'linkedin'      => 'LinkedIn profile',
+        'website'       => 'вебсайт',
+        'github'        => 'профіль GitHub',
+        'linkedin'      => 'профіль LinkedIn',
 
-        'telegram_template' => 'Telegram template',
-        'telegram_button_text' => 'Telegram button text',
-        'telegram_message_limit' => 'Telegram message limit',
+        'telegram_template' => 'шаблон Telegram',
+        'telegram_button_text' => 'текст кнопки Telegram',
+        'telegram_message_limit' => 'обмеження повідомлень Telegram',
     ],
 ];

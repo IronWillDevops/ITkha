@@ -3,7 +3,7 @@
 return [
 
     'required'  => 'The :attribute field is required.',
-    'string'    => 'The :attribute must be a valid string.',
+    'string'    => 'The :attribute must be a string.',
     'email'     => 'The :attribute must be a valid email address.',
     'url'       => 'The :attribute format is invalid.',
     'regex'     => 'The :attribute format is invalid.',
@@ -14,9 +14,11 @@ return [
     'unique'    => 'The :attribute has already been taken.',
     'confirmed' => 'The :attribute confirmation does not match.',
     'in'        => 'The selected :attribute is invalid.',
-    'file'      => 'The :attribute must be a valid file.',
+    'file'      => 'The :attribute must be a file.',
     'mimes'     => 'The :attribute must be a file of type: :values.',
     'incorrect' => 'The entered :attribute is incorrect.',
+    'after'     => 'The :attribute must be a date after :date.',
+    'after_now' => 'The :attribute must be a date in the future.',
 
     'max' => [
         'string' => 'The :attribute may not be greater than :max characters.',
@@ -59,11 +61,11 @@ return [
         ],
 
         'github' => [
-            'incorrect' => 'The entered :attribute is not a valid GitHub profile URL.',
+            'incorrect' => 'The entered :attribute is not a valid GitHub profile.',
         ],
 
         'linkedin' => [
-            'incorrect' => 'The entered :attribute is not a valid LinkedIn profile URL.',
+            'incorrect' => 'The entered :attribute is not a valid LinkedIn profile.',
         ],
 
         'website' => [
@@ -84,6 +86,7 @@ return [
         'content'       => 'content',
         'main_image'    => 'main image',
         'status'        => 'status',
+        'published_at'  => 'publication date',
 
         'user_id'       => 'user',
         'category_id'   => 'category',
@@ -94,10 +97,8 @@ return [
         'github'        => 'GitHub profile',
         'linkedin'      => 'LinkedIn profile',
 
-
         'telegram_template' => 'Telegram template',
         'telegram_button_text' => 'Telegram button text',
         'telegram_message_limit' => 'Telegram message limit',
-
     ],
 ];

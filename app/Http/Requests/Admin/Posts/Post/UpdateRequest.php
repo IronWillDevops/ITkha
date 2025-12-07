@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
 
             'content' => ['required', 'string'],
 
-            'main_image' => ['nullable','file', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'main_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
 
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],
@@ -37,11 +37,20 @@ class UpdateRequest extends FormRequest
             'category_id' => ['required', 'integer', 'exists:categories,id'],
 
             'tag_ids' => ['nullable', 'array'],
-            'tag_ids.*' => [ 'integer', 'exists:tags,id'],
+            'tag_ids.*' => ['integer', 'exists:tags,id'],
 
 
             'user_id' => ['required', 'integer', 'exists:users,id'],
 
+            'published_at' => [
+                'nullable',
+                'date',
+                function ($attribute, $value, $fail) {
+                    if ($this->input('status') === PostStatus::SCHEDULED->value && !$value) {
+                        $fail(__('validation.required', ['attribute' => $attribute]));
+                    }
+                },
+            ],
 
         ];
     }
@@ -82,6 +91,10 @@ class UpdateRequest extends FormRequest
             'user_id.required' =>  __('validation.required'),
             'user_id.integer' =>  __('validation.integer'),
             'user_id.exists' =>  __('validation.exists'),
+
+            'published_at.required' => __('validation.required'),
+            'published_at.date' => __('validation.date'),
+            'published_at.after_now' => __('validation.after', ['attribute' => 'published_at']),
         ];
     }
 }

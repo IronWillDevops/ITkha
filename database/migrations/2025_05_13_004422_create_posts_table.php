@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->foreignId('category_id')->constrained()->onDelete('cascade')->default(1);
 
             $table->softDeletes();
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });
     }
