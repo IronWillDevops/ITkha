@@ -17,8 +17,11 @@ class PostService
 
         try {
             // Сохраняем теги отдельно
-            $tagIds = $data['tag_ids'] ?? null;
-            unset($data['tag_ids']);
+            if (isset($data['tag_ids'])) {
+                $tagIds = $data['tag_ids'];
+
+                unset($data['tag_ids']);
+            }
 
             // Обработка главного изображения
             if ($request->hasFile('main_image')) {
@@ -36,7 +39,7 @@ class PostService
             $post = Post::create($data);
 
             // Привязываем теги
-            if ($tagIds) {
+            if (isset($tagIds)) {
                 $post->tags()->attach($tagIds);
             }
 
@@ -63,10 +66,10 @@ class PostService
         DB::beginTransaction();
 
         try {
-            // Сохраняем теги отдельно
-            $tagIds = $data['tag_ids'] ?? null;
-            unset($data['tag_ids']);
 
+            // Сохраняем теги отдельно
+            $tagIds = $data['tag_ids'] ?? [];
+            unset($data['tag_ids']);
             // Обработка главного изображения
             if ($request->hasFile('main_image')) {
                 if ($post->main_image && Storage::disk('public')->exists($post->main_image)) {
@@ -82,21 +85,17 @@ class PostService
                 $data['published_at'] = null;
             }
 
-            $oldStatus = $post->status;
 
             // Обновляем пост
             $post->update($data);
 
             // Синхронизация тегов
-            if ($tagIds) {
-                $post->tags()->sync($tagIds);
-            }
+            $post->tags()->sync($tagIds);
 
             // Обновляем комментарии
             $post->comments_enabled = $request->boolean('comments_enabled');
             $post->save();
 
-            $newStatus = $post->status;
 
             // Публикуем пост, если нужно
             $this->publishIfNeeded($post);
@@ -114,17 +113,22 @@ class PostService
      */
     private function publishIfNeeded(Post $post): void
     {
-        $shouldPublish = $post->status === PostStatus::PUBLISHED->value
-            || ($post->status === PostStatus::SCHEDULED->value
-                && $post->published_at
-                && $post->published_at <= date('Y-m-d H:i:s'));
+        // Если пост уже опубликован — ничего не делаем
+        if ($post->status === PostStatus::PUBLISHED->value) {
+            return;
+        }
+
+        // Проверяем, нужно ли публиковать (по расписанию)
+        $shouldPublish = $post->status === PostStatus::SCHEDULED->value
+            && $post->published_at
+            && $post->published_at <= date('Y-m-d H:i:s');
 
         if ($shouldPublish) {
-            if ($post->status !== PostStatus::PUBLISHED->value) {
-                $post->status = PostStatus::PUBLISHED->value;
-                $post->save();
-            }
+            // Меняем статус на PUBLISHED
+            $post->status = PostStatus::PUBLISHED->value;
+            $post->save();
 
+            // Генерируем событие публикации
             event(new PostPublished($post));
         }
     }
