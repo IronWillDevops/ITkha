@@ -8,6 +8,8 @@
             ? '<i class="fa-solid fa-sort-up text-xs"></i>'
             : '<i class="fa-solid fa-sort-down text-xs"></i>';
     }
+    $viewRoute = 'admin.' . $modelRoute . '.show';
+
 @endphp
 
 
@@ -91,7 +93,7 @@
             <tbody class="divide-y">
                 @forelse($items as $item)
                     <tr class="cursor-pointer hover:bg-muted"
-                        onclick="window.location='{{ route('admin.' . $modelRoute . '.show', $item) }}'">
+                        @if (Route::has($viewRoute)) onclick="window.location='{{ route('admin.' . $modelRoute . '.show', $item) }}'" @endif>
 
                         @foreach ($columns as $col)
                             @php
@@ -167,7 +169,7 @@
                 {{-- Верхняя часть карточки — кликабельная --}}
                 <div class="border border-input rounded-lg shadow-sm overflow-hidden">
 
-                    <div onclick="window.location='{{ route('admin.' . $modelRoute . '.show', $item) }}'"
+                    <div   @if (Route::has($viewRoute)) onclick="window.location='{{ route('admin.' . $modelRoute . '.show', $item) }}'" @endif
                         class="p-4 cursor-pointer hover:bg-muted transition">
 
                         @foreach ($columns as $col)
