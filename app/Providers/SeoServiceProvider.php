@@ -23,28 +23,36 @@ class SeoServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+       
         View::composer('*', function ($view) {
 
-            // Дефолтные значения
+            // Дефолтные значения для всех страниц
             $title = setting('site_name', config('app.name'));
             $description = setting('site_description', 'Default description');
             $image = asset('favicon.ico');
             $url = url()->current();
 
-            // Создаём дефолтный SEO массив
             $seo = SeoService::meta($title, $description, $image, $url);
 
-            // Если это страница поста и передан $post
+            // Динамический SEO для поста
             if (Route::currentRouteName() === 'public.post.show' && $view->offsetExists('post')) {
-                $post = $view->getData()['post'];
-                $seo = SeoService::meta(
-                    $post->title,
-                    $post->content ?? substr(strip_tags($post->content), 0, 150),
-                    isset($post->main_image) ? asset('storage/' . $post->main_image) : "",
-                    $url
-                );
+                $seo = SeoService::fromModel($view->getData()['post'], [
+                    'title' => 'title',
+                    'description' => 'content',
+                    'image' => 'main_image',
+                ]);
             }
 
+            // Динамический SEO для пользователя
+            if (Route::currentRouteName() === 'public.user.show' && $view->offsetExists('user')) {
+                $seo = SeoService::fromModel($view->getData()['user'], [
+                    'title' => 'login',
+                    'description' => 'profile.about_myself',
+                    'image' => 'avatar',
+                ]);
+            }
+
+            // Передаём в view
             $view->with('seo', $seo);
         });
     }
