@@ -18,8 +18,7 @@ class SettingsSeeder extends Seeder
             ['key' => 'site_name', 'value' => 'ITkha'],
             ['key' => 'site_description', 'value' => 'IT blog with articles, tutorials, and more.'],
             ['key' => 'site_keywords', 'value' => 'IT, tutorials, blog, technology'],
-            ['key' => 'site_favicon', 'value' => ''],
-            ['key' => 'site_timezone', 'value' => 'Europe/Kyiv'],
+
 
             //Comment
             ['key' => 'comments_enabled', 'value' => '1'],

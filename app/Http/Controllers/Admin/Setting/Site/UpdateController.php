@@ -34,8 +34,7 @@ class UpdateController extends Controller
             // Сохраняем новую favicon
             $favicon->move(public_path(), 'favicon.ico');
 
-            // Можно сохранить путь в настройку, если используется динамическая подгрузка
-            Setting::set('site_favicon', '/favicon.ico');
+          
         }
         return redirect()
             ->route('admin.setting.site.edit')
