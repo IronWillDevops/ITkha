@@ -31,6 +31,11 @@ class UserService
 
             $user->roles()->attach($role_id);
         }
+        // Обработка аватара (необязательное поле)
+        if (isset($data['avatar']) && $data['avatar'] instanceof \Illuminate\Http\UploadedFile) {
+            $avatarPath = $data['avatar']->store("avatars/{$user->id}", 'public');
+            $user->update(['avatar' => $avatarPath]);
+        }
     }
 
     public function update($data, $user)

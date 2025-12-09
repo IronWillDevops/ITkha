@@ -24,6 +24,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'], // 2MB
             'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z]+$/'],
             'surname' => ['string', 'max:255', 'regex:/^[A-Za-z]+$/'],
             'login' => ['required', 'string', 'min:5', 'max:50', 'unique:users', 'regex:/^[A-Za-z0-9_]+$/'],
@@ -38,6 +39,11 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
+
+            'avatar.image' => __('validation.image'),
+            'avatar.mimes' => __('validation.mimes'),
+            'avatar.max' => __('validation.max.file'),
+
             'name.required' => __('validation.required'),
             'name.string' => __('validation.string'),
             'name.max' => __('validation.max.string'),
