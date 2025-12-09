@@ -40,7 +40,7 @@ class SeoServiceProvider extends ServiceProvider
                 $seo = SeoService::meta(
                     $post->title,
                     $post->content ?? substr(strip_tags($post->content), 0, 150),
-                    isset($post->main_url) ? asset('storage/' . $post->main_url) : "",
+                    isset($post->main_image) ? asset('storage/' . $post->main_image) : "",
                     $url
                 );
             }
