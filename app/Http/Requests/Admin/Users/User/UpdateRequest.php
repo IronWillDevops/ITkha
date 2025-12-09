@@ -67,6 +67,10 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'avatar.image' => __('validation.image'),
+            'avatar.mimes' => __('validation.mimes'),
+            'avatar.max' => __('validation.max.file'),
+
             'name.required' => __('validation.required'),
             'name.string' => __('validation.string'),
             'name.max' => __('validation.max.string'),
@@ -100,7 +104,7 @@ class UpdateRequest extends FormRequest
             'email_verified_at.required' => __('validation.required'),
             'email_verified_at.boolean' => __('validation.boolean'),
 
-            'status.required' =>__('validation.required'),
+            'status.required' => __('validation.required'),
             'status.in' => __('validation.in'),
 
         ];
