@@ -9,68 +9,15 @@
 
     </div>
 
-    {{-- Таблица постов --}}
-    <div class="overflow-x-auto shadow ">
-        <table class="min-w-full divide-y ">
-            <thead>
-                <tr>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.id') }}</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.title') }}</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.count') }}</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">{{ __('admin/common.fields.created_at') }}
-                    </th>
-                    <th class="px-4 py-2 text-center text-sm font-semibold">{{ __('admin/common.fields.actions') }}</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y ">
-                @forelse($categories as $category)
-                    <tr>
-                        <td class="px-4 py-2 text-sm ">{{ $category->id }}</td>
-                        <td class="px-4 py-2 text-sm  font-medium  hover:underline">
-                            <a href ="{{ route('admin.category.show', $category->id) }}"
-                                class="focus:ring focus:outline-none focus-visible:ring-ring">{{ $category->title }}</a>
-                        </td>
-                        <td class="px-4 py-2 text-sm  font-medium ">
-                            {{ $category->posts()->count() }}
-                        </td>
-                        <td class="px-4 py-2 text-sm">
-                            {{ $category->created_at }}
-                        </td>
-                        <td class="px-4 py-2 text-sm text-right space-x-2 flex justify-end">
-                            {{-- Кнопка редагування --}}
-                            <a href="{{ route('admin.category.edit', $category->id) }}"
-                                class="focus:ring focus:outline-none focus-visible:ring-ring inline-flex items-center p-2 rounded-lg transition"
-                                title="{{ __('admin/common.buttons.edit') }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
+    {{-- Таблица категорий --}}
+    <x-admin.form.table
+        :columns="$columns"
+        :items="$categories"
+        modelRoute="category"
+        :sortField="$sortField"
+        :sortDirection="$sortDirection"
+        searchEnabled="true"
+        :showView="false"
+    />
 
-                            {{-- Кнопка видалення --}}
-                            <form action="{{ route('admin.category.delete', $category->id) }}" method="POST"
-                                onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')"
-                                class="inline-block">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="inline-flex items-center p-2 bg-destructive text-destructive-foreground rounded-lg transition focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer"
-                                    title="{{ __('admin/common.buttons.delete') }}">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="7" class="px-4 py-6 text-center text-sm">
-                            {{ __('admin/common.messages.no_records') }}
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-
-    {{-- Пагинация --}}
-    <div class="mt-6">
-        {{ $categories->links('vendor.pagination.pagination') }}
-    </div>
 @endsection

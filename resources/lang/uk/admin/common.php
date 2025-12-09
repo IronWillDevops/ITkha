@@ -7,8 +7,8 @@ return [
         'id'          => 'ID',
         'created_at'  => 'Створено',
         'updated_at'  => 'Оновлено',
-        
-        'published_at'=> 'Публікувати о',
+
+        'published_at' => 'Публікувати о',
         'title'       => 'Заголовок',
         'name'        => 'Ім’я',
         'surname'     => 'Прізвище',
@@ -29,6 +29,7 @@ return [
         'actions'     => 'Дії',
         'icon'        => 'Іконка',
         'url'         => 'URL',
+        'search'      => 'Пошук...',
     ],
 
     'placeholder' => [
@@ -49,7 +50,7 @@ return [
         'cancel'     => 'Скасувати',
         'close'      => 'Закрити',
         'read_more'  => 'Читати далі',
-
+        'search'      => 'Шукати',
         'yes' => 'Так',
         'no'  => 'Ні',
     ],

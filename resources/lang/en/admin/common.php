@@ -7,7 +7,7 @@ return [
         'id'          => 'ID',
         'created_at'  => 'Created at',
         'updated_at'  => 'Updated at',
-        'published_at'=> 'Published at',
+        'published_at' => 'Published at',
         'title'       => 'Title',
         'name'        => 'Name',
         'surname'     => 'Surname',
@@ -27,7 +27,8 @@ return [
         'description' => 'Description',
         'actions'     => 'Actions',
         'icon'        => 'Icon',
-        'url'        => 'URL',
+        'url'         => 'URL',
+        'search'      => 'Search...',
     ],
 
     'placeholder' => [
@@ -49,6 +50,7 @@ return [
         'close'      => 'Close',
         'read_more'  => 'Read more',
 
+        'search'      => 'Шукати',
         'yes' => 'Yes',
         'no'  => 'No',
     ],

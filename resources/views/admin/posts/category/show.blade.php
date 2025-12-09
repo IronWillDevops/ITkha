@@ -5,7 +5,6 @@
 @endsection
 
 @section('admin.content')
-
     <div class="flex items-center gap-4 mb-4">
         <x-admin.form.action-button type='link' route="{{ route('admin.category.edit', $category->id) }}" icon="fas fa-edit"
             label="{{ __('admin/common.buttons.edit') }}" />
@@ -31,29 +30,7 @@
             {{ __('admin/common.fields.post') }}
         </h2>
 
-        @if ($posts->isNotEmpty())
-            <ul class="list-disc list-inside space-y-1">
-                @foreach ($posts as $post)
-                    <li>
-                        <span>{{ $post->id }})</span>
-                        <a href="{{ route('admin.post.show', $post) }}"
-                            class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                            {{ $post->title }}
-                        </a>
-                        <span class="text-xs text-muted-foreground">
-                            ({{ $post->status }})
-                        </span>
-                    </li>
-                @endforeach
-            </ul>
-        @else
-            <p class="text-sm text-muted-foreground">
-                {{ __('admin/common.messages.no_posts') }}
-            </p>
-        @endif
-        {{-- Пагинация --}}
-        <div class="mt-6">
-            {{ $posts->links('vendor.pagination.pagination') }}
-        </div>
+        <x-admin.form.table :columns="$columns" :items="$posts" modelRoute="post" :sortField="$sortField" :sortDirection="$sortDirection"
+            searchEnabled="true" />
     </div>
 @endsection
