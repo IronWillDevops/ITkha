@@ -19,7 +19,7 @@ class SeoMeta extends Component
     public function __construct(string $title, string $description = '', string $image = '', string $url = '')
     {
         $this->title = $title;
-        $this->description = $description ?: config('app.name');
+        $this->description = $description ?: setting('site_description');
         $this->image = $image;
         $this->url = $url ?: url()->current();
     }

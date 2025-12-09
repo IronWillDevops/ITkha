@@ -2,7 +2,6 @@
 
 namespace App\Services\Public;
 
-use Illuminate\Support\Facades\URL;
 
 class SeoService
 {
@@ -10,7 +9,7 @@ class SeoService
     {
         return [
             'title' => $title,
-            'description' => $description ?: config('app.name'),
+            'description' => $description ?: setting('site_description'),
             'image' => $image,
             'url' => $url ?: url()->current(),
         ];

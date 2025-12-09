@@ -25,46 +25,72 @@ class SeoServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
 
-            // Дефолтные значения
+            // Базовые настройки (fallback)
             $title = setting('site_name', config('app.name'));
             $description = setting('site_description', 'Default description');
             $image = asset('favicon.ico');
             $url = url()->current();
 
-            // Создаём дефолтный SEO массив
             $seo = SeoService::meta($title, $description, $image, $url);
 
-            // Если это страница поста и передан $post
-            if (Route::currentRouteName() === 'public.post.show' && $view->offsetExists('post')) {
+            /**
+             * -----------------------------------------------------------
+             * SEO для страницы поста
+             * -----------------------------------------------------------
+             */
+            if (
+                Route::currentRouteName() === 'public.post.show'
+                && $view->offsetExists('post')
+            ) {
                 $post = $view->getData()['post'];
+
+                // Чистый текст без HTML
+                $cleanContent = trim(
+                    preg_replace('/\s+/', ' ', strip_tags($post->content))
+                );
+                $excerpt = mb_substr($cleanContent, 0, 150);
+
                 $seo = SeoService::meta(
                     $post->title,
-                    $post->content ?? substr(strip_tags($post->content), 0, 150),
-                    isset($post->main_image) ? asset('storage/' . $post->main_image) : "",
+                    $excerpt,
+                    $post->main_image
+                        ? asset('storage/' . $post->main_image)
+                        : asset('favicon.ico'),
                     $url
                 );
             }
-            if (Route::currentRouteName() === 'public.user.show' && $view->offsetExists('user')) {
 
+            /**
+             * -----------------------------------------------------------
+             * SEO для страницы пользователя
+             * -----------------------------------------------------------
+             */
+            if (
+                Route::currentRouteName() === 'public.user.show'
+                && $view->offsetExists('user')
+            ) {
                 $user = $view->getData()['user'];
-
-                // Данные профиля
                 $profile = $user->profile;
-                $about  = $profile?->about_myself;
-                $job    = $profile?->job_title;
 
-              
-                if ($job && $about) {
-                    $description = $job . '. ' . mb_substr(strip_tags($about), 0, 150);
+                $about = $profile?->about_myself;
+                $job   = $profile?->job_title;
+
+                // Чистый about
+                $cleanAbout = $about
+                    ? trim(preg_replace('/\s+/', ' ', strip_tags($about)))
+                    : null;
+
+                // Формирование description
+                if ($job && $cleanAbout) {
+                    $description = $job . '. ' . mb_substr($cleanAbout, 0, 150);
                 } elseif ($job) {
                     $description = $job . ' — ' . setting('site_name', config('app.name'));
-                } elseif ($about) {
-                    $description = mb_substr(strip_tags($about), 0, 150);
+                } elseif ($cleanAbout) {
+                    $description = mb_substr($cleanAbout, 0, 150);
                 } else {
                     $description = "{$user->login} — " . setting('site_name', config('app.name'));
                 }
 
-                // Аватар или fallback
                 $avatar = $user->avatar
                     ? asset('storage/' . $user->avatar)
                     : asset('favicon.ico');
@@ -76,8 +102,6 @@ class SeoServiceProvider extends ServiceProvider
                     $url
                 );
             }
-
-
 
             $view->with('seo', $seo);
         });
