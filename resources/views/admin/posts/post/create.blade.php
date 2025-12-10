@@ -13,7 +13,7 @@
                 placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-heading" />
 
             {{-- Изображение --}}
-            <x-admin.form.file-input name="main_image" label="{{ __('admin/post.fields.main_image') }}" />
+            <x-form.file name="main_image" label="{{ __('admin/post.fields.main_image') }}" icon="fa-regular fa-file-image"/>
 
             {{-- Категория --}}
             <x-admin.form.select name="category_id" label="{{ __('admin/common.fields.category') }}" :options="$categories"

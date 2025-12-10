@@ -31,7 +31,7 @@
                     </div>
                     <div class="flex-1">
                         <span>{{ $user->login }}</span>
-                        <x-form.input type="file" name="avatar" label="{{ __('public/common.fields.avatar') }}" icon="fas fa-solid fa-user" :required="false" />
+                        <x-form.file  name="avatar" label="{{ __('public/common.fields.avatar') }}" :required="false" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -13,7 +13,8 @@
                 placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-heading" />
 
             {{-- Изображение --}}
-            <x-admin.form.file-input name="main_image" label="{{ __('admin/post.fields.main_image') }}" />
+            <x-form.file name="main_image" label="{{ __('admin/post.fields.main_image') }}"
+                icon="fa-regular fa-file-image" />
 
             {{-- Категория --}}
             <x-admin.form.select name="category_id" label="{{ __('admin/common.fields.category') }}" :options="$categories"
@@ -26,7 +27,7 @@
             {{-- Editor --}}
             <x-admin.form.editor name="content" label="{{ __('admin/post.fields.content') }}"
                 placeholder="{{ __('admin/post.placeholder.content') }}" value="{{ $post->content }}" />
-                
+
             <div class="flex">
                 <div class="flex-1">
                     {{-- Статус --}} <x-admin.form.select name="status"
@@ -36,7 +37,7 @@
 
                 <div id="published_at_wrapper" class="flex-1 pl-4">
                     <x-admin.form.date-time-input name="published_at" label="{{ __('admin/common.fields.published_at') }}"
-                        icon="fa-solid fa-calendar-day" id="published_at" :required="true" :value="$post->published_at"/>
+                        icon="fa-solid fa-calendar-day" id="published_at" :required="true" :value="$post->published_at" />
                 </div>
             </div>
 

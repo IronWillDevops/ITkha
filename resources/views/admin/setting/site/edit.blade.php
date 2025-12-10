@@ -16,12 +16,14 @@
         <x-admin.form.area name="site_description" label="{{ __('admin/settings/general.fields.description') }}"
             placeholder="{{ __('admin/settings/general.placeholder.description') }}" value="{{ $site_description }}" />
 
-        <x-form.input name="site_keywords" label="{{ __('admin/settings/general.fields.keywords') }}" icon="fa-solid fa-heading"
-            placeholder="{{ __('admin/settings/general.placeholder.keywords') }}" value="{{ $site_keywords }}" />
+        <x-form.input name="site_keywords" label="{{ __('admin/settings/general.fields.keywords') }}"
+            icon="fa-solid fa-heading" placeholder="{{ __('admin/settings/general.placeholder.keywords') }}"
+            value="{{ $site_keywords }}" />
 
-        <x-admin.form.file-input name="site_favicon" label="Favicon" />
 
-        
+        <x-form.file name="site_favicon" label="Favicon" icon="fa-regular fa-file-image" />
+
+
 
 
         <div class="flex space-x-3">
