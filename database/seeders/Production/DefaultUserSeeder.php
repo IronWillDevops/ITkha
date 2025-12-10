@@ -19,7 +19,7 @@ class DefaultUserSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'admin@example.com'], // умова унікальності
             [
-                'name' => 'Administrator',
+                'first_name' => 'Administrator',
                 'login' => 'admin',
                 'password' => Hash::make('password'),
                 'email' => 'admin@example.com',

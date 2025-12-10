@@ -32,8 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $fillable = [
         'avatar',
-        'name',
-        'surname',
+        'first_name',
+        'last_name',
         'login',
         'email',
         'password',
@@ -105,10 +105,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function getInitial()
     {
-        $name = $this->name ?? '';
-        $surname = $this->surname ?? '';
+        $first_name = $this->first_name ?? '';
+        $last_name = $this->last_name ?? '';
 
-        $initials = mb_substr($name, 0, 1) . mb_substr($surname, 0, 1);
+        $initials = mb_substr($first_name, 0, 1) . mb_substr($last_name, 0, 1);
 
         return strtoupper($initials);
     }

@@ -24,8 +24,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z]+$/'],
-            'surname' => ['string', 'max:255', 'regex:/^[A-Za-z]+$/'],
+            'first_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z]+$/'],
+            'last_name' => ['string', 'max:255', 'regex:/^[A-Za-z]+$/'],
             'login' => ['required', 'string', 'min:5', 'max:50', 'unique:users', 'regex:/^[A-Za-z0-9_]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'max:255', 'confirmed', Password::defaults()],
@@ -38,14 +38,14 @@ class StoreRequest extends FormRequest
     {
         return [
 
-            'name.required' => __('validation.required'),
-            'name.string' => __('validation.string'),
-            'name.max' => __('validation.max.string'),
-            'name.regex' => __('validation.regex'),
+            'first_name.required' => __('validation.required'),
+            'first_name.string' => __('validation.string'),
+            'first_name.max' => __('validation.max.string'),
+            'first_name.regex' => __('validation.regex'),
 
-            'surname.string' => __('validation.string'),
-            'surname.max' => __('validation.max.string'),
-            'surname.regex' => __('validation.regex'),
+            'last_name.string' => __('validation.string'),
+            'last_name.max' => __('validation.max.string'),
+            'last_name.regex' => __('validation.regex'),
 
             'login.required' => __('validation.required'),
             'login.string' => __('validation.string'),

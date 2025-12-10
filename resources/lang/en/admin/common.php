@@ -9,8 +9,8 @@ return [
         'updated_at'  => 'Updated at',
         'published_at' => 'Published at',
         'title'       => 'Title',
-        'name'        => 'Name',
-        'surname'     => 'Surname',
+        'first_name'        => 'First name',
+        'last_name'     => 'Last name',
         'post'        => 'Post',
         'email'       => 'Email',
         'role'        => 'Role',
@@ -33,8 +33,8 @@ return [
 
     'placeholder' => [
         'title' => 'Enter title',
-        'name' => 'Enter your name',
-        'surname' => 'Enter your surname',
+        'first_name' => 'Enter your first name',
+        'last_name' => 'Enter your last name',
         'email' => 'Enter your email',
         'icon'        => 'Example: fa-brands fa-github',
         'url'        => 'Enter URL',

@@ -1,5 +1,5 @@
 @component('mail::message')
-# 🔐 Hello, {{ strtoupper($user->name) }}!
+# 🔐 Hello, {{ strtoupper($user->first_name) }}!
 
 We received a request to reset your password for your **{{ config('app.name') }}** account.
 

@@ -20,8 +20,8 @@ class UpdateController extends Controller
 
             // Оновлення основної інформації користувача
             $user->fill([
-                'name' => $data['name'],
-                'surname' => $data['surname'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
             ]);
 
             // Обробка аватара (необов’язкове поле)

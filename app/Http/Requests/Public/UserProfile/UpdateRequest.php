@@ -26,8 +26,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'], // 2MB
-            'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z]+$/'],
-            'surname' => ['string', 'max:255', 'regex:/^[A-Za-z]+$/'],
+            'first_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z]+$/'],
+            'last_name' => ['string', 'max:255', 'regex:/^[A-Za-z]+$/'],
 
             'job_title' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
@@ -44,14 +44,14 @@ class UpdateRequest extends FormRequest
             'avatar.image' => __('validation.image'),
             'avatar.max' => __('validation.max.string'),
 
-            'name.required' => __('validation.required'),
-            'name.string' => __('validation.string'),
-            'name.max' => __('validation.max.string'),
-            'name.regex' => __('validation.regex'),
+            'first_name.required' => __('validation.required'),
+            'first_name.string' => __('validation.string'),
+            'first_name.max' => __('validation.max.string'),
+            'first_name.regex' => __('validation.regex'),
 
-            'surname.string' => __('validation.string'),
-            'surname.max' => __('validation.max.string'),
-            'surname.regex' => __('validation.regex'),
+            'last_name.string' => __('validation.string'),
+            'last_name.max' => __('validation.max.string'),
+            'last_name.regex' => __('validation.regex'),
 
 
             'job_title.string' => __('validation.string'),

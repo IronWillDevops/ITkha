@@ -10,8 +10,8 @@
         <form class="max-w-md mx-auto" action="{{ route('public.pages.contact.store') }}" method="POST">
             @csrf
             {{-- Name --}}
-            <x-public.form.input name="name" label="{{ __('public/common.fields.name') }}"
-                placeholder="{{ __('public/common.placeholder.name') }}" icon="fas fa-solid fa-user" />
+            <x-public.form.input name="name" label="{{ __('public/common.fields.first_name') }}"
+                placeholder="{{ __('public/common.placeholder.first_name') }}" icon="fas fa-solid fa-user" />
 
             {{-- Email --}}
             <x-public.form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"

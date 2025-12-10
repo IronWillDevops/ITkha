@@ -35,18 +35,18 @@ class SeoService
     {
         $profile = $user->profile;
 
-        $first = $user?->name;
-        $last  = $user?->surname;
+        $first_name = $user?->first_name;
+        $last_name  = $user?->last_name;
 
         return new SeoMeta(
             'profile',
             $user->login,
-            $profile?->job_title ?: ($first . ' ' . $last),
+            $profile?->job_title ?: ($first_name . ' ' . $last_name),
             $user->avatar ? asset('storage/' . $user->avatar) : asset('favicon.ico'),
             $url,
             [
-                'profile:first_name' => $first,
-                'profile:last_name'  => $last,
+                'profile:first_name' => $first_name,
+                'profile:last_name'  => $last_name,
                 'profile:username'   => $user->login,
                 'profile:gender'     => $profile?->gender,
             ]
