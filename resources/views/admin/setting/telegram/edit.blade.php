@@ -43,7 +43,8 @@
             @foreach ($placeholders as $ph)
                 <button type="button" class="text-xs "
                     onclick="insertAtCursor(document.getElementById('telegram_template'), '{{ $ph }}')">
-                    <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1 cursor-pointer hover:bg-secondary/80">
+                    <span
+                        class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1 cursor-pointer hover:bg-secondary/80">
                         {{ $ph }}
                     </span>
                 </button>
@@ -51,12 +52,13 @@
         </div>
         <x-admin.form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}"
             :placeholder="$placeholder" :value="$telegramTemplate" />
-        <x-admin.form.input name="telegram_message_limit" min="10" max="750" type="number"
+
+        <x-form.input name="telegram_message_limit" min="10" max="750" type="number"
             label="{{ __('admin/settings/telegram.fields.message_limit') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.message_limit') }}" icon="fa-solid fa-heading"
             :value="$telegramMessageLimit" />
 
-        <x-admin.form.input name="telegram_button_text" label="{{ __('admin/settings/telegram.fields.button_text') }}"
+        <x-form.input name="telegram_button_text" label="{{ __('admin/settings/telegram.fields.button_text') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.button_text') }}" icon="fa-solid fa-heading"
             :value="$telegramButtonText" />
 

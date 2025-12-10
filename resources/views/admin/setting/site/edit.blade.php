@@ -10,13 +10,13 @@
         @method('PATCH')
 
 
-        <x-admin.form.input name="site_name" label="{{ __('admin/settings/general.fields.name') }}" icon="fa-solid fa-heading"
+        <x-form.input name="site_name" label="{{ __('admin/settings/general.fields.name') }}" icon="fa-solid fa-heading"
             placeholder="{{ __('admin/settings/general.placeholder.name') }}" value="{{ $site_name }}" />
 
         <x-admin.form.area name="site_description" label="{{ __('admin/settings/general.fields.description') }}"
             placeholder="{{ __('admin/settings/general.placeholder.description') }}" value="{{ $site_description }}" />
 
-        <x-admin.form.input name="site_keywords" label="{{ __('admin/settings/general.fields.keywords') }}" icon="fa-solid fa-heading"
+        <x-form.input name="site_keywords" label="{{ __('admin/settings/general.fields.keywords') }}" icon="fa-solid fa-heading"
             placeholder="{{ __('admin/settings/general.placeholder.keywords') }}" value="{{ $site_keywords }}" />
 
         <x-admin.form.file-input name="site_favicon" label="Favicon" />

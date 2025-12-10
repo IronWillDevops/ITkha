@@ -3,7 +3,7 @@
         class=" flex flex-wrap gap-4 items-center">
         <div class="relative flex-grow min-w-52 ">
             <div class="">
-                <x-public.form.input type="search" name="search" value="{{ request('search') }}"
+                <x-form.input type="search" name="search" value="{{ request('search') }}"
                     placeholder="{{ __('public/filter.placeholder.search') }}" icon="fa fa-search " />
             </div>
         </div>
@@ -49,7 +49,8 @@
             @php
                 // Загальний стиль для всіх елементів фільтра
                 $filterItemClasses = 'border-border border rounded-2xl px-3 py-1 flex items-center space-x-2';
-                $filterItemHover = 'hover:text-error/80 font-semibold focus:ring focus:outline-none focus-visible:ring-ring';
+                $filterItemHover =
+                    'hover:text-error/80 font-semibold focus:ring focus:outline-none focus-visible:ring-ring';
             @endphp
 
             {{-- search --}}

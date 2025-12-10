@@ -9,7 +9,7 @@
         @csrf
         @method('PATCH')
         {{-- Название роли --}}
-        <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}" icon="fa-solid fa-user-plus"
+        <x-form.input name="title" label="{{ __('admin/common.fields.title') }}" icon="fa-solid fa-user-plus"
             value="{{ $role->title }}" />
 
         {{-- Permissions --}}

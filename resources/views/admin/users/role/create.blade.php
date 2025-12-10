@@ -9,7 +9,7 @@
         @csrf
 
         {{-- Название роли --}}
-        <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}"
+        <x-form.input name="title" label="{{ __('admin/common.fields.title') }}"
             placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-user-plus" />
 
         {{-- Permissions --}}

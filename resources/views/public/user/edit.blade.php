@@ -31,16 +31,16 @@
                     </div>
                     <div class="flex-1">
                         <span>{{ $user->login }}</span>
-                        <x-public.form.input type="file" name="avatar" label="{{ __('public/common.fields.avatar') }}" icon="fas fa-solid fa-user" :required="false" />
+                        <x-form.input type="file" name="avatar" label="{{ __('public/common.fields.avatar') }}" icon="fas fa-solid fa-user" :required="false" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {{-- First name --}}
-                    <x-public.form.input name="first_name" label="{{ __('public/common.fields.first_name') }}"
+                    <x-form.input name="first_name" label="{{ __('public/common.fields.first_name') }}"
                         placeholder="{{ __('public/common.placeholder.first_name') }}" icon="fas fa-solid fa-user"
                         value="{{ $user->first_name }}" />
                     {{-- Last name --}}
-                    <x-public.form.input name="last_name" label="{{ __('public/common.fields.last_name') }}"
+                    <x-form.input name="last_name" label="{{ __('public/common.fields.last_name') }}"
                         placeholder="{{ __('public/common.placeholder.last_name') }}" icon="fas fa-solid fa-user"
                         value="{{ $user->last_name }}" />
                 </div>
@@ -49,17 +49,17 @@
             <section class="">
                 <h2 class="text-xl font-semibold mb-4">{{ __('public/user.sections.job_title') }}</h2>
                 {{-- Job Title --}}
-                <x-public.form.input type="jobtitle" name="job_title" label="{{ __('public/common.fields.job_title') }}"
+                <x-form.input type="jobtitle" name="job_title" label="{{ __('public/common.fields.job_title') }}"
                     placeholder="{{ __('public/common.placeholder.job_title') }}" icon="fas fa-solid fa-user"
                     value="{{ $user->profile?->job_title }}" :required="false" />
 
                 {{-- Address --}}
-                <x-public.form.input type="address" name="address" label="{{ __('public/common.fields.address') }}"
+                <x-form.input type="address" name="address" label="{{ __('public/common.fields.address') }}"
                     placeholder="{{ __('public/common.placeholder.address') }}" icon="fas fa-solid fa-user"
                     value="{{ $user->profile?->address }}" :required="false" />
 
                 {{-- Web site --}}
-                <x-public.form.input type="website" name="website" label="{{ __('public/common.fields.website') }}"
+                <x-form.input type="website" name="website" label="{{ __('public/common.fields.website') }}"
                     placeholder="{{ __('public/common.placeholder.website') }}" icon="fas fa-link" value="{{ $user->profile?->website }}"
                     :required="false" />
 
@@ -73,11 +73,11 @@
             <section class="">
                 <h2 class="text-xl font-semibold mb-4">{{ __('public/user.sections.social') }}</h2>
                 {{-- Web site --}}
-                <x-public.form.input type="website" name="github" label="{{__('public/common.fields.github')}}" placeholder="{{__('public/common.placeholder.github')}}"
+                <x-form.input type="website" name="github" label="{{__('public/common.fields.github')}}" placeholder="{{__('public/common.placeholder.github')}}"
                     icon="fab fa-github" value="{{ $user->profile?->github }}" :required="false" />
                 {{-- LinkeIn --}}
 
-                <x-public.form.input type="website" name="linkedin" label="{{__('public/common.fields.linkedin')}}" placeholder="{{__('public/common.placeholder.linkedin')}}"
+                <x-form.input type="website" name="linkedin" label="{{__('public/common.fields.linkedin')}}" placeholder="{{__('public/common.placeholder.linkedin')}}"
                     icon="fab fa-linkedin" value="{{ $user->profile?->linkedin }}" :required="false" />
             </section>
 

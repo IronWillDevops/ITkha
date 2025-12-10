@@ -13,14 +13,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 {{-- Имя --}}
-                <x-admin.form.input name="icon" label="{{ __('admin/common.fields.icon') }}"
+               <x-form.input name="icon" label="{{ __('admin/common.fields.icon') }}"
                     placeholder="{{ __('admin/common.placeholder.icon') }}" icon="fas fa-solid fa-icons" value="{{ $link->icon }}"/>
 
                 {{-- Фамилия --}}
-                <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}"
+               <x-form.input name="title" label="{{ __('admin/common.fields.title') }}"
                     placeholder="{{ __('admin/common.placeholder.title') }}" icon="fas fa-solid fa-heading" value="{{ $link->title }}"/>
             </div>
-            <x-admin.form.input name="url" label="{{ __('admin/common.fields.url') }}"
+           <x-form.input name="url" label="{{ __('admin/common.fields.url') }}"
                 placeholder="{{ __('admin/common.placeholder.url') }}" icon="fas fa-solid fa-link" value="{{ $link->url }}"/>
             {{-- Кнопки --}}
             <div class="flex space-x-3">

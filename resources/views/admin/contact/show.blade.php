@@ -11,15 +11,17 @@
 
             {{-- Відправник / Отримувач --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <x-admin.form.input name="from" label="{{ __('admin/contact.fields.from') }}" icon="fa-solid fa-at"
+                
+                    
+                <x-form.input name="from" label="{{ __('admin/contact.fields.from') }}" icon="fa-solid fa-at"
                     value="{{ config('mail.from.address') }}" readonly />
-                <x-admin.form.input name="to" label="{{ __('admin/contact.fields.to') }}" icon="fa-solid fa-at"
+                <x-form.input name="to" label="{{ __('admin/contact.fields.to') }}" icon="fa-solid fa-at"
                     value="{{ $contact->email }}" readonly />
             </div>
 
             {{-- Тема та повідомлення --}}
             <div class="space-y-4">
-                <x-admin.form.input name="subject" label="{{ __('admin/contact.fields.subject') }}"
+                <x-form.input name="subject" label="{{ __('admin/contact.fields.subject') }}"
                     value="Request Ticket#{{ $contact->id }} - {{ $contact->subject }}" icon="fa-solid fa-envelope"
                     readonly />
 

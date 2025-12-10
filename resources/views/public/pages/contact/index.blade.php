@@ -10,15 +10,15 @@
         <form class="max-w-md mx-auto" action="{{ route('public.pages.contact.store') }}" method="POST">
             @csrf
             {{-- Name --}}
-            <x-public.form.input name="name" label="{{ __('public/common.fields.first_name') }}"
+            <x-form.input name="name" label="{{ __('public/common.fields.first_name') }}"
                 placeholder="{{ __('public/common.placeholder.first_name') }}" icon="fas fa-solid fa-user" />
 
             {{-- Email --}}
-            <x-public.form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
+            <x-form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
                 placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
             {{-- Subject --}}
-            <x-public.form.input name="subject" label="{{ __('public/contact.fields.subject') }}"
+            <x-form.input name="subject" label="{{ __('public/contact.fields.subject') }}"
                 placeholder="{{ __('public/contact.placeholder.subject') }}" icon="fas fa-envelope" />
 
             {{-- Message --}}
@@ -30,6 +30,6 @@
                 placeholder="{{ __('public/common.placeholder.captcha') }}" />
 
 
-            <x-public.form.submit label="{{ __('public/contact.buttons.submit') }}" class="w-full"/>
+            <x-public.form.submit label="{{ __('public/contact.buttons.submit') }}" class="w-full" />
     </div>
 @endsection

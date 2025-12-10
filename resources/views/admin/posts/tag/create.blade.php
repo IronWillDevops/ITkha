@@ -8,7 +8,7 @@
             <form action="{{ route('admin.tag.store') }}" method="POST" class="space-y-6">
                 @csrf
 
-                <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}"  placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-heading"/>
+                <x-form.input name="title" label="{{ __('admin/common.fields.title') }}"  placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-heading"/>
 
                 {{-- Кнопки --}}
                 <div class="flex space-x-3">

@@ -13,7 +13,7 @@
             <form method="POST" action="{{ route('public.auth.forgot.password.store') }}">
                 @csrf
                 {{-- Email --}}
-                <x-public.form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
+                <x-form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
                     placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Captcha --}}

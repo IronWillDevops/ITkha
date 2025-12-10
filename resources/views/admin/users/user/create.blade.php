@@ -17,25 +17,25 @@
             <x-admin.form.file-input name="avatar" label="{{ __('admin/common.fields.avatar') }}" />
 
             {{-- Имя --}}
-            <x-admin.form.input name="first_name" label="{{ __('admin/common.fields.first_name') }}"
+           <x-form.input name="first_name" label="{{ __('admin/common.fields.first_name') }}"
                 placeholder="{{ __('admin/common.placeholder.first_name') }}" icon="fas fa-solid fa-user" />
 
             {{-- Фамилия --}}
-            <x-admin.form.input name="last_name" label="{{ __('admin/common.fields.last_name') }}"
+           <x-form.input name="last_name" label="{{ __('admin/common.fields.last_name') }}"
                 placeholder="{{ __('admin/common.placeholder.last_name') }}" icon="fas fa-solid fa-user" />
 
             {{-- Логин --}}
-            <x-admin.form.input name="login" label="{{ __('admin/user.fields.login') }}"
+           <x-form.input name="login" label="{{ __('admin/user.fields.login') }}"
                 placeholder="{{ __('admin/user.placeholder.login') }}" icon="fas fa-solid fa-user" />
 
 
             {{-- Email --}}
-            <x-admin.form.input type="email" name="email" label="{{ __('admin/common.fields.email') }}"
+           <x-form.input type="email" name="email" label="{{ __('admin/common.fields.email') }}"
                 placeholder="{{ __('admin/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
 
             {{-- Пароль --}}
-            <x-admin.form.input type="password" name="password" label="{{ __('admin/user.fields.password') }}"
+           <x-form.input type="password" name="password" label="{{ __('admin/user.fields.password') }}"
                 icon="fas fa-solid fa-lock" placeholder="{{ __('admin/user.placeholder.password') }}" />
 
             {{-- Role --}}

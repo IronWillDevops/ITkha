@@ -9,7 +9,7 @@
             @csrf
             @method('PATCH')
 
-            <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}" value="{{ $category->title }}"
+            <x-form.input name="title" label="{{ __('admin/common.fields.title') }}" value="{{ $category->title }}"
                 placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-heading" />
 
             {{-- Кнопки --}}
