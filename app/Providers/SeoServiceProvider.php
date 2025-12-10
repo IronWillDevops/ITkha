@@ -25,85 +25,33 @@ class SeoServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
 
-            // Базовые настройки (fallback)
-            $title = setting('site_name', config('app.name'));
-            $description = setting('site_description', 'Default description');
-            $image = asset('favicon.ico');
             $url = url()->current();
 
-            $seo = SeoService::meta($title, $description, $image, $url);
+            // fallback: website
+            $seo = SeoService::website(
+                setting('site_name', config('app.name')),
+                setting('site_description', 'Default description'),
+                asset('favicon.ico'),
+                $url
+            );
 
-            /**
-             * -----------------------------------------------------------
-             * SEO для страницы поста
-             * -----------------------------------------------------------
-             */
+            // Пост
             if (
                 Route::currentRouteName() === 'public.post.show'
                 && $view->offsetExists('post')
             ) {
-                $post = $view->getData()['post'];
-
-                // Чистый текст без HTML
-                $cleanContent = trim(
-                    preg_replace('/\s+/', ' ', strip_tags($post->content))
-                );
-                $excerpt = mb_substr($cleanContent, 0, 150);
-
-                $seo = SeoService::meta(
-                    $post->title,
-                    $excerpt,
-                    $post->main_image
-                        ? asset('storage/' . $post->main_image)
-                        : asset('favicon.ico'),
-                    $url
-                );
+                $seo = SeoService::article($view->getData()['post'], $url);
             }
 
-            /**
-             * -----------------------------------------------------------
-             * SEO для страницы пользователя
-             * -----------------------------------------------------------
-             */
+            // Пользователь
             if (
                 Route::currentRouteName() === 'public.user.show'
                 && $view->offsetExists('user')
             ) {
-                $user = $view->getData()['user'];
-                $profile = $user->profile;
-
-                $about = $profile?->about_myself;
-                $job   = $profile?->job_title;
-
-                // Чистый about
-                $cleanAbout = $about
-                    ? trim(preg_replace('/\s+/', ' ', strip_tags($about)))
-                    : null;
-
-                // Формирование description
-                if ($job && $cleanAbout) {
-                    $description = $job . '. ' . mb_substr($cleanAbout, 0, 150);
-                } elseif ($job) {
-                    $description = $job . ' — ' . setting('site_name', config('app.name'));
-                } elseif ($cleanAbout) {
-                    $description = mb_substr($cleanAbout, 0, 150);
-                } else {
-                    $description = "{$user->login} — " . setting('site_name', config('app.name'));
-                }
-
-                $avatar = $user->avatar
-                    ? asset('storage/' . $user->avatar)
-                    : asset('favicon.ico');
-
-                $seo = SeoService::meta(
-                    $user->login,
-                    $description,
-                    $avatar,
-                    $url
-                );
+                $seo = SeoService::profile($view->getData()['user'], $url);
             }
 
-            $view->with('seo', $seo);
+            $view->with('seo', $seo->toArray());
         });
     }
 }

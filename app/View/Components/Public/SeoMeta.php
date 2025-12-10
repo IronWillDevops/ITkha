@@ -8,20 +8,40 @@ use Illuminate\View\Component;
 
 class SeoMeta extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public $title;
-    public $description;
-    public $image;
-    public $url;
 
-    public function __construct(string $title, string $description = '', string $image = '', string $url = '')
-    {
+    public string $type;
+    public string $title;
+    public string $description;
+    public string $image;
+    public string $url;
+    public array $extra = [];
+
+    public function __construct(
+        string $type,
+        string $title,
+        string $description,
+        string $image,
+        string $url,
+        array $extra = []
+    ) {
+        $this->type = $type;
         $this->title = $title;
-        $this->description = $description ?: setting('site_description');
+        $this->description = $description;
         $this->image = $image;
-        $this->url = $url ?: url()->current();
+        $this->url = $url;
+        $this->extra = $extra;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'type'        => $this->type,
+            'title'       => $this->title,
+            'description' => $this->description,
+            'image'       => $this->image,
+            'url'         => $this->url,
+            'extra'       => $this->extra,
+        ];
     }
 
     /**
