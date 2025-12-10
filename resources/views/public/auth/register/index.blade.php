@@ -21,10 +21,10 @@
                 <x-form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
                     placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
                 {{-- Password --}}
-                <x-public.form.password name="password" label="{{ __('public/common.fields.password') }}"
+                <x-form.password name="password" label="{{ __('public/common.fields.password') }}"
                     placeholder="{{ __('public/common.placeholder.password') }}" />
                 {{-- Password --}}
-                <x-public.form.password name="password_confirmation"
+                <x-form.password name="password_confirmation"
                     label="{{ __('public/common.fields.password_confirmation') }}"
                     placeholder="{{ __('public/common.placeholder.password_confirmation') }}" />
                 {{-- Captcha --}}

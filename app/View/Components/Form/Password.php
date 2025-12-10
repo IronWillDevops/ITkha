@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Public\Form;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -17,7 +17,10 @@ class Password extends Component
     public $icon;
     public $required;
 
-    public function __construct($name, $label, $placeholder, $icon = "fas fa-solid fa-lock", $required = true)
+    public $min;
+    public $max;
+
+    public function __construct($name, $label, $placeholder, $icon = "fas fa-solid fa-lock", $required = true, $min = 8, $max = 255)
     {
         $this->name = $name;
         $this->label = $label;
@@ -31,6 +34,6 @@ class Password extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.public.form.password');
+        return view('components.form.password');
     }
 }

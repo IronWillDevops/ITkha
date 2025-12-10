@@ -14,11 +14,11 @@
             :checked="$telegramEnabled" />
 
         {{-- Telegram Token --}}
-        <x-public.form.password name="telegram_token" label="{{ __('admin/settings/telegram.fields.token') }}"
+        <x-form.password name="telegram_token" label="{{ __('admin/settings/telegram.fields.token') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.token') }}" :required='false' />
 
         {{-- Telegram ChatID --}}
-        <x-public.form.password name="telegram_chatid" label="{{ __('admin/settings/telegram.fields.chatid') }}"
+        <x-form.password name="telegram_chatid" label="{{ __('admin/settings/telegram.fields.chatid') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.chatid') }}" :required='false' />
 
         <x-admin.form.checkbox name="telegram_send_without_sound"

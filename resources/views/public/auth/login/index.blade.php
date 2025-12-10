@@ -17,7 +17,7 @@
                     placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Password --}}
-                <x-public.form.password name="password" label="{{ __('public/common.fields.password') }}"
+                <x-form.password name="password" label="{{ __('public/common.fields.password') }}"
                     placeholder="{{ __('public/common.placeholder.password') }}" icon="fas fa-solid fa-lock" />
 
                 @error('error')

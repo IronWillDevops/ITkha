@@ -94,11 +94,11 @@
             {{-- Розділ: Безпека --}}
             <section class="">
                 <h2 class="text-xl font-semibold mb-4">{{ __('public/user.sections.security') }}</h2>
-                <x-public.form.password name="current_password" label="{{ __('public/common.fields.password_current') }}"
+                <x-form.password name="current_password" label="{{ __('public/common.fields.password_current') }}"
                     placeholder="{{ __('public/common.placeholder.password_current') }}" />
-                <x-public.form.password name="password" label="{{ __('public/common.fields.password') }}"
+                <x-form.password name="password" label="{{ __('public/common.fields.password') }}"
                     placeholder="{{ __('public/common.placeholder.password') }}" />
-                <x-public.form.password name="password_confirmation"
+                <x-form.password name="password_confirmation"
                     label="{{ __('public/common.fields.password_confirmation') }}"
                     placeholder="{{ __('public/common.placeholder.password_confirmation') }}" />
             </section>
