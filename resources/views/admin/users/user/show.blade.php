@@ -20,7 +20,7 @@
         @if ($user->avatar)
             <img type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
                 class="relative inline-flex items-center justify-center w-24 h-24 object-cover rounded-full border border-border"
-                src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png" alt="{{ $user->name }}">
+                src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png" alt="{{ $user->first_name }}">
         @else
             <div
                 class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden rounded-full border border-border  text-5xl">
@@ -33,8 +33,8 @@
         {{-- Основные данные --}}
         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm">
             <div>
-                <span class="font-medium">{{ __('admin/common.fields.name') }}:</span>
-                {{ $user->name }} {{ $user->surname }}
+                <span class="font-medium">{{ __('admin/common.fields.first_name') }}:</span>
+                {{ $user->first_name }} {{ $user->last_name }}
             </div>
             <div>
                 <span class="font-medium">{{ __('admin/user.fields.login') }}:</span>

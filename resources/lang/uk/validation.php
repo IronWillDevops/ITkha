@@ -31,11 +31,11 @@ return [
 
     'custom' => [
 
-        'name' => [
+        'fisrt_name' => [
             'regex' => 'Поле :attribute може містити лише літери англійського алфавіту.',
         ],
 
-        'surname' => [
+        'last_name' => [
             'regex' => 'Поле :attribute може містити лише літери англійського алфавіту.',
         ],
 
@@ -75,8 +75,8 @@ return [
     ],
 
     'attributes' => [
-        'name'          => 'ім’я',
-        'surname'       => 'прізвище',
+        'first_name'          => 'ім’я',
+        'last_name'       => 'прізвище',
         'login'         => 'логін',
         'email'         => 'електронна адреса',
         'password'      => 'пароль',

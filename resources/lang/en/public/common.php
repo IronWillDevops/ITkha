@@ -3,8 +3,8 @@
 return [
     'fields' => [
         'avatar'                => 'Avatar',
-        'name' => 'Name',
-        'surname' => 'Surname',
+        'first_name' => 'First name',
+        'last_name' => 'Last name',
         'email' => 'Email',
         'login' => 'Login',
 
@@ -22,8 +22,8 @@ return [
         'linkedin' => 'LinkedIn',
     ],
     'placeholder' => [
-        'name' => 'Enter your name',
-        'surname' => 'Enter your surname',
+        'first_name' => 'Enter your first name',
+        'last_name' => 'Enter your last name',
         'email' => 'Enter your Email',
         'login' => 'Enter your login',
         'password_current'      => 'Enter current password',

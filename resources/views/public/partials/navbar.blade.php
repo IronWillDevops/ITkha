@@ -46,7 +46,7 @@
                             aria-label="User menu">
                             @if (Auth::user()->avatar)
                                 <img class="w-10 h-10 object-cover rounded-full border border-input"
-                                    src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                    src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->first_name }}">
                             @else
                                 <div
                                     class="bg-link hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">

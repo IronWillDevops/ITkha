@@ -6,7 +6,7 @@
              @if ($user->avatar)
                  <img type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
                      class="relative inline-flex items-center justify-center w-24 h-24 object-cover rounded-full border border-border"
-                     src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png" alt="{{ $user->name }}">
+                     src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png" alt="{{ $user->first_name }}">
              @else
                  <div
                      class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden rounded-full border border-border">
@@ -17,7 +17,7 @@
              @endif
 
          </div>
-         <h2 class=" text-2xl font-bold animate-fade-in ">{{ $user->name }} {{ $user->surname }}</h2>
+         <h2 class=" text-2xl font-bold animate-fade-in ">{{ $user->first_name }} {{ $user->last_name }}</h2>
          <p class="font-light text-muted-foreground">{{ $user->profile?->job_title }}</p>
 
          @if ($user->profile?->address)

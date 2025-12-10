@@ -204,7 +204,7 @@
                     data-dropdown-placement="bottom-start"
                     class="relative inline-flex items-center justify-center w-10 h-10 object-cover rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input"
                     src="{{ asset('storage/' . Auth::user()->avatar) }}" data-filename="image.png"
-                    alt="{{ Auth::user()->name }}">
+                    alt="{{ Auth::user()->first_name }}">
             @else
                 <div id="userMenuButton"
                     class="bg-link hover:bg-accent hover:text-accent-foreground  relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">

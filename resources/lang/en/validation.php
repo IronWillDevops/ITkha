@@ -31,11 +31,11 @@ return [
 
     'custom' => [
 
-        'name' => [
+        'first_name' => [
             'regex' => 'The :attribute may contain only English letters.',
         ],
 
-        'surname' => [
+        'last_name' => [
             'regex' => 'The :attribute may contain only English letters.',
         ],
 
@@ -75,8 +75,8 @@ return [
     ],
 
     'attributes' => [
-        'name'          => 'name',
-        'surname'       => 'surname',
+        'first_name'          => 'first name',
+        'last_name'       => 'last name',
         'login'         => 'login',
         'email'         => 'email',
         'password'      => 'password',

@@ -28,7 +28,7 @@ return [
         ],
         'edit_profile' => [
             'title' => 'Profile Settings',
-            'description' => 'Change name, surname etc.',
+            'description' => 'Change first name, last name etc.',
         ],
     ],
     'messages' => [

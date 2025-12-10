@@ -18,7 +18,7 @@
                             <img type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
                                 class="relative inline-flex items-center justify-center w-24 h-24 object-cover rounded-full border border-border"
                                 src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png"
-                                alt="{{ $user->name }}">
+                                alt="{{ $user->first_name }}">
                         @else
                             <div
                                 class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden rounded-full border border-border">
@@ -35,14 +35,14 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- Name --}}
-                    <x-public.form.input name="name" label="{{ __('public/common.fields.name') }}"
-                        placeholder="{{ __('public/common.placeholder.name') }}" icon="fas fa-solid fa-user"
-                        value="{{ $user->name }}" />
-                    {{-- Surname --}}
-                    <x-public.form.input name="surname" label="{{ __('public/common.fields.surname') }}"
-                        placeholder="{{ __('public/common.placeholder.surname') }}" icon="fas fa-solid fa-user"
-                        value="{{ $user->surname }}" />
+                    {{-- First name --}}
+                    <x-public.form.input name="first_name" label="{{ __('public/common.fields.first_name') }}"
+                        placeholder="{{ __('public/common.placeholder.first_name') }}" icon="fas fa-solid fa-user"
+                        value="{{ $user->first_name }}" />
+                    {{-- Last name --}}
+                    <x-public.form.input name="last_name" label="{{ __('public/common.fields.last_name') }}"
+                        placeholder="{{ __('public/common.placeholder.last_name') }}" icon="fas fa-solid fa-user"
+                        value="{{ $user->last_name }}" />
                 </div>
             </section>
             {{-- Розділ: Професійна інформація --}}

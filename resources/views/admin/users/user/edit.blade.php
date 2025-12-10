@@ -24,7 +24,7 @@
                                     data-dropdown-placement="bottom-start"
                                     class="relative inline-flex items-center justify-center w-24 h-24 object-cover rounded-full border border-border"
                                     src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png"
-                                    alt="{{ $user->name }}">
+                                    alt="{{ $user->first_name }}">
                             @else
                                 <div
                                     class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden rounded-full border border-border  text-5xl">
@@ -49,14 +49,14 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- Name --}}
-                    <x-admin.form.input name="name" label="{{ __('admin/common.fields.name') }}"
-                        value="{{ $user->name }}" placeholder="{{ __('admin/common.placeholder.name') }}"
+                    {{-- First name --}}
+                    <x-admin.form.input name="first_name" label="{{ __('admin/common.fields.first_name') }}"
+                        value="{{ $user->first_name }}" placeholder="{{ __('admin/common.placeholder.first_name') }}"
                         icon="fas fa-solid fa-user" />
 
-                    {{-- SurName --}}
-                    <x-admin.form.input name="surname" label="{{ __('admin/common.fields.surname') }}"
-                        value="{{ $user->surname }}" placeholder="{{ __('admin/common.placeholder.surname') }}"
+                    {{-- Last name --}}
+                    <x-admin.form.input name="last_name" label="{{ __('admin/common.fields.last_name') }}"
+                        value="{{ $user->last_name }}" placeholder="{{ __('admin/common.placeholder.last_name') }}"
                         icon="fas fa-solid fa-user" :required="false" />
                 </div>
 

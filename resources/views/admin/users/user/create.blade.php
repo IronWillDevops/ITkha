@@ -17,12 +17,12 @@
             <x-admin.form.file-input name="avatar" label="{{ __('admin/common.fields.avatar') }}" />
 
             {{-- Имя --}}
-            <x-admin.form.input name="name" label="{{ __('admin/common.fields.name') }}"
-                placeholder="{{ __('admin/common.placeholder.name') }}" icon="fas fa-solid fa-user" />
+            <x-admin.form.input name="first_name" label="{{ __('admin/common.fields.first_name') }}"
+                placeholder="{{ __('admin/common.placeholder.first_name') }}" icon="fas fa-solid fa-user" />
 
             {{-- Фамилия --}}
-            <x-admin.form.input name="surname" label="{{ __('admin/common.fields.surname') }}"
-                placeholder="{{ __('admin/common.placeholder.surname') }}" icon="fas fa-solid fa-user" />
+            <x-admin.form.input name="last_name" label="{{ __('admin/common.fields.last_name') }}"
+                placeholder="{{ __('admin/common.placeholder.last_name') }}" icon="fas fa-solid fa-user" />
 
             {{-- Логин --}}
             <x-admin.form.input name="login" label="{{ __('admin/user.fields.login') }}"

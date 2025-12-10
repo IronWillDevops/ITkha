@@ -10,10 +10,10 @@
 
             <form method="POST" action="{{ route('public.auth.register.store') }}">
                 @csrf
-                <x-public.form.input name="name" label="{{ __('public/common.fields.name') }}"
-                    placeholder="{{ __('public/common.placeholder.name') }}" icon="fas fa-solid fa-user" />
-                <x-public.form.input name="surname" label="{{ __('public/common.fields.surname') }}"
-                    placeholder="{{ __('public/common.placeholder.surname') }}" icon="fas fa-solid fa-user" />
+                <x-public.form.input name="first_name" label="{{ __('public/common.fields.first_name') }}"
+                    placeholder="{{ __('public/common.placeholder.first_name') }}" icon="fas fa-solid fa-user" />
+                <x-public.form.input name="last_name" label="{{ __('public/common.fields.last_name') }}"
+                    placeholder="{{ __('public/common.placeholder.last_name') }}" icon="fas fa-solid fa-user" />
                 {{-- Login --}}
                 <x-public.form.input name="login" label="{{ __('public/common.fields.login') }}"
                     placeholder="{{ __('public/common.placeholder.login') }}" icon="fas fa-solid fa-user" />
