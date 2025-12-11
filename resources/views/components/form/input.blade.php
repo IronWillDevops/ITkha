@@ -9,7 +9,7 @@
         <input type="{{ $type }}" id="{{ $name }}" name="{{ $name }}"
             value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}" {{ $min ? "min=$min" : '' }}
             {{ $max ? "max=$max" : '' }}
-            class="w-full text-sm caret-primary border border-input rounded-lg px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring"
+            class="w-full max-w-full text-sm caret-primary border border-input rounded-lg px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring"
             {{ $required ? 'required' : '' }} {{ $readonly ? 'readonly' : '' }}>
     </div>
     @error($name)

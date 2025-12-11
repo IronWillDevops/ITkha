@@ -20,7 +20,7 @@
     <!-- Header -->
     @include('admin.partials.nav')
 
-    <div class="flex flex-col lg:flex-row flex-1">
+    <div class="flex flex-col lg:flex-row flex-1 min-h-full">
         @include('admin.partials.aside')
 
         <!-- Main Content -->

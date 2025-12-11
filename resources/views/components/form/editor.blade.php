@@ -6,7 +6,8 @@
     <trix-toolbar id="editor-toolbar" class="text-card-foreground"></trix-toolbar>
 
     <trix-editor input="{{ $name }}" placeholder="{{ $placeholder }}" toolbar="editor-toolbar" id="post-content"
-        class="w-full text-sm caret-primary border px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring "></trix-editor>
+        class="w-full text-sm caret-primary border px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring ">
+    </trix-editor>
     @error($name)
         <p class="text-sm text-error mt-1">{{ $message }}</p>
     @enderror
@@ -18,6 +19,15 @@
         <style>
             trix-editor {
                 border: 1px solid var(--border) !important;
+
+                max-width: 100% !important;
+                /* не растягиваться шире контейнера */
+                overflow-x: hidden !important;
+                /* не делать горизонтальный скролл */
+                word-wrap: break-word !important;
+                /* переносить длинные слова */
+                white-space: pre-wrap !important;
+                /* корректный перенос текстов */
             }
 
             /* Общий стиль для кнопок: задать фон и цвет */
