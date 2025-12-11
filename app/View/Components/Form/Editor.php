@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Admin\Form;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -16,11 +16,11 @@ class Editor extends Component
     public $value;
     public $placeholder;
 
-    public function __construct($name, $label,$placeholder, $value = '')
+    public function __construct($name, $label, $placeholder, $value = '')
     {
-        $this->name = $name;  
-        $this->label = $label; 
-        $this->placeholder=$placeholder;
+        $this->name = $name;
+        $this->label = $label;
+        $this->placeholder = $placeholder;
         $this->value = $value;
     }
 
@@ -29,6 +29,6 @@ class Editor extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.form.editor');
+        return view('components.form.editor');
     }
 }

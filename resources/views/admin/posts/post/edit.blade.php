@@ -25,7 +25,7 @@
                 value-field="id" label-field="title" :selected="$post->tags->pluck('id')->toArray()" />
 
             {{-- Editor --}}
-            <x-admin.form.editor name="content" label="{{ __('admin/post.fields.content') }}"
+            <x-form.editor name="content" label="{{ __('admin/post.fields.content') }}"
                 placeholder="{{ __('admin/post.placeholder.content') }}" value="{{ $post->content }}" />
 
             <div class="flex">

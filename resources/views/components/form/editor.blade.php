@@ -1,13 +1,12 @@
-<div class="text-card-foreground ">
+<div class="mb-4">
     <label for="{{ $name }}" class="block text-sm font-medium mb-1">
         {{ $label }}
     </label>
-
     <input id="{{ $name }}" type="hidden" name="{{ $name }}" value="{!! old($name, $value) !!}">
     <trix-toolbar id="editor-toolbar" class="text-card-foreground"></trix-toolbar>
-    <trix-editor input="{{ $name }}" placeholder="{{ $placeholder }}" toolbar="editor-toolbar"  id="post-content"
-        class=" trix-content caret-primary border border-input rounded-lg px-3 py-2 min-h-[400px] focus:ring focus:ring-primary focus:outline-none focus-visible:ring-ring"></trix-editor>
 
+    {{-- <trix-editor input="{{ $name }}" placeholder="{{ $placeholder }}" toolbar="editor-toolbar" id="post-content"
+        class="w-full text-sm caret-primary border px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring "></trix-editor> --}}
     @error($name)
         <p class="text-sm text-error mt-1">{{ $message }}</p>
     @enderror
@@ -97,5 +96,4 @@
             }
         </script>
     @endpush
-
 @endonce
