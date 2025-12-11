@@ -26,7 +26,7 @@
                 placeholder="{{ __('public/contact.placeholder.message') }}" />
 
             {{-- Captcha --}}
-            <x-public.form.captcha name="captcha" label="{{ __('public/common.fields.captcha') }}"
+            <x-form.captcha name="captcha" label="{{ __('public/common.fields.captcha') }}"
                 placeholder="{{ __('public/common.placeholder.captcha') }}" />
 
 

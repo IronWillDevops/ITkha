@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Public\Form;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -23,6 +23,6 @@ class Captcha extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.public.form.captcha');
+        return view('components.form.captcha');
     }
 }

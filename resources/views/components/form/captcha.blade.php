@@ -8,7 +8,7 @@
         </div>
         <input type="text" id="{{ $name }}" name="{{ $name }}"
             placeholder="{{ __('public/common.placeholder.captcha')  }}"
-            class="w-full text-sm border border-input caret-primary placeholder:text-muted-foreground text-foreground rounded-lg px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring"
+            class="w-full text-sm caret-primary border border-input rounded-lg px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring"
             required>
     </div>
     <img src="{{ route('captcha.generate') }}" alt="Captcha"

@@ -15,7 +15,7 @@
     <x-form.area name="body" label="{{ __('public/comment.fields.write_comment') }}"
         placeholder="{{ __('public/comment.placeholder.write_comment') }}" />
         
-    <x-public.form.captcha name="captcha" />
+    <x-form.captcha name="captcha" />
 
     <x-form.submit label="{{ __('public/comment.buttons.submit') }}" />
 

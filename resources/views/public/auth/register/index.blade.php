@@ -28,7 +28,7 @@
                     label="{{ __('public/common.fields.password_confirmation') }}"
                     placeholder="{{ __('public/common.placeholder.password_confirmation') }}" />
                 {{-- Captcha --}}
-                <x-public.form.captcha name="captcha" />
+                <x-form.captcha name="captcha" />
 
                 {{-- Submit --}}
                 <x-form.submit label="{{ __('public/auth/register.buttons.submit') }}" class="w-full" />

@@ -17,7 +17,7 @@
                     placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Captcha --}}
-                <x-public.form.captcha name="captcha" />
+                <x-form.captcha name="captcha" />
 
                 {{-- Submit --}}
                 <x-form.submit label="{{ __('public/auth/forgot.buttons.submit') }}" class="w-full"/>
