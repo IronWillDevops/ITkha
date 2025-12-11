@@ -39,7 +39,7 @@
     </h2>
 
     @if($posts->isNotEmpty())
-        <x-admin.form.table
+        <x-form.table
             :columns="$columns"
             :items="$posts"
             modelRoute="post"

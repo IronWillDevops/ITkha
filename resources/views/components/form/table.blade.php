@@ -20,14 +20,14 @@
     @if ($searchEnabled)
         <form method="GET" class="mb-6 flex flex-wrap gap-2">
 
-            <div class="relative w-full sm:w-auto flex-1 min-w-52">
+            <div class="relative w-full sm:w-auto flex-1 min-w-52 mb-2">
+                
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                     <i class="fa fa-search"></i>
                 </div>
-
                 <input type="text" name="search" value="{{ request('search') }}"
                     placeholder="{{ __('admin/common.fields.search') }}"
-                    class="w-full text-sm border border-input caret-primary placeholder:text-muted-foreground text-foreground rounded-lg px-3 py-2 ps-10 focus:ring focus:outline-none focus-visible:ring-ring">
+                    class="w-full text-sm caret-primary border border-input rounded-lg px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring">
             </div>
 
             <input type="hidden" name="sort_field" value="{{ $sortField }}">
@@ -169,7 +169,7 @@
                 {{-- Верхняя часть карточки — кликабельная --}}
                 <div class="border border-input rounded-lg shadow-sm overflow-hidden">
 
-                    <div   @if (Route::has($viewRoute)) onclick="window.location='{{ route('admin.' . $modelRoute . '.show', $item) }}'" @endif
+                    <div @if (Route::has($viewRoute)) onclick="window.location='{{ route('admin.' . $modelRoute . '.show', $item) }}'" @endif
                         class="p-4 cursor-pointer hover:bg-muted transition">
 
                         @foreach ($columns as $col)

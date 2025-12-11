@@ -3,7 +3,7 @@
     {{ __('admin/comment.title') }}
 @endsection
 @section('admin.content')
-        <x-admin.form.table
+        <x-form.table
         :columns="$columns"
         :items="$comments"
         modelRoute="comment"

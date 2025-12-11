@@ -144,7 +144,7 @@
             {{ __('admin/common.fields.post') }}
         </h2>
 
-        <x-admin.form.table :columns="$columns" :items="$posts" modelRoute="post" :sortField="$sortField" :sortDirection="$sortDirection"
+        <x-form.table :columns="$columns" :items="$posts" modelRoute="post" :sortField="$sortField" :sortDirection="$sortDirection"
             searchEnabled="true" />
     </div>
 @endsection

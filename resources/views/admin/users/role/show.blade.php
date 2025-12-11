@@ -57,7 +57,7 @@
         <h2 class="text-lg font-semibold mb-2">
             {{ __('admin/user.title') }}
         </h2>
-        <x-admin.form.table :columns="$columns" :items="$users" modelRoute="user" :sortField="$sortField" :sortDirection="$sortDirection"
+        <x-form.table :columns="$columns" :items="$users" modelRoute="user" :sortField="$sortField" :sortDirection="$sortDirection"
             searchEnabled="true" />
         
     </div>

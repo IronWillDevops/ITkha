@@ -9,7 +9,7 @@
             label="{{ __('admin/common.buttons.create') }}" />
     </div>
 
-    <x-admin.form.table  :columns="[
+    <x-form.table  :columns="[
         ['key' => 'id', 'label' => __('admin/common.fields.id')],
         ['key' => 'title', 'label' => __('admin/common.fields.title'), 'wrap' => true],
         ['key' => 'category.title', 'label' => __('admin/common.fields.category')],

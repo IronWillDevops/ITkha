@@ -40,7 +40,7 @@
                     <x-form.submit label="{{ __('admin/common.buttons.send') }}" />
 
 
-                    <x-admin.form.button href="{{ route('admin.post.index') }}"
+                    <x-form.button href="{{ route('admin.post.index') }}"
                         label="{{ __('admin/common.buttons.cancel') }}" />
                 </div>
 

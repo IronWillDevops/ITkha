@@ -14,7 +14,7 @@
     />
 </div>
 
-<x-admin.form.table
+<x-form.table
     :columns="$columns"
     :items="$users"
     modelRoute="user"

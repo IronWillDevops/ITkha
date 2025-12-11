@@ -28,7 +28,7 @@
 
         <div class="flex space-x-3">
             <x-form.submit label="{{ __('admin/common.buttons.save') }}" />
-            <x-admin.form.button href="{{ route('admin.setting.site.edit') }}"
+            <x-form.button href="{{ route('admin.setting.site.edit') }}"
                 label="{{ __('admin/common.buttons.cancel') }}" />
         </div>
     </form>

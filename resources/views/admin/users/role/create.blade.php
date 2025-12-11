@@ -34,7 +34,7 @@
         {{-- Кнопки --}}
         <div class="flex space-x-3">
             <x-form.submit label="{{ __('admin/common.buttons.create') }}" />
-            <x-admin.form.button href="{{ route('admin.role.index') }}" label="{{ __('admin/common.buttons.cancel') }}" />
+            <x-form.button href="{{ route('admin.role.index') }}" label="{{ __('admin/common.buttons.cancel') }}" />
         </div>
     </form>
 @endsection

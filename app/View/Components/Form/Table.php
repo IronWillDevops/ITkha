@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Admin\Form;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -25,6 +25,6 @@ class Table extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.form.table');
+        return view('components.form.table');
     }
 }

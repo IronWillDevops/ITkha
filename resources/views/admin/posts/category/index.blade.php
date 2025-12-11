@@ -10,7 +10,7 @@
     </div>
 
     {{-- Таблица категорий --}}
-    <x-admin.form.table
+    <x-form.table
         :columns="$columns"
         :items="$categories"
         modelRoute="category"
