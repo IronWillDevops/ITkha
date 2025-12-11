@@ -21,7 +21,7 @@
                 value-field="id" label-field="title" value="{{ $post->category_id }}" />
 
             {{-- Теги --}}
-            <x-admin.form.checkboxes name="tag_ids" label="{{ __('admin/common.fields.tag') }}" :options="$tags"
+             <x-form.check-boxesname="tag_ids" label="{{ __('admin/common.fields.tag') }}" :options="$tags"
                 value-field="id" label-field="title" :selected="$post->tags->pluck('id')->toArray()" />
 
             {{-- Editor --}}

@@ -20,7 +20,7 @@
                 value-field="id" label-field="title" />
 
             {{-- Теги --}}
-            <x-admin.form.checkboxes name="tag_ids" label="{{ __('admin/common.fields.tag') }}" :options="$tags"
+            <x-form.check-boxes name="tag_ids" label="{{ __('admin/common.fields.tag') }}" :options="$tags"
                 value-field="id" label-field="title" />
 
             {{-- Editor --}}
