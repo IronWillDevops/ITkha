@@ -82,7 +82,7 @@
             </section>
 
             <div class="text-right inline-block">
-                <x-public.form.submit label="{{ __('public/user.buttons.submit') }}" />
+                <x-form.submit label="{{ __('public/user.buttons.submit') }}" />
             </div>
         </form>
 
@@ -104,7 +104,7 @@
             </section>
 
             <div class="text-right inline-block">
-                <x-public.form.submit label="{{ __('public/user.buttons.submit') }}" />
+                <x-form.submit label="{{ __('public/user.buttons.submit') }}" />
             </div>
 
         </form>

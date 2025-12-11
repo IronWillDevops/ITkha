@@ -17,7 +17,7 @@
         
     <x-public.form.captcha name="captcha" />
 
-    <x-public.form.submit label="{{ __('public/comment.buttons.submit') }}" />
+    <x-form.submit label="{{ __('public/comment.buttons.submit') }}" />
 
 </form>
 

@@ -31,7 +31,7 @@
                 <x-public.form.captcha name="captcha" />
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/auth/register.buttons.submit') }}" class="w-full" />
+                <x-form.submit label="{{ __('public/auth/register.buttons.submit') }}" class="w-full" />
 
             </form>
 

@@ -2,7 +2,7 @@
 
 return [
 
-    'fields' => [],
+    'fields' => ['search' => 'Пошук',],
 
     'placeholder' => [
         'search' => 'Пошук...',

@@ -37,7 +37,7 @@
             {{-- Кнопки --}}
             <div class="flex space-x-3">
                 <div class="flex space-x-3">
-                    <x-admin.form.submit label="{{ __('admin/common.buttons.send') }}" />
+                    <x-form.submit label="{{ __('admin/common.buttons.send') }}" />
 
 
                     <x-admin.form.button href="{{ route('admin.post.index') }}"

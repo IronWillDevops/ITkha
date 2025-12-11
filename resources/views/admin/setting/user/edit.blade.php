@@ -23,7 +23,7 @@
             label="{{ __('admin/settings/user.fields.is_verify') }}" :checked="$user_require_email_verification" />
 
         <div class="flex space-x-3">
-            <x-admin.form.submit label="{{ __('admin/common.buttons.save') }}" />
+            <x-form.submit label="{{ __('admin/common.buttons.save') }}" />
             <x-admin.form.button href="{{ route('admin.setting.user.edit') }}"
                 label="{{ __('admin/common.buttons.cancel') }}" />
         </div>

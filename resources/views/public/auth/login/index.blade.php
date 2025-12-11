@@ -33,7 +33,7 @@
                 </div>
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/auth/login.buttons.submit') }}" class="w-full" />
+                <x-form.submit label="{{ __('public/auth/login.buttons.submit') }}" class="w-full" />
             </form>
 
             <p class="mt-4 text-right text-sm text-muted-foreground">

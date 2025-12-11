@@ -30,6 +30,6 @@
                 placeholder="{{ __('public/common.placeholder.captcha') }}" />
 
 
-            <x-public.form.submit label="{{ __('public/contact.buttons.submit') }}" class="w-full" />
+            <x-form.submit label="{{ __('public/contact.buttons.submit') }}" class="w-full" />
     </div>
 @endsection

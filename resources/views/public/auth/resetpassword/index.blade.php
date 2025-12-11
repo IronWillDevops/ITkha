@@ -23,7 +23,7 @@
                     placeholder="{{ __('public/common.placeholder.password_confirmation') }}" />
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/auth/reset.buttons.submit') }}" class="w-full" />
+                <x-form.submit label="{{ __('public/auth/reset.buttons.submit') }}" class="w-full" />
 
 
             </form>

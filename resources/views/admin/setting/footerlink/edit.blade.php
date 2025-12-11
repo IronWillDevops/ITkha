@@ -24,7 +24,7 @@
                 placeholder="{{ __('admin/common.placeholder.url') }}" icon="fas fa-solid fa-link" value="{{ $link->url }}"/>
             {{-- Кнопки --}}
             <div class="flex space-x-3">
-                <x-admin.form.submit label="{{ __('admin/common.buttons.edit') }}" />
+                <x-form.submit label="{{ __('admin/common.buttons.edit') }}" />
                 <x-admin.form.button href="{{ route('admin.setting.footerlink.index') }}"
                     label="{{ __('admin/common.buttons.cancel') }}" />
             </div>
