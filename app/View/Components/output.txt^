@@ -1,0 +1,740 @@
+===== ./Admin/DashboardWidget.php =====
+<?php
+
+namespace App\View\Components\Admin;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class DashboardWidget extends Component
+{
+
+
+    public string $title;
+    public string $icon;
+    public ?string $description;
+    public string $link;
+    public ?string $linkText;
+    /**
+     * Create a new component instance.
+     */
+    public function __construct(string $title, string $icon, ?string $description = null, string $link = '#', ?string $linkText = null)
+    {
+        $this->title = $title;
+        $this->icon = $icon;
+        $this->description = $description;
+        $this->link = $link;
+        $this->linkText = $linkText;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.admin.dashboard-widget');
+    }
+}
+
+===== ./Admin/SidebarUpdate.php =====
+<?php
+
+namespace App\View\Components\Admin;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
+
+class SidebarUpdate extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+
+    public $latestVersion;
+    public $currentVersion;
+    public $isUpdateAvailable;
+    public $releaseUrl;
+
+    public function __construct()
+    {
+        $this->currentVersion = config('app.version');
+
+        // Кешируем весь релизный ответ, а не только версию
+        $releaseData = Cache::remember('latest_release_data', 60000, function () {
+            $response = Http::get('https://api.github.com/repos/IronWillDevops/ITkha/releases/latest');
+            if ($response->ok()) {
+                return $response->json();
+            }
+            return null;
+        });
+
+        // Если данные есть, извлекаем их
+        if ($releaseData) {
+            $this->latestVersion = $releaseData['tag_name'] ?? null;
+            $this->releaseUrl = $releaseData['html_url'] ?? null;
+        }
+
+        $this->isUpdateAvailable = $this->latestVersion && version_compare($this->latestVersion, $this->currentVersion, '>');
+    }
+
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.admin.sidebar-update');
+    }
+}
+
+===== ./Admin/Form/Checkboxes.php =====
+<?php
+
+namespace App\View\Components\Admin\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Checkboxes extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $name;
+    public $label;
+    public $options;
+    public $valueField;
+    public $labelField;
+
+    public $selected;
+
+    public function __construct(
+        $name,
+        $label,
+        $options = [],
+        $valueField = 'id',
+        $labelField = 'title',
+        $selected = []
+    ) {
+        $this->name = $name;
+        $this->label = $label;
+        $this->options = $options;
+        $this->valueField = $valueField;
+        $this->labelField = $labelField;
+        $this->selected = is_array($selected) ? $selected : collect($selected)->toArray();
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.admin.form.checkboxes');
+    }
+}
+
+===== ./output.txt^ =====
+
+===== ./Public/PostCard.php =====
+<?php
+
+namespace App\View\Components\Public;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class PostCard extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $post;
+    public function __construct($post)
+    {
+        $this->post = $post;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.public.post-card');
+    }
+}
+
+===== ./Public/SeoMeta.php =====
+<?php
+
+namespace App\View\Components\Public;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class SeoMeta extends Component
+{
+
+    public string $type;
+    public string $title;
+    public string $description;
+    public string $image;
+    public string $url;
+    public array $extra = [];
+
+    public function __construct(
+        string $type,
+        string $title,
+        string $description,
+        string $image,
+        string $url,
+        array $extra = []
+    ) {
+        $this->type = $type;
+        $this->title = $title;
+        $this->description = $description;
+        $this->image = $image;
+        $this->url = $url;
+        $this->extra = $extra;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'type'        => $this->type,
+            'title'       => $this->title,
+            'description' => $this->description,
+            'image'       => $this->image,
+            'url'         => $this->url,
+            'extra'       => $this->extra,
+        ];
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.public.seo-meta');
+    }
+}
+
+===== ./Form/Button.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Button extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $href;
+    public $label;
+    public $class;
+
+    public function __construct($href, $label = '', $class = '')
+    {
+        $this->href = $href;  // URL для посилання
+        $this->label = $label;  // Текст на кнопці
+        $this->class = $class;  // Додаткові класи для стилізації
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.button');
+    }
+}
+
+===== ./Form/Table.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Table extends Component
+{
+    public function __construct(
+        public array $columns = [],
+        public $items = null,
+        public string $modelRoute = '',
+        public string $sortField = 'id',
+        public string $sortDirection = 'asc',
+        public bool $searchEnabled = false,
+        public bool $showView = true,
+        public bool $showEdit=true,
+        public bool $showDelete=true
+    ) {}
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.table');
+    }
+}
+
+===== ./Form/Editor.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Editor extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $name;
+    public $label;
+    public $value;
+    public $placeholder;
+
+    public function __construct($name, $label, $placeholder, $value = '')
+    {
+        $this->name = $name;
+        $this->label = $label;
+        $this->placeholder = $placeholder;
+        $this->value = $value;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.editor');
+    }
+}
+
+===== ./Form/DateTime.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class DateTime extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $name;
+    public $label;
+    public $icon;
+    public $value;
+    public $placeholder;
+    public $required;
+
+    public function __construct(
+        $name,
+        $label,
+        $icon = null,
+        $value = '',
+        $placeholder = null,
+        $required = true,
+    ) {
+
+        $this->name = $name;
+        $this->label = $label;
+        $this->icon = $icon;
+        $this->value = $value;
+        $this->placeholder = $placeholder;
+        $this->required = $required;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.date-time');
+    }
+}
+
+===== ./Form/Select.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Select extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public string $name;
+    public string $label;
+    public $options;
+    public string $valueField;
+    public string $labelField;
+    public $selected;
+    public bool $required;
+
+    /**
+     * Create a new component instance.
+     */
+    public function __construct(
+        string $name,
+        string $label,
+        $options,
+        string $valueField = 'id',
+        string $labelField = 'title',
+        $value = null,
+        bool $required = true,
+    ) {
+        $this->name = $name;
+        $this->label = $label;
+        $this->options = $options;
+        $this->valueField = $valueField;
+        $this->labelField = $labelField;
+        $this->selected = $value ?? old($name);
+        $this->required = $required;
+    }
+
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.select');
+    }
+}
+
+===== ./Form/Password.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Password extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $name;
+    public $label;
+    public $placeholder;
+    public $icon;
+    public $required;
+
+    public $min;
+    public $max;
+
+    public function __construct($name, $label, $placeholder, $icon = "fas fa-solid fa-lock", $required = true, $min = 8, $max = 255)
+    {
+        $this->name = $name;
+        $this->label = $label;
+        $this->placeholder = $placeholder;
+        $this->icon = $icon;
+        $this->required = $required;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.password');
+    }
+}
+
+===== ./Form/Input.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Input extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $type;
+    public $name;
+    public $label;
+    public $placeholder;
+    public $value;
+    public $icon;
+    public $required;
+    public $readonly;
+
+    public $min;
+    public $max;
+
+    public function __construct($name, $label, $placeholder = null, $type = "text",  $value = null, $icon = null, $required = true, $readonly = false, $min = 0, $max = 255)
+    {
+        $this->name = $name;
+        $this->label = $label;
+        $this->placeholder = $placeholder;
+        $this->type = $type;
+        $this->value = $value;
+        $this->icon = $icon;
+        $this->required = $required;
+        $this->readonly = $readonly;
+        $this->min = $min;
+        $this->max = $max;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.input');
+    }
+}
+
+===== ./Form/File.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class File extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $name;
+    public $label;
+    public $icon;
+
+    public $required;
+
+    public function __construct($name, $label, $icon = "fa-solid fa-circle-user", $required = true)
+    {
+        $this->name = $name;  // Назва поля (наприклад, 'main_image')
+        $this->label = $label;  // Текст для лейблу
+        $this->icon = $icon;
+        $this->required = $required;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.file');
+    }
+}
+
+===== ./Form/Area.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Area extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $name;
+    public $label;
+    public $placeholder;
+    public $value;
+    public $required;
+    public $readonly;
+    public $min;
+    public $max;
+
+    public function __construct($name, $label, $placeholder, $value = "", $required = true, $readonly = false,  $min = 20,$max = 1000,)
+    {
+        $this->name = $name;
+        $this->label = $label;
+        $this->placeholder = $placeholder;
+        $this->value = $value;
+
+        $this->required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
+        $this->readonly = $readonly;
+        $this->min = $min;
+        $this->max = $max;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.area');
+    }
+}
+
+===== ./Form/TableActions.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class TableActions extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $type;
+    public $route;
+    public $method;
+    public $icon;
+    public $label;
+
+    public function __construct($route, $icon, $label, $type = 'link', $method = null)
+    {
+        $this->type = $type;
+        $this->route = $route;
+        $this->method = $method ?? 'POST';
+        $this->icon = $icon;
+        $this->label = $label;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.table-actions');
+    }
+}
+
+===== ./Form/Submit.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Submit extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $label;
+    public $class;
+
+    public function __construct($label = '', $class = '')
+    {
+        $this->label = $label;  // Текст кнопки
+        $this->class = $class;  // Дополнительні класи для стилізації
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.submit');
+    }
+}
+
+===== ./Form/CheckBox.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class CheckBox extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $name;
+    public $label;
+    public $value;
+    public $required;
+    public $checked;
+
+    public function __construct($name, $label, $value = '1',$required=false, $checked = false)
+    {
+        $this->name = $name;
+        $this->label = $label;
+        $this->value = $value;
+        $this->required = $required;
+        $this->checked = $checked;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.check-box');
+    }
+}
+
+===== ./Form/Captcha.php =====
+<?php
+
+namespace App\View\Components\Form;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Captcha extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public string $name;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.form.captcha');
+    }
+}
+
