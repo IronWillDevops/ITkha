@@ -23,7 +23,7 @@
                     </summary>
                     <section>
                         @foreach ($group as $permission)
-                            <x-admin.form.checkbox name="permissions[]"
+                            <x-form.check-box name="permissions[]"
                                 label="{{ __('admin/permission.' . $permission->key) }}" value="{{ $permission->id }}"
                                 checked="{{ $role->permissions->contains($permission->id) ? true : false }}" />
                         @endforeach

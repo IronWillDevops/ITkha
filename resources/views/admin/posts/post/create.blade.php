@@ -45,7 +45,7 @@
                 value-field="id" label-field="email" value="{{ Auth::user()->id }}" />
 
             {{-- Разрешить комментарии --}}
-            <x-admin.form.checkbox name="comments_enabled" label="{{ __('admin/post.fields.comment_enabled') }}"
+            <x-form.check-box name="comments_enabled" label="{{ __('admin/post.fields.comment_enabled') }}"
                 value="1" :checked="$commentsEnabled" />
 
 

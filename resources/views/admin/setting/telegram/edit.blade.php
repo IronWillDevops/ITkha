@@ -10,7 +10,7 @@
         @method('PATCH')
 
         {{-- Разрешить комментарии под постами --}}
-        <x-admin.form.checkbox name="telegram_enabled" label="{{ __('admin/settings/telegram.fields.enabled') }}"
+        <x-form.check-box name="telegram_enabled" label="{{ __('admin/settings/telegram.fields.enabled') }}"
             :checked="$telegramEnabled" />
 
         {{-- Telegram Token --}}
@@ -21,7 +21,7 @@
         <x-form.password name="telegram_chatid" label="{{ __('admin/settings/telegram.fields.chatid') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.chatid') }}" :required='false' />
 
-        <x-admin.form.checkbox name="telegram_send_without_sound"
+        <x-form.check-box name="telegram_send_without_sound"
             label="{{ __('admin/settings/telegram.fields.send_without_sound') }}" :checked="$telegramSendWithoutSound" />
         @php
             $placeholder =

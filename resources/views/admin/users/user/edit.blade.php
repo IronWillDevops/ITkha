@@ -126,7 +126,7 @@
                     <x-admin.form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"
                         value-field="value" label-field="value" :value="$user->status" />
                     {{-- Is Verify --}}
-                    <x-admin.form.checkbox name="email_verified_at" label="{{ __('admin/user.fields.verified') }}"
+                    <x-form.check-box name="email_verified_at" label="{{ __('admin/user.fields.verified') }}"
                         :checked="$user->email_verified_at" />
                 </div>
             </section>

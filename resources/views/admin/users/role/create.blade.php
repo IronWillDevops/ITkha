@@ -23,7 +23,7 @@
                     </summary>
                     <section>
                         @foreach ($group as $permission)
-                            <x-admin.form.checkbox name="permissions[]" label="{{ __('admin/permission.' . $permission->key) }}"
+                            <x-form.check-box name="permissions[]" label="{{ __('admin/permission.' . $permission->key) }}"
                                 value="{{ $permission->id }}" />
                         @endforeach
                     </section>

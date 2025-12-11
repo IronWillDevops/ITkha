@@ -48,7 +48,7 @@
                 value-field="value" label-field="value" :value="$user_default_status" />
 
             {{-- Is Verify --}}
-            <x-admin.form.checkbox name="email_verified_at" label="{{ __('admin/user.fields.verified') }}"
+            <x-form.check-box name="email_verified_at" label="{{ __('admin/user.fields.verified') }}"
                 :checked="$user_require_email_verification" />
 
         </div>

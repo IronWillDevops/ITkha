@@ -25,7 +25,7 @@
                 @enderror
 
                 <div class="mb-4 flex justify-between">
-                    <x-public.form.check-box name="remember" label="{{ __('public/auth/login.fields.remember_me') }}" />
+                    <x-form.check-box  name="remember" label="{{ __('public/auth/login.fields.remember_me') }}" />
                     <a href="{{ route('public.auth.forgot.password.index') }}"
                         class="text-sm text-muted-foreground hover:underline">{{ __('public/common.links.forgot') }}
 

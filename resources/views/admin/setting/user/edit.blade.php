@@ -19,7 +19,7 @@
             :options="$roles" :value="$user_default_role" value-field="id" label-field="title" /> 
 
         {{-- Требовать подтверждение email --}}
-        <x-admin.form.checkbox name="user_require_email_verification"
+        <x-form.check-box name="user_require_email_verification"
             label="{{ __('admin/settings/user.fields.is_verify') }}" :checked="$user_require_email_verification" />
 
         <div class="flex space-x-3">

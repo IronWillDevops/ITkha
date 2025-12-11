@@ -10,11 +10,11 @@
         @method('PATCH')
 
         {{-- Разрешить комментарии под постами --}}
-        <x-admin.form.checkbox name="comments_enabled" label="{{ __('admin/settings/comment.fields.enabled') }}"
+        <x-form.check-box name="comments_enabled" label="{{ __('admin/settings/comment.fields.enabled') }}"
             :checked="$commentsEnabled" />
 
         {{-- Автоматическое одобрение --}}
-        <x-admin.form.checkbox name="comments_auto_approve" label="{{ __('admin/settings/comment.fields.approve') }}"
+        <x-form.check-box name="comments_auto_approve" label="{{ __('admin/settings/comment.fields.approve') }}"
             :checked="$autoApprove" />
 
         {{-- Запрещённые слова --}}
