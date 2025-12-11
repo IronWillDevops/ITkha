@@ -1,6 +1,6 @@
 <div class="mb-4">
-    <label for="{{ $name }}" class="flex items-center cursor-pointer gap-2">
-        <input id="{{ $name }}" name="{{ $name }}" type="checkbox" value="{{ $value ?? 1 }}"
+    <label class="flex items-center cursor-pointer gap-2">
+        <input  name="{{ $name }}" type="checkbox" value="{{ $value ?? 1 }}"
             class="w-4 h-4 rounded border border-primary accent-primary focus:ring focus:ring-primary focus:outline-none focus-visible:ring-ring checked:text-primary-foreground"
             {{ old($name, $checked ?? false) ? 'checked' : '' }} {{ $required ? 'required' : '' }}>
         <span class="text-sm font-medium text-foreground">
