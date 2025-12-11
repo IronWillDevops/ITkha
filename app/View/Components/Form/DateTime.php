@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Admin\Form;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class DateTimeInput extends Component
+class DateTime extends Component
 {
     /**
      * Create a new component instance.
@@ -40,6 +40,6 @@ class DateTimeInput extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.form.date-time-input');
+        return view('components.form.date-time');
     }
 }

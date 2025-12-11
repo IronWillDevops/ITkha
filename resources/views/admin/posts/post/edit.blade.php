@@ -36,7 +36,7 @@
                 </div>
 
                 <div id="published_at_wrapper" class="flex-1 pl-4">
-                    <x-admin.form.date-time-input name="published_at" label="{{ __('admin/common.fields.published_at') }}"
+                    <x-form.date-time name="published_at" label="{{ __('admin/common.fields.published_at') }}"
                         icon="fa-solid fa-calendar-day" id="published_at" :required="true" :value="$post->published_at" />
                 </div>
             </div>
