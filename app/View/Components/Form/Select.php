@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Admin\Form;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -40,11 +40,12 @@ class Select extends Component
         $this->required = $required;
     }
 
+
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.form.select');
+        return view('components.form.select');
     }
 }

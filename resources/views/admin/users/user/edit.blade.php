@@ -120,10 +120,10 @@
             <section>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {{-- Role --}}
-                    <x-admin.form.select name="role_id" label="{{ __('admin/common.fields.role') }}" :options="$roles"
+                    <x-form.select name="role_id" label="{{ __('admin/common.fields.role') }}" :options="$roles"
                         value-field="id" label-field="title" :value="$user->roles()->first()->id" />
                     {{-- Статус --}}
-                    <x-admin.form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"
+                    <x-form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"
                         value-field="value" label-field="value" :value="$user->status" />
                     {{-- Is Verify --}}
                     <x-form.check-box name="email_verified_at" label="{{ __('admin/user.fields.verified') }}"

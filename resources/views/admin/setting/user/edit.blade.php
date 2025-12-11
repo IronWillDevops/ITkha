@@ -10,12 +10,12 @@
         @method('PATCH')
 
         {{-- Статус по умолчанию --}}
-        <x-admin.form.select name="user_default_status" label="{{ __('admin/settings/user.fields.status') }}"
+        <x-form.select name="user_default_status" label="{{ __('admin/settings/user.fields.status') }}"
             :options="$status" :value="$user_default_status" value-field="value" label-field="value" />
        
       
         {{-- Роль по умолчанию --}}
-        <x-admin.form.select name="user_default_role" label="{{ __('admin/settings/user.fields.role') }}"
+        <x-form.select name="user_default_role" label="{{ __('admin/settings/user.fields.role') }}"
             :options="$roles" :value="$user_default_role" value-field="id" label-field="title" /> 
 
         {{-- Требовать подтверждение email --}}

@@ -17,7 +17,7 @@
                 icon="fa-regular fa-file-image" />
 
             {{-- Категория --}}
-            <x-admin.form.select name="category_id" label="{{ __('admin/common.fields.category') }}" :options="$categories"
+            <x-form.select name="category_id" label="{{ __('admin/common.fields.category') }}" :options="$categories"
                 value-field="id" label-field="title" value="{{ $post->category_id }}" />
 
             {{-- Теги --}}
@@ -30,7 +30,7 @@
 
             <div class="flex">
                 <div class="flex-1">
-                    {{-- Статус --}} <x-admin.form.select name="status"
+                    {{-- Статус --}} <x-form.select name="status"
                         label="{{ __('admin/common.fields.status') }}" :options="$status" value-field="value"
                         label-field="value" :value="$post->status" />
                 </div>
@@ -42,7 +42,7 @@
             </div>
 
             {{-- Автор --}}
-            <x-admin.form.select name="user_id" label="{{ __('admin/common.fields.author') }}" :options="$users"
+            <x-form.select name="user_id" label="{{ __('admin/common.fields.author') }}" :options="$users"
                 value-field="id" label-field="email" value="{{ $post->user_id }}" />
 
             {{-- Разрешить комментарии --}}

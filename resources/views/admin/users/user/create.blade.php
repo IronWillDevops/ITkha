@@ -40,11 +40,11 @@
                 icon="fas fa-solid fa-lock" placeholder="{{ __('admin/user.placeholder.password') }}" />
 
             {{-- Role --}}
-            <x-admin.form.select name="role_id" label="{{ __('admin/common.fields.role') }}" :options="$roles"
+            <x-form.select name="role_id" label="{{ __('admin/common.fields.role') }}" :options="$roles"
                 value-field="id" label-field="title" :value="$user_default_role" />
 
             {{-- Статус --}}
-            <x-admin.form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"
+            <x-form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"
                 value-field="value" label-field="value" :value="$user_default_status" />
 
             {{-- Is Verify --}}

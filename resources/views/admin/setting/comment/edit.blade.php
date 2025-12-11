@@ -23,7 +23,7 @@
             max="65000"  />
 
         {{-- Политика по ссылкам --}}
-        <x-admin.form.select name="comments_links_policy" label="{{ __('admin/settings/comment.fields.links_policy') }}"
+        <x-form.select name="comments_links_policy" label="{{ __('admin/settings/comment.fields.links_policy') }}"
             :options="[
                 ['value' => 'allow', 'label' => __('admin/settings/comment.fields.links_allow')],
                 ['value' => 'remove', 'label' => __('admin/settings/comment.fields.links_remove')],
