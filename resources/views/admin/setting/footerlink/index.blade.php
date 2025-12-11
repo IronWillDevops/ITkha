@@ -6,7 +6,7 @@
 
 @section('admin.content')
     <div class="flex items-center justify-between mb-6">
-        <x-admin.form.action-button type='link' route="{{ route('admin.setting.footerlink.create') }}" icon="fa-solid fa-plus"
+        <x-form.table-actions type='link' route="{{ route('admin.setting.footerlink.create') }}" icon="fa-solid fa-plus"
             label="{{ __('admin/common.buttons.create') }}" />
 
 

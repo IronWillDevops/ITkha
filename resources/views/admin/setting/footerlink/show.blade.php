@@ -7,9 +7,9 @@
 @section('admin.content')
     
         <div class="flex items-center gap-4 mb-4">
-            <x-admin.form.action-button type='link' route="{{ route('admin.setting.footerlink.edit', $link->id) }}"
+            <x-form.table-actions type='link' route="{{ route('admin.setting.footerlink.edit', $link->id) }}"
                 icon="fas fa-edit" label="{{ __('admin/common.buttons.edit') }}" />
-            <x-admin.form.action-button type='form' method="DELETE"
+            <x-form.table-actions type='form' method="DELETE"
                 route="{{ route('admin.setting.footerlink.delete', $link->id) }}" icon="fas fa-trash-alt"
                 label="{{ __('admin/common.buttons.delete') }}" />
 
