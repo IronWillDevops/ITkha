@@ -64,7 +64,7 @@
                     :required="false" />
 
                 {{-- About myself --}}
-                <x-public.form.area name="about_myself" label="{{ __('public/common.fields.about_myself') }}"
+                <x-form.area name="about_myself" label="{{ __('public/common.fields.about_myself') }}"
                     placeholder="{{ __('public/common.placeholder.about_myself') }}" value="{{ $user->profile?->about_myself }}"
                     :required="false" />
             </section>

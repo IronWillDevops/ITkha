@@ -10,7 +10,7 @@
             @csrf
             @method('PATCH')
 
-            <x-admin.form.area name="body" label="{{ __('admin/comment.fields.body') }}"
+            <x-form.area name="body" label="{{ __('admin/comment.fields.body') }}"
                 placeholder="{{ __('admin/comment.placeholder.body') }}" value="{{ $comment->body }}" />
 
             <x-admin.form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"

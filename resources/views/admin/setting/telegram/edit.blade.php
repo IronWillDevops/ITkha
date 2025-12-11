@@ -50,7 +50,7 @@
                 </button>
             @endforeach
         </div>
-        <x-admin.form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}"
+        <x-form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}"
             :placeholder="$placeholder" :value="$telegramTemplate" />
 
         <x-form.input name="telegram_message_limit" min="10" max="750" type="number"

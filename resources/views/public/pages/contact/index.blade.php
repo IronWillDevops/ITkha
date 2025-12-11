@@ -22,7 +22,7 @@
                 placeholder="{{ __('public/contact.placeholder.subject') }}" icon="fas fa-envelope" />
 
             {{-- Message --}}
-            <x-public.form.area name="message" label="{{ __('public/contact.fields.message') }}"
+            <x-form.area name="message" label="{{ __('public/contact.fields.message') }}"
                 placeholder="{{ __('public/contact.placeholder.message') }}" />
 
             {{-- Captcha --}}

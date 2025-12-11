@@ -25,8 +25,8 @@
                     value="Request Ticket#{{ $contact->id }} - {{ $contact->subject }}" icon="fa-solid fa-envelope"
                     readonly />
 
-                <x-admin.form.area name="message" label="{{ __('admin/contact.fields.message') }}"
-                    placeholder="{{ __('admin/contact.placeholder.message') }}" rows="6">{{ old('message') }}</x-admin.form.area>
+                <x-form.area name="message" label="{{ __('admin/contact.fields.message') }}"
+                    placeholder="{{ __('admin/contact.placeholder.message') }}" >{{ old('message') }}</x-admin.form.area>
 
                 <div class="rounded-lg p-4 text-sm border">
                     <span class="font-medium">{{ __('admin/contact.fields.original_message') }}</span>

@@ -13,7 +13,7 @@
         <x-form.input name="site_name" label="{{ __('admin/settings/general.fields.name') }}" icon="fa-solid fa-heading"
             placeholder="{{ __('admin/settings/general.placeholder.name') }}" value="{{ $site_name }}" />
 
-        <x-admin.form.area name="site_description" label="{{ __('admin/settings/general.fields.description') }}"
+        <x-form.area name="site_description" label="{{ __('admin/settings/general.fields.description') }}"
             placeholder="{{ __('admin/settings/general.placeholder.description') }}" value="{{ $site_description }}" />
 
         <x-form.input name="site_keywords" label="{{ __('admin/settings/general.fields.keywords') }}"

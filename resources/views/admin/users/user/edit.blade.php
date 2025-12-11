@@ -89,8 +89,8 @@
                     placeholder="{{ __('admin/user.placeholder.website') }}" :required="false" />
 
                 {{-- About me --}}
-                <x-admin.form.area name="about_myself" label="{{ __('admin/user.fields.about_myself') }}"
-                    placeholder="{{ __('admin/user.fields.about_myself') }}" value="{{ $user->profile?->about_myself }}"
+                <x-form.area name="about_myself" label="{{ __('admin/user.fields.about_myself') }}"
+                    value="{{ $user->profile?->about_myself }}"
                     placeholder="{{ __('admin/user.placeholder.about_myself') }}" :required="false" />
             </section>
         </details>

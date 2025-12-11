@@ -18,9 +18,9 @@
             :checked="$autoApprove" />
 
         {{-- Запрещённые слова --}}
-        <x-admin.form.area name="comments_filter_words" label="{{ __('admin/settings/comment.fields.filter_words') }}"
-            placeholder="{{ __('admin/settings/comment.placeholder.filter_words') }}" :value="$filterWords" minCharactersLenght="0"
-            maxCharactersLenght="65000" rows="4" />
+        <x-form.area name="comments_filter_words" label="{{ __('admin/settings/comment.fields.filter_words') }}"
+            placeholder="{{ __('admin/settings/comment.placeholder.filter_words') }}" :value="$filterWords" min="0"
+            max="65000"  />
 
         {{-- Политика по ссылкам --}}
         <x-admin.form.select name="comments_links_policy" label="{{ __('admin/settings/comment.fields.links_policy') }}"
