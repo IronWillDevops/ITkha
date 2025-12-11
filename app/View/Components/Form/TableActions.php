@@ -11,9 +11,19 @@ class TableActions extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $type;
+    public $route;
+    public $method;
+    public $icon;
+    public $label;
+
+    public function __construct($route, $icon, $label, $type = 'link', $method = null)
     {
-        //
+        $this->type = $type;
+        $this->route = $route;
+        $this->method = $method ?? 'POST';
+        $this->icon = $icon;
+        $this->label = $label;
     }
 
     /**
