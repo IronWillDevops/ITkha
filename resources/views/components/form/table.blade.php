@@ -23,13 +23,9 @@
                     <i class="fa fa-search text-muted-foreground"></i>
                 </div>
 
-                <input
-                    type="text"
-                    name="search"
-                    value="{{ request('search') }}"
+                <input type="text" name="search" value="{{ request('search') }}"
                     placeholder="{{ __('admin/common.fields.search') }}"
-                    class="w-full text-sm border border-input rounded-lg px-3 py-2 ps-10 focus:ring focus:outline-none"
-                >
+                    class="w-full text-sm border border-input rounded-lg px-3 py-2 ps-10 focus:ring focus:outline-none">
             </div>
 
             <input type="hidden" name="sort_field" value="{{ $sortField }}">
@@ -41,7 +37,7 @@
 
             @if (request('search') || request('sort_field'))
                 <a href="{{ url()->current() }}"
-                   class="px-4 py-2 bg-destructive text-destructive-foreground rounded-lg flex items-center">
+                    class="px-4 py-2 bg-destructive text-destructive-foreground rounded-lg flex items-center">
                     <i class="fa fa-times"></i>
                 </a>
             @endif
@@ -71,7 +67,7 @@
                         <th class="px-4 py-3 text-left text-sm font-semibold truncate">
                             @if ($sortable)
                                 <a href="{{ url()->current() . '?' . http_build_query($query) }}"
-                                   class="flex items-center gap-1 truncate hover:underline">
+                                    class="flex items-center gap-1 truncate hover:underline">
                                     <span class="truncate">{{ $label }}</span>
                                     <span class="shrink-0 opacity-70">{!! sortIcon($isActive, $sortDirection) !!}</span>
                                 </a>
@@ -92,10 +88,7 @@
             <tbody class="divide-y">
                 @forelse($items as $item)
                     <tr class="hover:bg-muted cursor-pointer"
-                        @if (Route::has($viewRoute))
-                            onclick="window.location='{{ route($viewRoute, $item) }}'"
-                        @endif
-                    >
+                        @if (Route::has($viewRoute)) onclick="window.location='{{ route($viewRoute, $item) }}'" @endif>
                         @foreach ($columns as $col)
                             @php
                                 $value = data_get($item, $col['key']);
@@ -121,30 +114,28 @@
                                 <div class="flex justify-end gap-2">
                                     @if ($showView)
                                         <a href="{{ route('public.' . $modelRoute . '.show', $item) }}"
-                                           onclick="event.stopPropagation()"
-                                           class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                            onclick="event.stopPropagation()"
+                                            class="p-2 bg-background border rounded-lg hover:bg-muted">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                     @endif
 
                                     @if ($showEdit)
                                         <a href="{{ route('admin.' . $modelRoute . '.edit', $item) }}"
-                                           onclick="event.stopPropagation()"
-                                           class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                            onclick="event.stopPropagation()"
+                                            class="p-2 bg-background border rounded-lg hover:bg-muted">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     @endif
 
                                     @if ($showDelete)
                                         <form action="{{ route('admin.' . $modelRoute . '.delete', $item) }}"
-                                              method="POST"
-                                              class="contents"
-                                              onclick="event.stopPropagation()"
-                                              onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')">
+                                            method="POST" class="contents" onclick="event.stopPropagation()"
+                                            onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                    class="p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/80">
+                                                class="p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/80">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -168,11 +159,9 @@
     {{-- MOBILE --}}
     <div class="md:hidden space-y-4">
         @forelse($items as $item)
-            <div class="border rounded-lg overflow-hidden">
-                <div class="p-4 space-y-2 cursor-pointer hover:bg-muted"
-                     @if (Route::has($viewRoute))
-                         onclick="window.location='{{ route($viewRoute, $item) }}'"
-                     @endif>
+            <div class="border rounded-lg overflow-hidden cursor-pointer hover:bg-muted">
+                <div class="p-4 space-y-2 "
+                    @if (Route::has($viewRoute)) onclick="window.location='{{ route($viewRoute, $item) }}'" @endif>
                     @foreach ($columns as $col)
                         <div>
                             <div class="text-xs text-muted-foreground">{{ $col['label'] }}</div>
@@ -182,32 +171,33 @@
                         </div>
                     @endforeach
                 </div>
-
-                <div class="flex justify-end gap-2 p-3 border-t">
-                    @if ($showView)
-                        <a href="{{ route('public.' . $modelRoute . '.show', $item) }}"
-                           class="p-2 bg-background border rounded">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-                    @endif
-                    @if ($showEdit)
-                        <a href="{{ route('admin.' . $modelRoute . '.edit', $item) }}"
-                           class="p-2 bg-background border rounded">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    @endif
-                    @if ($showDelete)
-                        <form action="{{ route('admin.' . $modelRoute . '.delete', $item) }}"
-                              method="POST"
-                              onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="p-2 bg-destructive text-destructive-foreground rounded">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    @endif
-                </div>
+                @if ($showView || $showEdit || $showDelete)
+                    <div class="flex justify-end gap-2 p-3 border-t">
+                        @if ($showView)
+                            <a href="{{ route('public.' . $modelRoute . '.show', $item) }}"
+                                class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                        @endif
+                        @if ($showEdit)
+                            <a href="{{ route('admin.' . $modelRoute . '.edit', $item) }}"
+                                class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        @endif
+                        @if ($showDelete)
+                            <form action="{{ route('admin.' . $modelRoute . '.delete', $item) }}" method="POST"
+                                onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')">
+                                @csrf
+                                @method('DELETE')
+                                <button
+                                    class="p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/80">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+                @endif
             </div>
         @empty
             <div class="text-center text-sm text-muted-foreground">
