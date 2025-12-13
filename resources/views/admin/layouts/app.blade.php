@@ -24,11 +24,13 @@
         @include('admin.partials.aside')
 
         <!-- Main Content -->
-        <main class="flex-1 pt-4 pb-4 p-4">
-            <div class="mb-4 p-4 bg-card text-card-foreground border border-border shadow rounded-lg">
-                <h2 class="text-2xl font-semibold ">@yield('admin.content.title')</h2>
+        <main class="flex-1 pt-4 pb-4 p-4 min-w-0">
+            <div class="mb-4 p-4 bg-card text-card-foreground border border-border shadow rounded-lg break-words">
+                <h2 class="text-2xl font-semibold">@yield('admin.content.title')</h2>
             </div>
-            <div class="mb-4 p-4 bg-card text-card-foreground border border-border shadow rounded-lg">
+
+            <div
+                class="mb-4 p-4 bg-card text-card-foreground border border-border shadow rounded-lg break-words min-w-0">
                 @yield('admin.content')
             </div>
         </main>
