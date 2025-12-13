@@ -21,7 +21,7 @@
         <form method="GET" class="mb-6 flex flex-wrap gap-2">
 
             <div class="relative w-full sm:w-auto flex-1 min-w-52 mb-2">
-                
+
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                     <i class="fa fa-search"></i>
                 </div>
@@ -51,7 +51,7 @@
 
     {{-- Таблица (desktop) --}}
     <div class="hidden md:block overflow-x-auto rounded-lg shadow">
-        <table class="min-w-full divide-y">
+        <table class="min-w-full divide-y overflow-x-auto">
             <thead>
                 <tr>
                     @foreach ($columns as $col)
@@ -92,7 +92,7 @@
 
             <tbody class="divide-y">
                 @forelse($items as $item)
-                    <tr class="cursor-pointer hover:bg-muted"
+                    <tr class="hover:bg-muted cursor-pointer"
                         @if (Route::has($viewRoute)) onclick="window.location='{{ route('admin.' . $modelRoute . '.show', $item) }}'" @endif>
 
                         @foreach ($columns as $col)
@@ -100,7 +100,7 @@
                                 $value = data_get($item, $col['key']);
                             @endphp
 
-                            <td class="px-4 py-2 text-sm whitespace-nowrap">
+                            <td class="px-4 py-2 text-sm whitespace-nowrap ">
                                 @if (is_iterable($value) && !is_string($value))
                                     @forelse($value as $tag)
                                         <span class="inline-block px-2 py-0.5 rounded-lg text-xs">
@@ -120,25 +120,27 @@
 
                                     @if ($showView)
                                         <a href="{{ route('public.' . $modelRoute . '.show', $item) }}"
-                                            class="inline-flex items-center p-2 rounded-lg hover:bg-muted">
+                                            onclick="event.stopPropagation()"
+                                            class="bg-background inline-flex border items-center p-2 rounded-lg hover:bg-muted">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                     @endif
 
                                     @if ($showEdit)
                                         <a href="{{ route('admin.' . $modelRoute . '.edit', $item) }}"
-                                            class="inline-flex items-center p-2 rounded-lg hover:bg-muted">
+                                            onclick="event.stopPropagation()"
+                                            class="bg-background inline-flex border items-center p-2 rounded-lg hover:bg-muted">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     @endif
 
                                     @if ($showDelete)
                                         <form action="{{ route('admin.' . $modelRoute . '.delete', $item) }}"
-                                            method="POST" class="contents"
+                                            method="POST" class="contents" onclick="event.stopPropagation()"
                                             onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')">
                                             @csrf @method('DELETE')
                                             <button type="submit"
-                                                class="inline-flex items-center p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90">
+                                                class="inline-flex border items-center p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/80">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
