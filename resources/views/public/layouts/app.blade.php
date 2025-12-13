@@ -35,9 +35,11 @@
     @include('public.partials.footer')
 
     @include('public.partials.notifications')
+    @include('public.partials.cookie')
 
     @stack('scripts')
     @livewireScripts
+    
 </body>
 
 </html>
