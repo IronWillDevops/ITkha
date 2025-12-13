@@ -6,9 +6,9 @@
 
 @section('admin.content')
     <div class="flex items-center gap-4 mb-4">
-        <x-admin.form.action-button type='link' route="{{ route('admin.category.edit', $category->id) }}" icon="fas fa-edit"
+        <x-form.table-actions type='link' route="{{ route('admin.category.edit', $category->id) }}" icon="fas fa-edit"
             label="{{ __('admin/common.buttons.edit') }}" />
-        <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.category.delete', $category->id) }}"
+        <x-form.table-actions type='form' method="DELETE" route="{{ route('admin.category.delete', $category->id) }}"
             icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" />
     </div>
 
@@ -30,7 +30,7 @@
             {{ __('admin/common.fields.post') }}
         </h2>
 
-        <x-admin.form.table :columns="$columns" :items="$posts" modelRoute="post" :sortField="$sortField" :sortDirection="$sortDirection"
+        <x-form.table :columns="$columns" :items="$posts" modelRoute="post" :sortField="$sortField" :sortDirection="$sortDirection"
             searchEnabled="true" />
     </div>
 @endsection

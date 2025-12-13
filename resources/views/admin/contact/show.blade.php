@@ -11,20 +11,22 @@
 
             {{-- Відправник / Отримувач --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <x-admin.form.input name="from" label="{{ __('admin/contact.fields.from') }}" icon="fa-solid fa-at"
+                
+                    
+                <x-form.input name="from" label="{{ __('admin/contact.fields.from') }}" icon="fa-solid fa-at"
                     value="{{ config('mail.from.address') }}" readonly />
-                <x-admin.form.input name="to" label="{{ __('admin/contact.fields.to') }}" icon="fa-solid fa-at"
+                <x-form.input name="to" label="{{ __('admin/contact.fields.to') }}" icon="fa-solid fa-at"
                     value="{{ $contact->email }}" readonly />
             </div>
 
             {{-- Тема та повідомлення --}}
             <div class="space-y-4">
-                <x-admin.form.input name="subject" label="{{ __('admin/contact.fields.subject') }}"
+                <x-form.input name="subject" label="{{ __('admin/contact.fields.subject') }}"
                     value="Request Ticket#{{ $contact->id }} - {{ $contact->subject }}" icon="fa-solid fa-envelope"
                     readonly />
 
-                <x-admin.form.area name="message" label="{{ __('admin/contact.fields.message') }}"
-                    placeholder="{{ __('admin/contact.placeholder.message') }}" rows="6">{{ old('message') }}</x-admin.form.area>
+                <x-form.area name="message" label="{{ __('admin/contact.fields.message') }}"
+                    placeholder="{{ __('admin/contact.placeholder.message') }}" >{{ old('message') }}</x-admin.form.area>
 
                 <div class="rounded-lg p-4 text-sm border">
                     <span class="font-medium">{{ __('admin/contact.fields.original_message') }}</span>
@@ -35,10 +37,10 @@
             {{-- Кнопки --}}
             <div class="flex space-x-3">
                 <div class="flex space-x-3">
-                    <x-admin.form.submit label="{{ __('admin/common.buttons.send') }}" />
+                    <x-form.submit label="{{ __('admin/common.buttons.send') }}" />
 
 
-                    <x-admin.form.button href="{{ route('admin.post.index') }}"
+                    <x-form.button href="{{ route('admin.post.index') }}"
                         label="{{ __('admin/common.buttons.cancel') }}" />
                 </div>
 

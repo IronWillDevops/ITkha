@@ -37,12 +37,12 @@
                         </div>
 
                         <div class="flex-1">
-                            <x-admin.form.file-input name="avatar" label="{{ __('admin/common.fields.avatar') }}" />
+                            <x-form.file name="avatar" label="{{ __('admin/common.fields.avatar') }}" />
                         </div>
                     </div>
                     <div class="flex items-center gap-6 mb-6">
                         <div class="flex-1">
-                            <x-admin.form.input name="login" label="{{ __('admin/user.fields.login') }}"
+                            <x-form.input name="login" label="{{ __('admin/user.fields.login') }}"
                                 value="{{ $user->login }}" placeholder="{{ __('admin/user.placeholder.login') }}"
                                 icon="fas fa-solid fa-user" />
                         </div>
@@ -50,18 +50,18 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {{-- First name --}}
-                    <x-admin.form.input name="first_name" label="{{ __('admin/common.fields.first_name') }}"
+                    <x-form.input name="first_name" label="{{ __('admin/common.fields.first_name') }}"
                         value="{{ $user->first_name }}" placeholder="{{ __('admin/common.placeholder.first_name') }}"
                         icon="fas fa-solid fa-user" />
 
                     {{-- Last name --}}
-                    <x-admin.form.input name="last_name" label="{{ __('admin/common.fields.last_name') }}"
+                    <x-form.input name="last_name" label="{{ __('admin/common.fields.last_name') }}"
                         value="{{ $user->last_name }}" placeholder="{{ __('admin/common.placeholder.last_name') }}"
                         icon="fas fa-solid fa-user" :required="false" />
                 </div>
 
                 {{-- Email --}}
-                <x-admin.form.input type="email" name="email" label="{{ __('admin/common.fields.email') }}"
+                <x-form.input type="email" name="email" label="{{ __('admin/common.fields.email') }}"
                     value="{{ $user->email }}" placeholder="{{ __('admin/common.placeholder.email') }}"
                     icon="fas fa-solid fa-at" />
             </section>
@@ -75,21 +75,21 @@
             <section>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {{-- Job Title --}}
-                    <x-admin.form.input name="job_title" label="{{ __('admin/user.fields.job_title') }}"
-                        value="{{ $user->profile?->job_title }}"
-                        icon="fas fa-solid fa-user" placeholder="{{ __('admin/user.placeholder.job_title') }}" :required="false" />
+                    <x-form.input name="job_title" label="{{ __('admin/user.fields.job_title') }}"
+                        value="{{ $user->profile?->job_title }}" icon="fas fa-solid fa-user"
+                        placeholder="{{ __('admin/user.placeholder.job_title') }}" :required="false" />
                     {{-- Address --}}
-                    <x-admin.form.input name="address" label="{{ __('admin/user.fields.address') }}"
+                    <x-form.input name="address" label="{{ __('admin/user.fields.address') }}"
                         value="{{ $user->profile?->address }}" icon="fas fa-solid fa-user"
                         placeholder="{{ __('admin/user.placeholder.address') }}" :required="false" />
                 </div>
                 {{-- Website --}}
-                <x-admin.form.input type="website" name="website" label="{{__('admin/user.fields.website')}}" value="{{ $user->profile?->website }}"
-                    icon="fas fa-link" placeholder="{{ __('admin/user.placeholder.website') }}" :required="false" />
+                <x-form.input type="website" name="website" label="{{ __('admin/user.fields.website') }}"
+                    value="{{ $user->profile?->website }}" icon="fas fa-link"
+                    placeholder="{{ __('admin/user.placeholder.website') }}" :required="false" />
 
                 {{-- About me --}}
-                <x-admin.form.area name="about_myself" label="{{ __('admin/user.fields.about_myself') }}"
-                    placeholder="{{ __('admin/user.fields.about_myself') }}"
+                <x-form.area name="about_myself" label="{{ __('admin/user.fields.about_myself') }}"
                     value="{{ $user->profile?->about_myself }}"
                     placeholder="{{ __('admin/user.placeholder.about_myself') }}" :required="false" />
             </section>
@@ -102,11 +102,13 @@
             </summary>
             <section>
                 {{-- Git Hub --}}
-                <x-admin.form.input type="website" name="github" label="{{ __('admin/user.fields.github') }}" value="{{ $user->profile?->github }}"
-                    icon="fab fa-github" placeholder="{{ __('admin/user.placeholder.github') }}" :required="false" />
+                <x-form.input type="website" name="github" label="{{ __('admin/user.fields.github') }}"
+                    value="{{ $user->profile?->github }}" icon="fab fa-github"
+                    placeholder="{{ __('admin/user.placeholder.github') }}" :required="false" />
                 {{-- LinkedIn --}}
-                <x-admin.form.input type="website" name="linkedin" label="{{ __('admin/user.fields.linkedin') }}" value="{{ $user->profile?->linkedin }}"
-                    icon="fab fa-linkedin" placeholder="{{ __('admin/user.placeholder.linkedin') }}" :required="false" />
+                <x-form.input type="website" name="linkedin" label="{{ __('admin/user.fields.linkedin') }}"
+                    value="{{ $user->profile?->linkedin }}" icon="fab fa-linkedin"
+                    placeholder="{{ __('admin/user.placeholder.linkedin') }}" :required="false" />
             </section>
         </details>
 
@@ -118,13 +120,13 @@
             <section>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {{-- Role --}}
-                    <x-admin.form.select name="role_id" label="{{ __('admin/common.fields.role') }}" :options="$roles"
+                    <x-form.select name="role_id" label="{{ __('admin/common.fields.role') }}" :options="$roles"
                         value-field="id" label-field="title" :value="$user->roles()->first()->id" />
                     {{-- Статус --}}
-                    <x-admin.form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"
+                    <x-form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"
                         value-field="value" label-field="value" :value="$user->status" />
                     {{-- Is Verify --}}
-                    <x-admin.form.checkbox name="email_verified_at" label="{{ __('admin/user.fields.verified') }}"
+                    <x-form.check-box name="email_verified_at" label="{{ __('admin/user.fields.verified') }}"
                         :checked="$user->email_verified_at" />
                 </div>
             </section>
@@ -132,8 +134,8 @@
 
         {{-- Кнопки --}}
         <div class="flex space-x-3">
-            <x-admin.form.submit label="{{ __('admin/common.buttons.edit') }}" />
-            <x-admin.form.button href="{{ route('admin.user.index') }}"
+            <x-form.submit label="{{ __('admin/common.buttons.edit') }}" />
+            <x-form.button href="{{ route('admin.user.index') }}"
                 label="{{ __('admin/common.buttons.cancel') }}" />
         </div>
     </form>

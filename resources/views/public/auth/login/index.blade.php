@@ -13,11 +13,11 @@
                 @csrf
 
                 {{-- Email --}}
-                <x-public.form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
+                <x-form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
                     placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Password --}}
-                <x-public.form.password name="password" label="{{ __('public/common.fields.password') }}"
+                <x-form.password name="password" label="{{ __('public/common.fields.password') }}"
                     placeholder="{{ __('public/common.placeholder.password') }}" icon="fas fa-solid fa-lock" />
 
                 @error('error')
@@ -25,7 +25,7 @@
                 @enderror
 
                 <div class="mb-4 flex justify-between">
-                    <x-public.form.check-box name="remember" label="{{ __('public/auth/login.fields.remember_me') }}" />
+                    <x-form.check-box  name="remember" label="{{ __('public/auth/login.fields.remember_me') }}" />
                     <a href="{{ route('public.auth.forgot.password.index') }}"
                         class="text-sm text-muted-foreground hover:underline">{{ __('public/common.links.forgot') }}
 
@@ -33,7 +33,7 @@
                 </div>
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/auth/login.buttons.submit') }}" class="w-full" />
+                <x-form.submit label="{{ __('public/auth/login.buttons.submit') }}" class="w-full" />
             </form>
 
             <p class="mt-4 text-right text-sm text-muted-foreground">

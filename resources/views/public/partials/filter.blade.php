@@ -1,13 +1,13 @@
 <div class="w-full bg-card text-card-foreground border border-border p-6 mb-6 shadow rounded-lg">
     <form method="GET" action="{{ route('public.post.index') }}" id="filter-form"
-        class=" flex flex-wrap gap-4 items-center">
-        <div class="relative flex-grow min-w-52 ">
-            <div class="">
-                <x-public.form.input type="search" name="search" value="{{ request('search') }}"
-                    placeholder="{{ __('public/filter.placeholder.search') }}" icon="fa fa-search " />
-            </div>
+        class="flex flex-wrap gap-4 items-center">
+        <div class="relative flex-grow min-w-52 items-end ">
+            <x-form.input type="search" name="search" value="{{ request('search') }}"
+                label="{{ __('public/filter.fields.search') }}"
+                placeholder="{{ __('public/filter.placeholder.search') }}" icon="fa fa-search" />
         </div>
-        <div class="mb-4">
+
+        <div class="mt-2">
             <!-- Кнопка напрямку сортування (asc/desc) -->
             <button type="button"
                 class="border-border border focus:ring focus:outline-none focus-visible:ring-ring text-foreground rounded px-3 py-2 flex items-center justify-center h-10 hover:bg-accent "
@@ -19,14 +19,11 @@
                 @endif
             </button>
         </div>
-
-        <!-- Кнопка скидання фільтрів з іконкою -->
-
-        <div class="mb-4">
+        <div class="mt-2">
             <a href="{{ route('public.post.index') }}"
                 class="border-border border bg-destructive text-destructive-foreground hover:bg-destructive/80 focus:ring focus:outline-none focus-visible:ring-ring px-3 py-2 rounded  flex items-center justify-center h-10 "
                 title="{{ __('public/filter.buttons.reset') }}">
-                <i class="fa fa-times "></i>
+                <i class="fa fa-times"></i>
             </a>
         </div>
     </form>
@@ -49,7 +46,8 @@
             @php
                 // Загальний стиль для всіх елементів фільтра
                 $filterItemClasses = 'border-border border rounded-2xl px-3 py-1 flex items-center space-x-2';
-                $filterItemHover = 'hover:text-error/80 font-semibold focus:ring focus:outline-none focus-visible:ring-ring';
+                $filterItemHover =
+                    'hover:text-error/80 font-semibold focus:ring focus:outline-none focus-visible:ring-ring';
             @endphp
 
             {{-- search --}}

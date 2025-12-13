@@ -6,9 +6,9 @@
 
 @section('admin.content')
     <div class="flex items-center gap-4 mb-4">
-        <x-admin.form.action-button type='link' route="{{ route('admin.role.edit', $role) }}" icon="fas fa-edit"
+        <x-form.table-actions type='link' route="{{ route('admin.role.edit', $role) }}" icon="fas fa-edit"
             label="{{ __('admin/common.buttons.edit') }}" />
-        <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.role.delete', $role) }}"
+        <x-form.table-actions type='form' method="DELETE" route="{{ route('admin.role.delete', $role) }}"
             icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" />
     </div>
 
@@ -57,7 +57,7 @@
         <h2 class="text-lg font-semibold mb-2">
             {{ __('admin/user.title') }}
         </h2>
-        <x-admin.form.table :columns="$columns" :items="$users" modelRoute="user" :sortField="$sortField" :sortDirection="$sortDirection"
+        <x-form.table :columns="$columns" :items="$users" modelRoute="user" :sortField="$sortField" :sortDirection="$sortDirection"
             searchEnabled="true" />
         
     </div>

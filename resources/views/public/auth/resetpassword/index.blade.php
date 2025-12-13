@@ -15,15 +15,15 @@
                 <input type="hidden" name="email" value="{{ $email }}">
 
                 {{-- Password --}}
-                <x-public.form.password name="password" label="{{ __('public/common.fields.password') }}"
+                <x-form.password name="password" label="{{ __('public/common.fields.password') }}"
                     placeholder="{{ __('public/common.placeholder.password') }}" />
                 {{-- Password --}}
-                <x-public.form.password name="password_confirmation"
+                <x-form.password name="password_confirmation"
                     label="{{ __('public/common.fields.password_confirmation') }}"
                     placeholder="{{ __('public/common.placeholder.password_confirmation') }}" />
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/auth/reset.buttons.submit') }}" class="w-full" />
+                <x-form.submit label="{{ __('public/auth/reset.buttons.submit') }}" class="w-full" />
 
 
             </form>

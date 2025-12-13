@@ -9,7 +9,7 @@
         @csrf
         @method('PATCH')
         {{-- Название роли --}}
-        <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}" icon="fa-solid fa-user-plus"
+        <x-form.input name="title" label="{{ __('admin/common.fields.title') }}" icon="fa-solid fa-user-plus"
             value="{{ $role->title }}" />
 
         {{-- Permissions --}}
@@ -23,7 +23,7 @@
                     </summary>
                     <section>
                         @foreach ($group as $permission)
-                            <x-admin.form.checkbox name="permissions[]"
+                            <x-form.check-box name="permissions[]"
                                 label="{{ __('admin/permission.' . $permission->key) }}" value="{{ $permission->id }}"
                                 checked="{{ $role->permissions->contains($permission->id) ? true : false }}" />
                         @endforeach
@@ -34,8 +34,8 @@
 
         {{-- Кнопки --}}
         <div class="flex space-x-3">
-            <x-admin.form.submit label="{{ __('admin/common.buttons.edit') }}" />
-            <x-admin.form.button href="{{ route('admin.role.index') }}" label="{{ __('admin/common.buttons.cancel') }}" />
+            <x-form.submit label="{{ __('admin/common.buttons.edit') }}" />
+            <x-form.button href="{{ route('admin.role.index') }}" label="{{ __('admin/common.buttons.cancel') }}" />
         </div>
     </form>
 @endsection

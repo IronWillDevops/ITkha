@@ -9,49 +9,50 @@
             @csrf
             @method('PATCH')
 
-            <x-admin.form.input name="title" label="{{ __('admin/common.fields.title') }}" value="{{ $post->title }}"
+            <x-form.input name="title" label="{{ __('admin/common.fields.title') }}" value="{{ $post->title }}"
                 placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-heading" />
 
             {{-- Изображение --}}
-            <x-admin.form.file-input name="main_image" label="{{ __('admin/post.fields.main_image') }}" />
+            <x-form.file name="main_image" label="{{ __('admin/post.fields.main_image') }}"
+                icon="fa-regular fa-file-image" />
 
             {{-- Категория --}}
-            <x-admin.form.select name="category_id" label="{{ __('admin/common.fields.category') }}" :options="$categories"
+            <x-form.select name="category_id" label="{{ __('admin/common.fields.category') }}" :options="$categories"
                 value-field="id" label-field="title" value="{{ $post->category_id }}" />
 
             {{-- Теги --}}
-            <x-admin.form.checkboxes name="tag_ids" label="{{ __('admin/common.fields.tag') }}" :options="$tags"
+             <x-form.check-boxes name="tag_ids" label="{{ __('admin/common.fields.tag') }}" :options="$tags"
                 value-field="id" label-field="title" :selected="$post->tags->pluck('id')->toArray()" />
 
             {{-- Editor --}}
-            <x-admin.form.editor name="content" label="{{ __('admin/post.fields.content') }}"
+            <x-form.editor name="content" label="{{ __('admin/post.fields.content') }}"
                 placeholder="{{ __('admin/post.placeholder.content') }}" value="{{ $post->content }}" />
-                
+
             <div class="flex">
                 <div class="flex-1">
-                    {{-- Статус --}} <x-admin.form.select name="status"
+                    {{-- Статус --}} <x-form.select name="status"
                         label="{{ __('admin/common.fields.status') }}" :options="$status" value-field="value"
                         label-field="value" :value="$post->status" />
                 </div>
 
                 <div id="published_at_wrapper" class="flex-1 pl-4">
-                    <x-admin.form.date-time-input name="published_at" label="{{ __('admin/common.fields.published_at') }}"
-                        icon="fa-solid fa-calendar-day" id="published_at" :required="true" :value="$post->published_at"/>
+                    <x-form.date-time name="published_at" label="{{ __('admin/common.fields.published_at') }}"
+                        icon="fa-solid fa-calendar-day" id="published_at" :required="true" :value="$post->published_at" />
                 </div>
             </div>
 
             {{-- Автор --}}
-            <x-admin.form.select name="user_id" label="{{ __('admin/common.fields.author') }}" :options="$users"
+            <x-form.select name="user_id" label="{{ __('admin/common.fields.author') }}" :options="$users"
                 value-field="id" label-field="email" value="{{ $post->user_id }}" />
 
             {{-- Разрешить комментарии --}}
-            <x-admin.form.checkbox name="comments_enabled" label="{{ __('admin/post.fields.comment_enabled') }}"
+            <x-form.check-box name="comments_enabled" label="{{ __('admin/post.fields.comment_enabled') }}"
                 :checked="$post->comments_enabled" />
 
             {{-- Кнопки --}}
             <div class="flex space-x-3">
-                <x-admin.form.submit label="{{ __('admin/common.buttons.edit') }}" />
-                <x-admin.form.button href="{{ route('admin.post.index') }}"
+                <x-form.submit label="{{ __('admin/common.buttons.edit') }}" />
+                <x-form.button href="{{ route('admin.post.index') }}"
                     label="{{ __('admin/common.buttons.cancel') }}" />
             </div>
         </form>

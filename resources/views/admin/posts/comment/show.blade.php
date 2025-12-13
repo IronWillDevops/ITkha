@@ -6,9 +6,9 @@
 
 @section('admin.content')
 <div class="flex items-center gap-4 mb-4">
-    <x-admin.form.action-button type='link' route="{{ route('admin.comment.edit', $comment->id) }}" icon="fas fa-edit"
+    <x-form.table-actions type='link' route="{{ route('admin.comment.edit', $comment->id) }}" icon="fas fa-edit"
         label="{{ __('admin/common.buttons.edit') }}" />
-    <x-admin.form.action-button type='form' method="DELETE" route="{{ route('admin.comment.delete', $comment->id) }}"
+    <x-form.table-actions type='form' method="DELETE" route="{{ route('admin.comment.delete', $comment->id) }}"
         icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" />
 </div>
 
@@ -39,7 +39,7 @@
     </h2>
 
     @if($posts->isNotEmpty())
-        <x-admin.form.table
+        <x-form.table
             :columns="$columns"
             :items="$posts"
             modelRoute="post"

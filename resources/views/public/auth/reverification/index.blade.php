@@ -11,11 +11,11 @@
                 @csrf
 
                 {{-- Email --}}
-                <x-public.form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
+                <x-form.input type="email" name="email" label="{{ __('public/common.fields.email') }}"
                     placeholder="{{ __('public/common.placeholder.email') }}" icon="fas fa-solid fa-at" />
 
                 {{-- Submit --}}
-                <x-public.form.submit label="{{ __('public/auth/verify.buttons.submit') }}" class="w-full"/>
+                <x-form.submit label="{{ __('public/auth/verify.buttons.submit') }}" class="w-full" />
 
             </form>
 

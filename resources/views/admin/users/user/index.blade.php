@@ -6,7 +6,7 @@
 
 @section('admin.content')
 <div class="flex items-center justify-between mb-6">
-    <x-admin.form.action-button 
+    <x-form.table-actions 
         type="link" 
         route="{{ route('admin.user.create') }}" 
         icon="fa-solid fa-plus"
@@ -14,7 +14,7 @@
     />
 </div>
 
-<x-admin.form.table
+<x-form.table
     :columns="$columns"
     :items="$users"
     modelRoute="user"

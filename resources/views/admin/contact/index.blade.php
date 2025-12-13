@@ -6,7 +6,7 @@
 
 @section('admin.content')
 
-    <x-admin.form.table  
+    <x-form.table  
         :columns="$columns"
         :items="$items"
         modelRoute="contact"

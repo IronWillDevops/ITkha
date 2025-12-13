@@ -12,12 +12,12 @@
             class=" hover:underline cursor-pointer">{{ __('public/comment.labels.reply_to_cancel') }}</button>
     </div>
 
-    <x-public.form.area name="body" label="{{ __('public/comment.fields.write_comment') }}"
+    <x-form.area name="body" label="{{ __('public/comment.fields.write_comment') }}"
         placeholder="{{ __('public/comment.placeholder.write_comment') }}" />
         
-    <x-public.form.captcha name="captcha" />
+    <x-form.captcha name="captcha" />
 
-    <x-public.form.submit label="{{ __('public/comment.buttons.submit') }}" />
+    <x-form.submit label="{{ __('public/comment.buttons.submit') }}" />
 
 </form>
 

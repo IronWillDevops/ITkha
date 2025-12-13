@@ -10,18 +10,18 @@
         @method('PATCH')
 
         {{-- Разрешить комментарии под постами --}}
-        <x-admin.form.checkbox name="telegram_enabled" label="{{ __('admin/settings/telegram.fields.enabled') }}"
+        <x-form.check-box name="telegram_enabled" label="{{ __('admin/settings/telegram.fields.enabled') }}"
             :checked="$telegramEnabled" />
 
         {{-- Telegram Token --}}
-        <x-public.form.password name="telegram_token" label="{{ __('admin/settings/telegram.fields.token') }}"
+        <x-form.password name="telegram_token" label="{{ __('admin/settings/telegram.fields.token') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.token') }}" :required='false' />
 
         {{-- Telegram ChatID --}}
-        <x-public.form.password name="telegram_chatid" label="{{ __('admin/settings/telegram.fields.chatid') }}"
+        <x-form.password name="telegram_chatid" label="{{ __('admin/settings/telegram.fields.chatid') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.chatid') }}" :required='false' />
 
-        <x-admin.form.checkbox name="telegram_send_without_sound"
+        <x-form.check-box name="telegram_send_without_sound"
             label="{{ __('admin/settings/telegram.fields.send_without_sound') }}" :checked="$telegramSendWithoutSound" />
         @php
             $placeholder =
@@ -43,27 +43,29 @@
             @foreach ($placeholders as $ph)
                 <button type="button" class="text-xs "
                     onclick="insertAtCursor(document.getElementById('telegram_template'), '{{ $ph }}')">
-                    <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1 cursor-pointer hover:bg-secondary/80">
+                    <span
+                        class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1 cursor-pointer hover:bg-secondary/80">
                         {{ $ph }}
                     </span>
                 </button>
             @endforeach
         </div>
-        <x-admin.form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}"
+        <x-form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}"
             :placeholder="$placeholder" :value="$telegramTemplate" />
-        <x-admin.form.input name="telegram_message_limit" min="10" max="750" type="number"
+
+        <x-form.input name="telegram_message_limit" min="10" max="750" type="number"
             label="{{ __('admin/settings/telegram.fields.message_limit') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.message_limit') }}" icon="fa-solid fa-heading"
             :value="$telegramMessageLimit" />
 
-        <x-admin.form.input name="telegram_button_text" label="{{ __('admin/settings/telegram.fields.button_text') }}"
+        <x-form.input name="telegram_button_text" label="{{ __('admin/settings/telegram.fields.button_text') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.button_text') }}" icon="fa-solid fa-heading"
             :value="$telegramButtonText" />
 
         <div class="flex space-x-3">
 
-            <x-admin.form.submit label="{{ __('admin/common.buttons.save') }}" />
-            <x-admin.form.button href="{{ route('admin.setting.comment.edit') }}"
+            <x-form.submit label="{{ __('admin/common.buttons.save') }}" />
+            <x-form.button href="{{ route('admin.setting.comment.edit') }}"
                 label="{{ __('admin/common.buttons.cancel') }}" />
 
         </div>
