@@ -171,32 +171,33 @@
                         </div>
                     @endforeach
                 </div>
-
-                <div class="flex justify-end gap-2 p-3 border-t">
-                    @if ($showView)
-                        <a href="{{ route('public.' . $modelRoute . '.show', $item) }}"
-                            class="p-2 bg-background border rounded-lg hover:bg-muted">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-                    @endif
-                    @if ($showEdit)
-                        <a href="{{ route('admin.' . $modelRoute . '.edit', $item) }}"
-                            class="p-2 bg-background border rounded-lg hover:bg-muted">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    @endif
-                    @if ($showDelete)
-                        <form action="{{ route('admin.' . $modelRoute . '.delete', $item) }}" method="POST"
-                            onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')">
-                            @csrf
-                            @method('DELETE')
-                            <button
-                                class="p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/80">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    @endif
-                </div>
+                @if ($showView || $showEdit || $showDelete)
+                    <div class="flex justify-end gap-2 p-3 border-t">
+                        @if ($showView)
+                            <a href="{{ route('public.' . $modelRoute . '.show', $item) }}"
+                                class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                        @endif
+                        @if ($showEdit)
+                            <a href="{{ route('admin.' . $modelRoute . '.edit', $item) }}"
+                                class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        @endif
+                        @if ($showDelete)
+                            <form action="{{ route('admin.' . $modelRoute . '.delete', $item) }}" method="POST"
+                                onsubmit="return confirm('{{ __('admin/common.messages.confirm_delete') }}')">
+                                @csrf
+                                @method('DELETE')
+                                <button
+                                    class="p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/80">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+                @endif
             </div>
         @empty
             <div class="text-center text-sm text-muted-foreground">
