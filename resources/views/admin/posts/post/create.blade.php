@@ -13,7 +13,7 @@
                 placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-heading" />
 
             {{-- Изображение --}}
-            <x-form.file name="main_image" label="{{ __('admin/post.fields.main_image') }}" icon="fa-regular fa-file-image"/>
+            <x-form.file name="main_image" label="{{ __('admin/post.fields.main_image') }}" icon="fa-regular fa-file-image" :required="false"/>
 
             {{-- Категория --}}
             <x-form.select name="category_id" label="{{ __('admin/common.fields.category') }}" :options="$categories"
@@ -24,8 +24,8 @@
                 value-field="id" label-field="title" />
 
             {{-- Editor --}}
-            <x-form.editor name="content" label="{{ __('admin/post.fields.content') }}"
-                placeholder="{{ __('admin/post.placeholder.content') }}" />
+            <x-form.editor name="content" label="{{ __('admin/common.fields.content') }}"
+                placeholder="{{ __('admin/common.placeholder.content') }}" />
 
             <div class="flex">
                 <div class="flex-1">

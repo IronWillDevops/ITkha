@@ -2,6 +2,7 @@
      <!-- Name and title with staggered animation -->
 
      <div class="text-center mb-4">
+      
          <div class="avatar m-4 ">
              @if ($user->avatar)
                  <img type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"

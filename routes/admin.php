@@ -102,6 +102,15 @@ Route::prefix('admin')->name('admin.')
                         Route::get('/', App\Http\Controllers\Admin\Setting\Comment\EditController::class)->name('edit')->middleware('permission:setting.update');
                         Route::patch('/', App\Http\Controllers\Admin\Setting\Comment\UpdateController::class)->name('update')->middleware('permission:setting.update');
                     });
+                Route::prefix('policy')
+                    ->name('policy.')
+                    ->group(function () {
+                         Route::get('/', App\Http\Controllers\Admin\Setting\Policy\IndexController::class)->name('index')->middleware('permission:setting.view');
+                         Route::get('/create', App\Http\Controllers\Admin\Setting\Policy\CreateController::class)->name('create')->middleware('permission:setting.create');
+                         Route::post('/store', App\Http\Controllers\Admin\Setting\Policy\StoreController::class)->name('store')->middleware('permission:setting.create');
+                         Route::get('/{policy}/edit', App\Http\Controllers\Admin\Setting\Policy\EditController::class)->name('edit')->middleware('permission:setting.update');
+                         Route::patch('/{policy}', App\Http\Controllers\Admin\Setting\Policy\UpdateController::class)->name('update')->middleware('permission:setting.update');
+                    });
                 Route::prefix('footerlink')
                     ->name('footerlink.')
                     ->group(function () {
@@ -148,3 +157,5 @@ Route::prefix('admin')->name('admin.')
                     });
             });
     });
+// admin
+Route::prefix('admin')->middleware('auth')->group(function () {});

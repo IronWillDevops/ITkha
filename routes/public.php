@@ -83,8 +83,15 @@ Route::prefix('/')
                         Route::get('/', App\Http\Controllers\Public\Page\Contact\IndexController::class)->name('index');
                         Route::post('/store', App\Http\Controllers\Public\Page\Contact\StoreController::class)->name('store');
                     });
+            });
 
+        Route::prefix('/cookie')
+            ->name('cookie.')
+            ->group(function () {
 
+                Route::get('/', App\Http\Controllers\Public\Cookie\IndexController::class)->name('banner');
+                Route::post('/accept', App\Http\Controllers\Public\Cookie\StoreController::class)->name('accept');
+                Route::post('/revoke', App\Http\Controllers\Public\Cookie\DeleteController::class)->name('revoke');
             });
 
         Route::prefix('/user')
@@ -98,3 +105,8 @@ Route::prefix('/')
                 Route::patch('/{user}/password', App\Http\Controllers\Public\User\UpdatePasswordController::class)->middleware('auth')->name('password.update');
             });
     });
+// public
+Route::get('/policy',App\Http\Controllers\Public\Policy\ShowController::class)->name('policy.show');
+Route::post('/policy/accept', App\Http\Controllers\Public\Policy\AcceptController::class)
+    ->middleware('auth')
+    ->name('policy.accept');

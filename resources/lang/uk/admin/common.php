@@ -30,6 +30,9 @@ return [
         'icon'        => 'Іконка',
         'url'         => 'URL',
         'search'      => 'Пошук...',
+        'key' => 'Ключ',
+        'version' => 'Версія',
+        'is_active' => 'Активна',
     ],
 
     'placeholder' => [
@@ -37,11 +40,15 @@ return [
         'first_name'    => 'Введіть ім’я',
         'last_name' => 'Введіть прізвище',
         'email'   => 'Введіть електронну пошту',
+        'content' => 'Введіть контент',
+        'key' => 'Введіть ключ',
         'icon'    => 'Наприклад: fa-brands fa-github',
         'url'     => 'Введіть URL',
     ],
 
     'buttons' => [
+        
+        'accept' => 'Прийняти',
         'create'     => 'Створити',
         'edit'       => 'Редагувати',
         'delete'     => 'Видалити',

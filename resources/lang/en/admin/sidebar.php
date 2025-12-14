@@ -33,7 +33,7 @@ return [
     'contact' => [
         'title' => 'Contacts',
     ],
-    
+
     'setting' => [
         'title' => 'Settings',
         'sections' => [
@@ -48,6 +48,7 @@ return [
             'additional' => [
                 'title' => 'Additional',
                 'entities' => [
+                    'policy' => ['title' => 'Policy'],
                     'footerlink' => ['title' => 'Footer link'],
                     'info'       => ['title' => 'Info'],
                     'log'        => ['title' => 'Logs'],

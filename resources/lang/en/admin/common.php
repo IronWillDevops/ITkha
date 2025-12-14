@@ -29,6 +29,10 @@ return [
         'icon'        => 'Icon',
         'url'         => 'URL',
         'search'      => 'Search...',
+        'key' => 'Key',
+        'version' => 'Version',
+        'is_active' => 'Active',
+
     ],
 
     'placeholder' => [
@@ -36,11 +40,14 @@ return [
         'first_name' => 'Enter your first name',
         'last_name' => 'Enter your last name',
         'email' => 'Enter your email',
+        'content' => 'Enter content',
+        'key' => 'Enter key',
         'icon'        => 'Example: fa-brands fa-github',
         'url'        => 'Enter URL',
     ],
 
     'buttons' => [
+        'accept' => 'Accept',
         'create'     => 'Create',
         'edit'       => 'Edit',
         'delete'     => 'Delete',

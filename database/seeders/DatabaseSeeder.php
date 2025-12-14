@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             Production\DefaultCategorySeeder::class,
             Production\RolePermissionSeeder::class,
             Production\SettingsSeeder::class,
+            Production\PolicySeeder::class,
         ]);
 
         if (!app()->environment('production')) {

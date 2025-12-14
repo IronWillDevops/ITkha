@@ -33,7 +33,7 @@ return [
     'contact' => [
         'title' => 'Контакти',
     ],
-    
+
     'setting' => [
         'title' => 'Налаштування',
         'sections' => [
@@ -48,6 +48,7 @@ return [
             'additional' => [
                 'title' => 'Додаткові',
                 'entities' => [
+                    'policy' => ['title' => 'Політика конфіденційності'],
                     'footerlink' => ['title' => 'Посилання в футері'],
                     'info'       => ['title' => 'Інформація'],
                     'log'        => ['title' => 'Логи'],

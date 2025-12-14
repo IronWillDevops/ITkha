@@ -78,7 +78,7 @@
 
                 <x-public.ui.separator />
                 
-                <div id="post-content" class="prose max-w-none prose-lg prose-gray wrap-anywhere">
+                <div id="post-content" class="max-w-none text-muted-foreground wrap-anywhere">
                     {!! $post->content !!}
                 </div>
             </div>

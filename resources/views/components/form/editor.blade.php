@@ -1,12 +1,31 @@
+@props([
+    'name',
+    'label' => '',
+    'placeholder' => '',
+    'value' => ''
+])
+
+@php
+    // Генерация уникального ID для каждого редактора
+    $editorId = 'editor-' . md5($name . rand());
+@endphp
+
 <div class="mb-4 min-w-0">
-    <label for="{{ $name }}" class="block text-sm font-medium mb-1">
+    <label for="{{ $editorId }}" class="block text-sm font-medium mb-1">
         {{ $label }}
     </label>
-    <input id="{{ $name }}" type="hidden" name="{{ $name }}" value="{!! old($name, $value) !!}">
 
-    <trix-toolbar id="editor-toolbar" class="text-card-foreground"></trix-toolbar>
+    {{-- Скрытое поле, куда будет сохраняться содержимое --}}
+    <input id="{{ $editorId }}" type="hidden" name="{{ $name }}" value="{!! old($name, $value) !!}">
 
-    <trix-editor input="{{ $name }}" placeholder="{{ $placeholder }}" toolbar="editor-toolbar" id="post-content"
+    {{-- Toolbar --}}
+    <trix-toolbar id="toolbar-{{ $editorId }}" class="text-card-foreground"></trix-toolbar>
+
+    {{-- Редактор --}}
+    <trix-editor
+        input="{{ $editorId }}"
+        toolbar="toolbar-{{ $editorId }}"
+        placeholder="{{ $placeholder }}"
         class="w-full min-w-0 text-sm caret-primary border px-3 py-2 ps-10 p-2.5 
                focus:ring focus:outline-none focus-visible:ring-ring break-words whitespace-pre-wrap overflow-hidden">
     </trix-editor>
@@ -22,25 +41,16 @@
         <style>
             trix-editor {
                 border: 1px solid var(--border) !important;
-
                 max-width: 100% !important;
-                /* не растягиваться шире контейнера */
                 overflow-x: hidden !important;
-                /* не делать горизонтальный скролл */
                 word-wrap: break-word !important;
-                /* переносить длинные слова */
                 white-space: pre-wrap !important;
-                /* корректный перенос текстов */
             }
-
-            /* Общий стиль для кнопок: задать фон и цвет */
             trix-toolbar .trix-button {
                 background-color: white;
                 color: white;
                 background-image: none !important;
             }
-
-            /* Цвет фона при активной кнопке */
             trix-toolbar .trix-button:active {
                 background-color: var(--color-accent-foreground);
             }
@@ -49,7 +59,6 @@
 
     @push('scripts')
         <script src="https://unpkg.com/trix@2.1.15/dist/trix.umd.min.js"></script>
-
         <script>
             document.addEventListener("trix-attachment-add", function(event) {
                 const attachment = event.attachment;
@@ -74,42 +83,38 @@
                 form.append("file", file);
 
                 fetch("{{ route('admin.post.image.upload') }}", {
-                        method: "POST",
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        },
-                        body: form
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        attachment.setAttributes({
-                            url: result.url,
-                            href: result.url
-                        });
-                    })
-                    .catch(error => {
-                        console.error("Image upload failed:", error);
+                    method: "POST",
+                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    body: form
+                })
+                .then(response => response.json())
+                .then(result => {
+                    attachment.setAttributes({
+                        url: result.url,
+                        href: result.url
                     });
+                })
+                .catch(error => {
+                    console.error("Image upload failed:", error);
+                });
             }
 
             function deleteAttachment(url) {
                 fetch("{{ route('admin.post.image.delete') }}", {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        },
-                        body: JSON.stringify({
-                            url: url
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log("Image deleted:", result.message);
-                    })
-                    .catch(error => {
-                        console.error("Image delete failed:", error);
-                    });
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ url: url })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log("Image deleted:", result.message);
+                })
+                .catch(error => {
+                    console.error("Image delete failed:", error);
+                });
             }
         </script>
     @endpush

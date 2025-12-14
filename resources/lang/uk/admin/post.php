@@ -5,12 +5,7 @@ return [
 
     'fields' => [
         'main_image'       => 'Головне зображення',
-        'content'          => 'Контент',
         'comment_enabled'  => 'Коментарі увімкнено',
-    ],
-
-    'placeholder' => [
-        'content' => 'Введіть контент',
     ],
 
     'messages' => [
