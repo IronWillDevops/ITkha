@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// Redirect from root to /posts
+// Redirect from root to /post
 Route::redirect('/', '/post');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', App\Http\Controllers\Public\Auth\Login\IndexController::class)->name('login');
     Route::post('/login', App\Http\Controllers\Public\Auth\Login\StoreController::class)->middleware('throttle:login')
-        ->name('login.store');;
+        ->name('login.store');
 });
 Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
     ->middleware('auth')
@@ -74,14 +74,18 @@ Route::prefix('/')
                 });
             });
 
-
-        Route::prefix('pages/contact')
-            ->name('pages.contact.')
+        Route::prefix('/pages')
+            ->name('pages.')
             ->group(function () {
-                Route::get('/', App\Http\Controllers\Public\Page\Contact\IndexController::class)->name('index');
-                Route::post('/store', App\Http\Controllers\Public\Page\Contact\StoreController::class)->name('store');
-            });
+                Route::prefix('/contact')
+                    ->name('contact.')
+                    ->group(function () {
+                        Route::get('/', App\Http\Controllers\Public\Page\Contact\IndexController::class)->name('index');
+                        Route::post('/store', App\Http\Controllers\Public\Page\Contact\StoreController::class)->name('store');
+                    });
 
+
+            });
 
         Route::prefix('/user')
             ->name('user.')
