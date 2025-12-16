@@ -1,6 +1,9 @@
 <div class="mb-4">
     <label for="{{ $name }}" class="block text-sm font-medium mb-1">
         {{ $label }}
+        @if ($required)
+            <span class="text-destructive">*</span>
+        @endif
     </label>
     <div class="relative mb-2">
         <textarea type="text" name="{{ $name }}" id="{{ $name }}" minlength="{{ $min }}"

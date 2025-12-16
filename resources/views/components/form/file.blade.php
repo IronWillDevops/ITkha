@@ -1,6 +1,9 @@
 <div class="mb-4">
     <label for="{{ $name }}" class="block text-sm font-medium mb-1">
         {{ $label }}
+        @if ($required)
+            <span class="text-destructive">*</span>
+        @endif
     </label>
     <div class="relative mb-2">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
