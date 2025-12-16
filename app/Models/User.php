@@ -173,4 +173,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return 'login';
     }
+
+    // Policy
+    public function acceptedPolicies()
+    {
+        return $this->belongsToMany(
+            Policy::class,
+            'policy_acceptances' 
+        )
+            ->withPivot(['accepted_at', 'version'])
+            ->withTimestamps();
+    }
 }

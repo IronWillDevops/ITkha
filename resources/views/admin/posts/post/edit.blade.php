@@ -14,7 +14,7 @@
 
             {{-- Изображение --}}
             <x-form.file name="main_image" label="{{ __('admin/post.fields.main_image') }}"
-                icon="fa-regular fa-file-image" />
+                icon="fa-regular fa-file-image" :required="false"/>
 
             {{-- Категория --}}
             <x-form.select name="category_id" label="{{ __('admin/common.fields.category') }}" :options="$categories"
@@ -25,8 +25,8 @@
                 value-field="id" label-field="title" :selected="$post->tags->pluck('id')->toArray()" />
 
             {{-- Editor --}}
-            <x-form.editor name="content" label="{{ __('admin/post.fields.content') }}"
-                placeholder="{{ __('admin/post.placeholder.content') }}" value="{{ $post->content }}" />
+            <x-form.editor name="content" label="{{ __('admin/common.fields.content') }}"
+                placeholder="{{ __('admin/common.placeholder.content') }}" value="{{ $post->content }}" />
 
             <div class="flex">
                 <div class="flex-1">

@@ -33,9 +33,11 @@ class UpdateController extends Controller
 
             // Сохраняем новую favicon
             $favicon->move(public_path(), 'favicon.ico');
-
-          
         }
+        Setting::set('site_email', $data['site_email']);
+        Setting::set('site_phone', $data['site_phone']);
+        Setting::set('site_address', $data['site_address']);
+
         return redirect()
             ->route('admin.setting.site.edit')
             ->with('success', __('admin/common.messages.settings_saved'));

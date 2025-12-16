@@ -2,6 +2,11 @@
 
 return [
     'fields' => [
+        
+        'policy_accept' => 'Я прочитав(ла) і погоджуюсь з :link',
+        'policy_title' => 'Політикою конфіденційності',
+
+
         'avatar'                => 'Аватар',
         'first_name'                  => 'Ім’я',
         'last_name'               => 'Прізвище',

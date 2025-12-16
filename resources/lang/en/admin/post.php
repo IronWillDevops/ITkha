@@ -5,12 +5,7 @@ return [
 
     'fields' => [
         'main_image' => 'Main image',
-        'content' => 'Content',
         'comment_enabled' => 'Comments enabled',
-    ],
-
-    'placeholder' => [
-        'content' => 'Enter content',
     ],
 
     'messages' => [

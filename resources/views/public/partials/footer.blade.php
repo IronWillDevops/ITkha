@@ -2,7 +2,7 @@
     <div class="px-4 py-6 md:flex md:items-center md:justify-between">
         <!-- Левый блок -->
         <div class="text-center md:text-left">
-            &copy; 2024 - {{ date('Y') }} <span class="font-semibold">{{ config('app.name') }}</span>. All rights reserved.
+            &copy; 2024 - {{ date('Y') }} <span class="font-semibold">{{ config('app.name') }}</span>. All rights reserved. <a href="{{ route('policy.show') }}" class="underline">{{ __('admin/settings/policy.title') }}</a>
         </div>
 
         <!-- Центр (языки) -->

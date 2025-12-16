@@ -11,8 +11,8 @@
     <meta name="keywords" content="{{ setting('site_keywords', 'blog,laravel') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <x-public.seo-meta :type="$seo['type']" :title="$seo['title']" :description="$seo['description']" :image="$seo['image']" :url="$seo['url']" 
-    :extra="$seo['extra']"/>
+    <x-public.seo-meta :type="$seo['type']" :title="$seo['title']" :description="$seo['description']" :image="$seo['image']" :url="$seo['url']"
+        :extra="$seo['extra']" />
     <title>{{ setting('site_name', config('app.name')) }}</title>
     @stack('head')
     @livewireStyles
@@ -35,11 +35,11 @@
     @include('public.partials.footer')
 
     @include('public.partials.notifications')
-    @include('public.partials.cookie')
 
+    @include('public.cookie.banner')
     @stack('scripts')
     @livewireScripts
-    
+
 </body>
 
 </html>

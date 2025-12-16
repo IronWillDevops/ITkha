@@ -18,9 +18,13 @@ class EditController extends Controller
         $site_name = Setting::get('site_name');
         $site_description = Setting::get('site_description');
         $site_keywords = Setting::get('site_keywords');
-        
+
+        $site_email = Setting::get('site_email');
+        $site_phone = Setting::get('site_phone');
+        $site_address = Setting::get('site_address');
 
 
-        return view('admin.setting.site.edit', compact('site_name', 'site_description', 'site_keywords', ));
+
+        return view('admin.setting.site.edit', compact('site_name', 'site_description', 'site_keywords', 'site_email', 'site_phone', 'site_address'));
     }
 }

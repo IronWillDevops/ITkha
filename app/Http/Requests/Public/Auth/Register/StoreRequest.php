@@ -29,6 +29,7 @@ class StoreRequest extends FormRequest
             'login' => ['required', 'string', 'min:5', 'max:50', 'unique:users', 'regex:/^[A-Za-z0-9_]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'max:255', 'confirmed', Password::defaults()],
+            'accept_policy' => ['accepted'],
             'captcha' => ['required',  new CaptchaRule()],
 
         ];
@@ -65,6 +66,8 @@ class StoreRequest extends FormRequest
             'password.max' => __('validation.max.string'),
             'password.min' => __('validation.min.string'),
             'password.confirmed' => __('validation.confirmed'),
+            
+            'accept_policy' => __('validation.accepted'),
 
             // Повідомлення для правил Password::defaults()
             'password.letters' => __('validation.custom.password.letters'),
