@@ -4,7 +4,7 @@ return [
 
     // ===== Fields =====
     'fields' => [
-        
+
         'id'          => 'ID',
         'created_at'  => 'Created at',
         'updated_at'  => 'Updated at',
@@ -23,7 +23,7 @@ return [
         'slug'        => 'Slug',
         'user'        => 'User',
         'author'      => 'Author',
-        'count'       => 'Post count',
+        'count'       => 'Counts',
         'ip_address'  => 'IP address',
         'description' => 'Description',
         'actions'     => 'Actions',
@@ -42,6 +42,7 @@ return [
         'last_name' => 'Enter your last name',
         'email' => 'Enter your email',
         'content' => 'Enter content',
+        'description' => 'Enter description',
         'key' => 'Enter key',
         'icon'        => 'Example: fa-brands fa-github',
         'url'        => 'Enter URL',
