@@ -2,6 +2,9 @@
     @if ($label)
         <label for="{{ $name }}" class="block text-sm font-medium mb-1">
             {{ $label }}
+            @if ($required)
+                <span class="text-destructive">*</span>
+            @endif
         </label>
     @endif
 
