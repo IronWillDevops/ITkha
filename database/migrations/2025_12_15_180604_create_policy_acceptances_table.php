@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('policy_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('version')->default(1);
             $table->timestamp('accepted_at');
-
+            $table->timestamps();
             $table->unique(['user_id', 'policy_id']);
-        });;
+        });
     }
 
     /**

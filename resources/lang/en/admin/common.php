@@ -4,6 +4,7 @@ return [
 
     // ===== Fields =====
     'fields' => [
+        
         'id'          => 'ID',
         'created_at'  => 'Created at',
         'updated_at'  => 'Updated at',

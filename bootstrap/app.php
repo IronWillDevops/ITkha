@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsurePolicyAccepted;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -23,10 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             LocaleMiddleware::class,
             ShareCookieConsent::class,
-        ]);
-
-        $middleware->alias([
-            'policy.accepted' => App\Http\Middleware\EnsurePolicyAccepted::class,
+            EnsurePolicyAccepted::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

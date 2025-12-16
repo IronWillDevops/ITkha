@@ -4,7 +4,7 @@
             class="w-4 h-4 rounded border border-primary accent-primary focus:ring focus:ring-primary focus:outline-none focus-visible:ring-ring checked:text-primary-foreground"
             {{ old($name, $checked ?? false) ? 'checked' : '' }} {{ $required ? 'required' : '' }}>
         <span class="text-sm font-medium text-foreground">
-            {{ $label }}
+            {!! $label !!}
         </span>
     </label>
 

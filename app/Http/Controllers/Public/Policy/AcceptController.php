@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Public\Policy;
 
 use App\Http\Controllers\Controller;
 use App\Models\Policy;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class AcceptController extends Controller
 {
@@ -15,12 +13,15 @@ class AcceptController extends Controller
 
     public function __invoke()
     {
-        $policy = Policy::where('key', 'usage_policy')
+        $policy = Policy::where('key', 'policy')
             ->where('is_active', true)
             ->firstOrFail();
 
         auth()->user()->acceptedPolicies()->syncWithoutDetaching([
-            $policy->id => ['accepted_at' => now(), 'version' => $policy->version],
+            $policy->id => [
+                'accepted_at' => now(),
+                'version' => $policy->version,
+            ],
         ]);
 
         return redirect()->intended('/');

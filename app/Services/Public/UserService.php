@@ -2,6 +2,7 @@
 
 namespace App\Services\Public;
 
+use App\Models\Policy;
 use App\Models\Role;
 use App\Models\Setting;
 use App\Models\User;
@@ -11,21 +12,6 @@ class UserService
 {
     public function store($data)
     {
-
-        // $data['password'] = Hash::make($data['password']);
-
-        // $user = User::firstOrCreate(['email' => $data['email']], $data);
-
-        // // Знайти роль за назвою
-        // $role = Role::where('title', 'user')->first(); // або 'користувач'
-
-        // // Присвоїти роль користувачу
-        // if ($role) {
-        //     $user->roles()->syncWithoutDetaching([$role->id]);
-        // } 
-
-        // // Отправляем письмо для подтверждения email
-        // $user->sendEmailVerificationNotification();
 
         $settings = Setting::whereIn('key', [
             'user_default_status',
@@ -45,8 +31,22 @@ class UserService
         // //  Присвоюємо роль користувачу
         $user->roles()->syncWithoutDetaching([$data['role']]);
 
-        //  Якщо активна вимога підтвердження email — відправляємо лист
 
+        // Соглашение с политикой конфиденциальности
+        $policy = Policy::where('key', 'policy')
+            ->where('is_active', true)
+            ->first();
+
+        if ($policy) {
+            $user->acceptedPolicies()->syncWithoutDetaching([
+                $policy->id => [
+                    'accepted_at' => now(),
+                    'version'     => $policy->version,
+                ]
+            ]);
+        }
+
+        // Email verification
         if ((bool)$settings['user_require_email_verification'] === true) {
             $user->sendEmailVerificationNotification();
         } else {

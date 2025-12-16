@@ -3,7 +3,7 @@
 return [
     'title' => 'Registration',
     'description' => 'Please fill in the form to create your account.',
-    'fields' => [],
+  
     'buttons' => [
         'submit' => 'Register',
     ],

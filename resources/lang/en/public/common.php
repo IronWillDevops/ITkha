@@ -2,6 +2,9 @@
 
 return [
     'fields' => [
+        'policy_accept' => 'I have read and agree to the :link',
+        'policy_title' => 'Privacy Policy',
+
         'avatar'                => 'Avatar',
         'first_name' => 'First name',
         'last_name' => 'Last name',

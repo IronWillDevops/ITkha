@@ -43,4 +43,13 @@ class Policy extends Model
             ->withPivot('accepted_at', 'version')
             ->withTimestamps();
     }
+    public function acceptedByUsers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'policy_acceptances'
+        )
+            ->withPivot(['accepted_at', 'version'])
+            ->withTimestamps();
+    }
 }
