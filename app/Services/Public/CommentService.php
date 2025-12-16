@@ -17,7 +17,7 @@ class CommentService
         $post = Post::findOrFail($data['post_id']);
 
         if (! $post->comments_enabled) {
-            abort(403, __('public/comment.comments_disabled'));
+            abort(403, __('public/comment.labels.comments_disabled'));
         }
 
         $body = $data['body'];

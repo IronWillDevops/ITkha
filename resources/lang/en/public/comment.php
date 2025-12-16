@@ -9,6 +9,7 @@ return [
     ],
     'labels' => [
         'title' => 'Comments',
+        'comments_disabled' => 'Comments are disabled',
         'latest_comment'    => 'Latest comments',
         'reply_to'          => 'Replying to',
         'reply_to_cancel'   => 'Cancel reply',

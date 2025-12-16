@@ -4,6 +4,7 @@
         <ul class="space-y-2 p-2">
 
             <!-- Dashboard -->
+            @permission('post.view')
             <li>
                 <a href="{{ route('admin.index') }}"
                     class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -11,8 +12,10 @@
                     <span class="hover:underline">{{ __('admin/sidebar.dashboard.title') }}</span>
                 </a>
             </li>
+            @endpermission
 
             {{-- Posts --}}
+            @anypermission(['post.view','category.view','tag.view','comment.view'])
             <li>
                 <details class="group" data-id="posts" open>
                     <summary
@@ -21,6 +24,7 @@
                         <span class="hover:underline">{{ __('admin/sidebar.post.title') }}</span>
                     </summary>
                     <ul class="pl-8 pt-2 space-y-2">
+                        @permission('post.view')
                         <li>
                             <a href="{{ route('admin.post.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -28,6 +32,8 @@
                                 <span class="hover:underline">{{ __('admin/sidebar.post.post.title') }}</span>
                             </a>
                         </li>
+                        @endpermission
+                        @permission('category.view')
                         <li>
                             <a href="{{ route('admin.category.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -35,6 +41,8 @@
                                 <span class="hover:underline">{{ __('admin/sidebar.post.category.title') }}</span>
                             </a>
                         </li>
+                        @endpermission
+                        @permission('tag.view')
                         <li>
                             <a href="{{ route('admin.tag.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -42,6 +50,8 @@
                                 <span class="hover:underline">{{ __('admin/sidebar.post.tag.title') }}</span>
                             </a>
                         </li>
+                        @endpermission
+                        @permission('comment.view')
                         <li>
                             <a href="{{ route('admin.comment.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -49,11 +59,14 @@
                                 <span class="hover:underline">{{ __('admin/sidebar.post.comment.title') }}</span>
                             </a>
                         </li>
+                        @endpermission
                     </ul>
                 </details>
             </li>
+            @endanypermission
 
             {{-- Users --}}
+            @anypermission(['user.view','role.view'])
             <li>
                 <details class="group" data-id="users">
                     <summary
@@ -62,6 +75,7 @@
                         <span class="hover:underline">{{ __('admin/sidebar.user.title') }}</span>
                     </summary>
                     <ul class="pl-8 pt-2 space-y-2">
+                        @permission('user.view')
                         <li>
                             <a href="{{ route('admin.user.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -69,6 +83,8 @@
                                 <span class="hover:underline">{{ __('admin/sidebar.user.user.title') }}</span>
                             </a>
                         </li>
+                        @endpermission
+                        @permission('role.view')
                         <li>
                             <a href="{{ route('admin.role.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -76,11 +92,14 @@
                                 <span class="hover:underline">{{ __('admin/sidebar.user.role.title') }}</span>
                             </a>
                         </li>
+                        @endpermission
                     </ul>
                 </details>
             </li>
+            @endanypermission
 
             {{-- Contacts --}}
+            @permission('contact.view')
             <li>
                 <a href="{{ route('admin.contact.index') }}"
                     class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -88,8 +107,10 @@
                     <span class="hover:underline">{{ __('admin/sidebar.contact.title') }}</span>
                 </a>
             </li>
+            @endpermission
 
             {{-- Settings --}}
+             @anypermission(['setting.update','setting.view'])
             <li>
                 <details class="group" data-id="settings">
                     <summary
@@ -102,6 +123,7 @@
                     <ul class="pl-8 pt-2 space-y-2">
                         <li class="font-semibold text-sm text-text-secondary">
                             {{ __('admin/sidebar.setting.sections.main.title') }}</li>
+                        @permission('setting.update')
                         <li>
                             <a href="{{ route('admin.setting.site.edit') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -126,12 +148,14 @@
                                     class="hover:underline">{{ __('admin/sidebar.setting.sections.main.entities.comment.title') }}</span>
                             </a>
                         </li>
+                        @endpermission
                     </ul>
 
                     {{-- Additional settings --}}
                     <ul class="pl-8 pt-2 space-y-2 mt-2">
                         <li class="font-semibold text-sm text-text-secondary">
                             {{ __('admin/sidebar.setting.sections.additional.title') }}</li>
+                        @permission('setting.view')
                         <li>
                             <a href="{{ route('admin.setting.policy.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -157,6 +181,7 @@
                                     class="hover:underline">{{ __('admin/sidebar.setting.sections.additional.entities.info.title') }}</span>
                             </a>
                         </li>
+                        @permission('log.view')
                         <li>
                             <a href="{{ route('admin.setting.log.index') }}"
                                 class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
@@ -165,9 +190,12 @@
                                     class="hover:underline">{{ __('admin/sidebar.setting.sections.additional.entities.log.title') }}</span>
                             </a>
                         </li>
+                        @endpermission
+                        @endpermission
                     </ul>
 
                     {{-- Integrations --}}
+                    @permission('setting.update')
                     <ul class="pl-8 pt-2 space-y-2 mt-2">
                         <li class="font-semibold text-sm text-text-secondary">
                             {{ __('admin/sidebar.setting.sections.integrations.title') }}</li>
@@ -180,8 +208,10 @@
                             </a>
                         </li>
                     </ul>
+                    @endpermission
                 </details>
             </li>
+            @endpermission
 
             {{-- Icons --}}
             <li>

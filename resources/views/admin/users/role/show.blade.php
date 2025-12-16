@@ -15,17 +15,21 @@
 
 
     {{-- Метаданные --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm ">
-        <div>
-            <span class="font-medium">{{ __('admin/common.fields.title') }}:</span>
-            {{ $role->title }}
-        </div>
-        <div>
-            <span class="font-medium">{{ __('admin/common.fields.created_at') }}:</span>
-            {{ $role->created_at }}
-        </div>
-    </div>
+    <div class="gap-4 mb-6 text-sm ">
+        <div class="grid grid-cols-1 md:grid-cols-2 ">
+            <div>
+                <span class="font-medium">{{ __('admin/common.fields.title') }}:</span>
+                {{ $role->title }}
+            </div>
+            <div>
+                <span class="font-medium">{{ __('admin/common.fields.created_at') }}:</span>
+                {{ $role->created_at }}
+            </div>
 
+        </div>
+        <span class="font-medium">{{ __('admin/common.fields.description') }}: {{ $role->description }}</span>
+    </div>
+    
     <div class="border-t border-border pt-4 mb-6">
         {{-- Permissions --}}
 
@@ -59,6 +63,6 @@
         </h2>
         <x-form.table :columns="$columns" :items="$users" modelRoute="user" :sortField="$sortField" :sortDirection="$sortDirection"
             searchEnabled="true" />
-        
+
     </div>
 @endsection

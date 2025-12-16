@@ -77,31 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->permissions()->contains($key);
     }
-    // public function hasRole(string $roleTitle): bool
-    // {
-    //     return $this->roles()->where('title', $roleTitle)->exists();
-    // }
 
-    // public function hasPermission(string $permissionKey): bool
-    // {
-    //     return $this->roles()
-    //         ->whereHas('permissions', function ($query) use ($permissionKey) {
-    //             $query->where('key', $permissionKey);
-    //         })->exists();
-    // }
-
-    // public function hasHeaderPermission(string $header): bool
-    // {
-    //     return $this->roles()->whereHas('permissions', function ($query) use ($header) {
-    //         $query->where('header', $header);
-    //     })->exists();
-    // }
-
-    public function hasAnyHeaderPermissions(array $headers): bool
+    public function hasAnyPermission(array $permissions): bool
     {
-        return $this->roles()->whereHas('permissions', function ($query) use ($headers) {
-            $query->whereIn('header', $headers);
-        })->exists();
+        return $this->permissions()->intersect($permissions)->isNotEmpty();
     }
     public function getInitial()
     {
@@ -135,10 +114,7 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         });
     }
-    public function publishedPosts()
-    {
-        return $this->hasMany(Post::class)->where('status', PostStatus::PUBLISHED->value)->paginate(20);
-    }
+   
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -154,10 +130,6 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new VerifyEmailNotification($this));
     }
 
-    public function sendPasswordResetNotification($token): void
-    {
-        $this->notify(new ResetPasswordNotification($token));
-    }
 
     public function profile()
     {
@@ -179,7 +151,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(
             Policy::class,
-            'policy_acceptances' 
+            'policy_acceptances'
         )
             ->withPivot(['accepted_at', 'version'])
             ->withTimestamps();

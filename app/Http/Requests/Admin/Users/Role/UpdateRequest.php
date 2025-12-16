@@ -30,6 +30,9 @@ class UpdateRequest extends FormRequest
                 'max:50',
                 Rule::unique('roles', 'title')->ignore($this->role)
             ],
+
+            'description' => ['nullable', 'string', 'max:255'],
+
             'permissions' => ['nullable', 'array'],
             'permissions.*' => ['integer', 'exists:permissions,id'],
         ];
@@ -43,6 +46,9 @@ class UpdateRequest extends FormRequest
             'title.min' => __('validation.min.string'),
             'title.max' => __('validation.max.string'),
             'title.unique' => __('validation.unique'),
+
+            'description.string' => __('validation.string'),
+            'description.max' => __('validation.max.string'),
 
             'permissions.array'        => __('validation.array'),
             'permissions.*.integer'    => __('validation.integer'),

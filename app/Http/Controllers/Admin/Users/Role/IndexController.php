@@ -20,7 +20,7 @@ class IndexController extends BaseController
         }
 
         // Разрешаем сортировку только по допустимым полям
-        $allowedSorts = ['id', 'title', 'users_count', 'created_at'];
+        $allowedSorts = ['id', 'title','description', 'users_count', 'created_at'];
         if (!in_array($sortField, $allowedSorts)) {
             $sortField = 'id';
         }
@@ -32,6 +32,7 @@ class IndexController extends BaseController
         $columns = [
             ['key' => 'id', 'label' => __('admin/common.fields.id')],
             ['key' => 'title', 'label' => __('admin/common.fields.title')],
+            ['key' => 'description', 'label' => __('admin/common.fields.description')],
             ['key' => 'users_count', 'label' => __('admin/common.fields.count')],
             ['key' => 'created_at', 'label' => __('admin/common.fields.created_at')],
         ];

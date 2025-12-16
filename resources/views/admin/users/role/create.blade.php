@@ -11,7 +11,9 @@
         {{-- Название роли --}}
         <x-form.input name="title" label="{{ __('admin/common.fields.title') }}"
             placeholder="{{ __('admin/common.placeholder.title') }}" icon="fa-solid fa-user-plus" />
-
+            
+        <x-form.input name="description" label="{{ __('admin/common.fields.description') }}"
+            placeholder="{{ __('admin/common.placeholder.description') }}" icon="fa fa-info-circle" />
         {{-- Permissions --}}
         <div class="mb-6">
             <h2 class="font-semibold mb-2">{{ __('admin/permission.title') }}</h2>

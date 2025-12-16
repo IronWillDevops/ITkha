@@ -46,7 +46,7 @@
 
     {{-- TABLE (DESKTOP) --}}
     <div class="hidden md:block overflow-x-auto rounded-lg border border-input">
-        <table class="w-full table-fixed border-collapse">
+        <table class="w-full  border-collapse">
             <thead class="bg-muted">
                 <tr>
                     @foreach ($columns as $col)

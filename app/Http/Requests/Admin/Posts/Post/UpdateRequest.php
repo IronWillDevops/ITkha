@@ -32,7 +32,7 @@ class UpdateRequest extends FormRequest
 
 
             'status' => ['required', 'string', 'in:' . implode(',', array_map(fn($s) => $s->value, PostStatus::cases()))],
-            'comments_enabled' => ['required', 'boolean'],
+            'comments_enabled' => ['nullable', 'boolean'],
 
             'category_id' => ['required', 'integer', 'exists:categories,id'],
 
@@ -77,7 +77,7 @@ class UpdateRequest extends FormRequest
             'status.string' => __('validation.string'),
             'status.in' => __('validation.in'),
 
-            'comments_enabled.required' => __('validation.required'),
+            'comments_enabled.nullable' => __('validation.nullable'),
             'comments_enabled.boolean' => __('validation.boolean'),
 
             'category_id.required' =>  __('validation.required'),

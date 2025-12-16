@@ -38,9 +38,24 @@ class RolePermissionSeeder extends Seeder
             }
         }
 
-        $adminRole  = Role::firstOrCreate(['title' => 'admin']);
-        $editorRole = Role::firstOrCreate(['title' => 'editor']);
-        $userRole   = Role::firstOrCreate(['title' => 'user']);
+        $roles = [
+            'admin' => 'Administrator with full access to all system modules, settings, and user management.',
+            'editor' => 'Editor responsible for managing and moderating site content such as posts, categories, tags, and comments.',
+            'user' => 'Regular user with basic access to the system without administrative privileges.',
+        ];
+
+        $roleModels = [];
+
+        foreach ($roles as $title => $description) {
+            $roleModels[$title] = Role::updateOrCreate(
+                ['title' => $title],
+                ['description' => $description]
+            );
+        }
+
+        $adminRole  = $roleModels['admin'];
+        $editorRole = $roleModels['editor'];
+        $userRole   = $roleModels['user'];
 
         // Admin получает все права
         $adminRole->permissions()->sync(Permission::all());

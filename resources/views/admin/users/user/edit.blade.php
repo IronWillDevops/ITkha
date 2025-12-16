@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="flex-1">
-                            <x-form.file name="avatar" label="{{ __('admin/common.fields.avatar') }}" />
+                            <x-form.file name="avatar" label="{{ __('admin/common.fields.avatar') }}" :required="false"/>
                         </div>
                     </div>
                     <div class="flex items-center gap-6 mb-6">

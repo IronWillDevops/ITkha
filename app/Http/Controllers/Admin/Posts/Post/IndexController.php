@@ -34,7 +34,7 @@ class IndexController extends BaseController
         ]);
 
         $sortField = $validated['sort_field'] ?? 'id';
-        $sortDirection = $validated['sort_direction'] ?? 'asc';
+        $sortDirection = $validated['sort_direction'] ?? 'desc';
         $search = $validated['search'] ?? null;
         $query = Post::query()->with('category', 'tags');
 

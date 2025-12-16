@@ -14,7 +14,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
             {{-- Аватар --}}
-            <x-form.file name="avatar" label="{{ __('admin/common.fields.avatar') }}" />
+            <x-form.file name="avatar" label="{{ __('admin/common.fields.avatar') }}" :required="false"/>
 
 
             {{-- Имя --}}
