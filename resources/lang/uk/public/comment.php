@@ -11,6 +11,7 @@ return [
 
     'labels' => [
         'title'             => 'Коментарі',
+        'comments_disabled' => 'Коментарі відключено',
         'latest_comment'    => 'Останні коментарі',
         'reply_to'          => 'Відповідь на',
         'reply_to_cancel'   => 'Скасувати відповідь',

@@ -12,7 +12,7 @@
                  'post' => $post,
              ])
          @else
-             <p class="text-muted-foreground">{{ __('public/comment.comments_disabled') }}</p>
+             <p class="text-muted-foreground">{{ __('public/comment.labels.comments_disabled') }}</p>
          @endif
      </div>
  </section>

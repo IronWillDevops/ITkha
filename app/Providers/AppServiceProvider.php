@@ -8,6 +8,7 @@ use App\Http\Middleware\CheckPermission;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,7 +40,13 @@ class AppServiceProvider extends ServiceProvider
                 ->numbers()
                 ->symbols();
         });
+        Blade::if('permission', function ($permission) {
+            return auth()->check() && auth()->user()->hasPermission($permission);
+        });
 
+        Blade::if('anypermission', function ($permissions) {
+            return auth()->check() && auth()->user()->hasAnyPermission($permissions);
+        });
 
         Route::aliasMiddleware('permission', CheckPermission::class);
 
