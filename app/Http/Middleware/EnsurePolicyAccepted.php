@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 // app/Http/Middleware/EnsurePolicyAccepted.php
 class EnsurePolicyAccepted
 {
-     public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if (! auth()->check()) {
             return $next($request);
@@ -30,7 +30,7 @@ class EnsurePolicyAccepted
             ->wherePivot('version', $policy->version)
             ->exists();
 
-        if (! $accepted && ! $request->routeIs('policy.*')&& ! $request->routeIs('locale.*')) {
+        if (! $accepted && ! $request->routeIs('policy.*') && ! $request->routeIs('locale.*') && ! $request->routeIs('admin.*')) {
             return redirect()->route('policy.show');
         }
 
