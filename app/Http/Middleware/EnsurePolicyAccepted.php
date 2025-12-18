@@ -30,7 +30,7 @@ class EnsurePolicyAccepted
             ->wherePivot('version', $policy->version)
             ->exists();
 
-        if (! $accepted && ! $request->routeIs('policy.*')) {
+        if (! $accepted && ! $request->routeIs('policy.*')&& ! $request->routeIs('locale.*')) {
             return redirect()->route('policy.show');
         }
 
