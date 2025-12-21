@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/IronWillDevops/WYSIWYG-editor@1.0.1/dist/wysiwyg.min.js"></script>
      <title>Admin Panel | {{ setting('site_name', config('app.name')) }}</title>
     @stack('head')
 
