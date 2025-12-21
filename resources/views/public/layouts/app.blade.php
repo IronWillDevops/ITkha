@@ -2,7 +2,7 @@
 <html lang="en" class="h-full">
 
 <head>
-    @vite(['resources/css/public/app.css', 'resources/js/public/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/public/app.js'])
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon"
         href="{{ asset('favicon.ico') }}?v={{ filemtime(public_path('favicon.ico')) }}">

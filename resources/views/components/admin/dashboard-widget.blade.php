@@ -15,7 +15,7 @@
 
         <!-- Описание (если есть) -->
         @isset($description)
-            <p class="text-sm text-text-secondary mb-4">
+            <p class="text-sm text-muted-foreground mb-4">
                 {{ $description }}
             </p>
         @endisset

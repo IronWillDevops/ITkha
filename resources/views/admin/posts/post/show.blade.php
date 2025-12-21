@@ -44,7 +44,7 @@
                     #{{ $tag->title }}
                 </span>
             @empty
-                <span class="text-xs text-text-secondary">-</span>
+                <span class="text-xs text-muted-foreground">-</span>
             @endforelse
         </div>
         

@@ -13,9 +13,9 @@
             {{ $readonly ? 'readonly' : '' }}>{{ old($name, $value) }}</textarea>
     </div>
     @error($name)
-        <p class="text-sm text-text-danger mt-1">{{ $message }}</p>
+        <p class="text-sm text-error mt-1">{{ $message }}</p>
     @enderror
-    <div id="message-count" class="mt-4 text-xs text-text-secondary text-right">0 / {{ $max }}</div>
+    <div id="message-count" class="mt-4 text-xs text-muted-foreground text-right">0 / {{ $max }}</div>
 </div>
 <script>
     function updateCharacterCount(textarea) {

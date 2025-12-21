@@ -26,7 +26,7 @@
 
             {{-- Editor --}}
             <x-form.editor name="content" label="{{ __('admin/common.fields.content') }}"
-                placeholder="{{ __('admin/common.placeholder.content') }}" value="{{ $post->content }}" />
+                placeholder="{{ __('admin/common.placeholder.content') }}" value="{!! $post->content !!}" />
 
             <div class="flex">
                 <div class="flex-1">

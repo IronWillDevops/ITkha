@@ -1,7 +1,7 @@
  <section class=" bg-card text-muted-foreground rounded-2xl border border-border">
      <div class="p-6">
          <h2 class="text-card-foreground text-2xl font-semibold mb-6">{{ __('public/post.labels.related_posts') }}</h2>
-         <div class="text grid grid-cols-1 md:grid-cols-2 gap-6">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
              @foreach ($similarPosts as $post)
                  <article
                      class="border border-border rounded-xl overflow-hidden flex flex-col hover:shadow-md transition">
@@ -19,15 +19,15 @@
                          </h3>
                          <p class="text-sm mb-3">
                              {{ Str::limit(strip_tags($post->content), 250) }}</p>
-                         <div class="flex flex-wrap items-center text-sm space-x-4 pt-2 mt-auto">
+                         <div class="flex flex-wrap items-center text-sm gap-x-4 gap-y-2 pt-2 mt-auto">
 
                              <span class="inline-flex items-center">
-                                 <i class="fa fa-tag ml-2"></i>
+                                 <i class="fa fa-tag "></i>
                                  <span class="font-medium ml-2">{{ $post->category->title ?? '-' }}</span>
                              </span>
 
                              <span class="inline-flex items-center">
-                                 <i class="fa fa-user ml-2"></i>
+                                 <i class="fa fa-user "></i>
                                  <a href="{{ route('public.user.show', $post->author) ?? '#' }}"
                                      class="hover:underline font-medium ml-2  focus:ring focus:outline-none focus-visible:ring-ring">
                                      {{ $post->author->login ?? 'Author' }}
@@ -35,7 +35,7 @@
                              </span>
 
                              <span class="inline-flex items-center">
-                                 <i class="fa fa-clock ml-2"></i>
+                                 <i class="fa fa-clock "></i>
                                  <span class="font-medium ml-2">{{ $post->created_at->format('d/m/Y') ?? '-' }}</span>
                              </span>
                          </div>

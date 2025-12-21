@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    @vite(['resources/css/public/app.css', 'resources/js/public/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/public/app.js'])
     <title>{{ config('app.name') }} - @yield('title')</title>
     @stack('head')
 </head>

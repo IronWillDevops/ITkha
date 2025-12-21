@@ -2,7 +2,7 @@
     <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col space-y-4">
         @if (session('success'))
             <div
-                class="toast fixed bottom-4 right-4 max-w-sm w-full bg-card border border-success rounded-xl shadow-lg flex items-start p-4 gap-3 text-card-foreground z-50 transition-transform duration-300 ease-in-out animate-slide-in-bottom">
+                class="toast bottom-4 right-4 max-w-sm w-full bg-card border border-success rounded-xl shadow-lg flex items-start p-4 gap-3 text-card-foreground z-50 transition-transform duration-300 ease-in-out animate-slide-in-bottom">
                 <i class="fa-solid fa-circle-check text-success text-xl mt-1"></i>
 
                 <div class="flex-1">
@@ -19,7 +19,7 @@
 
         @if (session('error'))
             <div
-                class="toast fixed bottom-4 right-4 max-w-sm w-full bg-card border border-error rounded-xl shadow-lg flex items-start p-4 gap-3 text-card-foreground z-50 transition-transform duration-300 ease-in-out animate-slide-in-bottom">
+                class="toast bottom-4 right-4 max-w-sm w-full bg-card border border-error rounded-xl shadow-lg flex items-start p-4 gap-3 text-card-foreground z-50 transition-transform duration-300 ease-in-out animate-slide-in-bottom">
                 <i class="fa-solid fa-circle-xmark text-error text-xl mt-1"></i>
 
                 <div class="flex-1">

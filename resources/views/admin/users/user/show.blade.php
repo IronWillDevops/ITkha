@@ -88,7 +88,7 @@
                 </div>
                 <div class="md:col-span-2">
                     <span class="font-medium">{{ __('admin/user.fields.about_myself') }}:</span>
-                    <p class="mt-1 text-text-secondary">
+                    <p class="mt-1 text-muted-foreground">
                         {{ $user->profile?->about_myself ?? '-' }}
                     </p>
                 </div>

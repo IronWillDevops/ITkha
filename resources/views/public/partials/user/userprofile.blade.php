@@ -42,7 +42,7 @@
 
          @if ($user->profile?->github)
              <a href="{{ $user->profile?->github }}"
-                 class="flex items-center justify-center w-10 h-10 bg-link hover:bg-accent/80 hover:text-accent-foreground border border-input transition rounded-sm focus:ring focus:outline-none focus-visible:ring-ring"
+                 class="flex items-center justify-center w-10 h-10  hover:bg-accent/80 hover:text-accent-foreground border border-input transition rounded-md focus:ring focus:outline-none focus-visible:ring-ring"
                  target="_blank">
                  <i class="fab fa-github"></i>
              </a>
@@ -50,7 +50,7 @@
 
          @if ($user->profile?->linkedin)
              <a href="{{ $user->profile?->linkedin }}"
-                 class="flex items-center justify-center w-10 h-10 bg-link hover:bg-accent/80 hover:text-accent-foreground border border-input transition rounded-sm focus:ring focus:outline-none focus-visible:ring-ring"
+                 class="flex items-center justify-center w-10 h-10  hover:bg-accent/80 hover:text-accent-foreground border border-input transition rounded-md focus:ring focus:outline-none focus-visible:ring-ring"
                  target="_blank">
                  <i class="fab fa-linkedin"></i>
              </a>
@@ -58,7 +58,7 @@
 
          @if ($user->profile?->website)
              <a href="{{ $user->profile?->website }}"
-                 class="flex items-center justify-center w-10 h-10 bg-link hover:bg-accent/80 hover:text-accent-foreground border border-input transition rounded-sm focus:ring focus:outline-none focus-visible:ring-ring"
+                 class="flex items-center justify-center w-10 h-10  hover:bg-accent/80 hover:text-accent-foreground border border-input transition rounded-md focus:ring focus:outline-none focus-visible:ring-ring"
                  target="_blank">
                  <i class="fas fa-link"></i>
              </a>
@@ -69,8 +69,8 @@
          <x-public.ui.separator />
          <!-- User action cards (1 col on mobile, 2 cols on md+) -->
          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 ">
-             <a href="{{ route('public.user.show', $user) }}"
-                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
+             <a href="{{ route('public.user.show', $user) }}" rel="noopener noreferrer" 
+                 class="bg-background border border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-pen text-xl"></i>
                  <div>
                      <p class="text-sm font-semibold">{{ __('public/user.buttons.my_post.title') }}</p>
@@ -79,8 +79,8 @@
                  </div>
              </a>
 
-             <a href="{{ route('public.user.show.like', $user) }}"
-                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
+             <a href="{{ route('public.user.show.like', $user) }}" rel="noopener noreferrer"
+                 class="bg-background border border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-heart text-xl"></i>
                  <div>
                      <p class="text-sm font-semibold">{{ __('public/user.buttons.liked_post.title') }}
@@ -89,8 +89,8 @@
                          {{ __('public/user.buttons.liked_post.description') }}</p>
                  </div>
              </a>
-             <a href="{{ route('public.user.show.favorite', $user) }}"
-                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
+             <a href="{{ route('public.user.show.favorite', $user) }}" rel="noopener noreferrer"
+                 class="bg-background border border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-bookmark text-xl"></i>
                  <div>
                      <p class="text-sm font-semibold">
@@ -102,8 +102,8 @@
                  </div>
              </a>
 
-             <a href="{{ route('public.user.edit', $user) }}"
-                 class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-sm flex items-center focus:ring focus:outline-none gap-4 p-4">
+             <a href="{{ route('public.user.edit', $user) }}" rel="noopener noreferrer"
+                 class="bg-background border border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-cog text-xl"></i>
                  <div>
                      <p class="text-sm font-semibold">{{ __('public/user.buttons.edit_profile.title') }}

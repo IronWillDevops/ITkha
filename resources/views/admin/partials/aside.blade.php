@@ -121,7 +121,7 @@
 
                     {{-- Main settings --}}
                     <ul class="pl-8 pt-2 space-y-2">
-                        <li class="font-semibold text-sm text-text-secondary">
+                        <li class="font-semibold text-sm text-muted-foreground">
                             {{ __('admin/sidebar.setting.sections.main.title') }}</li>
                         @permission('setting.update')
                         <li>
@@ -153,7 +153,7 @@
 
                     {{-- Additional settings --}}
                     <ul class="pl-8 pt-2 space-y-2 mt-2">
-                        <li class="font-semibold text-sm text-text-secondary">
+                        <li class="font-semibold text-sm text-muted-foreground">
                             {{ __('admin/sidebar.setting.sections.additional.title') }}</li>
                         @permission('setting.view')
                         <li>
@@ -197,7 +197,7 @@
                     {{-- Integrations --}}
                     @permission('setting.update')
                     <ul class="pl-8 pt-2 space-y-2 mt-2">
-                        <li class="font-semibold text-sm text-text-secondary">
+                        <li class="font-semibold text-sm text-muted-foreground">
                             {{ __('admin/sidebar.setting.sections.integrations.title') }}</li>
                         <li>
                             <a href="{{ route('admin.setting.telegram.edit') }}"
@@ -241,14 +241,14 @@
                     alt="{{ Auth::user()->first_name }}">
             @else
                 <div id="userMenuButton"
-                    class="bg-link hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
+                    class="hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
                     <span class="font-medium">{{ Auth::user()->getInitial() }}</span>
                 </div>
             @endif
             <div>
                 <p class="text-sm font-semibold">{{ Auth::user()->login }}</p>
-                <p class="text-xs text-text-secondary">{{ Auth::user()->profile?->job_title }}</p>
-                <p class="text-xs text-text-secondary">{{ Auth::user()->email }}</p>
+                <p class="text-xs text-muted-foreground">{{ Auth::user()->profile?->job_title }}</p>
+                <p class="text-xs text-muted-foreground">{{ Auth::user()->email }}</p>
             </div>
         </a>
     </div>
