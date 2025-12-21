@@ -9,7 +9,7 @@
                  </div>
                  <div>
                      <p class="text-sm font-semibold">{{ __('admin/update.new_version') }}</p>
-                     <p class="text-xs text-text-secondary">
+                     <p class="text-xs text-muted-foreground">
                          {{ __('admin/update.current_latest', ['current' => $currentVersion, 'latest' => $latestVersion]) }}
                      </p>
                      <p class="text-xs link link-hover underline">{{ __('admin/update.view_on_github') }}</p>

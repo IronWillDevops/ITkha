@@ -1,0 +1,181 @@
+/* WYSIWYG Content Styles - для отображения контента */
+.wysiwyg-content {
+    line-height: 1.7;
+    font-size: 0.875rem;
+}
+
+.wysiwyg-content h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin: 1.5rem 0 1rem;
+}
+
+.wysiwyg-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1.25rem 0 0.75rem;
+}
+
+.wysiwyg-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+}
+
+.wysiwyg-content h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0.875rem 0 0.5rem;
+}
+
+.wysiwyg-content h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.wysiwyg-content h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.wysiwyg-content p {
+    margin: 0.75rem 0;
+}
+
+.wysiwyg-content strong {
+    font-weight: 600;
+}
+
+.wysiwyg-content em {
+    font-style: italic;
+}
+
+.wysiwyg-content u {
+    text-decoration: underline;
+}
+
+.wysiwyg-content pre {
+    background: var(--wysiwyg-code-bg, #eaeef0);
+    color: var(--wysiwyg-code-foreground, #0969da);
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.dark .wysiwyg-content pre {
+    background: #0d1117;
+    color: #58a6ff;
+}
+
+.wysiwyg-content blockquote[data-note] {
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    border-left: 4px solid #72e3ad;
+    background: rgba(114, 227, 173, 0.08);
+    border-radius: 4px;
+}
+
+.dark .wysiwyg-content blockquote[data-note] {
+    border-left-color: #4ade80;
+    background: rgba(74, 222, 128, 0.08);
+}
+
+.wysiwyg-content hr {
+    border: none;
+    border-top: 2px solid #d3d3d3;
+    margin: 1.5rem 0;
+}
+
+.dark .wysiwyg-content hr {
+    border-top-color: #292929;
+}
+
+.wysiwyg-content ul,
+.wysiwyg-content ol {
+    margin: 0 0 1rem 1.5rem;
+    padding-left: 0;
+}
+
+.wysiwyg-content ul {
+    list-style-type: disc;
+}
+
+.wysiwyg-content ol {
+    list-style-type: decimal;
+}
+
+.wysiwyg-content li {
+    margin: 0.25rem 0;
+}
+
+.wysiwyg-content a {
+    color: #72e3ad;
+    text-decoration: underline;
+}
+
+.dark .wysiwyg-content a {
+    color: #4ade80;
+}
+
+.wysiwyg-content a:hover {
+    opacity: 0.8;
+}
+
+.wysiwyg-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+
+.wysiwyg-content .wysiwyg-image-wrapper {
+    margin: 1rem 0;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.wysiwyg-content .wysiwyg-image-wrapper.align-left {
+    float: left;
+    margin-right: 1rem;
+}
+
+.wysiwyg-content .wysiwyg-image-wrapper.align-center {
+    display: block;
+    text-align: center;
+    margin: 1rem auto;
+}
+
+.wysiwyg-content .wysiwyg-image-wrapper.align-right {
+    float: right;
+    margin-left: 1rem;
+}
+
+.wysiwyg-content .wysiwyg-image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+}
+
+.wysiwyg-content .wysiwyg-image-caption {
+    font-size: 0.875rem;
+    color: #6b6b6b;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.dark .wysiwyg-content .wysiwyg-image-caption {
+    color: #a2a2a2;
+}
+
+/* Очистка float для картинок */
+.wysiwyg-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}

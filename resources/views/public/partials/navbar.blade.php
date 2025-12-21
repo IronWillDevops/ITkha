@@ -14,7 +14,7 @@
             <div class="flex items-center space-x-2 md:space-x-2">
                 {{-- Кнопка смены темы --}}
                 <button id="theme-toggle" type="button"
-                    class="bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-lg focus:ring focus:outline-none focus-visible:ring-ring text-sm p-2"
+                    class="bg-background border border-input hover:bg-accent hover:text-accent-foreground rounded-lg focus:ring focus:outline-none focus-visible:ring-ring text-sm p-2"
                     aria-label="Change theme">
                     <div id="theme-toggle-dark-icon"><i class="fas fa-moon hidden fa-lg"></i></div>
                     <div id="theme-toggle-light-icon"><i class="fas fa-sun hidden fa-lg"></i></div>
@@ -42,14 +42,14 @@
                 @auth
                     <div class="hidden md:block relative">
                         <button id="userMenuButton" type="button"
-                            class="bg-background border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring"
+                            class="bg-background border border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring"
                             aria-label="User menu">
                             @if (Auth::user()->avatar)
                                 <img class="w-10 h-10 object-cover rounded-full border border-input"
                                     src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->first_name }}">
                             @else
                                 <div
-                                    class="bg-link hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
+                                    class=" hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
                                     <span class="font-medium">
                                         {{ Auth::user()->getInitial() }}
                                     </span>
@@ -80,7 +80,7 @@
 
                 {{-- Кнопка бургер-меню (только мобильные) --}}
                 <button data-collapse-toggle="navbar-default" type="button"
-                    class="bg-background border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg focus:ring focus:outline-none focus-visible:ring-ring md:hidden"
+                    class="bg-background border border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg focus:ring focus:outline-none focus-visible:ring-ring md:hidden"
                     aria-controls="navbar-default" aria-expanded="false">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
