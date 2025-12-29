@@ -17,10 +17,10 @@
         <h2 class="text-lg font-semibold mb-2">
             {{ __('admin/user.sections.personal') }}
         </h2>
-        @if ($user->avatar)
+        @if ($user->singleMedia('avatar'))
             <img type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
                 class="relative inline-flex items-center justify-center w-24 h-24 object-cover rounded-full border border-border"
-                src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png" alt="{{ $user->first_name }}">
+                src="{{ $user->singleMedia('avatar')->url }}" data-filename="image.png" alt="{{ $user->first_name }}">
         @else
             <div
                 class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden rounded-full border border-border  text-5xl">

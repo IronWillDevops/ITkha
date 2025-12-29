@@ -2,11 +2,11 @@
     <div class="ml-{{ $level ?? 0 }} border border-border p-2 rounded-lg mt-4 ">
         <div class="flex justify-between items-center mb-2">
             <div class="flex items-center gap-2">
-                @if ($comment->user->avatar)
+                @if ($comment->user->singleMedia('avatar'))
                     <img id="userMenuButton" type="button" data-dropdown-toggle="userDropdown"
                         data-dropdown-placement="bottom-start"
                         class="relative inline-flex items-center justify-center w-10 h-10 object-cover rounded-full border border-border"
-                        src="{{ asset('storage/' . $comment->user->avatar) }}" data-filename="image.png"
+                        src="{{ asset('storage/' . $comment->user->singleMedia('avatar')) }}" data-filename="image.png"
                         alt="{{ $comment->user->name }}">
                 @else
                     <div id="userMenuButton"

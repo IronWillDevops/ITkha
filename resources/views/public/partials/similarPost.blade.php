@@ -5,9 +5,9 @@
              @foreach ($similarPosts as $post)
                  <article
                      class="border border-border rounded-xl overflow-hidden flex flex-col hover:shadow-md transition">
-                     @if (!empty($post->main_image) && Storage::disk('public')->exists($post->main_image))
+                     @if (!empty( $post->singleMedia('main_image')) && Storage::disk('public')->exists( $post->singleMedia('main_image')))
                          <a href="{{ route('public.post.show', $post) }}" class="block w-full h-40 overflow-hidden  focus:ring focus:outline-none focus-visible:ring-ring">
-                             <img src="{{ asset('storage/' . $post->main_image) }}" alt="post-image"
+                             <img src="{{  $post->singleMedia('main_image')->url }}" alt="post-image"
                                  class="w-full h-full object-cover  " />
                          </a>
                      @endif

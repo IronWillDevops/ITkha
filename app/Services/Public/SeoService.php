@@ -20,7 +20,7 @@ class SeoService
             'article',
             $post->title,
             $excerpt,
-            $post->main_image ? asset('storage/' . $post->main_image) : asset('favicon.ico'),
+             $post->singleMedia('main_image') ?  $post->singleMedia('main_image')->url : asset('favicon.ico'),
             $url,
             [
                 'article:published_time' => optional($post->created_at)->toIso8601String(),
@@ -42,7 +42,7 @@ class SeoService
             'profile',
             $user->login,
             $profile?->job_title ?: ($first_name . ' ' . $last_name),
-            $user->avatar ? asset('storage/' . $user->avatar) : asset('favicon.ico'),
+            $user->singleMedia('avatar')?->url ?? asset('favicon.ico'),
             $url,
             [
                 'profile:first_name' => $first_name,

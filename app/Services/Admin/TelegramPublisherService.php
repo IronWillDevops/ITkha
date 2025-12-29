@@ -36,7 +36,7 @@ class TelegramPublisherService
             ]
         ];
 
-        $photoUrl = $post->main_image ? asset('storage/' . $post->main_image) : null;
+        $photoUrl =  $post->singleMedia('main_image') ?  $post->singleMedia('main_image')->url : null;
 
         // Проверяем, что URL картинки доступен через HTTPS
         if ($photoUrl && str_starts_with($photoUrl, 'https://')) {

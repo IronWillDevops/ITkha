@@ -1,9 +1,9 @@
 <div
     class="relative overflow-hidden flex w-full flex-col md:flex-row bg-card text-muted-foreground shadow-sm border border-border hover:shadow-md rounded-lg">
 
-    @if (!empty($post->main_image) && Storage::disk('public')->exists($post->main_image))
+    @if ($post->singleMedia('main_image'))
         <div class="relative md:w-2/5 shrink-0 overflow-hidden aspect-[3/2]">
-            <img src="{{ asset('storage/' . $post->main_image) }}" alt="card-image"
+            <img src="{{ $post->singleMedia('main_image')->url }}" alt="card-image"
                 class="h-full w-full rounded-md md:rounded-lg object-cover" />
         </div>
     @endif

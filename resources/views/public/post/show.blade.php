@@ -4,9 +4,9 @@
     <div class="flex flex-col gap-6">
         <article class="w-full bg-card text-muted-foreground rounded-2xl border border-border">
 
-            @if (!empty($post->main_image) && Storage::disk('public')->exists($post->main_image))
+            @if ($post->singleMedia('main_image'))
                 <div class="w-full h-64 object-cover">
-                    <img src="{{ asset('storage/' . $post->main_image) }}" alt="card-image"
+                    <img src="{{  $post->singleMedia('main_image')->url }}" alt="card-image"
                         class="h-full w-full rounded-md md:rounded-lg object-cover" />
                 </div>
             @endif
