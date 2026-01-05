@@ -14,7 +14,6 @@ class UpdateController extends Controller
     public function __invoke(UpdateRequest $request)
     {
         $data = $request->validated();
-
         Setting::set('telegram_enabled', $data['telegram_enabled']);
 
         if ($data['telegram_token']) {
@@ -34,9 +33,10 @@ class UpdateController extends Controller
         if ($data['telegram_button_text']) {
             Setting::set('telegram_button_text', $data['telegram_button_text']);
         }
-
-        Setting::set('telegram_send_without_sound', $data['telegram_send_without_sound']);
-
+        Setting::set(
+            'telegram_send_without_sound',
+            (int) ($data['telegram_send_without_sound'] ?? 0)
+        );
         return redirect()->route('admin.setting.telegram.edit')->with('success', __('admin/common.messages.settings_saved'));
     }
 }

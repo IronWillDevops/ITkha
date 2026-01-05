@@ -180,7 +180,7 @@
                     <span id="wysiwygModalFileName"></span>
                 </div>
             </div>
-            <div class="wysiwyg-form-group">
+            <div class="wysiwyg-form-group" id="modalUrlGroup">
                 <label data-i18n="url">URL</label>
                 <input type="text" id="wysiwygModalUrl" class="wysiwyg-input">
             </div>
@@ -226,523 +226,8 @@
         </div>
     </div>
 </div>
-<style>
-    /* [Все ваши существующие стили остаются без изменений] */
-    :root {
-        --wysiwyg-primary: #72e3ad;
-        --wysiwyg-primary-foreground: #ffffff;
-        --wysiwyg-card: #fcfcfc;
-        --wysiwyg-foreground: #1a1a1a;
-        --wysiwyg-muted: #6b6b6b;
-        --wysiwyg-muted-foreground: #4a4a4a;
-        --wysiwyg-border: #d3d3d3;
-        --wysiwyg-accent: #e8e8e8;
-        --wysiwyg-ring: #72e3ad;
-        --wysiwyg-danger: #ca3214;
-        --wysiwyg-code-bg: #eaeef0;
-        --wysiwyg-code-foreground: #0969da;
-        --wysiwyg-overlay-bg: rgba(0, 0, 0, 0.45);
-        --wysiwyg-radius-xs: 2px;
-        --wysiwyg-radius-sm: 4px;
-        --wysiwyg-radius-md: 6px;
-        --wysiwyg-radius-lg: 10px;
-        --wysiwyg-font-sans: Outfit, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        --wysiwyg-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        --wysiwyg-space-1: 0.25rem;
-        --wysiwyg-space-2: 0.5rem;
-        --wysiwyg-space-3: 0.75rem;
-        --wysiwyg-space-4: 1rem;
-        --wysiwyg-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-        --wysiwyg-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-        --wysiwyg-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.25);
-        --wysiwyg-transition-fast: 0.15s ease;
-        --wysiwyg-transition-base: 0.2s ease;
-        --wysiwyg-z-modal: 10000;
-    }
 
-    .dark {
-        --wysiwyg-primary: #4ade80;
-        --wysiwyg-primary-foreground: #1e2723;
-        --wysiwyg-card: #171717;
-        --wysiwyg-foreground: #e2e8f0;
-        --wysiwyg-muted: #a2a2a2;
-        --wysiwyg-muted-foreground: #c0c0c0;
-        --wysiwyg-border: #292929;
-        --wysiwyg-accent: #313131;
-        --wysiwyg-ring: #4ade80;
-        --wysiwyg-danger: #ff6347;
-        --wysiwyg-code-bg: #0d1117;
-        --wysiwyg-code-foreground: #58a6ff;
-        --wysiwyg-overlay-bg: rgba(0, 0, 0, 0.6);
-    }
 
-    /* [Все остальные стили из оригинального файла] */
-    .wysiwyg-toolbar {
-        background: var(--wysiwyg-card);
-        border: 1px solid var(--wysiwyg-border);
-        border-radius: var(--wysiwyg-radius-md) var(--wysiwyg-radius-md) 0 0;
-        padding: 0.5rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.25rem;
-    }
-
-    .wysiwyg.wysiwyg-active .wysiwyg-toolbar {
-        border-color: var(--wysiwyg-ring);
-    }
-
-    .wysiwyg-toolbar button {
-        width: 2rem;
-        height: 2rem;
-        border: none;
-        background: transparent;
-        border-radius: var(--wysiwyg-radius-sm);
-        color: var(--wysiwyg-muted);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all var(--wysiwyg-transition-fast);
-    }
-
-    .wysiwyg-toolbar button:hover {
-        background: var(--wysiwyg-accent);
-        color: var(--wysiwyg-foreground);
-    }
-
-    .wysiwyg-toolbar button.active {
-        background: var(--wysiwyg-primary);
-        color: white;
-    }
-
-    .wysiwyg-danger-btn:hover {
-        background: var(--wysiwyg-danger) !important;
-        color: white !important;
-    }
-
-    .wysiwyg-divider {
-        width: 1px;
-        height: 1.5rem;
-        background: var(--wysiwyg-border);
-        margin: 0 0.25rem;
-    }
-
-    .wysiwyg-select {
-        height: 2rem;
-        padding: 0 0.5rem;
-        border-radius: var(--wysiwyg-radius-sm);
-        background: var(--wysiwyg-card);
-        border: 1px solid var(--wysiwyg-border);
-        color: var(--wysiwyg-foreground);
-        font-size: 0.75rem;
-        cursor: pointer;
-    }
-
-    .wysiwyg-content {
-        background: var(--wysiwyg-card);
-        border: 1px solid var(--wysiwyg-border);
-        border-top: none;
-        border-bottom: none;
-        padding: 1rem;
-        min-height: 300px;
-        line-height: 1.7;
-        font-size: 0.875rem;
-        overflow: auto;
-        /* добавлено для контроля переполнения */
-    }
-
-    .wysiwyg-credits {
-        margin-left: auto !important;
-        /* Выравнивание справа */
-        font-size: 0.7rem;
-        opacity: 0.7;
-    }
-
-    .wysiwyg-credits a {
-        color: var(--wysiwyg-primary);
-        text-decoration: none;
-        font-weight: 500;
-        margin-left: 0.25rem;
-    }
-
-    .wysiwyg-credits a:hover {
-        text-decoration: underline;
-        opacity: 0.8;
-    }
-
-    /* Убедитесь, что содержимое редактора не выходит за границы */
-    .wysiwyg-content * {
-        max-width: 100%;
-    }
-
-    .wysiwyg-content:focus {
-        outline: none;
-    }
-
-    .wysiwyg.wysiwyg-active .wysiwyg-content {
-        border-color: var(--wysiwyg-ring);
-    }
-
-    .wysiwyg-status-bar {
-        background: var(--wysiwyg-card);
-        border: 1px solid var(--wysiwyg-border);
-        border-radius: 0 0 var(--wysiwyg-radius-md) var(--wysiwyg-radius-md);
-        padding: 0.5rem 1rem;
-        display: flex;
-        gap: 1.5rem;
-        font-size: 0.75rem;
-        color: var(--wysiwyg-muted);
-        clear: both;
-    }
-
-    .wysiwyg.wysiwyg-active .wysiwyg-status-bar {
-        border-color: var(--wysiwyg-ring);
-    }
-
-    .wysiwyg-status-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .wysiwyg-content h1 {
-        font-size: 1.875rem;
-        font-weight: 700;
-        margin: 1.5rem 0 1rem;
-    }
-
-    .wysiwyg-content h2 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin: 1.25rem 0 0.75rem;
-    }
-
-    .wysiwyg-content h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 1rem 0 0.5rem;
-    }
-
-    .wysiwyg-content pre {
-        background: var(--wysiwyg-code-bg);
-        color: var(--wysiwyg-code-foreground);
-        padding: 1rem;
-        border-radius: var(--wysiwyg-radius-sm);
-        font-family: var(--wysiwyg-font-mono);
-        margin: 1rem 0;
-        overflow-x: auto;
-    }
-
-    .wysiwyg-content blockquote[data-note] {
-        margin: 1rem 0;
-        padding: 0.75rem 1rem;
-        border-left: 4px solid var(--wysiwyg-primary);
-        background: color-mix(in srgb, var(--wysiwyg-primary) 8%, transparent);
-        border-radius: var(--wysiwyg-radius-sm);
-    }
-
-    .wysiwyg-content hr {
-        border: none;
-        border-top: 2px solid var(--wysiwyg-border);
-        margin: 1.5rem 0;
-    }
-
-    .wysiwyg-content ul,
-    .wysiwyg-content ol {
-        margin: 0 0 1rem 1.5rem;
-        padding-left: 0;
-    }
-
-    .wysiwyg-content ul {
-        list-style-type: disc;
-    }
-
-    .wysiwyg-content ol {
-        list-style-type: decimal;
-    }
-
-    /* Стили для изображений */
-    figure.wysiwyg-image-wrapper {
-        margin: 1rem 0;
-        display: inline-block;
-        max-width: 100%;
-        position: relative;
-        cursor: pointer;
-        transition: all var(--wysiwyg-transition-base);
-    }
-
-    /* Clearfix для float элементов */
-    .wysiwyg-content::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    /* Улучшенные стили для figure */
-    figure.wysiwyg-image-wrapper {
-        margin: 1rem 0;
-        display: block;
-        /* изменено с inline-block на block */
-        max-width: 100%;
-        position: relative;
-        cursor: pointer;
-        transition: all var(--wysiwyg-transition-base);
-    }
-
-    figure.wysiwyg-image-wrapper.align-left {
-        float: left;
-        margin-right: 1rem;
-        margin-bottom: 1rem;
-        /* добавлен отступ снизу */
-        max-width: 50%;
-        /* ограничение ширины для float элементов */
-    }
-
-    figure.wysiwyg-image-wrapper.align-center {
-        float: none;
-        /* явно убираем float */
-        text-align: center;
-        margin: 1rem auto;
-        max-width: 100%;
-    }
-
-    figure.wysiwyg-image-wrapper.align-right {
-        float: right;
-        margin-left: 1rem;
-        margin-bottom: 1rem;
-        /* добавлен отступ снизу */
-        max-width: 50%;
-        /* ограничение ширины для float элементов */
-    }
-
-    /* Параграфы после изображений */
-    .wysiwyg-content figure.wysiwyg-image-wrapper+p {
-        clear: none;
-        /* позволяет тексту обтекать изображение */
-    }
-
-    /* Опциональный класс для принудительной очистки float */
-    .wysiwyg-content .clear-float {
-        clear: both;
-    }
-
-    figure.wysiwyg-image-wrapper:hover {
-        opacity: 0.9;
-    }
-
-    figure.wysiwyg-image-wrapper:hover::after {
-        content: '✎ Edit';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: var(--wysiwyg-radius-sm);
-        font-size: 0.875rem;
-        pointer-events: none;
-    }
-
-    figure.wysiwyg-image-wrapper.align-left {
-        float: left;
-        margin-right: 1rem;
-    }
-
-    figure.wysiwyg-image-wrapper.align-center {
-        display: block;
-        text-align: center;
-        margin: 1rem auto;
-    }
-
-    figure.wysiwyg-image-wrapper.align-right {
-        float: right;
-        margin-left: 1rem;
-    }
-
-    figure.wysiwyg-image-wrapper img {
-        max-width: 100%;
-        height: auto;
-        border-radius: var(--wysiwyg-radius-sm);
-        display: block;
-    }
-
-    figcaption.wysiwyg-image-caption,
-    .wysiwyg-content figcaption {
-        margin-top: 0.5rem;
-        font-size: 0.875rem;
-        color: var(--wysiwyg-muted);
-        text-align: center;
-        font-style: italic;
-    }
-
-    /* Стили для файлов */
-    .wysiwyg-file-attachment {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
-        background: var(--wysiwyg-accent);
-        border: 1px solid var(--wysiwyg-border);
-        border-radius: var(--wysiwyg-radius-sm);
-        margin: 0.5rem 0;
-        cursor: pointer;
-        transition: all var(--wysiwyg-transition-fast);
-        text-decoration: none;
-        color: var(--wysiwyg-foreground);
-    }
-
-    .wysiwyg-file-attachment:hover {
-        background: var(--wysiwyg-border);
-        transform: translateX(2px);
-    }
-
-    .wysiwyg-file-icon {
-        font-size: 1.5rem;
-        color: var(--wysiwyg-primary);
-    }
-
-    .wysiwyg-file-info {
-        display: flex;
-        flex-direction: column;
-        gap: 0.125rem;
-    }
-
-    .wysiwyg-file-name {
-        font-weight: 500;
-        font-size: 0.875rem;
-    }
-
-    .wysiwyg-file-size {
-        font-size: 0.75rem;
-        color: var(--wysiwyg-muted);
-    }
-
-    .wysiwyg-file-download {
-        margin-left: auto;
-        color: var(--wysiwyg-muted);
-    }
-
-    /* Модальное окно */
-    .wysiwyg-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: var(--wysiwyg-z-modal);
-        display: none;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .wysiwyg-modal-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--wysiwyg-overlay-bg);
-    }
-
-    .wysiwyg-modal-content {
-        position: relative;
-        background: var(--wysiwyg-card);
-        border-radius: var(--wysiwyg-radius-md);
-        box-shadow: var(--wysiwyg-shadow-lg);
-        max-width: 500px;
-        width: 90%;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .wysiwyg-modal-header {
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--wysiwyg-border);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .wysiwyg-input {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border: 1px solid var(--wysiwyg-border);
-        border-radius: var(--wysiwyg-radius-sm);
-        background: var(--wysiwyg-card);
-        color: var(--wysiwyg-foreground);
-        font-size: 0.875rem;
-    }
-
-    .wysiwyg-btn {
-        padding: 0.5rem 1rem;
-        border-radius: var(--wysiwyg-radius-sm);
-        font-size: 0.875rem;
-        cursor: pointer;
-        border: none;
-    }
-
-    .wysiwyg-btn-primary {
-        background: var(--wysiwyg-primary);
-        color: white;
-    }
-
-    .wysiwyg-btn-primary:hover {
-        background: color-mix(in srgb, var(--wysiwyg-primary) 90%, black);
-    }
-
-    .wysiwyg-form-group {
-        margin-bottom: 1rem;
-    }
-
-    .wysiwyg-modal-body {
-        padding: 1.5rem;
-    }
-
-    .wysiwyg-modal-footer {
-        padding: 1.5rem;
-        border-top: 1px solid var(--wysiwyg-border);
-        display: flex;
-        gap: 0.5rem;
-        justify-content: flex-end;
-    }
-
-    .wysiwyg-btn-secondary {
-        background: var(--wysiwyg-accent);
-        color: var(--wysiwyg-foreground);
-    }
-
-    .wysiwyg-align-buttons {
-        display: flex;
-        gap: 0.5rem;
-    }
-
-    .wysiwyg-align-btn {
-        padding: 0.5rem 1rem;
-        border: 1px solid var(--wysiwyg-border);
-        background: var(--wysiwyg-card);
-        color: var(--wysiwyg-foreground);
-        cursor: pointer;
-        border-radius: var(--wysiwyg-radius-sm);
-    }
-
-    .wysiwyg-align-btn.active {
-        background: var(--wysiwyg-primary);
-        color: white;
-        border-color: var(--wysiwyg-primary);
-    }
-
-    .wysiwyg-loading-message {
-        padding: 1rem;
-        background: var(--wysiwyg-primary);
-        color: white;
-        border-radius: var(--wysiwyg-radius-sm);
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-</style>
 <script>
     const WYSIWYG_I18N = {
         en: {
@@ -1111,13 +596,52 @@
         }
     }
 
+    // Добавьте эту функцию после других функций
+    function ensureEditorStructure(ed) {
+        // Проверяем, есть ли хоть какой-то контент
+        const hasContent = ed.innerHTML.trim() && ed.textContent.trim();
+        
+        // Если есть контент, но нет блочных элементов (только текстовые ноды)
+        if (hasContent) {
+            const hasBlockElement = ed.querySelector('div, p, h1, h2, h3, h4, h5, h6, ul, ol, blockquote, pre');
+            if (!hasBlockElement) {
+                // Оборачиваем существующий текст в div
+                const tempDiv = document.createElement('div');
+                while (ed.firstChild) {
+                    tempDiv.appendChild(ed.firstChild);
+                }
+                ed.appendChild(tempDiv);
+                return true;
+            }
+            return false;
+        }
+        
+        // Если редактор полностью пустой, создаем начальную структуру
+        if (!ed.innerHTML.trim() || ed.innerHTML === '' || ed.textContent.trim() === '') {
+            ed.innerHTML = '<div><br></div>';
+            return true;
+        }
+        
+        return false;
+    }
+
+    // Модифицируйте функцию wysiwygSyncContent
     function wysiwygSyncContent(ed) {
         const c = ed.closest('.wysiwyg'),
             h = c?.querySelector('input[type="hidden"][data-wysiwyg-hidden]');
+
         if (h) h.value = ed.innerHTML;
-        const txt = ed.innerText || '',
-            w = txt.trim().split(/\s+/).filter(x => x.length).length,
-            ch = txt.length;
+
+        // Получаем текст и очищаем
+        const txt = ed.innerText || '';
+        const cleanedText = txt.replace(/^\s+|\s+$/g, '');
+
+        // Проверяем, пустой ли контент
+        const isEmpty = cleanedText.length === 0 || ed.innerHTML === '<div><br></div>' || ed.innerHTML === '<br>';
+
+        const w = isEmpty ? 0 : cleanedText.trim().split(/\s+/).filter(x => x.length).length;
+        const ch = isEmpty ? 0 : cleanedText.length;
+
         const wc = c.querySelector('.wysiwyg-word-count'),
             cc = c.querySelector('.wysiwyg-char-count');
         if (wc) wc.textContent = t('words', {
@@ -1128,6 +652,7 @@
             count: ch,
             s: ch !== 1 ? 's' : ''
         });
+
         const s = window.getSelection();
         if (s.rangeCount) {
             let n = s.getRangeAt(0).startContainer;
@@ -1377,6 +902,7 @@
 
     function showM(titleKey, cfg) {
         document.getElementById('wysiwygModalTitle').textContent = t(titleKey);
+        document.getElementById('modalUrlGroup').style.display = cfg.url ? 'block' : 'none';
         document.getElementById('modalTextGroup').style.display = cfg.txt ? 'block' : 'none';
         document.getElementById('modalTargetGroup').style.display = cfg.tgt ? 'block' : 'none';
         document.getElementById('modalAlignGroup').style.display = cfg.aln ? 'block' : 'none';
@@ -1399,6 +925,7 @@
         document.getElementById('wysiwygModalText').value = lnk?.textContent || s.toString();
         document.getElementById('wysiwygModalTarget').checked = lnk?.target === '_blank';
         showM(lnk ? 'editLink' : 'link', {
+            url: 1,
             txt: 1,
             tgt: 1,
             aln: 0,
@@ -1447,7 +974,9 @@
             nm.textContent = f.name;
         }
 
+        // ИСПРАВЛЕНИЕ: Скрываем поле URL для новых файлов/картинок
         showM(isImg ? 'insertImage' : 'insertFile', {
+            url: 0,  // Скрываем URL для новых файлов
             txt: isImg,
             tgt: 0,
             aln: isImg,
@@ -1518,7 +1047,8 @@
 
         if (isImage) {
             const img = wrapper.querySelector('img'),
-                cap = wrapper.querySelector('.figcaption');
+                // ИСПРАВЛЕНИЕ: Используем правильный селектор
+                cap = wrapper.querySelector('.wysiwyg-image-caption');
             const align = wrapper.classList.contains('align-left') ? 'left' :
                 wrapper.classList.contains('align-right') ? 'right' : 'center';
             document.getElementById('wysiwygModalUrl').value = img.src;
@@ -1533,7 +1063,9 @@
             document.querySelectorAll('.wysiwyg-align-btn').forEach(b => b.classList.remove('active'));
             document.querySelector(`.wysiwyg-align-btn[data-align="${align}"]`)?.classList.add('active');
             WC.uploadedMediaId = img.dataset.mediaId || null;
+            // ИСПРАВЛЕНИЕ: Скрываем URL при редактировании картинки
             showM('editImage', {
+                url: 0,  // Скрываем URL при редактировании
                 txt: 1,
                 tgt: 0,
                 aln: 1,
@@ -1615,7 +1147,9 @@
             w.className = `wysiwyg-image-wrapper align-${al}`;
             w.contentEditable = 'false';
             w.onclick = function() {
-                wysiwygEditMedia(this, true);
+                if (this.closest('.wysiwyg-content')) {
+                    wysiwygEditMedia(this, true);
+                }
             };
 
             const img = document.createElement('img');
@@ -1646,7 +1180,6 @@
                 r.deleteContents();
                 r.insertNode(w);
 
-                // Создаем параграф после изображения только для center выравнивания
                 if (al === 'center') {
                     const p = document.createElement('p');
                     p.innerHTML = '<br>';
@@ -1654,7 +1187,6 @@
                     r.setStart(p, 0);
                     r.collapse(true);
                 } else {
-                    // Для left/right выравнивания ставим курсор после figure
                     r.setStartAfter(w);
                     r.collapse(true);
                 }
@@ -1868,6 +1400,23 @@
                 }
             }
             b = b.parentNode;
+        }
+    });
+
+    // Добавьте в конец файла, в секцию document.addEventListener
+    document.addEventListener('keyup', e => {
+        if (e.key === 'Backspace' || e.key === 'Delete') {
+            const s = window.getSelection();
+            if (!s.rangeCount) return;
+
+            let n = s.getRangeAt(0).startContainer;
+            let ed = n;
+            while (ed && !ed.classList?.contains('wysiwyg-content')) ed = ed.parentNode;
+
+            if (ed) {
+                ensureEditorStructure(ed);
+                wysiwygSyncContent(ed);
+            }
         }
     });
 </script>

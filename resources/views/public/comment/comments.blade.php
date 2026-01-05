@@ -28,10 +28,10 @@
             <small class="text-sm text-muted-foreground whitespace-nowrap">
                 {{ $comment->created_at->diffForHumans() }}
                 @if (Auth::check() && Auth::user()->hasPermission('comment.update'))
-                <a href="{{ route('admin.comment.edit',$comment->id) }}"
-                    class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
-                    <i class="fas fa-pencil-alt"></i>
-                </a>
+                    <a href="{{ route('admin.comment.edit', $comment->id) }}"
+                        class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
                 @endif
             </small>
 
@@ -39,11 +39,13 @@
 
         <p class="mb-2 text-muted-foreground break-all">{{ $comment->body }}</p>
 
-        <a href="#comment-form"
-            class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold p-2 rounded-sm flex items-center w-64"
-            onclick="moveForm({{ $comment->id }}, '{{ $comment->user->login }}', this)">
-            {{ __('public/comment.buttons.reply') }}
-        </a>
+        @auth
+            <a href="#comment-form"
+                class="flex items-center gap-2 rounded-sm bg-background border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 focus:ring focus:outline-none focus-visible:ring-ring w-64"
+                onclick="moveForm({{ $comment->id }}, '{{ $comment->user->login }}', this)">
+                <i class="fa-solid fa-reply"></i> {{ __('public/comment.buttons.reply') }}
+            </a>
+        @endauth
 
         <div id="comment-{{ $comment->id }}"></div>
 

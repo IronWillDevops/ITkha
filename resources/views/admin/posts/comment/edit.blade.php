@@ -17,7 +17,7 @@
                 value-field="value" label-field="value" :value="$comment->status->value" />
             {{-- Автор --}}
             <x-form.select name="user_id" label="{{ __('admin/common.fields.author') }}" :options="$users"
-                value-field="id" label-field="name" value="{{ $comment->user_id }}" />
+                value-field="id" label-field="login" value="{{ $comment->user_id }}" />
             {{-- Кнопки --}}
 
             <div class="flex space-x-3">

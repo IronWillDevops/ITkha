@@ -60,7 +60,7 @@ class PostService
             $post->save();
 
             // Публикуем пост, если время уже наступило или статус PUBLISHED
-            $this->publishIfNeeded($post);
+            $this->publishIfNeeded($post, null);
 
             DB::commit();
             return $post;
@@ -88,7 +88,7 @@ class PostService
             } else {
                 $data['published_at'] = null;
             }
-
+            $oldStatus = $post->status;
             // Обновляем пост
             $post->update($data);
 
@@ -112,7 +112,7 @@ class PostService
             $post->save();
 
             // Публикуем пост, если нужно
-            $this->publishIfNeeded($post);
+            $this->publishIfNeeded($post, $oldStatus);
 
             DB::commit();
             return $post;
@@ -134,7 +134,7 @@ class PostService
 
         // Извлекаем все media_id из data-media-id атрибутов в контенте
         preg_match_all('/data-media-id=["\'](\d+)["\']/', $content, $matches);
-        
+
         if (empty($matches[1])) {
             return;
         }
@@ -161,24 +161,37 @@ class PostService
     /**
      * Проверяет, нужно ли публиковать пост, и публикует его
      */
-    private function publishIfNeeded(Post $post): void
+    private function publishIfNeeded(Post $post, ?string $oldStatus = null): void
     {
-        // Если пост уже опубликован — ничего не делаем
-        if ($post->status === PostStatus::PUBLISHED->value) {
+        // Для нового поста oldStatus будет null
+        $wasPublished = $oldStatus === PostStatus::PUBLISHED->value;
+        $isNowPublished = $post->status === PostStatus::PUBLISHED->value;
+
+        // Если пост уже был опубликован и остался опубликованным — ничего не делаем
+        if ($wasPublished && $isNowPublished) {
             return;
         }
 
-        // Проверяем, нужно ли публиковать (по расписанию)
-        $shouldPublish = $post->status === PostStatus::SCHEDULED->value
-            && $post->published_at
-            && $post->published_at <= date('Y-m-d H:i:s');
+        $shouldPublish = false;
 
-        if ($shouldPublish) {
-            // Меняем статус на PUBLISHED
+        // Проверяем ручную публикацию (смена статуса на PUBLISHED)
+        if ($isNowPublished && !$wasPublished) {
+            $shouldPublish = true;
+        }
+
+        // Проверяем публикацию по расписанию
+        if (
+            $post->status === PostStatus::SCHEDULED->value
+            && $post->published_at
+            && $post->published_at <= now()
+        ) {
+            $shouldPublish = true;
             $post->status = PostStatus::PUBLISHED->value;
             $post->save();
+        }
 
-            // Генерируем событие публикации
+        // Генерируем событие публикации только один раз
+        if ($shouldPublish) {
             event(new PostPublished($post));
         }
     }
