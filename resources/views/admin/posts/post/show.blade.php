@@ -11,9 +11,9 @@
     </div>
 
     {{-- Основное изображение --}}
-    @if ($post->main_image)
+    @if ( $post->singleMedia('main_image'))
         <div class="mb-6">
-            <img src="{{ asset('storage/' . $post->main_image) }}" alt="{{ $post->title }}"
+            <img src="{{  $post->singleMedia('main_image')->url }}" alt="{{ $post->title }}"
                 class="w-full max-h-96 object-cover rounded-xl shadow">
         </div>
     @endif
@@ -57,7 +57,7 @@
 
 
     {{-- Контент --}}
-    <div class="prose max-w-none" id="post-content">
+    <div class="prose max-w-none wysiwyg-content" id="post-content">
         {!! $post->content !!}
     </div>
 @endsection

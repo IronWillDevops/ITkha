@@ -10,3 +10,4 @@ Artisan::command('inspire', function () {
 
 Schedule::command('cache:sync-post-views')->everyTenMinutes();
 Schedule::command('posts:publish-scheduled')->everyMinute();
+Schedule::command('wysiwyg:cleanup-temp')->daily();

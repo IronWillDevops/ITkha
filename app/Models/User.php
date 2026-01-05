@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\VerifyEmailNotification;
 use App\Notifications\ResetPasswordNotification;
 use App\Enums\PostStatus;
+use App\Models\Traits\HasMedia;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory,
         Notifiable,
-        SoftDeletes;
+        SoftDeletes,
+        HasMedia;
 
     /**
      * The attributes that are mass assignable.

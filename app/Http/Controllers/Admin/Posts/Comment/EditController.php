@@ -14,9 +14,9 @@ class EditController extends Controller
      */
     public function __invoke(Comment $comment)
     {
-        
-        $users= User::all();
-        $status=CommentStatus::cases();
-        return view('admin.posts.comment.edit', compact('comment','status','users'));
+
+        $users = User::all();
+        $status = CommentStatus::cases();
+        return view('admin.posts.comment.edit', compact('comment', 'status', 'users'));
     }
 }

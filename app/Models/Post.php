@@ -8,6 +8,7 @@ use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Traits\Filterable;
 use App\Models\Traits\Cacheable;
+use App\Models\Traits\HasMedia;
 use App\Models\Traits\HasSlug;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,7 +19,8 @@ class Post extends Model
         HasFactory,
         Filterable,
         Cacheable,
-        HasSlug;
+        HasSlug,
+        HasMedia;
 
 
     protected $slugSource = 'title';   // генерируем slug из title
@@ -27,7 +29,7 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
-        'main_image',
+        // 'main_image',
         'status',
         'comments_enabled',
         'likes',

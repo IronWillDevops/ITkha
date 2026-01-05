@@ -19,15 +19,14 @@
                     <div class="flex items-center gap-6 mb-6">
                         <div id="avatarContainer" class="w-24 h-24 rounded-full overflow-hidden border border-border">
                             {{-- Аватар --}}
-                            @if ($user->avatar)
+                            @if ($user->singleMedia('avatar'))
                                 <img type="button" data-dropdown-toggle="userDropdown"
                                     data-dropdown-placement="bottom-start"
                                     class="relative inline-flex items-center justify-center w-24 h-24 object-cover rounded-full border border-border"
-                                    src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png"
-                                    alt="{{ $user->first_name }}">
+                                    src="{{ $user->singleMedia('avatar')->url }}" alt="{{ $user->first_name }}">
                             @else
                                 <div
-                                    class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden rounded-full border border-border  text-5xl">
+                                    class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden rounded-full border border-border text-5xl">
                                     <span class="font-bold">
                                         {{ $user->getInitial() }}
                                     </span>
@@ -37,7 +36,7 @@
                         </div>
 
                         <div class="flex-1">
-                            <x-form.file name="avatar" label="{{ __('admin/common.fields.avatar') }}" :required="false"/>
+                            <x-form.file name="avatar" label="{{ __('admin/common.fields.avatar') }}" :required="false" />
                         </div>
                     </div>
                     <div class="flex items-center gap-6 mb-6">
@@ -135,8 +134,7 @@
         {{-- Кнопки --}}
         <div class="flex space-x-3">
             <x-form.submit label="{{ __('admin/common.buttons.edit') }}" />
-            <x-form.button href="{{ route('admin.user.index') }}"
-                label="{{ __('admin/common.buttons.cancel') }}" />
+            <x-form.button href="{{ route('admin.user.index') }}" label="{{ __('admin/common.buttons.cancel') }}" />
         </div>
     </form>
 @endsection

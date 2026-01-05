@@ -3,7 +3,6 @@
 @section('public.content')
     <div class="flex flex-col gap-6">
         <article class="w-full bg-card text-muted-foreground rounded-2xl border border-border">
-
             <!-- Контейнер для контента политики -->
             <div class="w-full p-8 bg-surface rounded-2xl">
                 <div class="text-center mb-6 text-accent-foreground ">
@@ -19,7 +18,7 @@
 
                 <x-public.ui.separator />
                 <!-- Содержание политики -->
-                <div id="post-content" class="policy-content mb-6 prose prose-neutral" >
+                <div id="post-content" class="wysiwyg-content mb-6 prose prose-neutral ">
                     {!! $translation->content !!}
                 </div>
 
@@ -32,6 +31,6 @@
                     </form>
                 @endauth
             </div>
-    </article>
+        </article>
     </div>
 @endsection

@@ -2,22 +2,25 @@
     'name' => 'content',
     'value' => old($name, $value ?? ''),
     'locale' => app()->getLocale(),
-    'saveImagesAs' => 'base64',
+    'saveImagesAs' => 'server',
     'id' => null,
     'label' => null,
     'required' => false,
     'error' => null,
+    'modelType' => 'App\\Models\\Post',
+    'modelId' => null,
 ])
 @php
     $editorId = $id ?? 'editor-' . Str::random(8);
-    // Очищаем значение от лишних пробелов, но сохраняем HTML
     $cleanValue = trim($value);
     if (empty($cleanValue)) {
-        $cleanValue = '<p><br></p>';
+        $cleanValue = '<div><br></div>';
     }
 @endphp
 <div class="wysiwyg w-full" data-wysiwyg-id="{{ $editorId }}" data-locale="{{ $locale }}"
-    data-save-images-as="{{ $saveImagesAs }}">
+    data-save-images-as="{{ $saveImagesAs }}" data-upload-url="{{ route('admin.wysiwyg.upload') }}"
+    data-delete-url="{{ route('admin.wysiwyg.delete') }}" data-model-type="{{ $modelType }}"
+    data-model-id="{{ $modelId }}">
     <div class="wysiwyg-toolbar flex flex-wrap items-center gap-1">
         <button type="button" onclick="wysiwygFormat(event, 'undo')" data-i18n-title="undo" title="Undo">
             <i class="fa-solid fa-rotate-left"></i>
@@ -112,9 +115,13 @@
         <button type="button" onclick="wysiwygOpenLinkModal(event)" data-i18n-title="link" title="Insert Link">
             <i class="fa-solid fa-link"></i>
         </button>
-        <button type="button" onclick="wysiwygOpenFileUpload(event)" data-i18n-title="imageFile"
+        <button type="button" onclick="wysiwygOpenFileUpload(event, 'image')" data-i18n-title="imageFile"
             title="Insert Image">
             <i class="fa-solid fa-image"></i>
+        </button>
+        <button type="button" onclick="wysiwygOpenFileUpload(event, 'file')" data-i18n-title="file"
+            title="Insert File">
+            <i class="fa-solid fa-file"></i>
         </button>
         <button type="button" onclick="wysiwygFormat(event, 'removeFormat')" data-i18n-title="clearFormat"
             title="Clear Format">
@@ -127,8 +134,7 @@
         </button>
     </div>
 
-    {{-- ВАЖНО: Контент вставляется напрямую в редактор с HTML разметкой --}}
-    <div contenteditable="true" class="wysiwyg-editor" id="{{ $editorId }}" oninput="wysiwygSyncContent(this)"
+    <div contenteditable="true" class="wysiwyg-content" id="{{ $editorId }}" oninput="wysiwygSyncContent(this)"
         onfocus="wysiwygEditorFocus(this)" onblur="wysiwygEditorBlur(this)">{!! $cleanValue !!}</div>
 
     <div class="wysiwyg-status-bar">
@@ -144,14 +150,17 @@
             <i class="fa-solid fa-paragraph"></i>
             <span data-i18n="paragraph">Paragraph</span>
         </span>
+        <span class="wysiwyg-status-item wysiwyg-credits">
+            <i class="fa-solid fa-code"></i>
+            <span>Made by ITkha</span>
+        </span>
     </div>
 
-    {{-- ВАЖНО: Скрытое поле ПУСТОЕ при загрузке, заполняется JavaScript'ом --}}
     <input type="hidden" name="{{ $name }}" value="" data-wysiwyg-hidden
         @if ($required) required @endif>
 
     <input type="file" class="wysiwyg-file-input" style="display: none;"
-        accept="image/*,application/pdf,.doc,.docx,.txt" onchange="wysiwygHandleFileSelect(event)">
+        accept="image/*,application/pdf,.doc,.docx,.txt,.zip,.rar" onchange="wysiwygHandleFileSelect(event)">
 </div>
 
 <div class="wysiwyg-modal" id="wysiwygUniversalModal">
@@ -171,7 +180,7 @@
                     <span id="wysiwygModalFileName"></span>
                 </div>
             </div>
-            <div class="wysiwyg-form-group">
+            <div class="wysiwyg-form-group" id="modalUrlGroup">
                 <label data-i18n="url">URL</label>
                 <input type="text" id="wysiwygModalUrl" class="wysiwyg-input">
             </div>
@@ -202,10 +211,10 @@
                     Delete link
                 </button>
             </div>
-            <div class="wysiwyg-form-group" id="modalDeleteImageGroup" style="display:none;">
-                <button type="button" class="wysiwyg-btn wysiwyg-danger-btn" onclick="wysiwygDeleteImage()"
-                    data-i18n="deleteImage">
-                    Delete image
+            <div class="wysiwyg-form-group" id="modalDeleteMediaGroup" style="display:none;">
+                <button type="button" class="wysiwyg-btn wysiwyg-danger-btn" onclick="wysiwygDeleteMedia()"
+                    data-i18n="deleteMedia">
+                    Delete media
                 </button>
             </div>
         </div>
@@ -217,424 +226,198 @@
         </div>
     </div>
 </div>
-<style>
-    :root {
-        --wysiwyg-primary: #72e3ad;
-        --wysiwyg-primary-foreground: #ffffff;
-        --wysiwyg-card: #fcfcfc;
-        --wysiwyg-foreground: #1a1a1a;
-        --wysiwyg-muted: #6b6b6b;
-        --wysiwyg-muted-foreground: #4a4a4a;
-        --wysiwyg-border: #d3d3d3;
-        --wysiwyg-accent: #e8e8e8;
-        --wysiwyg-ring: #72e3ad;
-        --wysiwyg-danger: #ca3214;
-        --wysiwyg-code-bg: #eaeef0;
-        --wysiwyg-code-foreground: #0969da;
-        --wysiwyg-overlay-bg: rgba(0, 0, 0, 0.45);
-        --wysiwyg-radius-xs: 2px;
-        --wysiwyg-radius-sm: 4px;
-        --wysiwyg-radius-md: 6px;
-        --wysiwyg-radius-lg: 10px;
-        --wysiwyg-font-sans: Outfit, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        --wysiwyg-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        --wysiwyg-space-1: 0.25rem;
-        --wysiwyg-space-2: 0.5rem;
-        --wysiwyg-space-3: 0.75rem;
-        --wysiwyg-space-4: 1rem;
-        --wysiwyg-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-        --wysiwyg-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-        --wysiwyg-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.25);
-        --wysiwyg-transition-fast: 0.15s ease;
-        --wysiwyg-transition-base: 0.2s ease;
-        --wysiwyg-z-modal: 10000;
-    }
 
-    .dark {
-        --wysiwyg-primary: #4ade80;
-        --wysiwyg-primary-foreground: #1e2723;
-        --wysiwyg-card: #171717;
-        --wysiwyg-foreground: #e2e8f0;
-        --wysiwyg-muted: #a2a2a2;
-        --wysiwyg-muted-foreground: #c0c0c0;
-        --wysiwyg-border: #292929;
-        --wysiwyg-accent: #313131;
-        --wysiwyg-ring: #4ade80;
-        --wysiwyg-danger: #ff6347;
-        --wysiwyg-code-bg: #0d1117;
-        --wysiwyg-code-foreground: #58a6ff;
-        --wysiwyg-overlay-bg: rgba(0, 0, 0, 0.6);
-    }
 
-    .wysiwyg-toolbar {
-        background: var(--wysiwyg-card);
-        border: 1px solid var(--wysiwyg-border);
-        border-radius: var(--wysiwyg-radius-md) var(--wysiwyg-radius-md) 0 0;
-        padding: 0.5rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.25rem;
-    }
-
-    .wysiwyg.wysiwyg-active .wysiwyg-toolbar {
-        border-color: var(--wysiwyg-ring);
-    }
-
-    .wysiwyg-toolbar button {
-        width: 2rem;
-        height: 2rem;
-        border: none;
-        background: transparent;
-        border-radius: var(--wysiwyg-radius-sm);
-        color: var(--wysiwyg-muted);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all var(--wysiwyg-transition-fast);
-    }
-
-    .wysiwyg-toolbar button:hover {
-        background: var(--wysiwyg-accent);
-        color: var(--wysiwyg-foreground);
-    }
-
-    .wysiwyg-toolbar button.active {
-        background: var(--wysiwyg-primary);
-        color: white;
-    }
-
-    .wysiwyg-danger-btn:hover {
-        background: var(--wysiwyg-danger) !important;
-        color: white !important;
-    }
-
-    .wysiwyg-divider {
-        width: 1px;
-        height: 1.5rem;
-        background: var(--wysiwyg-border);
-        margin: 0 0.25rem;
-    }
-
-    .wysiwyg-select {
-        height: 2rem;
-        padding: 0 0.5rem;
-        border-radius: var(--wysiwyg-radius-sm);
-        background: var(--wysiwyg-card);
-        border: 1px solid var(--wysiwyg-border);
-        color: var(--wysiwyg-foreground);
-        font-size: 0.75rem;
-        cursor: pointer;
-    }
-
-    .wysiwyg-editor {
-        background: var(--wysiwyg-card);
-        border: 1px solid var(--wysiwyg-border);
-        border-top: none;
-        border-bottom: none;
-        padding: 1rem;
-        min-height: 300px;
-        line-height: 1.7;
-        font-size: 0.875rem;
-    }
-
-    .wysiwyg-editor:focus {
-        outline: none;
-    }
-
-    .wysiwyg.wysiwyg-active .wysiwyg-editor {
-        border-color: var(--wysiwyg-ring);
-    }
-
-    .wysiwyg-status-bar {
-        background: var(--wysiwyg-card);
-        border: 1px solid var(--wysiwyg-border);
-        border-radius: 0 0 var(--wysiwyg-radius-md) var(--wysiwyg-radius-md);
-        padding: 0.5rem 1rem;
-        display: flex;
-        gap: 1.5rem;
-        font-size: 0.75rem;
-        color: var(--wysiwyg-muted);
-        clear: both;
-    }
-
-    .wysiwyg.wysiwyg-active .wysiwyg-status-bar {
-        border-color: var(--wysiwyg-ring);
-    }
-
-    .wysiwyg-status-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .wysiwyg-editor h1 {
-        font-size: 1.875rem;
-        font-weight: 700;
-        margin: 1.5rem 0 1rem;
-    }
-
-    .wysiwyg-editor h2 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin: 1.25rem 0 0.75rem;
-    }
-
-    .wysiwyg-editor h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 1rem 0 0.5rem;
-    }
-
-    .wysiwyg-editor pre {
-        background: var(--wysiwyg-code-bg);
-        color: var(--wysiwyg-code-foreground);
-        padding: 1rem;
-        border-radius: var(--wysiwyg-radius-sm);
-        font-family: var(--wysiwyg-font-mono);
-        margin: 1rem 0;
-        overflow-x: auto;
-    }
-
-    .wysiwyg-editor blockquote[data-note] {
-        margin: 1rem 0;
-        padding: 0.75rem 1rem;
-        border-left: 4px solid var(--wysiwyg-primary);
-        background: color-mix(in srgb, var(--wysiwyg-primary) 8%, transparent);
-        border-radius: var(--wysiwyg-radius-sm);
-    }
-
-    .wysiwyg-editor hr {
-        border: none;
-        border-top: 2px solid var(--wysiwyg-border);
-        margin: 1.5rem 0;
-    }
-
-    .wysiwyg-editor ul,
-    .wysiwyg-editor ol {
-        margin: 0 0 1rem 1.5rem;
-        padding-left: 0;
-    }
-
-    .wysiwyg-editor ul {
-        list-style-type: disc;
-    }
-
-    .wysiwyg-editor ol {
-        list-style-type: decimal;
-    }
-
-    .wysiwyg-image-wrapper {
-        margin: 1rem 0;
-        display: inline-block;
-        max-width: 100%;
-        position: relative;
-        cursor: pointer;
-        transition: all var(--wysiwyg-transition-base);
-    }
-
-    .wysiwyg-image-wrapper:hover {
-        opacity: 0.9;
-    }
-
-    .wysiwyg-image-wrapper:hover::after {
-        content: '✎ Edit';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: var(--wysiwyg-radius-sm);
-        font-size: 0.875rem;
-        pointer-events: none;
-    }
-
-    .wysiwyg-image-wrapper.align-left {
-        float: left;
-        margin-right: 1rem;
-    }
-
-    .wysiwyg-image-wrapper.align-center {
-        display: block;
-        text-align: center;
-        margin: 1rem auto;
-    }
-
-    .wysiwyg-image-wrapper.align-right {
-        float: right;
-        margin-left: 1rem;
-    }
-
-    .wysiwyg-image-wrapper img {
-        max-width: 100%;
-        height: auto;
-        border-radius: var(--wysiwyg-radius-sm);
-        display: block;
-    }
-
-    .wysiwyg-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: var(--wysiwyg-z-modal);
-        display: none;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .wysiwyg-modal-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--wysiwyg-overlay-bg);
-    }
-
-    .wysiwyg-modal-content {
-        position: relative;
-        background: var(--wysiwyg-card);
-        border-radius: var(--wysiwyg-radius-md);
-        box-shadow: var(--wysiwyg-shadow-lg);
-        max-width: 500px;
-        width: 90%;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .wysiwyg-modal-header {
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--wysiwyg-border);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .wysiwyg-input {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border: 1px solid var(--wysiwyg-border);
-        border-radius: var(--wysiwyg-radius-sm);
-        background: var(--wysiwyg-card);
-        color: var(--wysiwyg-foreground);
-        font-size: 0.875rem;
-    }
-
-    .wysiwyg-btn {
-        padding: 0.5rem 1rem;
-        border-radius: var(--wysiwyg-radius-sm);
-        font-size: 0.875rem;
-        cursor: pointer;
-        border: none;
-    }
-
-    .wysiwyg-btn-primary {
-        background: var(--wysiwyg-primary);
-        color: white;
-    }
-
-    .wysiwyg-btn-primary:hover {
-        background: color-mix(in srgb, var(--wysiwyg-primary) 90%, black);
-    }
-
-    .wysiwyg-form-group {
-        margin-bottom: 1rem;
-    }
-
-    .wysiwyg-modal-body {
-        padding: 1.5rem;
-    }
-
-    .wysiwyg-modal-footer {
-        padding: 1.5rem;
-        border-top: 1px solid var(--wysiwyg-border);
-        display: flex;
-        gap: 0.5rem;
-        justify-content: flex-end;
-    }
-
-    .wysiwyg-btn-secondary {
-        background: var(--wysiwyg-accent);
-        color: var(--wysiwyg-foreground);
-    }
-
-    .wysiwyg-align-buttons {
-        display: flex;
-        gap: 0.5rem;
-    }
-
-    .wysiwyg-align-btn {
-        padding: 0.5rem 1rem;
-        border: 1px solid var(--wysiwyg-border);
-        background: var(--wysiwyg-card);
-        color: var(--wysiwyg-foreground);
-        cursor: pointer;
-        border-radius: var(--wysiwyg-radius-sm);
-    }
-
-    .wysiwyg-align-btn.active {
-        background: var(--wysiwyg-primary);
-        color: white;
-        border-color: var(--wysiwyg-primary);
-    }
-</style>
 <script>
     const WYSIWYG_I18N = {
         en: {
-            undo: 'Undo (Ctrl+Z)', redo: 'Redo (Ctrl+Y)', bold: 'Bold (Ctrl+B)', italic: 'Italic (Ctrl+I)',
-            underline: 'Underline (Ctrl+U)', strikethrough: 'Strikethrough', highlight: 'Highlight', text: 'Text',
-            bulletList: 'Bullet list', numberedList: 'Numbered list', outdent: 'Outdent', indent: 'Indent',
-            alignLeft: 'Align left', alignCenter: 'Align center', alignRight: 'Align right', alignJustify: 'Justify',
-            superscript: 'Superscript', subscript: 'Subscript', code: 'Code block', note: 'Note block',
-            horizontalRule: 'Horizontal rule', link: 'Insert link', imageFile: 'Insert image/file',
-            clearFormat: 'Clear formatting', clearAll: 'Clear all', insert: 'Insert', url: 'URL',
-            openInNewTab: 'Open in new tab', alignment: 'Alignment', left: 'Left', center: 'Center', right: 'Right',
-            deleteLink: 'Delete link', deleteImage: 'Delete image', cancel: 'Cancel', apply: 'Apply',
-            insertImage: 'Insert image', insertFile: 'Insert file', editLink: 'Edit link', editImage: 'Edit image',
-            words: '{count} word{s}', characters: '{count} character{s}', paragraph: 'Paragraph', block: 'Block',
-            heading1: 'Heading 1', heading2: 'Heading 2', heading3: 'Heading 3', heading4: 'Heading 4',
-            heading5: 'Heading 5', heading6: 'Heading 6', codeBlock: 'Code', noteBlock: 'Note', list: 'List',
-            numberedListBlock: 'Numbered List', listItem: 'List Item', clearAllConfirm: 'Are you sure you want to clear all content?'
+            undo: 'Undo (Ctrl+Z)',
+            redo: 'Redo (Ctrl+Y)',
+            bold: 'Bold (Ctrl+B)',
+            italic: 'Italic (Ctrl+I)',
+            underline: 'Underline (Ctrl+U)',
+            strikethrough: 'Strikethrough',
+            highlight: 'Highlight',
+            text: 'Text',
+            bulletList: 'Bullet list',
+            numberedList: 'Numbered list',
+            outdent: 'Outdent',
+            indent: 'Indent',
+            alignLeft: 'Align left',
+            alignCenter: 'Align center',
+            alignRight: 'Align right',
+            alignJustify: 'Justify',
+            superscript: 'Superscript',
+            subscript: 'Subscript',
+            code: 'Code block',
+            note: 'Note block',
+            horizontalRule: 'Horizontal rule',
+            link: 'Insert link',
+            imageFile: 'Insert image',
+            file: 'Insert file',
+            clearFormat: 'Clear formatting',
+            clearAll: 'Clear all',
+            insert: 'Insert',
+            url: 'URL',
+            openInNewTab: 'Open in new tab',
+            alignment: 'Alignment',
+            left: 'Left',
+            center: 'Center',
+            right: 'Right',
+            deleteLink: 'Delete link',
+            deleteMedia: 'Delete media',
+            cancel: 'Cancel',
+            apply: 'Apply',
+            insertImage: 'Insert image',
+            insertFile: 'Insert file',
+            editLink: 'Edit link',
+            editImage: 'Edit image',
+            editFile: 'Edit file',
+            words: '{count} word{s}',
+            characters: '{count} character{s}',
+            paragraph: 'Paragraph',
+            block: 'Block',
+            heading1: 'Heading 1',
+            heading2: 'Heading 2',
+            heading3: 'Heading 3',
+            heading4: 'Heading 4',
+            heading5: 'Heading 5',
+            heading6: 'Heading 6',
+            codeBlock: 'Code',
+            noteBlock: 'Note',
+            list: 'List',
+            numberedListBlock: 'Numbered List',
+            listItem: 'List Item',
+            clearAllConfirm: 'Are you sure you want to clear all content?',
+            uploading: 'Uploading...',
+            uploadSuccess: 'Upload successful!',
+            uploadError: 'Upload failed. Please try again.'
         },
         ru: {
-            undo: 'Отменить (Ctrl+Z)', redo: 'Повторить (Ctrl+Y)', bold: 'Жирный (Ctrl+B)', italic: 'Курсив (Ctrl+I)',
-            underline: 'Подчеркнутый (Ctrl+U)', strikethrough: 'Зачеркнутый', highlight: 'Выделить', text: 'Текст',
-            bulletList: 'Маркированный список', numberedList: 'Нумерованный список', outdent: 'Уменьшить отступ',
-            indent: 'Увеличить отступ', alignLeft: 'По левому краю', alignCenter: 'По центру', alignRight: 'По правому краю',
-            alignJustify: 'По ширине', superscript: 'Надстрочный', subscript: 'Подстрочный', code: 'Блок кода',
-            note: 'Блок заметки', horizontalRule: 'Горизонтальная линия', link: 'Вставить ссылку',
-            imageFile: 'Вставить изображение/файл', clearFormat: 'Очистить форматирование', clearAll: 'Очистить все',
-            insert: 'Вставить', url: 'URL', openInNewTab: 'Открыть в новой вкладке', alignment: 'Выравнивание',
-            left: 'Слева', center: 'По центру', right: 'Справа', deleteLink: 'Удалить ссылку', deleteImage: 'Удалить изображение',
-            cancel: 'Отмена', apply: 'Применить', insertImage: 'Вставить изображение', insertFile: 'Вставить файл',
-            editLink: 'Редактировать ссылку', editImage: 'Редактировать изображение', words: '{count} слов{s}',
-            characters: '{count} символ{s}', paragraph: 'Параграф', block: 'Блок', heading1: 'Заголовок 1',
-            heading2: 'Заголовок 2', heading3: 'Заголовок 3', heading4: 'Заголовок 4', heading5: 'Заголовок 5',
-            heading6: 'Заголовок 6', codeBlock: 'Код', noteBlock: 'Заметка', list: 'Список',
-            numberedListBlock: 'Нумерованный список', listItem: 'Элемент списка',
-            clearAllConfirm: 'Вы уверены, что хотите очистить весь контент?'
+            undo: 'Отменить (Ctrl+Z)',
+            redo: 'Повторить (Ctrl+Y)',
+            bold: 'Жирный (Ctrl+B)',
+            italic: 'Курсив (Ctrl+I)',
+            underline: 'Подчеркнутый (Ctrl+U)',
+            strikethrough: 'Зачеркнутый',
+            highlight: 'Выделить',
+            text: 'Текст',
+            bulletList: 'Маркированный список',
+            numberedList: 'Нумерованный список',
+            outdent: 'Уменьшить отступ',
+            indent: 'Увеличить отступ',
+            alignLeft: 'По левому краю',
+            alignCenter: 'По центру',
+            alignRight: 'По правому краю',
+            alignJustify: 'По ширине',
+            superscript: 'Надстрочный',
+            subscript: 'Подстрочный',
+            code: 'Блок кода',
+            note: 'Блок заметки',
+            horizontalRule: 'Горизонтальная линия',
+            link: 'Вставить ссылку',
+            imageFile: 'Вставить изображение',
+            file: 'Вставить файл',
+            clearFormat: 'Очистить форматирование',
+            clearAll: 'Очистить все',
+            insert: 'Вставить',
+            url: 'URL',
+            openInNewTab: 'Открыть в новой вкладке',
+            alignment: 'Выравнивание',
+            left: 'Слева',
+            center: 'По центру',
+            right: 'Справа',
+            deleteLink: 'Удалить ссылку',
+            deleteMedia: 'Удалить медиа',
+            cancel: 'Отмена',
+            apply: 'Применить',
+            insertImage: 'Вставить изображение',
+            insertFile: 'Вставить файл',
+            editLink: 'Редактировать ссылку',
+            editImage: 'Редактировать изображение',
+            editFile: 'Редактировать файл',
+            words: '{count} слов{s}',
+            characters: '{count} символ{s}',
+            paragraph: 'Параграф',
+            block: 'Блок',
+            heading1: 'Заголовок 1',
+            heading2: 'Заголовок 2',
+            heading3: 'Заголовок 3',
+            heading4: 'Заголовок 4',
+            heading5: 'Заголовок 5',
+            heading6: 'Заголовок 6',
+            codeBlock: 'Код',
+            noteBlock: 'Заметка',
+            list: 'Список',
+            numberedListBlock: 'Нумерованный список',
+            listItem: 'Элемент списка',
+            clearAllConfirm: 'Вы уверены, что хотите очистить весь контент?',
+            uploading: 'Загрузка...',
+            uploadSuccess: 'Загрузка успешна!',
+            uploadError: 'Ошибка загрузки. Попробуйте снова.'
         },
         uk: {
-            undo: 'Скасувати (Ctrl+Z)', redo: 'Повторити (Ctrl+Y)', bold: 'Жирний (Ctrl+B)', italic: 'Курсив (Ctrl+I)',
-            underline: 'Підкреслений (Ctrl+U)', strikethrough: 'Закреслений', highlight: 'Виділити', text: 'Текст',
-            bulletList: 'Маркований список', numberedList: 'Нумерований список', outdent: 'Зменшити відступ',
-            indent: 'Збільшити відступ', alignLeft: 'По лівому краю', alignCenter: 'По центру',
-            alignRight: 'По правому краю', alignJustify: 'По ширині', superscript: 'Надрядковий', subscript: 'Підрядковий',
-            code: 'Блок коду', note: 'Блок нотатки', horizontalRule: 'Горизонтальна лінія', link: 'Вставити посилання',
-            imageFile: 'Вставити зображення/файл', clearFormat: 'Очистити форматування', clearAll: 'Очистити все',
-            insert: 'Вставити', url: 'URL', openInNewTab: 'Відкрити в новій вкладці', alignment: 'Вирівнювання',
-            left: 'Зліва', center: 'По центру', right: 'Справа', deleteLink: 'Видалити посилання',
-            deleteImage: 'Видалити зображення', cancel: 'Скасувати', apply: 'Застосувати',
-            insertImage: 'Вставити зображення', insertFile: 'Вставити файл', editLink: 'Редагувати посилання',
-            editImage: 'Редагувати зображення', words: '{count} слів{s}', characters: '{count} символ{s}',
-            paragraph: 'Параграф', block: 'Блок', heading1: 'Заголовок 1', heading2: 'Заголовок 2',
-            heading3: 'Заголовок 3', heading4: 'Заголовок 4', heading5: 'Заголовок 5', heading6: 'Заголовок 6',
-            codeBlock: 'Код', noteBlock: 'Нотатка', list: 'Список', numberedListBlock: 'Нумерований список',
-            listItem: 'Елемент списку', clearAllConfirm: 'Ви впевнені, що хочете очистити весь контент?'
+            undo: 'Скасувати (Ctrl+Z)',
+            redo: 'Повторити (Ctrl+Y)',
+            bold: 'Жирний (Ctrl+B)',
+            italic: 'Курсив (Ctrl+I)',
+            underline: 'Підкреслений (Ctrl+U)',
+            strikethrough: 'Закреслений',
+            highlight: 'Виділити',
+            text: 'Текст',
+            bulletList: 'Маркований список',
+            numberedList: 'Нумерований список',
+            outdent: 'Зменшити відступ',
+            indent: 'Збільшити відступ',
+            alignLeft: 'По лівому краю',
+            alignCenter: 'По центру',
+            alignRight: 'По правому краю',
+            alignJustify: 'По ширині',
+            superscript: 'Надрядковий',
+            subscript: 'Підрядковий',
+            code: 'Блок коду',
+            note: 'Блок нотатки',
+            horizontalRule: 'Горизонтальна лінія',
+            link: 'Вставити посилання',
+            imageFile: 'Вставити зображення',
+            file: 'Вставити файл',
+            clearFormat: 'Очистити форматування',
+            clearAll: 'Очистити все',
+            insert: 'Вставити',
+            url: 'URL',
+            openInNewTab: 'Відкрити в новій вкладці',
+            alignment: 'Вирівнювання',
+            left: 'Зліва',
+            center: 'По центру',
+            right: 'Справа',
+            deleteLink: 'Видалити посилання',
+            deleteMedia: 'Видалити медіа',
+            cancel: 'Скасувати',
+            apply: 'Застосувати',
+            insertImage: 'Вставити зображення',
+            insertFile: 'Вставити файл',
+            editLink: 'Редагувати посилання',
+            editImage: 'Редагувати зображення',
+            editFile: 'Редагувати файл',
+            words: '{count} слів{s}',
+            characters: '{count} символ{s}',
+            paragraph: 'Параграф',
+            block: 'Блок',
+            heading1: 'Заголовок 1',
+            heading2: 'Заголовок 2',
+            heading3: 'Заголовок 3',
+            heading4: 'Заголовок 4',
+            heading5: 'Заголовок 5',
+            heading6: 'Заголовок 6',
+            codeBlock: 'Код',
+            noteBlock: 'Нотатка',
+            list: 'Список',
+            numberedListBlock: 'Нумерований список',
+            listItem: 'Елемент списку',
+            clearAllConfirm: 'Ви впевнені, що хочете очистити весь контент?',
+            uploading: 'Завантаження...',
+            uploadSuccess: 'Завантаження успішне!',
+            uploadError: 'Помилка завантаження. Спробуйте ще раз.'
         }
     };
 
@@ -642,31 +425,69 @@
         blocks: ['P', 'DIV', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'PRE', 'LI'],
         headings: ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
         names: {
-            P: 'paragraph', DIV: 'block', H1: 'heading1', H2: 'heading2', H3: 'heading3', H4: 'heading4',
-            H5: 'heading5', H6: 'heading6', PRE: 'codeBlock', BLOCKQUOTE: 'noteBlock', UL: 'list',
-            OL: 'numberedListBlock', LI: 'listItem'
+            P: 'paragraph',
+            DIV: 'block',
+            H1: 'heading1',
+            H2: 'heading2',
+            H3: 'heading3',
+            H4: 'heading4',
+            H5: 'heading5',
+            H6: 'heading6',
+            PRE: 'codeBlock',
+            BLOCKQUOTE: 'noteBlock',
+            UL: 'list',
+            OL: 'numberedListBlock',
+            LI: 'listItem'
         },
-        align: { left: 'left', start: 'left', center: 'center', right: 'right', end: 'right', justify: 'justify' },
-        editor: null, file: null, mode: null, link: null, range: null, imageWrapper: null, locale: 'en', saveImagesAs: 'url'
+        align: {
+            left: 'left',
+            start: 'left',
+            center: 'center',
+            right: 'right',
+            end: 'right',
+            justify: 'justify'
+        },
+        editor: null,
+        file: null,
+        mode: null,
+        link: null,
+        range: null,
+        mediaWrapper: null,
+        locale: 'en',
+        saveImagesAs: 'url',
+        uploadUrl: null,
+        deleteUrl: null,
+        modelType: null,
+        modelId: null,
+        csrfToken: null,
+        uploadedMediaUrl: null,
+        uploadedMediaId: null,
+        uploadType: null
     };
 
     function t(key, params = {}) {
         const locale = WC.locale || 'en';
         const translations = WYSIWYG_I18N[locale] || WYSIWYG_I18N.en;
         let text = translations[key] || WYSIWYG_I18N.en[key] || key;
-        Object.keys(params).forEach(k => { text = text.replace(`{${k}}`, params[k]); });
+        Object.keys(params).forEach(k => {
+            text = text.replace(`{${k}}`, params[k]);
+        });
         return text;
     }
 
     function applyI18n(container) {
-        container.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
-        container.querySelectorAll('[data-i18n-title]').forEach(el => { el.title = t(el.getAttribute('data-i18n-title')); });
+        container.querySelectorAll('[data-i18n]').forEach(el => {
+            el.textContent = t(el.getAttribute('data-i18n'));
+        });
+        container.querySelectorAll('[data-i18n-title]').forEach(el => {
+            el.title = t(el.getAttribute('data-i18n-title'));
+        });
     }
 
     function getEd(e) {
         let tg = e.target;
         while (tg && !tg.hasAttribute('data-wysiwyg-id')) tg = tg.parentElement;
-        return tg?.querySelector('.wysiwyg-editor');
+        return tg?.querySelector('.wysiwyg-content');
     }
 
     function findP(n, tag, stop) {
@@ -689,7 +510,8 @@
     function moveCaret(el, txt = '\u00A0') {
         const tn = document.createTextNode(txt);
         el.parentNode.insertBefore(tn, el.nextSibling);
-        const s = window.getSelection(), r = document.createRange();
+        const s = window.getSelection(),
+            r = document.createRange();
         r.setStart(tn, 1);
         r.collapse(true);
         s.removeAllRanges();
@@ -697,7 +519,8 @@
     }
 
     function setCaret(el) {
-        const r = document.createRange(), s = window.getSelection();
+        const r = document.createRange(),
+            s = window.getSelection();
         r.selectNodeContents(el);
         r.collapse(true);
         s.removeAllRanges();
@@ -713,13 +536,123 @@
         });
     }
 
+    /**
+     * Загрузка файла (изображения или документа) на сервер
+     */
+    async function uploadFileToServer(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('model_type', WC.modelType || 'App\\Models\\User');
+        formData.append('model_id', WC.modelId || '');
+
+        console.log('Uploading file:', {
+            fileName: file.name,
+            fileSize: file.size,
+            fileType: file.type,
+            uploadUrl: WC.uploadUrl,
+            modelType: WC.modelType,
+            modelId: WC.modelId,
+            hasCsrfToken: !!WC.csrfToken
+        });
+
+        try {
+            const response = await fetch(WC.uploadUrl, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': WC.csrfToken,
+                    'Accept': 'application/json',
+                },
+                body: formData
+            });
+
+            let data;
+            try {
+                data = await response.json();
+            } catch (e) {
+                console.error('Failed to parse response:', e);
+                throw new Error('Server returned invalid response');
+            }
+
+            console.log('Upload response:', data);
+
+            if (!response.ok || !data.success) {
+                const errorMsg = data.message || 'Upload failed';
+                console.error('Upload failed:', errorMsg, data);
+                throw new Error(errorMsg);
+            }
+
+            return {
+                url: data.url,
+                mediaId: data.media_id,
+                isImage: data.is_image,
+                mimeType: data.mime_type,
+                originalName: data.original_name,
+                size: data.size,
+                humanSize: data.human_size
+            };
+        } catch (error) {
+            console.error('Upload error:', error);
+            throw error;
+        }
+    }
+
+    // Добавьте эту функцию после других функций
+    function ensureEditorStructure(ed) {
+        // Проверяем, есть ли хоть какой-то контент
+        const hasContent = ed.innerHTML.trim() && ed.textContent.trim();
+        
+        // Если есть контент, но нет блочных элементов (только текстовые ноды)
+        if (hasContent) {
+            const hasBlockElement = ed.querySelector('div, p, h1, h2, h3, h4, h5, h6, ul, ol, blockquote, pre');
+            if (!hasBlockElement) {
+                // Оборачиваем существующий текст в div
+                const tempDiv = document.createElement('div');
+                while (ed.firstChild) {
+                    tempDiv.appendChild(ed.firstChild);
+                }
+                ed.appendChild(tempDiv);
+                return true;
+            }
+            return false;
+        }
+        
+        // Если редактор полностью пустой, создаем начальную структуру
+        if (!ed.innerHTML.trim() || ed.innerHTML === '' || ed.textContent.trim() === '') {
+            ed.innerHTML = '<div><br></div>';
+            return true;
+        }
+        
+        return false;
+    }
+
+    // Модифицируйте функцию wysiwygSyncContent
     function wysiwygSyncContent(ed) {
-        const c = ed.closest('.wysiwyg'), h = c?.querySelector('input[type="hidden"][data-wysiwyg-hidden]');
+        const c = ed.closest('.wysiwyg'),
+            h = c?.querySelector('input[type="hidden"][data-wysiwyg-hidden]');
+
         if (h) h.value = ed.innerHTML;
-        const txt = ed.innerText || '', w = txt.trim().split(/\s+/).filter(x => x.length).length, ch = txt.length;
-        const wc = c.querySelector('.wysiwyg-word-count'), cc = c.querySelector('.wysiwyg-char-count');
-        if (wc) wc.textContent = t('words', { count: w, s: w !== 1 ? 's' : '' });
-        if (cc) cc.textContent = t('characters', { count: ch, s: ch !== 1 ? 's' : '' });
+
+        // Получаем текст и очищаем
+        const txt = ed.innerText || '';
+        const cleanedText = txt.replace(/^\s+|\s+$/g, '');
+
+        // Проверяем, пустой ли контент
+        const isEmpty = cleanedText.length === 0 || ed.innerHTML === '<div><br></div>' || ed.innerHTML === '<br>';
+
+        const w = isEmpty ? 0 : cleanedText.trim().split(/\s+/).filter(x => x.length).length;
+        const ch = isEmpty ? 0 : cleanedText.length;
+
+        const wc = c.querySelector('.wysiwyg-word-count'),
+            cc = c.querySelector('.wysiwyg-char-count');
+        if (wc) wc.textContent = t('words', {
+            count: w,
+            s: w !== 1 ? 's' : ''
+        });
+        if (cc) cc.textContent = t('characters', {
+            count: ch,
+            s: ch !== 1 ? 's' : ''
+        });
+
         const s = window.getSelection();
         if (s.rangeCount) {
             let n = s.getRangeAt(0).startContainer;
@@ -751,8 +684,10 @@
         let n = s.getRangeAt(0).startContainer;
         while (n && n !== ed) {
             if (n.nodeType === 1) {
-                if (n.nodeName === 'SUP') c.querySelector('[onclick*="wysiwygToggleScript"][onclick*="superscript"]')?.classList.add('active');
-                if (n.nodeName === 'SUB') c.querySelector('[onclick*="wysiwygToggleScript"][onclick*="subscript"]')?.classList.add('active');
+                if (n.nodeName === 'SUP') c.querySelector('[onclick*="wysiwygToggleScript"][onclick*="superscript"]')
+                    ?.classList.add('active');
+                if (n.nodeName === 'SUB') c.querySelector('[onclick*="wysiwygToggleScript"][onclick*="subscript"]')
+                    ?.classList.add('active');
             }
             n = n.parentNode;
         }
@@ -774,9 +709,9 @@
         if (findP(s.anchorNode, 'BLOCKQUOTE', ed)?.hasAttribute('data-note'))
             c.querySelector('[onclick*="wysiwygInsertBlock"][onclick*="note"]')?.classList.add('active');
         if (isInside(s.getRangeAt(0), n => {
-            const bg = window.getComputedStyle(n).backgroundColor;
-            return bg === 'rgb(255, 255, 0)' || bg === 'yellow';
-        }, ed)) c.querySelector('[onclick*="wysiwygHighlightText"]')?.classList.add('active');
+                const bg = window.getComputedStyle(n).backgroundColor;
+                return bg === 'rgb(255, 255, 0)' || bg === 'yellow';
+            }, ed)) c.querySelector('[onclick*="wysiwygHighlightText"]')?.classList.add('active');
     }
 
     function wysiwygFormat(e, cmd, v = null) {
@@ -799,10 +734,11 @@
         ed.focus();
         const s = window.getSelection();
         if (!s.rangeCount) return;
-        const r = s.getRangeAt(0), h = isInside(r, n => {
-            const bg = window.getComputedStyle(n).backgroundColor;
-            return bg === 'rgb(255, 255, 0)' || bg === 'yellow';
-        }, ed);
+        const r = s.getRangeAt(0),
+            h = isInside(r, n => {
+                const bg = window.getComputedStyle(n).backgroundColor;
+                return bg === 'rgb(255, 255, 0)' || bg === 'yellow';
+            }, ed);
         if (h && r.collapsed) moveCaret(h);
         else if (h) {
             document.execCommand('removeFormat', false, null);
@@ -824,7 +760,9 @@
         ed.focus();
         const s = window.getSelection();
         if (!s.rangeCount) return;
-        const r = s.getRangeAt(0), tag = type === 'superscript' ? 'SUP' : 'SUB', el = findP(r.startContainer, tag, ed);
+        const r = s.getRangeAt(0),
+            tag = type === 'superscript' ? 'SUP' : 'SUB',
+            el = findP(r.startContainer, tag, ed);
         if (el) {
             if (r.collapsed) moveCaret(el);
             else {
@@ -893,7 +831,8 @@
         if (!s.rangeCount) return;
         let n = s.focusNode;
         while (n && n !== ed) {
-            if (n.nodeType === 1 && ['P', 'DIV', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'LI'].includes(n.nodeName) && ed.contains(n)) {
+            if (n.nodeType === 1 && ['P', 'DIV', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'LI'].includes(n
+                    .nodeName) && ed.contains(n)) {
                 const m = parseInt(window.getComputedStyle(n).marginLeft) || 0;
                 n.style.marginLeft = (d === 'indent' ? m + 30 : Math.max(0, m - 30)) + 'px';
                 wysiwygSyncContent(ed);
@@ -909,18 +848,24 @@
         ed.focus();
         const s = window.getSelection();
         if (!s.rangeCount || !ed.contains(s.anchorNode)) return;
-        const r = s.getRangeAt(0), bs = new Set(), w = document.createTreeWalker(ed, NodeFilter.SHOW_ELEMENT, {
-            acceptNode(n) {
-                if (WC.blocks.includes(n.nodeName)) {
-                    const nr = document.createRange();
-                    nr.selectNodeContents(n);
-                    if (r.compareBoundaryPoints(Range.END_TO_START, nr) < 0 && r.compareBoundaryPoints(Range.START_TO_END, nr) > 0) return NodeFilter.FILTER_ACCEPT;
+        const r = s.getRangeAt(0),
+            bs = new Set(),
+            w = document.createTreeWalker(ed, NodeFilter.SHOW_ELEMENT, {
+                acceptNode(n) {
+                    if (WC.blocks.includes(n.nodeName)) {
+                        const nr = document.createRange();
+                        nr.selectNodeContents(n);
+                        if (r.compareBoundaryPoints(Range.END_TO_START, nr) < 0 && r.compareBoundaryPoints(Range
+                                .START_TO_END, nr) > 0) return NodeFilter.FILTER_ACCEPT;
+                    }
+                    return NodeFilter.FILTER_SKIP;
                 }
-                return NodeFilter.FILTER_SKIP;
-            }
-        });
+            });
         let n = w.nextNode();
-        while (n) { bs.add(n); n = w.nextNode(); }
+        while (n) {
+            bs.add(n);
+            n = w.nextNode();
+        }
         if (bs.size === 0) {
             n = r.startContainer;
             while (n && n !== ed && !WC.blocks.includes(n.nodeName)) n = n.parentNode;
@@ -934,7 +879,7 @@
     function wysiwygClearAll(e) {
         const ed = getEd(e);
         if (ed && confirm(t('clearAllConfirm'))) {
-            ed.innerHTML = '<p><br></p>';
+            ed.innerHTML = '<div><br></div>';
             ed.focus();
             wysiwygSyncContent(ed);
             updToolbar(ed);
@@ -957,11 +902,12 @@
 
     function showM(titleKey, cfg) {
         document.getElementById('wysiwygModalTitle').textContent = t(titleKey);
+        document.getElementById('modalUrlGroup').style.display = cfg.url ? 'block' : 'none';
         document.getElementById('modalTextGroup').style.display = cfg.txt ? 'block' : 'none';
         document.getElementById('modalTargetGroup').style.display = cfg.tgt ? 'block' : 'none';
         document.getElementById('modalAlignGroup').style.display = cfg.aln ? 'block' : 'none';
         document.getElementById('modalDeleteGroup').style.display = cfg.del ? 'block' : 'none';
-        document.getElementById('modalDeleteImageGroup').style.display = cfg.delImg ? 'block' : 'none';
+        document.getElementById('modalDeleteMediaGroup').style.display = cfg.delMedia ? 'block' : 'none';
         document.getElementById('wysiwygModalPreview').style.display = cfg.prv ? 'block' : 'none';
         document.getElementById('wysiwygUniversalModal').style.display = 'flex';
     }
@@ -978,16 +924,32 @@
         document.getElementById('wysiwygModalUrl').value = lnk?.href || '';
         document.getElementById('wysiwygModalText').value = lnk?.textContent || s.toString();
         document.getElementById('wysiwygModalTarget').checked = lnk?.target === '_blank';
-        showM(lnk ? 'editLink' : 'link', { txt: 1, tgt: 1, aln: 0, del: !!lnk, delImg: 0, prv: 0 });
+        showM(lnk ? 'editLink' : 'link', {
+            url: 1,
+            txt: 1,
+            tgt: 1,
+            aln: 0,
+            del: !!lnk,
+            delMedia: 0,
+            prv: 0
+        });
     }
 
-    function wysiwygOpenFileUpload(e) {
+    function wysiwygOpenFileUpload(e, type) {
         const ed = getEd(e);
         if (!ed) return;
         WC.editor = ed;
+        WC.uploadType = type;
         const s = window.getSelection();
         if (s.rangeCount) WC.range = s.getRangeAt(0).cloneRange();
-        ed.closest('.wysiwyg').querySelector('.wysiwyg-file-input').click();
+
+        const input = ed.closest('.wysiwyg').querySelector('.wysiwyg-file-input');
+        if (type === 'image') {
+            input.accept = 'image/*';
+        } else {
+            input.accept = 'application/pdf,.doc,.docx,.txt,.zip,.rar,.xls,.xlsx,.ppt,.pptx';
+        }
+        input.click();
     }
 
     async function wysiwygHandleFileSelect(e) {
@@ -996,8 +958,11 @@
         WC.file = f;
         const isImg = f.type.startsWith('image/');
         WC.mode = isImg ? 'image' : 'file';
-        const prv = document.getElementById('wysiwygModalPreview'), img = document.getElementById('wysiwygModalImagePreview'),
-            inf = document.getElementById('wysiwygModalFileInfo'), nm = document.getElementById('wysiwygModalFileName');
+        const prv = document.getElementById('wysiwygModalPreview'),
+            img = document.getElementById('wysiwygModalImagePreview'),
+            inf = document.getElementById('wysiwygModalFileInfo'),
+            nm = document.getElementById('wysiwygModalFileName');
+
         if (isImg) {
             const base64 = await fileToBase64(f);
             img.src = base64;
@@ -1008,38 +973,119 @@
             inf.style.display = 'flex';
             nm.textContent = f.name;
         }
-        showM(isImg ? 'insertImage' : 'insertFile', { txt: isImg, tgt: 0, aln: isImg, del: 0, delImg: 0, prv: 1 });
+
+        // ИСПРАВЛЕНИЕ: Скрываем поле URL для новых файлов/картинок
+        showM(isImg ? 'insertImage' : 'insertFile', {
+            url: 0,  // Скрываем URL для новых файлов
+            txt: isImg,
+            tgt: 0,
+            aln: isImg,
+            del: 0,
+            delMedia: 0,
+            prv: 1
+        });
+
+        if (WC.saveImagesAs === 'server') {
+            const modalBody = document.querySelector('.wysiwyg-modal-body');
+            const loadingMsg = document.createElement('div');
+            loadingMsg.className = 'wysiwyg-loading-message';
+            loadingMsg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ' + t('uploading');
+
+            modalBody.insertBefore(loadingMsg, modalBody.firstChild);
+
+            const applyBtn = document.querySelector('.wysiwyg-btn-primary');
+            if (applyBtn) {
+                applyBtn.disabled = true;
+                applyBtn.style.opacity = '0.5';
+                applyBtn.style.cursor = 'not-allowed';
+            }
+
+            try {
+                const result = await uploadFileToServer(f);
+                WC.uploadedMediaUrl = result.url;
+                WC.uploadedMediaId = result.mediaId;
+
+                if (isImg) {
+                    img.src = result.url;
+                }
+
+                loadingMsg.innerHTML = '<i class="fa-solid fa-check-circle"></i> ' + t('uploadSuccess');
+                loadingMsg.style.background = '#10b981';
+
+                if (applyBtn) {
+                    applyBtn.disabled = false;
+                    applyBtn.style.opacity = '1';
+                    applyBtn.style.cursor = 'pointer';
+                }
+
+                setTimeout(() => loadingMsg.remove(), 2000);
+            } catch (error) {
+                console.error('Upload failed:', error);
+                loadingMsg.innerHTML = '<i class="fa-solid fa-times-circle"></i> ' + (error.message || t(
+                    'uploadError'));
+                loadingMsg.style.background = '#ef4444';
+
+                if (applyBtn) {
+                    applyBtn.disabled = false;
+                    applyBtn.style.opacity = '1';
+                    applyBtn.style.cursor = 'pointer';
+                }
+
+                setTimeout(() => {
+                    loadingMsg.remove();
+                }, 3000);
+            }
+        }
     }
 
-    function wysiwygEditImage(wrapper) {
-        const ed = wrapper.closest('.wysiwyg-editor');
+    function wysiwygEditMedia(wrapper, isImage) {
+        const ed = wrapper.closest('.wysiwyg-content');
         if (!ed) return;
         WC.editor = ed;
-        WC.mode = 'image-edit';
-        WC.imageWrapper = wrapper;
-        const img = wrapper.querySelector('img'), cap = wrapper.querySelector('.wysiwyg-image-caption');
-        const align = wrapper.classList.contains('align-left') ? 'left' :
-            wrapper.classList.contains('align-right') ? 'right' : 'center';
-        document.getElementById('wysiwygModalUrl').value = img.src;
-        document.getElementById('wysiwygModalText').value = cap ? cap.textContent : '';
-        const prv = document.getElementById('wysiwygModalPreview'), prvImg = document.getElementById('wysiwygModalImagePreview'),
-            inf = document.getElementById('wysiwygModalFileInfo');
-        prvImg.src = img.src;
-        prvImg.style.display = 'block';
-        inf.style.display = 'none';
-        prv.style.display = 'block';
-        document.querySelectorAll('.wysiwyg-align-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector(`.wysiwyg-align-btn[data-align="${align}"]`)?.classList.add('active');
-        showM('editImage', { txt: 1, tgt: 0, aln: 1, del: 0, delImg: 1, prv: 1 });
+        WC.mode = isImage ? 'image-edit' : 'file-edit';
+        WC.mediaWrapper = wrapper;
+
+        if (isImage) {
+            const img = wrapper.querySelector('img'),
+                // ИСПРАВЛЕНИЕ: Используем правильный селектор
+                cap = wrapper.querySelector('.wysiwyg-image-caption');
+            const align = wrapper.classList.contains('align-left') ? 'left' :
+                wrapper.classList.contains('align-right') ? 'right' : 'center';
+            document.getElementById('wysiwygModalUrl').value = img.src;
+            document.getElementById('wysiwygModalText').value = cap ? cap.textContent : '';
+            const prv = document.getElementById('wysiwygModalPreview'),
+                prvImg = document.getElementById('wysiwygModalImagePreview'),
+                inf = document.getElementById('wysiwygModalFileInfo');
+            prvImg.src = img.src;
+            prvImg.style.display = 'block';
+            inf.style.display = 'none';
+            prv.style.display = 'block';
+            document.querySelectorAll('.wysiwyg-align-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.wysiwyg-align-btn[data-align="${align}"]`)?.classList.add('active');
+            WC.uploadedMediaId = img.dataset.mediaId || null;
+            // ИСПРАВЛЕНИЕ: Скрываем URL при редактировании картинки
+            showM('editImage', {
+                url: 0,  // Скрываем URL при редактировании
+                txt: 1,
+                tgt: 0,
+                aln: 1,
+                del: 0,
+                delMedia: 1,
+                prv: 1
+            });
+        }
     }
 
     function wysiwygCloseUniversalModal() {
         document.getElementById('wysiwygUniversalModal').style.display = 'none';
-        const img = document.getElementById('wysiwygModalImagePreview'), inf = document.getElementById('wysiwygModalFileInfo');
+        const img = document.getElementById('wysiwygModalImagePreview'),
+            inf = document.getElementById('wysiwygModalFileInfo');
         img.src = '';
         img.style.display = 'none';
         inf.style.display = 'none';
-        WC.mode = WC.link = WC.file = WC.imageWrapper = null;
+        WC.uploadedMediaUrl = null;
+        WC.uploadedMediaId = null;
+        WC.mode = WC.link = WC.file = WC.mediaWrapper = null;
     }
 
     async function wysiwygApplyUniversal() {
@@ -1049,6 +1095,7 @@
         const s = window.getSelection();
         s.removeAllRanges();
         if (WC.range) s.addRange(WC.range);
+
         if (WC.mode === 'link') {
             const u = document.getElementById('wysiwygModalUrl').value.trim(),
                 txt = document.getElementById('wysiwygModalText').value.trim(),
@@ -1061,7 +1108,8 @@
                 if (tb) lnk.target = '_blank';
                 else lnk.removeAttribute('target');
             } else if (s.rangeCount) {
-                const r = s.getRangeAt(0), a = document.createElement('a');
+                const r = s.getRangeAt(0),
+                    a = document.createElement('a');
                 a.href = u;
                 a.textContent = txt || u;
                 if (tb) a.target = '_blank';
@@ -1073,8 +1121,9 @@
                 s.addRange(r);
             }
         }
+
         if (WC.mode === 'image-edit') {
-            const w = WC.imageWrapper;
+            const w = WC.mediaWrapper;
             if (!w) return;
             const cap = document.getElementById('wysiwygModalText').value.trim();
             const al = document.querySelector('.wysiwyg-align-btn.active')?.dataset.align || 'left';
@@ -1082,74 +1131,114 @@
             let capEl = w.querySelector('.wysiwyg-image-caption');
             if (cap) {
                 if (!capEl) {
-                    capEl = document.createElement('div');
+                    capEl = document.createElement('figcaption');
                     capEl.className = 'wysiwyg-image-caption';
                     w.appendChild(capEl);
                 }
                 capEl.textContent = cap;
             } else if (capEl) capEl.remove();
         }
+
         if (WC.mode === 'image') {
-            const f = WC.file;
-            if (!f) return;
             const cap = document.getElementById('wysiwygModalText').value.trim(),
                 al = document.querySelector('.wysiwyg-align-btn.active')?.dataset.align || 'left',
-                w = document.createElement('div');
+                w = document.createElement('figure');
+
             w.className = `wysiwyg-image-wrapper align-${al}`;
             w.contentEditable = 'false';
-            w.onclick = function() { wysiwygEditImage(this); };
+            w.onclick = function() {
+                if (this.closest('.wysiwyg-content')) {
+                    wysiwygEditMedia(this, true);
+                }
+            };
+
             const img = document.createElement('img');
-            if (WC.saveImagesAs === 'base64') img.src = await fileToBase64(f);
-            else img.src = URL.createObjectURL(f);
+
+            if (WC.saveImagesAs === 'server' && WC.uploadedMediaUrl) {
+                img.src = WC.uploadedMediaUrl;
+                if (WC.uploadedMediaId) {
+                    img.dataset.mediaId = WC.uploadedMediaId;
+                }
+            } else if (WC.saveImagesAs === 'base64') {
+                img.src = await fileToBase64(WC.file);
+            } else {
+                img.src = URL.createObjectURL(WC.file);
+            }
+
             img.alt = cap || 'Image';
             w.appendChild(img);
+
             if (cap) {
-                const c = document.createElement('div');
+                const c = document.createElement('figcaption');
                 c.className = 'wysiwyg-image-caption';
                 c.textContent = cap;
                 w.appendChild(c);
             }
+
             if (s.rangeCount) {
                 const r = s.getRangeAt(0);
                 r.deleteContents();
                 r.insertNode(w);
-                const p = document.createElement('p');
-                p.innerHTML = '<br>';
-                w.parentNode.insertBefore(p, w.nextSibling);
-                r.setStart(p, 0);
-                r.collapse(true);
+
+                if (al === 'center') {
+                    const p = document.createElement('p');
+                    p.innerHTML = '<br>';
+                    w.parentNode.insertBefore(p, w.nextSibling);
+                    r.setStart(p, 0);
+                    r.collapse(true);
+                } else {
+                    r.setStartAfter(w);
+                    r.collapse(true);
+                }
+
                 s.removeAllRanges();
                 s.addRange(r);
-            } else ed.appendChild(w);
+            } else {
+                ed.appendChild(w);
+            }
         }
+
         if (WC.mode === 'file') {
             const f = WC.file;
             if (!f) return;
+
             const a = document.createElement('a');
-            a.href = URL.createObjectURL(f);
+
+            if (WC.saveImagesAs === 'server' && WC.uploadedMediaUrl) {
+                a.href = WC.uploadedMediaUrl;
+                if (WC.uploadedMediaId) {
+                    a.dataset.mediaId = WC.uploadedMediaId;
+                }
+            } else {
+                a.href = URL.createObjectURL(f);
+            }
+
             a.download = f.name;
             a.className = 'wysiwyg-file-attachment';
             a.contentEditable = 'false';
-            a.innerHTML = `<i class="fa-solid fa-file wysiwyg-file-icon"></i><div class="wysiwyg-file-info"><span class="wysiwyg-file-name">${f.name}</span><span class="wysiwyg-file-size">${(f.size/1024).toFixed(1)} KB</span></div><i class="fa-solid fa-download wysiwyg-file-download"></i>`;
+            a.innerHTML =
+                `<i class="fa-solid fa-file wysiwyg-file-icon"></i><div class="wysiwyg-file-info"><span class="wysiwyg-file-name">${f.name}</span><span class="wysiwyg-file-size">${(f.size/1024).toFixed(1)} KB</span></div><i class="fa-solid fa-download wysiwyg-file-download"></i>`;
+
             if (s.rangeCount) {
                 const r = s.getRangeAt(0);
                 r.deleteContents();
-                const p = document.createElement('p');
-                p.appendChild(a);
-                r.insertNode(p);
-                const np = document.createElement('p');
-                np.innerHTML = '<br>';
-                p.parentNode.insertBefore(np, p.nextSibling);
-                r.setStart(np, 0);
+                const div = document.createElement('div');
+                div.appendChild(a);
+                r.insertNode(div);
+                const ndiv = document.createElement('div');
+                ndiv.innerHTML = '<br>';
+                div.parentNode.insertBefore(ndiv, div.nextSibling);
+                r.setStart(ndiv, 0);
                 r.collapse(true);
                 s.removeAllRanges();
                 s.addRange(r);
             } else {
-                const p = document.createElement('p');
-                p.appendChild(a);
-                ed.appendChild(p);
+                const div = document.createElement('div');
+                div.appendChild(a);
+                ed.appendChild(div);
             }
         }
+
         wysiwygSyncContent(ed);
         wysiwygCloseUniversalModal();
     }
@@ -1162,41 +1251,88 @@
         wysiwygCloseUniversalModal();
     }
 
-    function wysiwygDeleteImage() {
-        const w = WC.imageWrapper;
+    async function wysiwygDeleteMedia() {
+        const w = WC.mediaWrapper;
         if (!w) return;
+
+        const mediaElement = w.querySelector('img') || w.querySelector('a');
+        const mediaId = mediaElement?.dataset.mediaId;
+
+        if (mediaId && WC.csrfToken && WC.deleteUrl) {
+            try {
+                await fetch(WC.deleteUrl, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': WC.csrfToken,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        media_id: mediaId
+                    })
+                });
+            } catch (error) {
+                console.error('Error deleting media from server:', error);
+            }
+        }
+
         w.remove();
         wysiwygSyncContent(WC.editor);
         wysiwygCloseUniversalModal();
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+        WC.csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+
+        if (!WC.csrfToken) {
+            console.error(
+                'WYSIWYG Editor: CSRF token not found! Add <meta name="csrf-token" content="{{ csrf_token() }}"> to your layout.'
+            );
+        }
+
         document.querySelectorAll('.wysiwyg').forEach(container => {
-            const ed = container.querySelector('.wysiwyg-editor');
+            const ed = container.querySelector('.wysiwyg-content');
             const locale = container.getAttribute('data-locale') || 'en';
-            const saveAs = container.getAttribute('data-save-images-as') || 'url';
+            const saveAs = container.getAttribute('data-save-images-as') || 'server';
+
             WC.locale = locale;
             WC.saveImagesAs = saveAs;
+            WC.uploadUrl = container.getAttribute('data-upload-url') || '/admin/wysiwyg/upload';
+            WC.deleteUrl = container.getAttribute('data-delete-url') || '/admin/wysiwyg/delete';
+            WC.modelType = container.getAttribute('data-model-type') || 'App\\Models\\User';
+            WC.modelId = container.getAttribute('data-model-id') || null;
+
+            console.log('WYSIWYG initialized:', {
+                uploadUrl: WC.uploadUrl,
+                deleteUrl: WC.deleteUrl,
+                modelType: WC.modelType,
+                modelId: WC.modelId,
+                saveAs: WC.saveImagesAs,
+                hasCsrfToken: !!WC.csrfToken
+            });
+
             applyI18n(container);
             applyI18n(document.getElementById('wysiwygUniversalModal'));
-            
-            // КРИТИЧЕСКИ ВАЖНО: Инициализируем скрытое поле значением из РЕДАКТОРА
+
             const h = container.querySelector('input[type="hidden"][data-wysiwyg-hidden]');
             if (h) h.value = ed.innerHTML;
-            
+
             ed.querySelectorAll('.wysiwyg-image-wrapper').forEach(w => {
-                w.onclick = function() { wysiwygEditImage(this); };
+                w.onclick = function() {
+                    wysiwygEditMedia(this, true);
+                };
             });
-            
+
             setTimeout(() => {
                 updToolbar(ed);
                 wysiwygSyncContent(ed);
             }, 100);
         });
-        
+
         document.addEventListener('click', e => {
             if (e.target.closest('.wysiwyg-align-btn')) {
-                const b = e.target.closest('.wysiwyg-align-btn'), c = b.closest('.wysiwyg-align-buttons');
+                const b = e.target.closest('.wysiwyg-align-btn'),
+                    c = b.closest('.wysiwyg-align-buttons');
                 c.querySelectorAll('.wysiwyg-align-btn').forEach(x => x.classList.remove('active'));
                 b.classList.add('active');
             }
@@ -1208,7 +1344,7 @@
         if (s.rangeCount) {
             let n = s.getRangeAt(0).startContainer;
             while (n) {
-                if (n.classList?.contains('wysiwyg-editor')) {
+                if (n.classList?.contains('wysiwyg-content')) {
                     updToolbar(n);
                     wysiwygSyncContent(n);
                     break;
@@ -1223,18 +1359,19 @@
         const s = window.getSelection();
         if (!s.rangeCount) return;
         const r = s.getRangeAt(0);
-        let n = r.startContainer, ed = n;
-        while (ed && !ed.classList?.contains('wysiwyg-editor')) ed = ed.parentNode;
+        let n = r.startContainer,
+            ed = n;
+        while (ed && !ed.classList?.contains('wysiwyg-content')) ed = ed.parentNode;
         if (!ed?.contains(n)) return;
         let b = n;
         while (b && b !== ed) {
             if (b.nodeType === 1) {
                 if (/^H[1-6]$/.test(b.tagName)) {
                     e.preventDefault();
-                    const p = document.createElement('p');
-                    p.innerHTML = '<br>';
-                    b.parentNode.insertBefore(p, b.nextSibling);
-                    r.setStart(p, 0);
+                    const div = document.createElement('div');
+                    div.innerHTML = '<br>';
+                    b.parentNode.insertBefore(div, b.nextSibling);
+                    r.setStart(div, 0);
                     r.collapse(true);
                     s.removeAllRanges();
                     s.addRange(r);
@@ -1263,6 +1400,23 @@
                 }
             }
             b = b.parentNode;
+        }
+    });
+
+    // Добавьте в конец файла, в секцию document.addEventListener
+    document.addEventListener('keyup', e => {
+        if (e.key === 'Backspace' || e.key === 'Delete') {
+            const s = window.getSelection();
+            if (!s.rangeCount) return;
+
+            let n = s.getRangeAt(0).startContainer;
+            let ed = n;
+            while (ed && !ed.classList?.contains('wysiwyg-content')) ed = ed.parentNode;
+
+            if (ed) {
+                ensureEditorStructure(ed);
+                wysiwygSyncContent(ed);
+            }
         }
     });
 </script>

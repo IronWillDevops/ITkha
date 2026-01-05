@@ -1,5 +1,6 @@
 <!-- resources/views/comments/form.blade.php -->
-
+@auth
+    
 <form method="POST" action="{{ route('public.post.comment.store') }}" class="my-4">
     @csrf
     <input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -9,7 +10,7 @@
     <div id="reply-to-info" class="my-2 hidden text-sm">
         {{ __('public/comment.labels.reply_to') }} <span id="reply-author" class="font-semibold"></span>
         <button type="button" onclick="cancelReply()"
-            class=" hover:underline cursor-pointer">{{ __('public/comment.labels.reply_to_cancel') }}</button>
+            class="hover:underline cursor-pointer">{{ __('public/comment.labels.reply_to_cancel') }}</button>
     </div>
 
     <x-form.area name="body" label="{{ __('public/comment.fields.write_comment') }}"
@@ -64,3 +65,12 @@
         }
     }
 </script>
+
+@endauth
+@guest
+  <div class="my-4 rounded-md border border-border p-4 text-sm">
+        <p class="font-medium">
+            {{ __('public/comment.messages.auth_required') }}
+        </p>
+    </div>
+@endguest

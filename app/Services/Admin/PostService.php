@@ -5,12 +5,18 @@ namespace App\Services\Admin;
 use App\Enums\PostStatus;
 use App\Events\PostPublished;
 use App\Models\Post;
+use App\Models\Media;
+use App\Services\MediaService;
 use Exception;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PostService
 {
+    public function __construct(
+        protected MediaService $mediaService
+    ) {}
+
     public function store(array $data, $request): Post
     {
         DB::beginTransaction();
@@ -19,13 +25,7 @@ class PostService
             // Сохраняем теги отдельно
             if (isset($data['tag_ids'])) {
                 $tagIds = $data['tag_ids'];
-
                 unset($data['tag_ids']);
-            }
-
-            // Обработка главного изображения
-            if ($request->hasFile('main_image')) {
-                $data['main_image'] = $request->file('main_image')->store('images/main', 'public');
             }
 
             // Обработка published_at (формат datetime-local -> MySQL)
@@ -38,6 +38,18 @@ class PostService
             // Создаём пост
             $post = Post::create($data);
 
+            // Обработка главного изображения
+            if ($request->hasFile('main_image')) {
+                $this->mediaService->replaceSingle(
+                    $post,
+                    $request->file('main_image'),
+                    'main_image'
+                );
+            }
+
+            // Перемещаем временные медиафайлы из контента к посту
+            $this->moveTemporaryMediaToPost($post, $data['content'] ?? '');
+
             // Привязываем теги
             if (isset($tagIds)) {
                 $post->tags()->attach($tagIds);
@@ -48,7 +60,7 @@ class PostService
             $post->save();
 
             // Публикуем пост, если время уже наступило или статус PUBLISHED
-            $this->publishIfNeeded($post);
+            $this->publishIfNeeded($post, null);
 
             DB::commit();
             return $post;
@@ -66,17 +78,9 @@ class PostService
         DB::beginTransaction();
 
         try {
-
             // Сохраняем теги отдельно
             $tagIds = $data['tag_ids'] ?? [];
             unset($data['tag_ids']);
-            // Обработка главного изображения
-            if ($request->hasFile('main_image')) {
-                if ($post->main_image && Storage::disk('public')->exists($post->main_image)) {
-                    Storage::disk('public')->delete($post->main_image);
-                }
-                $data['main_image'] = $request->file('main_image')->store('images/main', 'public');
-            }
 
             // Обработка published_at (формат datetime-local -> MySQL)
             if (!empty($data['published_at'])) {
@@ -84,10 +88,21 @@ class PostService
             } else {
                 $data['published_at'] = null;
             }
-
-
+            $oldStatus = $post->status;
             // Обновляем пост
             $post->update($data);
+
+            // Обработка главного изображения
+            if ($request->hasFile('main_image')) {
+                $this->mediaService->replaceSingle(
+                    $post,
+                    $request->file('main_image'),
+                    'main_image'
+                );
+            }
+
+            // Перемещаем временные медиафайлы
+            $this->moveTemporaryMediaToPost($post, $data['content'] ?? '');
 
             // Синхронизация тегов
             $post->tags()->sync($tagIds);
@@ -96,9 +111,8 @@ class PostService
             $post->comments_enabled = $request->boolean('comments_enabled');
             $post->save();
 
-
             // Публикуем пост, если нужно
-            $this->publishIfNeeded($post);
+            $this->publishIfNeeded($post, $oldStatus);
 
             DB::commit();
             return $post;
@@ -109,26 +123,75 @@ class PostService
     }
 
     /**
-     * Проверяет, нужно ли публиковать пост, и публикует его
+     * Перемещает временные медиафайлы из wysiwyg_temp к посту
+     * Поддерживает как изображения, так и другие файлы
      */
-    private function publishIfNeeded(Post $post): void
+    private function moveTemporaryMediaToPost(Post $post, string $content): void
     {
-        // Если пост уже опубликован — ничего не делаем
-        if ($post->status === PostStatus::PUBLISHED->value) {
+        if (empty($content)) {
             return;
         }
 
-        // Проверяем, нужно ли публиковать (по расписанию)
-        $shouldPublish = $post->status === PostStatus::SCHEDULED->value
-            && $post->published_at
-            && $post->published_at <= date('Y-m-d H:i:s');
+        // Извлекаем все media_id из data-media-id атрибутов в контенте
+        preg_match_all('/data-media-id=["\'](\d+)["\']/', $content, $matches);
 
-        if ($shouldPublish) {
-            // Меняем статус на PUBLISHED
+        if (empty($matches[1])) {
+            return;
+        }
+
+        $mediaIds = array_unique($matches[1]);
+
+        // Находим все медиа с collection='wysiwyg_temp' принадлежащие текущему пользователю
+        $temporaryMedia = Media::whereIn('id', $mediaIds)
+            ->where('model_type', get_class(Auth::user()))
+            ->where('model_id', Auth::id())
+            ->where('collection', 'wysiwyg_temp')
+            ->get();
+
+        // Перемещаем их к посту
+        foreach ($temporaryMedia as $media) {
+            $media->update([
+                'model_type' => get_class($post),
+                'model_id' => $post->id,
+                'collection' => 'wysiwyg_content',
+            ]);
+        }
+    }
+
+    /**
+     * Проверяет, нужно ли публиковать пост, и публикует его
+     */
+    private function publishIfNeeded(Post $post, ?string $oldStatus = null): void
+    {
+        // Для нового поста oldStatus будет null
+        $wasPublished = $oldStatus === PostStatus::PUBLISHED->value;
+        $isNowPublished = $post->status === PostStatus::PUBLISHED->value;
+
+        // Если пост уже был опубликован и остался опубликованным — ничего не делаем
+        if ($wasPublished && $isNowPublished) {
+            return;
+        }
+
+        $shouldPublish = false;
+
+        // Проверяем ручную публикацию (смена статуса на PUBLISHED)
+        if ($isNowPublished && !$wasPublished) {
+            $shouldPublish = true;
+        }
+
+        // Проверяем публикацию по расписанию
+        if (
+            $post->status === PostStatus::SCHEDULED->value
+            && $post->published_at
+            && $post->published_at <= now()
+        ) {
+            $shouldPublish = true;
             $post->status = PostStatus::PUBLISHED->value;
             $post->save();
+        }
 
-            // Генерируем событие публикации
+        // Генерируем событие публикации только один раз
+        if ($shouldPublish) {
             event(new PostPublished($post));
         }
     }

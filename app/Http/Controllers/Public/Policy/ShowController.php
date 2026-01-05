@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Public\Policy;
 
 use App\Http\Controllers\Controller;
 use App\Models\Policy;
-use Illuminate\Http\Request;
 
 class ShowController extends Controller
 {

@@ -2,12 +2,12 @@
      <!-- Name and title with staggered animation -->
 
      <div class="text-center mb-4">
-      
+
          <div class="avatar m-4 ">
-             @if ($user->avatar)
+             @if ($user->singleMedia('avatar'))
                  <img type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
                      class="relative inline-flex items-center justify-center w-24 h-24 object-cover rounded-full border border-border"
-                     src="{{ asset('storage/' . $user->avatar) }}" data-filename="image.png" alt="{{ $user->first_name }}">
+                     src="{{ $user->singleMedia('avatar')->url }}" data-filename="image.png" alt="{{ $user->first_name }}">
              @else
                  <div
                      class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden rounded-full border border-border">
@@ -69,7 +69,7 @@
          <x-public.ui.separator />
          <!-- User action cards (1 col on mobile, 2 cols on md+) -->
          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 ">
-             <a href="{{ route('public.user.show', $user) }}" rel="noopener noreferrer" 
+             <a href="{{ route('public.user.show', $user) }}" rel="noopener noreferrer"
                  class="bg-background border border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
                  <i class="fas fa-pen text-xl"></i>
                  <div>

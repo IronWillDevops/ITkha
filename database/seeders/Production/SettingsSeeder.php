@@ -39,7 +39,11 @@ class SettingsSeeder extends Seeder
             ['key' => 'telegram_template', 'value' => '
 <b>{{title}}</b>
 
-{{excerpt}}'],
+{{ category }}
+{{excerpt}}
+
+{{ tags }} 
+<a href="{{ author_url }}">{{ author }}</a> - {{ data }}'],
             ['key' => 'telegram_message_limit', 'value' => '450'],
             ['key' => 'telegram_button_text', 'value' => 'Read more...'],
 

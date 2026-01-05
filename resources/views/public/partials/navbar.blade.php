@@ -6,7 +6,8 @@
                 {{-- Логотип --}}
                 <a href="{{ route('public.post.index') }}"
                     class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
-                    <span class="text-2xl font-semibold whitespace-nowrap">{{ setting('site_name', config('app.name')) }}</span>
+                    <span
+                        class="text-2xl font-semibold whitespace-nowrap">{{ setting('site_name', config('app.name')) }}</span>
                 </a>
             </div>
 
@@ -32,7 +33,7 @@
                         <li class="flex items-center">
                             <a href="{{ route('login') }}"
                                 class="block px-3 py-2 rounded-md bg-background hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
-                               {{ __('public/header.fields.login') }}
+                                {{ __('public/header.fields.login') }}
                             </a>
                         </li>
                     @endguest
@@ -44,17 +45,19 @@
                         <button id="userMenuButton" type="button"
                             class="bg-background border border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring"
                             aria-label="User menu">
-                            @if (Auth::user()->avatar)
+                            @if (Auth::user()->singleMedia('avatar'))
                                 <img class="w-10 h-10 object-cover rounded-full border border-input"
-                                    src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->first_name }}">
+                                    src="{{ Auth::user()->singleMedia('avatar')->url }}"
+                                    alt="{{ Auth::user()->first_name }}">
                             @else
                                 <div
-                                    class=" hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
+                                    class="hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
                                     <span class="font-medium">
                                         {{ Auth::user()->getInitial() }}
                                     </span>
                                 </div>
                             @endif
+
                         </button>
 
                         {{-- Выпадающее меню --}}

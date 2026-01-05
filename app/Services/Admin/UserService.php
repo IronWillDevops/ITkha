@@ -33,23 +33,24 @@ class UserService
         }
         // Обработка аватара (необязательное поле)
         if (isset($data['avatar']) && $data['avatar'] instanceof \Illuminate\Http\UploadedFile) {
-            $avatarPath = $data['avatar']->store("avatars/{$user->id}", 'public');
-            $user->update(['avatar' => $avatarPath]);
+            app(\App\Services\MediaService::class)->replaceSingle(
+                $user,
+                $data['avatar'],
+                'avatar'
+            );
         }
     }
 
     public function update($data, $user)
     {
-        // Обработка аватара (необязательное поле)
+        // Обработка аватара через MediaService
         if (isset($data['avatar']) && $data['avatar'] instanceof \Illuminate\Http\UploadedFile) {
-            // Удаление предыдущего аватара, если он есть
-            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
-                Storage::disk('public')->delete($user->avatar);
-            }
-
-            // Сохранение нового аватара в правильное место
-            $avatarPath = $data['avatar']->store("avatars/{$user->id}", 'public');
-            $data['avatar'] = $avatarPath;
+            app(\App\Services\MediaService::class)->replaceSingle(
+                $user,
+                $data['avatar'],
+                'avatar'
+            );
+            unset($data['avatar']); // чтобы не писать в users.avatar
         }
 
 

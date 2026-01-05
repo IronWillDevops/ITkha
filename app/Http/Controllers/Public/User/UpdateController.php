@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\UserProfile\UpdateRequest;
 use App\Models\User;
+use App\Services\MediaService;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,7 @@ class UpdateController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(UpdateRequest $request, User $user)
+    public function __invoke(UpdateRequest $request, User $user,MediaService $mediaService)
     {
         try {
             $data = $request->validated();
@@ -25,16 +26,12 @@ class UpdateController extends Controller
             ]);
 
             // Обробка аватара (необов’язкове поле)
-            if ($request->hasFile('avatar')) {
-                // Видалення попереднього, якщо є
-                if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
-                    Storage::disk('public')->delete($user->avatar);
-                }
-
-                // Збереження нового
-                $avatarPath = $request->file('avatar')->store("avatars/{$user->id}", 'public');
-
-                $user->avatar = $avatarPath;
+                if ($request->hasFile('avatar')) {
+                $mediaService->replaceSingle(
+                    $user,
+                    $request->file('avatar'),
+                    'avatar'
+                );
             }
 
             $user->save();
