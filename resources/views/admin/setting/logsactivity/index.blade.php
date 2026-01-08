@@ -5,8 +5,8 @@
 @section('admin.content')
       <x-form.table 
         :columns="$columns"
-        :items="$logs"
-        modelRoute="log"
+        :items="$logsactivity"
+        modelRoute="ActivityLog"
         :sortField="$sortField"
         :sortDirection="$sortDirection"
         searchEnabled="true"

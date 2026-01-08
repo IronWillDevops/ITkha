@@ -10,6 +10,7 @@ use App\Models\Traits\Filterable;
 use App\Models\Traits\Cacheable;
 use App\Models\Traits\HasMedia;
 use App\Models\Traits\HasSlug;
+use App\Models\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -20,7 +21,8 @@ class Post extends Model
         Filterable,
         Cacheable,
         HasSlug,
-        HasMedia;
+        HasMedia,
+        LogsActivity;
 
 
     protected $slugSource = 'title';   // генерируем slug из title

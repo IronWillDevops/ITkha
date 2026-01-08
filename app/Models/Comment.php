@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\CommentStatus;
+use App\Models\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,8 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory,
+        SoftDeletes,
+        LogsActivity;
 
     protected $fillable = ['post_id', 'user_id', 'parent_id', 'body',  'status',];
 

@@ -12,9 +12,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\VerifyEmailNotification;
-use App\Notifications\ResetPasswordNotification;
-use App\Enums\PostStatus;
 use App\Models\Traits\HasMedia;
+use App\Models\Traits\LogsActivity;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -22,7 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory,
         Notifiable,
         SoftDeletes,
-        HasMedia;
+        HasMedia,
+        LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -116,7 +116,7 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         });
     }
-   
+
     public function posts()
     {
         return $this->hasMany(Post::class);

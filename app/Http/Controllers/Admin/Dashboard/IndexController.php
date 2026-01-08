@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityLog;
 use App\Models\Category;
-use App\Models\Log;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -22,7 +22,7 @@ class IndexController extends Controller
         $categoryCount = Category::count();
         $tagCount = Tag::count();
         $userCount = User::count();
-        $logCount = Log::count();
+        $logCount = ActivityLog::count();
 
         return view('admin.dashboard.index', compact('postCount', 'categoryCount', 'tagCount', 'userCount','logCount'));
     }

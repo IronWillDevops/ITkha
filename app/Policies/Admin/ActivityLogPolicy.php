@@ -2,10 +2,10 @@
 
 namespace App\Policies\Admin;
 
-use App\Models\Log;
+use App\Models\ActivityLog;
 use App\Models\User;
 
-class LogPolicy
+class ActivityLogPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,7 +18,7 @@ class LogPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Log $log): bool
+    public function view(User $user, ActivityLog $log): bool
     {
         return $user->hasPermission('log.view');
     }
@@ -34,7 +34,7 @@ class LogPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Log $log): bool
+    public function update(User $user, ActivityLog $log): bool
     {
         return $user->hasPermission('log.update');
     }
@@ -42,7 +42,7 @@ class LogPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Log $log): bool
+    public function delete(User $user, ActivityLog $log): bool
     {
         return $user->hasPermission('log.delete');
     }
@@ -50,7 +50,7 @@ class LogPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Log $log): bool
+    public function restore(User $user, ActivityLog $log): bool
     {
         return false;
     }
@@ -58,7 +58,7 @@ class LogPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Log $log): bool
+    public function forceDelete(User $user, ActivityLog $log): bool
     {
         return false;
     }

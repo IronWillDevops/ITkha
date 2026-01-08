@@ -30,6 +30,8 @@ return [
         'icon'        => 'Icon',
         'url'         => 'URL',
         'search'      => 'Search...',
+        'model_type'  => 'Model type',
+        'model_id'    => 'Model ID',
         'key' => 'Key',
         'version' => 'Version',
         'is_active' => 'Active',

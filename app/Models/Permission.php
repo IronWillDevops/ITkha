@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-   protected $fillable = ['header', 'key'];
+    use LogsActivity;
+    protected $fillable = ['header', 'key'];
 
     public function roles()
     {

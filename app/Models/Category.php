@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Exceptions\Category\CannotDeleteCategoryWithPostsException;
 use App\Exceptions\Category\CannotDeleteLastCategoryException;
+use App\Models\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,LogsActivity;
     protected $fillable = ['title'];
 
     public function posts()
