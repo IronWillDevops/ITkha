@@ -142,10 +142,10 @@ Route::prefix('admin')->name('admin.')
                         Route::patch('/',  App\Http\Controllers\Admin\Setting\Site\UpdateController::class)->name('update')->middleware('permission:setting.update');
                     });
 
-                Route::prefix('log')
-                    ->name('log.')
+                Route::prefix('logsactivity')
+                    ->name('logsactivity.')
                     ->group(function () {
-                        Route::get('/', App\Http\Controllers\Admin\Setting\Log\IndexController::class)->name('index')->middleware('permission:log.view');
+                        Route::get('/', App\Http\Controllers\Admin\Setting\LogsActivity\IndexController::class)->name('index')->middleware('permission:log.view');
                     });
 
 

@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Exceptions\Role\CannotDeleteProtectedRoleException;
+use App\Models\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $fillable = ['title','description'];
+    use LogsActivity;
+    protected $fillable = ['title', 'description'];
 
     public function permissions()
     {
@@ -26,7 +28,7 @@ class Role extends Model
             }
         });
     }
-      //Slug 
+    //Slug 
     public function getRouteKeyName(): string
     {
         return 'title';

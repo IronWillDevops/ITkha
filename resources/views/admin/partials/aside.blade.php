@@ -183,7 +183,7 @@
                             </li>
                             @permission('log.view')
                                 <li>
-                                    <a href="{{ route('admin.setting.log.index') }}"
+                                    <a href="{{ route('admin.setting.logsactivity.index') }}"
                                         class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
                                         <i class="fa fa-history"></i>
                                         <span

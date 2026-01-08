@@ -30,6 +30,8 @@ return [
         'icon'        => 'Іконка',
         'url'         => 'URL',
         'search'      => 'Пошук...',
+        'model_type'  => 'Тип моделі',
+        'model_id'    => 'ID моделі',
         'key' => 'Ключ',
         'version' => 'Версія',
         'is_active' => 'Активна',

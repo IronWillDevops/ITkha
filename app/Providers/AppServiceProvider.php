@@ -50,11 +50,7 @@ class AppServiceProvider extends ServiceProvider
 
         Route::aliasMiddleware('permission', CheckPermission::class);
 
-        \App\Models\Tag::observe(\App\Observers\TagObserver::class);
-        \App\Models\User::observe(\App\Observers\UserObserver::class);
-        \App\Models\Post::observe(\App\Observers\PostObserver::class);
-        \App\Models\Category::observe(\App\Observers\CategoryObserver::class);
-        \App\Models\Setting::observe(\App\Observers\SettingObserver::class);
+       
 
 
 
@@ -67,6 +63,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(\App\Models\Contact::class,  \App\Policies\Admin\ContactPolicy::class);
 
         Gate::policy(\App\Models\Setting::class,  \App\Policies\Admin\SettingPolicy::class);
-        Gate::policy(\App\Models\Log::class,  \App\Policies\Admin\LogPolicy::class);
+        Gate::policy(\App\Models\ActivityLog::class,  \App\Policies\Admin\ActivityLogPolicy::class);
     }
 }

@@ -22,7 +22,7 @@
             linkText="{{ __('admin/common.buttons.read_more') }}" />
             
         <x-admin.dashboard-widget title="{{ __('admin/log.title') }}" icon="fa-solid fa-history"
-            description="{{ $logCount }}" link="{{ route('admin.setting.log.index') }}"
+            description="{{ $logCount }}" link="{{ route('admin.setting.logsactivity.index') }}"
             linkText="{{ __('admin/common.buttons.read_more') }}" />
 
     </div>
