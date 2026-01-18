@@ -165,9 +165,26 @@
                     @foreach ($columns as $col)
                         <div>
                             <div class="text-xs text-muted-foreground">{{ $col['label'] }}</div>
-                            <div class="text-sm font-medium truncate">
-                                {{ data_get($item, $col['key']) ?? '-' }}
+                            @php
+                                $value = data_get($item, $col['key']);
+                            @endphp
+
+                            <div class="text-sm font-medium">
+                                @if (is_iterable($value) && !is_string($value))
+                                    <div class="flex flex-wrap gap-1">
+                                        @foreach ($value as $tag)
+                                            <span class="px-2 py-0.5 bg-muted rounded text-xs truncate max-w-[140px]">
+                                                {{ data_get($tag, 'title') }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <span class="truncate block">
+                                        {{ $value ?? '-' }}
+                                    </span>
+                                @endif
                             </div>
+
                         </div>
                     @endforeach
                 </div>

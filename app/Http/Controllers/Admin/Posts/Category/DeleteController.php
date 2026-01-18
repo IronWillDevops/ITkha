@@ -6,6 +6,7 @@ use App\Exceptions\Category\CannotDeleteCategoryWithPostsException;
 use App\Exceptions\Category\CannotDeleteLastCategoryException;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Exception;
 
 class DeleteController extends Controller
 {
@@ -16,13 +17,14 @@ class DeleteController extends Controller
     {
         try {
             $category->delete();
-             return redirect()->route('admin.category.index')->with('success', __('admin/category.messages.deleted',['title' => $category->title])); 
-        } 
-        catch (CannotDeleteLastCategoryException $ex) {
+            return redirect()->route('admin.category.index')->with('success', __('admin/category.messages.deleted', ['title' => $category->title]));
+        } catch (CannotDeleteLastCategoryException $ex) {
             return redirect()->back()->with('error', $ex->getMessage());
-        } 
-        catch (CannotDeleteCategoryWithPostsException $ex) {
+        } catch (CannotDeleteCategoryWithPostsException $ex) {
             return redirect()->back()->with('error', $ex->getMessage());
+        } catch (Exception $ex) {
+            logger()->error('Category delete failed', ['exception' => $ex]);
+            return redirect()->back()->with('error', __('errors/category.delete.failed'));
         }
     }
 }

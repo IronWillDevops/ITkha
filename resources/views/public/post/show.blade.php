@@ -6,7 +6,7 @@
 
             @if ($post->singleMedia('main_image'))
                 <div class="w-full h-64 object-cover">
-                    <img src="{{  $post->singleMedia('main_image')->url }}" alt="card-image"
+                    <img src="{{ $post->singleMedia('main_image')->url }}" alt="card-image"
                         class="h-full w-full rounded-md md:rounded-lg object-cover" />
                 </div>
             @endif
@@ -14,7 +14,8 @@
             <div class="p-6 space-y-6">
                 <h1 class="text-card-foreground text-3xl font-bold">{{ $post->title }}
                     @if (Auth::check() && Auth::user()->hasPermission('post.update'))
-                        <a href="{{ route('admin.post.edit', $post) }}" class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
+                        <a href="{{ route('admin.post.edit', $post) }}"
+                            class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                     @endif
@@ -38,7 +39,7 @@
                     <span class="inline-flex items-center">
                         <i class="fa fa-user "></i>
                         <a href="{{ route('public.user.show', $post->author) }}"
-                            class="hover:underline ml-2  focus:ring focus:outline-none focus-visible:ring-ring">
+                            class="hover:underline ml-2 focus:ring focus:outline-none focus-visible:ring-ring">
                             {{ $post->author->login }}
                         </a>
                     </span>
@@ -51,7 +52,7 @@
                     <span>|</span>
                     <span class="inline-flex items-center">
                         <i class="fa fa-eye "></i>
-                        <span class="font-medium ml-2">{{ Number::abbreviate($post->actual_views) }}</span>
+                        <span class="font-medium ml-2">{{ Number::abbreviate($post->getActualViewsAttribute()) }}</span>
                     </span>
                     <span>|</span>
 
@@ -77,7 +78,7 @@
                 @endif
 
                 <x-public.ui.separator />
-                
+
                 <div id="post-content" class="wysiwyg-content max-w-none  wrap-anywhere">
                     {!! $post->content !!}
                 </div>

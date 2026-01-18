@@ -5,13 +5,13 @@
     <title>{{ $subjectLine }}</title>
 </head>
 <body>
-    <p>Доброго дня, {{ $contact->name }}!</p>
+    <p>Hi, {{ $contact->name }}!</p>
 
     <p>{{ $replyMessage }}</p>
 
     <hr>
     <p style="font-size: 12px; color: #777;">
-        Відповідь на ваше повідомлення: "{{ $contact->subject }}"
+        Reply to your message: "{{ $contact->subject }}"
     </p>
 </body>
 </html>

@@ -91,7 +91,6 @@ class PostService
             $oldStatus = $post->status;
             // Обновляем пост
             $post->update($data);
-
             // Обработка главного изображения
             if ($request->hasFile('main_image')) {
                 $this->mediaService->replaceSingle(
