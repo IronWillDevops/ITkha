@@ -3,36 +3,40 @@
 namespace App\Services\Admin;
 
 use App\Models\Role;
+use Illuminate\Support\Collection;
 use App\Exceptions\Role\CannotUpdateProtectedRoleException;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class RoleService
 {
-    public function store($data)
+    public function store(array $data): Role
     {
-        $permissions = $data['permissions'] ?? [];
-        unset($data['permissions']);
+        return DB::transaction(function () use ($data) {
+            $permissions = $data['permissions'] ?? [];
+            unset($data['permissions']);
 
-        // Создание роли
-        $role = Role::create($data);
+            $role = Role::create($data);
+            $role->permissions()->sync($permissions);
 
-        // Привязка прав к роли
-        $role->permissions()->sync($permissions);
+            return $role;
+        });
     }
 
-    public function update($data, $role)
-    {
-        if (in_array($role->id, [1, 2, 3])) {
+    public function update(array $data, Role $role): Role
+     {
+        if ($role->isProtected()) {
             throw new CannotUpdateProtectedRoleException();
         }
-        $permissions = $data['permissions'] ?? [];
-        unset($data['permissions']);
 
-        // Обновляем название роли
-        $role->update($data);
+        return DB::transaction(function () use ($data, $role) {
+            $permissions = $data['permissions'] ?? [];
+            unset($data['permissions']);
 
-        // Синхронизируем разрешения (старые будут удалены, новые добавлены)
-        $role->permissions()->sync($permissions);
+            $role->update($data);
+            $role->permissions()->sync($permissions);
 
-        return $role;
+            return $role;
+        });
     }
 }

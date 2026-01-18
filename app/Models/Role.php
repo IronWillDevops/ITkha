@@ -33,4 +33,9 @@ class Role extends Model
     {
         return 'title';
     }
+
+    public function isProtected(): bool
+    {
+        return in_array($this->id, config('roles.protected_ids'), true);
+    }
 }

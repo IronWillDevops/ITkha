@@ -66,7 +66,7 @@ class TelegramPublisherService
     private function applyPlaceholders(string $template, Post $post): string
     {
         $template = $this->normalizePlaceholders($template);
-
+        $template = $this->cleanTelegramText($template);
         $limit = setting('telegram_message_limit', 450);
         $excerpt = \Illuminate\Support\Str::limit(strip_tags($post->content), $limit);
 
@@ -96,5 +96,18 @@ class TelegramPublisherService
     private function normalizePlaceholders(string $template): string
     {
         return preg_replace('/\{\{\s*(.*?)\s*\}\}/', '{{$1}}', $template);
+    }
+    private function cleanTelegramText(string $text): string
+    {
+        // Нормализация переносов строк
+        $text = str_replace(["\r\n", "\r"], "\n", $text);
+
+        // Убираем пробелы в пустых строках
+        $text = preg_replace("/[ \t]+\n/", "\n", $text);
+
+        // Сводим 2+ пустых строк к одной
+        $text = preg_replace("/\n{3,}/", "\n\n", $text);
+
+        return trim($text);
     }
 }

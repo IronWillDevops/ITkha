@@ -64,22 +64,29 @@
 }
 
 /* ============================================
-   WYSIWYG WRAPPER
+   WYSIWYG WRAPPER - FLEXBOX LAYOUT
    ============================================ */
 .wysiwyg {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    height: auto;
     border: 1px solid var(--wysiwyg-border);
     border-radius: var(--wysiwyg-radius-md);
+    overflow: hidden;
     transition: border-color var(--wysiwyg-transition-base);
 }
 
 .wysiwyg.wysiwyg-active {
     border-color: var(--wysiwyg-ring);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--wysiwyg-ring) 10%, transparent);
 }
 
 /* ============================================
-   TOOLBAR STYLES
+   TOOLBAR STYLES - ФИКСИРОВАННАЯ ВЫСОТА
    ============================================ */
 .wysiwyg-toolbar {
+    flex-shrink: 0;
     background: var(--wysiwyg-card);
     border-radius: var(--wysiwyg-radius-md) var(--wysiwyg-radius-md) 0 0;
     padding: var(--wysiwyg-space-2);
@@ -140,15 +147,13 @@
 }
 
 /* ============================================
-   CONTENT AREA STYLES (БЕЗ ГРАНИЦ!)
+   CONTENT AREA - БАЗОВЫЕ СТИЛИ
    ============================================ */
 .wysiwyg-content {
     background: var(--wysiwyg-card);
     padding: var(--wysiwyg-space-4);
-    
     line-height: 1.7;
     font-size: 0.875rem;
-    overflow: auto;
 }
 
 .wysiwyg-content * {
@@ -157,6 +162,40 @@
 
 .wysiwyg-content:focus {
     outline: none;
+}
+
+/* ПРОКРУТКА ТОЛЬКО ВНУТРИ РЕДАКТОРА (с .wysiwyg оберткой) */
+.wysiwyg .wysiwyg-content {
+    flex: 1;
+    min-height: 200px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Кастомный скроллбар для WebKit браузеров - ТОЛЬКО В РЕДАКТОРЕ */
+.wysiwyg .wysiwyg-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.wysiwyg .wysiwyg-content::-webkit-scrollbar-track {
+    background: var(--wysiwyg-accent);
+    border-radius: var(--wysiwyg-radius-sm);
+}
+
+.wysiwyg .wysiwyg-content::-webkit-scrollbar-thumb {
+    background: var(--wysiwyg-border);
+    border-radius: var(--wysiwyg-radius-sm);
+}
+
+.wysiwyg .wysiwyg-content::-webkit-scrollbar-thumb:hover {
+    background: var(--wysiwyg-muted);
+}
+
+/* Для Firefox - ТОЛЬКО В РЕДАКТОРЕ */
+.wysiwyg .wysiwyg-content {
+    scrollbar-width: thin;
+    scrollbar-color: var(--wysiwyg-border) var(--wysiwyg-accent);
 }
 
 /* Clearfix for Float Elements */
@@ -232,6 +271,96 @@
 }
 
 /* ============================================
+   TABLE STYLES
+   ============================================ */
+.wysiwyg-table-wrapper {
+    margin: 1rem 0 3rem 0;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Панель управления таблицей - ТОЛЬКО в редакторе */
+.wysiwyg .wysiwyg-table-wrapper:hover .wysiwyg-table-controls {
+    opacity: 1;
+}
+
+/* Скрыть панель управления вне редактора */
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-table-controls {
+    display: none !important;
+}
+
+.wysiwyg-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--wysiwyg-card);
+    border: 1px solid var(--wysiwyg-border);
+    border-radius: var(--wysiwyg-radius-sm);
+}
+
+.wysiwyg-table th,
+.wysiwyg-table td {
+    border: 1px solid var(--wysiwyg-border);
+    padding: var(--wysiwyg-space-2) var(--wysiwyg-space-3);
+    text-align: left;
+    min-width: 100px;
+    vertical-align: top;
+}
+
+.wysiwyg-table th {
+    background: var(--wysiwyg-accent);
+    font-weight: 600;
+    color: var(--wysiwyg-foreground);
+}
+
+.wysiwyg-table td:focus,
+.wysiwyg-table th:focus {
+    outline: 2px solid var(--wysiwyg-primary);
+    outline-offset: -2px;
+}
+
+/* Table Controls */
+.wysiwyg-table-controls {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    display: flex;
+    gap: var(--wysiwyg-space-1);
+    opacity: 0;
+    transition: opacity var(--wysiwyg-transition-base);
+    background: var(--wysiwyg-card);
+    padding: var(--wysiwyg-space-2);
+    border-radius: var(--wysiwyg-radius-sm);
+    box-shadow: var(--wysiwyg-shadow-md);
+    z-index: 10;
+}
+
+.wysiwyg-table-btn {
+    padding: var(--wysiwyg-space-1) var(--wysiwyg-space-2);
+    background: var(--wysiwyg-accent);
+    border: 1px solid var(--wysiwyg-border);
+    border-radius: var(--wysiwyg-radius-sm);
+    color: var(--wysiwyg-foreground);
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: var(--wysiwyg-space-1);
+    transition: all var(--wysiwyg-transition-fast);
+    white-space: nowrap;
+}
+
+.wysiwyg-table-btn:hover {
+    background: var(--wysiwyg-border);
+}
+
+.wysiwyg-table-btn.wysiwyg-danger-btn:hover {
+    background: var(--wysiwyg-danger);
+    color: white;
+    border-color: var(--wysiwyg-danger);
+}
+
+/* ============================================
    IMAGE WRAPPER STYLES
    ============================================ */
 .wysiwyg-content figure.wysiwyg-image-wrapper {
@@ -239,15 +368,19 @@
     display: block;
     max-width: 100%;
     position: relative;
-    cursor: pointer;
     transition: all var(--wysiwyg-transition-base);
 }
 
-.wysiwyg-content figure.wysiwyg-image-wrapper:hover {
+/* Курсор и hover эффект - ТОЛЬКО в редакторе */
+.wysiwyg .wysiwyg-content figure.wysiwyg-image-wrapper {
+    cursor: pointer;
+}
+
+.wysiwyg .wysiwyg-content figure.wysiwyg-image-wrapper:hover {
     opacity: 0.9;
 }
 
-.wysiwyg-content figure.wysiwyg-image-wrapper:hover::after {
+.wysiwyg .wysiwyg-content figure.wysiwyg-image-wrapper:hover::after {
     content: '✎ Edit';
     position: absolute;
     top: 50%;
@@ -259,6 +392,11 @@
     border-radius: var(--wysiwyg-radius-sm);
     font-size: 0.875rem;
     pointer-events: none;
+}
+
+/* Вне редактора - обычный курсор */
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) figure.wysiwyg-image-wrapper {
+    cursor: default;
 }
 
 /* Image Alignment */
@@ -356,9 +494,10 @@ figcaption.wysiwyg-image-caption,
 }
 
 /* ============================================
-   STATUS BAR STYLES
+   STATUS BAR STYLES - ФИКСИРОВАННАЯ ВЫСОТА
    ============================================ */
 .wysiwyg-status-bar {
+    flex-shrink: 0;
     background: var(--wysiwyg-card);
     border-top: 1px solid var(--wysiwyg-border);
     border-radius: 0 0 var(--wysiwyg-radius-md) var(--wysiwyg-radius-md);
@@ -395,7 +534,22 @@ figcaption.wysiwyg-image-caption,
     opacity: 0.8;
 }
 
-/* Остальные стили модалки, форм и т.д. остаются без изменений */
+/* ============================================
+   АДАПТИВНОСТЬ ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ
+   ============================================ */
+@media (max-height: 600px) {
+    .wysiwyg-content {
+        max-height: calc(100vh - 180px);
+    }
+}
+
+@media (max-height: 400px) {
+    .wysiwyg-content {
+        max-height: calc(100vh - 150px);
+        min-height: 150px;
+    }
+}
+
 /* ============================================
    MODAL STYLES
    ============================================ */
@@ -407,7 +561,6 @@ figcaption.wysiwyg-image-caption,
     bottom: 0;
     z-index: var(--wysiwyg-z-modal);
     display: none;
-    /* ВАЖНО! По умолчанию скрыто */
     align-items: center;
     justify-content: center;
 }
@@ -431,7 +584,6 @@ figcaption.wysiwyg-image-caption,
     max-height: 90vh;
     overflow-y: auto;
     z-index: 1;
-    /* Чтобы быть поверх overlay */
 }
 
 /* Modal Header */

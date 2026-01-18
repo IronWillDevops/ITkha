@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Users\Role;
 use App\Exceptions\Role\CannotUpdateProtectedRoleException;
 use App\Http\Requests\Admin\Users\Role\UpdateRequest;
 use App\Models\Role;
+use Exception;
 
 class UpdateController extends BaseController
 {
@@ -15,10 +16,13 @@ class UpdateController extends BaseController
     {
         try {
             $data = $request->validated();
-            $role = $this->service->update($data, $role);
+            $this->service->update($data, $role);
             return  redirect()->route('admin.role.show', $role)->with('success', __('admin/role.messages.updated', ['title' => $role->title])); 
         } catch (CannotUpdateProtectedRoleException $ex) {
             return redirect()->route('admin.role.index')->with('error',$ex->getMessage() );
+         } catch (Exception $ex) {
+             logger()->error('Role update failed', ['exception' => $ex]);
+            return redirect()->back()->with('error', __('errors/role.update.failed'));
         }
     }
 }

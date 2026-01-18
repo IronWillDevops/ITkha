@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Users\User;
 use App\Exceptions\User\CannotDeactivateLastActiveUserException;
 use App\Http\Requests\Admin\Users\User\UpdateRequest;
 use App\Models\User;
-
+use Exception;
 
 class UpdateController extends BaseController
 {
@@ -23,6 +23,9 @@ class UpdateController extends BaseController
             return redirect()->route('admin.user.show', compact('user'))->with('success', __('admin/user.messages.updated', ['login' => $user->login]));
         } catch (CannotDeactivateLastActiveUserException $ex) {
             return redirect()->back()->with('error', $ex->getMessage());
+        } catch (Exception $ex) {
+            logger()->error('User update failed', ['exception' => $ex]);
+            return redirect()->back()->with('error', __('errors/user.update.failed'));
         }
     }
 }

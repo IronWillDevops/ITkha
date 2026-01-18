@@ -66,7 +66,7 @@ trait LogsActivity
             'description' => $this->getLogDescription($event),
             'old_values' => $oldValues,
             'new_values' => $newValues,
-            'ip_address' => request()->ip(),
+            'ip_address' => $this->getClientIp(),
             'user_agent' => request()->userAgent(),
         ]);
     }
@@ -130,5 +130,16 @@ trait LogsActivity
     public function lastActivity()
     {
         return $this->morphOne(ActivityLog::class, 'model')->latest();
+    }
+
+    protected function getClientIp(): string
+    {
+        $xff = request()->header('X-Forwarded-For');
+
+        if ($xff) {
+            return trim(explode(',', $xff)[0]);
+        }
+
+        return request()->ip();
     }
 }
