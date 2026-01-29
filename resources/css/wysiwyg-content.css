@@ -255,7 +255,7 @@
 }
 
 /* Content Blockquotes (Note Blocks) */
-.wysiwyg-content blockquote[data-note] {
+.wysiwyg-content blockquote {
     margin: 1rem 0;
     padding: 0.75rem 1rem;
     border-left: 4px solid var(--wysiwyg-primary);

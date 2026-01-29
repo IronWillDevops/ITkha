@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'site_name' => ['required', 'string', 'max:255'],
-            'site_description' => ['nullable', 'string', 'max:1000'],
+            'site_description' => ['required', 'string', 'max:1000'],
             'site_keywords' => ['nullable', 'string', 'max:500'],
             'site_favicon' => ['nullable',  'mimes:ico', 'max:2048'],
             'site_email' => ['nullable', 'email', 'max:255'],
@@ -39,6 +39,7 @@ class UpdateRequest extends FormRequest
             'site_name.string' => __('validation.string'),
             'site_name.max' => __('validation.max.string'),
 
+            'site_description.required' => __('validation.required'),
             'site_description.string' => __('validation.string'),
             'site_description.max' => __('validation.max.string'),
 
