@@ -36,14 +36,14 @@ class TelegramPublisherService
     private function hasValidPhoto(Post $post): bool
     {
         $media = $post->singleMedia('main_image');
-        
+
         return $media && str_starts_with($media->url, 'https://');
     }
 
     private function sendPhoto(Post $post)
     {
         $text = $this->buildMessage($post);
-        
+
         return Http::post($this->getApiUrl('sendPhoto'), [
             'chat_id' => $this->getChatId(),
             'photo' => $post->singleMedia('main_image')->url,
@@ -56,19 +56,21 @@ class TelegramPublisherService
 
     private function sendMessage(Post $post)
     {
-        return Http::post($this->getApiUrl('sendMessage'), [
+        $payload = [
             'chat_id' => $this->getChatId(),
             'text' => $this->buildMessage($post),
             'parse_mode' => 'HTML',
             'disable_notification' => $this->isSilentMode(),
             'reply_markup' => $this->buildKeyboard($post),
-        ]);
+        ];
+
+        return Http::post($this->getApiUrl('sendMessage'), $payload);
     }
 
     private function buildMessage(Post $post): string
     {
         $template = setting('telegram_template');
-        
+
         return $this->applyPlaceholders($template, $post);
     }
 
@@ -92,7 +94,7 @@ class TelegramPublisherService
     private function applyPlaceholders(string $template, Post $post): string
     {
         $template = $this->normalizePlaceholders($template);
-        
+
         $replacements = $this->buildReplacements($post);
 
         // Удаляем плейсхолдер тегов, если их нет
@@ -124,7 +126,7 @@ class TelegramPublisherService
     private function buildExcerpt(Post $post): string
     {
         $limit = setting('telegram_message_limit', self::DEFAULT_MESSAGE_LIMIT);
-        
+
         $html = $this->prepareHtmlForTelegram($post->content);
         $text = strip_tags($html);
         $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
