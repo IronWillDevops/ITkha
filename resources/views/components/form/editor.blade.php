@@ -582,6 +582,7 @@
         container.querySelectorAll('[data-i18n]').forEach(el => {
             el.textContent = t(el.getAttribute('data-i18n'));
         });
+
         container.querySelectorAll('[data-i18n-title]').forEach(el => {
             el.title = t(el.getAttribute('data-i18n-title'));
         });
@@ -1863,7 +1864,7 @@
 
             // Ініціалізуємо спойлери
             ed.querySelectorAll('.wysiwyg-spoiler').forEach(spoiler => {
-                 spoiler.removeAttribute('open');
+                spoiler.removeAttribute('open');
 
                 // Знаходимо кнопку редагування і додаємо обробник
                 const editBtn = spoiler.querySelector('[data-spoiler-edit]');
