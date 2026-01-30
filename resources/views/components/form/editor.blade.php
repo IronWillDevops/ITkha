@@ -107,6 +107,9 @@
             title="Note Block">
             <i class="fa-solid fa-quote-left"></i>
         </button>
+        <button type="button" onclick="wysiwygInsertSpoiler(event)" data-i18n-title="spoiler" title="Spoiler">
+            <i class="fa-solid fa-eye-slash"></i>
+        </button>
         <button type="button" onclick="wysiwygInsertHR(event)" data-i18n-title="horizontalRule"
             title="Horizontal Line">
             <i class="fa-solid fa-minus"></i>
@@ -192,6 +195,11 @@
                 <label id="modalTextLabel" data-i18n="text">Text</label>
                 <input type="text" id="wysiwygModalText" class="wysiwyg-input">
             </div>
+            <div class="wysiwyg-form-group" id="modalSpoilerTitleGroup" style="display:none;">
+                <label data-i18n="spoilerTitle">Spoiler Title</label>
+                <input type="text" id="wysiwygModalSpoilerTitle" class="wysiwyg-input"
+                    placeholder="Click to reveal...">
+            </div>
             <div class="wysiwyg-form-group" id="modalTargetGroup">
                 <label>
                     <input type="checkbox" id="wysiwygModalTarget">
@@ -244,6 +252,12 @@
                     Delete table
                 </button>
             </div>
+            <div class="wysiwyg-form-group" id="modalDeleteSpoilerGroup" style="display:none;">
+                <button type="button" class="wysiwyg-btn wysiwyg-danger-btn" onclick="wysiwygDeleteSpoiler()"
+                    data-i18n="deleteSpoiler">
+                    Delete spoiler
+                </button>
+            </div>
         </div>
         <div class="wysiwyg-modal-footer">
             <button type="button" class="wysiwyg-btn wysiwyg-btn-secondary" onclick="wysiwygCloseUniversalModal()"
@@ -277,6 +291,7 @@
             subscript: 'Subscript',
             code: 'Code block',
             note: 'Note block',
+            spoiler: 'Spoiler',
             horizontalRule: 'Horizontal rule',
             link: 'Insert link',
             imageFile: 'Insert image',
@@ -297,11 +312,14 @@
             deleteLink: 'Delete link',
             deleteMedia: 'Delete media',
             deleteTable: 'Delete table',
+            deleteSpoiler: 'Delete spoiler',
             cancel: 'Cancel',
             apply: 'Apply',
             insertImage: 'Insert image',
             insertFile: 'Insert file',
             insertTable: 'Insert table',
+            insertSpoiler: 'Insert spoiler',
+            editSpoiler: 'Edit spoiler',
             editLink: 'Edit link',
             editImage: 'Edit image',
             editFile: 'Edit file',
@@ -324,6 +342,7 @@
             heading6: 'Heading 6',
             codeBlock: 'Code',
             noteBlock: 'Note',
+            spoilerBlock: 'Spoiler',
             list: 'List',
             numberedListBlock: 'Numbered List',
             listItem: 'List Item',
@@ -331,7 +350,8 @@
             clearAllConfirm: 'Are you sure you want to clear all content?',
             uploading: 'Uploading...',
             uploadSuccess: 'Upload successful!',
-            uploadError: 'Upload failed. Please try again.'
+            uploadError: 'Upload failed. Please try again.',
+            spoilerTitle: 'Spoiler Title'
         },
         ru: {
             undo: 'Отменить (Ctrl+Z)',
@@ -354,6 +374,7 @@
             subscript: 'Подстрочный',
             code: 'Блок кода',
             note: 'Блок заметки',
+            spoiler: 'Спойлер',
             horizontalRule: 'Горизонтальная линия',
             link: 'Вставить ссылку',
             imageFile: 'Вставить изображение',
@@ -374,11 +395,14 @@
             deleteLink: 'Удалить ссылку',
             deleteMedia: 'Удалить медиа',
             deleteTable: 'Удалить таблицу',
+            deleteSpoiler: 'Удалить спойлер',
             cancel: 'Отмена',
             apply: 'Применить',
             insertImage: 'Вставить изображение',
             insertFile: 'Вставить файл',
             insertTable: 'Вставить таблицу',
+            insertSpoiler: 'Вставить спойлер',
+            editSpoiler: 'Редактировать спойлер',
             editLink: 'Редактировать ссылку',
             editImage: 'Редактировать изображение',
             editFile: 'Редактировать файл',
@@ -401,6 +425,7 @@
             heading6: 'Заголовок 6',
             codeBlock: 'Код',
             noteBlock: 'Заметка',
+            spoilerBlock: 'Спойлер',
             list: 'Список',
             numberedListBlock: 'Нумерованный список',
             listItem: 'Элемент списка',
@@ -408,7 +433,8 @@
             clearAllConfirm: 'Вы уверены, что хотите очистить весь контент?',
             uploading: 'Загрузка...',
             uploadSuccess: 'Загрузка успешна!',
-            uploadError: 'Ошибка загрузки. Попробуйте снова.'
+            uploadError: 'Ошибка загрузки. Попробуйте снова.',
+            spoilerTitle: 'Заголовок спойлера'
         },
         uk: {
             undo: 'Скасувати (Ctrl+Z)',
@@ -431,6 +457,7 @@
             subscript: 'Підрядковий',
             code: 'Блок коду',
             note: 'Блок нотатки',
+            spoiler: 'Спойлер',
             horizontalRule: 'Горизонтальна лінія',
             link: 'Вставити посилання',
             imageFile: 'Вставити зображення',
@@ -451,11 +478,14 @@
             deleteLink: 'Видалити посилання',
             deleteMedia: 'Видалити медіа',
             deleteTable: 'Видалити таблицю',
+            deleteSpoiler: 'Видалити спойлер',
             cancel: 'Скасувати',
             apply: 'Застосувати',
             insertImage: 'Вставити зображення',
             insertFile: 'Вставити файл',
             insertTable: 'Вставити таблицю',
+            insertSpoiler: 'Вставити спойлер',
+            editSpoiler: 'Редагувати спойлер',
             editLink: 'Редагувати посилання',
             editImage: 'Редагувати зображення',
             editFile: 'Редагувати файл',
@@ -478,6 +508,7 @@
             heading6: 'Заголовок 6',
             codeBlock: 'Код',
             noteBlock: 'Нотатка',
+            spoilerBlock: 'Спойлер',
             list: 'Список',
             numberedListBlock: 'Нумерований список',
             listItem: 'Елемент списку',
@@ -485,7 +516,8 @@
             clearAllConfirm: 'Ви впевнені, що хочете очистити весь контент?',
             uploading: 'Завантаження...',
             uploadSuccess: 'Завантаження успішне!',
-            uploadError: 'Помилка завантаження. Спробуйте ще раз.'
+            uploadError: 'Помилка завантаження. Спробуйте ще раз.',
+            spoilerTitle: 'Заголовок спойлера'
         }
     };
 
@@ -523,6 +555,7 @@
         range: null,
         mediaWrapper: null,
         tableWrapper: null,
+        spoilerWrapper: null,
         locale: 'en',
         saveImagesAs: 'url',
         uploadUrl: null,
@@ -711,6 +744,10 @@
                     c.querySelector('.wysiwyg-current-block span').textContent = t('tableBlock');
                     break;
                 }
+                if (n.classList && n.classList.contains('wysiwyg-spoiler')) {
+                    c.querySelector('.wysiwyg-current-block span').textContent = t('spoilerBlock');
+                    break;
+                }
                 n = n.parentNode;
             }
         }
@@ -760,6 +797,11 @@
                 const bg = window.getComputedStyle(n).backgroundColor;
                 return bg === 'rgb(255, 255, 0)' || bg === 'yellow';
             }, ed)) c.querySelector('[onclick*="wysiwygHighlightText"]')?.classList.add('active');
+
+        // Check if inside spoiler
+        if (isInside(s.getRangeAt(0), n => n.classList && n.classList.contains('wysiwyg-spoiler'), ed)) {
+            c.querySelector('[onclick*="wysiwygInsertSpoiler"]')?.classList.add('active');
+        }
     }
 
     function wysiwygFormat(e, cmd, v = null) {
@@ -832,7 +874,6 @@
         if (!s.rangeCount) return;
         const r = s.getRangeAt(0);
 
-        // Создаём блок
         let b;
         if (type === 'code') {
             b = document.createElement('pre');
@@ -843,22 +884,17 @@
             b.innerHTML = '<div><br></div>';
         }
 
-        // Создаём параграф для продолжения ввода после блока
         const np = document.createElement('p');
         np.innerHTML = '<br>';
 
-        // Удаляем выделенный контент (если есть)
         r.deleteContents();
 
-        // Создаём временный контейнер
         const fragment = document.createDocumentFragment();
         fragment.appendChild(b);
         fragment.appendChild(np);
 
-        // Вставляем в позицию курсора
         r.insertNode(fragment);
 
-        // Перемещаем курсор в блок
         const targetNode = type === 'note' ? b.firstChild : b;
         if (targetNode) {
             const newRange = document.createRange();
@@ -870,6 +906,110 @@
 
         wysiwygSyncContent(ed);
         updToolbar(ed);
+    }
+
+    function wysiwygInsertSpoiler(e) {
+        const ed = getEd(e);
+        if (!ed) return;
+
+        ed.focus();
+        WC.editor = ed;
+        WC.mode = 'spoiler';
+
+        const s = window.getSelection();
+        if (s.rangeCount) {
+            WC.range = s.getRangeAt(0).cloneRange();
+        } else {
+            const range = document.createRange();
+            range.selectNodeContents(ed);
+            range.collapse(false);
+            WC.range = range;
+        }
+
+        document.getElementById('wysiwygModalSpoilerTitle').value = 'Click to reveal...';
+
+        showM('insertSpoiler', {
+            url: 0,
+            txt: 0,
+            tgt: 0,
+            aln: 0,
+            tbl: 0,
+            del: 0,
+            delMedia: 0,
+            delTable: 0,
+            delSpoiler: 0,
+            spoilerTitle: 1,
+            prv: 0
+        });
+    }
+
+    function wysiwygCreateSpoiler(title) {
+        const wrapper = document.createElement('details');
+        wrapper.className = 'wysiwyg-spoiler';
+
+        const summary = document.createElement('summary');
+        summary.contentEditable = 'false';
+        summary.innerHTML = `<span class="wysiwyg-spoiler-title">${title}</span>`;
+
+        const editBtn = document.createElement('button');
+        editBtn.type = 'button';
+        editBtn.className = 'wysiwyg-spoiler-edit-btn';
+        editBtn.innerHTML = '<i class="fa-solid fa-cog"></i>';
+        editBtn.setAttribute('data-spoiler-edit', 'true');
+
+        // Додаємо обробник безпосередньо до кнопки
+        editBtn.onclick = function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            wysiwygEditSpoiler(wrapper);
+        };
+
+        summary.appendChild(editBtn);
+
+        const content = document.createElement('div');
+        content.className = 'wysiwyg-spoiler-content';
+        content.contentEditable = 'true';
+        content.innerHTML = '<div><br></div>';
+
+        wrapper.appendChild(summary);
+        wrapper.appendChild(content);
+
+        return wrapper;
+    }
+
+    function wysiwygEditSpoiler(wrapper) {
+        const ed = wrapper.closest('.wysiwyg-content');
+        if (!ed) return;
+
+        WC.editor = ed;
+        WC.mode = 'spoiler-edit';
+        WC.spoilerWrapper = wrapper;
+
+        const titleEl = wrapper.querySelector('.wysiwyg-spoiler-title');
+        document.getElementById('wysiwygModalSpoilerTitle').value = titleEl ? titleEl.textContent : '';
+
+        showM('editSpoiler', {
+            url: 0,
+            txt: 0,
+            tgt: 0,
+            aln: 0,
+            tbl: 0,
+            del: 0,
+            delMedia: 0,
+            delTable: 0,
+            delSpoiler: 1,
+            spoilerTitle: 1,
+            prv: 0
+        });
+    }
+
+    function wysiwygDeleteSpoiler() {
+        const wrapper = WC.spoilerWrapper;
+        if (!wrapper) return;
+
+        wrapper.remove();
+        wysiwygSyncContent(WC.editor);
+        wysiwygCloseUniversalModal();
     }
 
     function wysiwygInsertHR(e) {
@@ -962,6 +1102,7 @@
         document.getElementById('wysiwygModalTitle').textContent = t(titleKey);
         document.getElementById('modalUrlGroup').style.display = cfg.url ? 'block' : 'none';
         document.getElementById('modalTextGroup').style.display = cfg.txt ? 'block' : 'none';
+        document.getElementById('modalSpoilerTitleGroup').style.display = cfg.spoilerTitle ? 'block' : 'none';
         document.getElementById('modalTargetGroup').style.display = cfg.tgt ? 'block' : 'none';
         document.getElementById('modalAlignGroup').style.display = cfg.aln ? 'block' : 'none';
         document.getElementById('modalTableGroup').style.display = cfg.tbl ? 'block' : 'none';
@@ -970,6 +1111,7 @@
         document.getElementById('modalDeleteGroup').style.display = cfg.del ? 'block' : 'none';
         document.getElementById('modalDeleteMediaGroup').style.display = cfg.delMedia ? 'block' : 'none';
         document.getElementById('modalDeleteTableGroup').style.display = cfg.delTable ? 'block' : 'none';
+        document.getElementById('modalDeleteSpoilerGroup').style.display = cfg.delSpoiler ? 'block' : 'none';
         document.getElementById('wysiwygModalPreview').style.display = cfg.prv ? 'block' : 'none';
         document.getElementById('wysiwygUniversalModal').style.display = 'flex';
     }
@@ -978,7 +1120,7 @@
         const ed = getEd(e);
         if (!ed) return;
 
-        ed.focus(); // Фокусируем редактор
+        ed.focus();
 
         WC.editor = ed;
         WC.mode = 'table';
@@ -987,7 +1129,6 @@
         if (s.rangeCount) {
             WC.range = s.getRangeAt(0).cloneRange();
         } else {
-            // Создаём range в конце редактора если нет выделения
             const range = document.createRange();
             range.selectNodeContents(ed);
             range.collapse(false);
@@ -1007,6 +1148,8 @@
             del: 0,
             delMedia: 0,
             delTable: 0,
+            delSpoiler: 0,
+            spoilerTitle: 0,
             prv: 0
         });
     }
@@ -1125,7 +1268,6 @@
             return;
         }
 
-        // Найти активную ячейку (где стоит курсор)
         const ed = wrapper.closest('.wysiwyg-content');
         const selection = window.getSelection();
         let activeRow = null;
@@ -1141,7 +1283,6 @@
             }
         }
 
-        // Если нашли активную строку - удаляем её, иначе последнюю
         if (activeRow) {
             activeRow.remove();
         } else {
@@ -1162,7 +1303,6 @@
             return;
         }
 
-        // Найти активную ячейку (где стоит курсор)
         const ed = wrapper.closest('.wysiwyg-content');
         const selection = window.getSelection();
         let activeCellIndex = -1;
@@ -1171,7 +1311,6 @@
             let node = selection.getRangeAt(0).startContainer;
             while (node && node !== table) {
                 if (node.nodeName === 'TD' || node.nodeName === 'TH') {
-                    // Найти индекс ячейки
                     const row = node.parentNode;
                     const cells = Array.from(row.querySelectorAll('td, th'));
                     activeCellIndex = cells.indexOf(node);
@@ -1181,7 +1320,6 @@
             }
         }
 
-        // Если нашли активный столбец - удаляем его, иначе последний
         const colToDelete = activeCellIndex >= 0 ? activeCellIndex : cols - 1;
 
         rows.forEach(row => {
@@ -1212,6 +1350,8 @@
             del: 0,
             delMedia: 0,
             delTable: 1,
+            delSpoiler: 0,
+            spoilerTitle: 0,
             prv: 0
         });
     }
@@ -1230,7 +1370,7 @@
         const ed = getEd(e);
         if (!ed) return;
 
-        ed.focus(); // Фокусируем редактор
+        ed.focus();
 
         WC.editor = ed;
         WC.mode = 'link';
@@ -1239,7 +1379,6 @@
         if (s.rangeCount) {
             WC.range = s.getRangeAt(0).cloneRange();
         } else {
-            // Создаём range в конце редактора если нет выделения
             const range = document.createRange();
             range.selectNodeContents(ed);
             range.collapse(false);
@@ -1262,6 +1401,8 @@
             del: !!lnk,
             delMedia: 0,
             delTable: 0,
+            delSpoiler: 0,
+            spoilerTitle: 0,
             prv: 0
         });
     }
@@ -1271,7 +1412,7 @@
         const ed = getEd(e);
         if (!ed) return;
 
-        ed.focus(); // Фокусируем редактор
+        ed.focus();
 
         WC.editor = ed;
         WC.uploadType = type;
@@ -1280,7 +1421,6 @@
         if (s.rangeCount) {
             WC.range = s.getRangeAt(0).cloneRange();
         } else {
-            // Создаём range в конце редактора если нет выделения
             const range = document.createRange();
             range.selectNodeContents(ed);
             range.collapse(false);
@@ -1327,6 +1467,8 @@
             del: 0,
             delMedia: 0,
             delTable: 0,
+            delSpoiler: 0,
+            spoilerTitle: 0,
             prv: 1
         });
 
@@ -1416,6 +1558,8 @@
                 del: 0,
                 delMedia: 1,
                 delTable: 0,
+                delSpoiler: 0,
+                spoilerTitle: 0,
                 prv: 1
             });
         }
@@ -1430,7 +1574,7 @@
         inf.style.display = 'none';
         WC.uploadedMediaUrl = null;
         WC.uploadedMediaId = null;
-        WC.mode = WC.link = WC.file = WC.mediaWrapper = WC.tableWrapper = null;
+        WC.mode = WC.link = WC.file = WC.mediaWrapper = WC.tableWrapper = WC.spoilerWrapper = null;
     }
 
 
@@ -1440,18 +1584,45 @@
 
         ed.focus();
 
-        // Восстанавливаем сохранённую позицию курсора
         const s = window.getSelection();
         s.removeAllRanges();
         if (WC.range) {
             try {
                 s.addRange(WC.range);
             } catch (e) {
-                // Если range невалиден, создаём новый в конце
                 const range = document.createRange();
                 range.selectNodeContents(ed);
                 range.collapse(false);
                 s.addRange(range);
+            }
+        }
+
+        if (WC.mode === 'spoiler') {
+            const title = document.getElementById('wysiwygModalSpoilerTitle').value.trim() || 'Click to reveal...';
+            const spoiler = wysiwygCreateSpoiler(title);
+
+            const r = s.getRangeAt(0);
+            r.deleteContents();
+            r.insertNode(spoiler);
+
+            const p = document.createElement('p');
+            p.innerHTML = '<br>';
+            spoiler.parentNode.insertBefore(p, spoiler.nextSibling);
+
+            const content = spoiler.querySelector('.wysiwyg-spoiler-content');
+            if (content) {
+                setCaret(content);
+            }
+        }
+
+        if (WC.mode === 'spoiler-edit') {
+            const wrapper = WC.spoilerWrapper;
+            if (!wrapper) return;
+
+            const title = document.getElementById('wysiwygModalSpoilerTitle').value.trim() || 'Click to reveal...';
+            const titleEl = wrapper.querySelector('.wysiwyg-spoiler-title');
+            if (titleEl) {
+                titleEl.textContent = title;
             }
         }
 
@@ -1466,12 +1637,10 @@
             r.deleteContents();
             r.insertNode(tableWrapper);
 
-            // Добавляем параграф после таблицы
             const p = document.createElement('p');
             p.innerHTML = '<br>';
             tableWrapper.parentNode.insertBefore(p, tableWrapper.nextSibling);
 
-            // Перемещаем курсор в первую ячейку таблицы
             const firstCell = tableWrapper.querySelector('td, th');
             if (firstCell) {
                 setCaret(firstCell);
@@ -1499,7 +1668,6 @@
                 r.deleteContents();
                 r.insertNode(a);
 
-                // Перемещаем курсор после ссылки
                 r.setStartAfter(a);
                 r.collapse(true);
                 s.removeAllRanges();
@@ -1566,12 +1734,10 @@
             r.deleteContents();
             r.insertNode(w);
 
-            // Добавляем параграф после изображения для продолжения ввода
             const p = document.createElement('p');
             p.innerHTML = '<br>';
             w.parentNode.insertBefore(p, w.nextSibling);
 
-            // Перемещаем курсор в новый параграф
             r.setStart(p, 0);
             r.collapse(true);
             s.removeAllRanges();
@@ -1602,17 +1768,14 @@
             const r = s.getRangeAt(0);
             r.deleteContents();
 
-            // Вставляем файл в отдельном div
             const div = document.createElement('div');
             div.appendChild(a);
             r.insertNode(div);
 
-            // Добавляем параграф после файла
             const ndiv = document.createElement('div');
             ndiv.innerHTML = '<br>';
             div.parentNode.insertBefore(ndiv, div.nextSibling);
 
-            // Перемещаем курсор в новый параграф
             r.setStart(ndiv, 0);
             r.collapse(true);
             s.removeAllRanges();
@@ -1688,7 +1851,7 @@
             const h = container.querySelector('input[type="hidden"][data-wysiwyg-hidden]');
             if (h) h.value = ed.innerHTML;
 
-            // Добавляем обработчики клика только для изображений внутри редактора
+            // Ініціалізуємо зображення
             ed.querySelectorAll('.wysiwyg-image-wrapper').forEach(w => {
                 w.onclick = function(event) {
                     const wysiwygEditor = this.closest('.wysiwyg');
@@ -1698,18 +1861,45 @@
                 };
             });
 
+            // Ініціалізуємо спойлери
+            ed.querySelectorAll('.wysiwyg-spoiler').forEach(spoiler => {
+                 spoiler.removeAttribute('open');
+
+                // Знаходимо кнопку редагування і додаємо обробник
+                const editBtn = spoiler.querySelector('[data-spoiler-edit]');
+                if (editBtn) {
+                    editBtn.onclick = function(event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        wysiwygEditSpoiler(spoiler);
+                    };
+                }
+            });
+
             setTimeout(() => {
                 updToolbar(ed);
                 wysiwygSyncContent(ed);
             }, 100);
         });
 
+        // Глобальний обробник для кнопок вирівнювання
         document.addEventListener('click', e => {
             if (e.target.closest('.wysiwyg-align-btn')) {
                 const b = e.target.closest('.wysiwyg-align-btn'),
                     c = b.closest('.wysiwyg-align-buttons');
                 c.querySelectorAll('.wysiwyg-align-btn').forEach(x => x.classList.remove('active'));
                 b.classList.add('active');
+            }
+
+            // Глобальний обробник для кнопок редагування спойлерів
+            if (e.target.closest('[data-spoiler-edit]')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const btn = e.target.closest('[data-spoiler-edit]');
+                const spoiler = btn.closest('.wysiwyg-spoiler');
+                if (spoiler) {
+                    wysiwygEditSpoiler(spoiler);
+                }
             }
         });
     });
@@ -1730,71 +1920,39 @@
     });
 
     document.addEventListener('keydown', e => {
-    const s = window.getSelection();
-    if (!s.rangeCount) return;
-    const r = s.getRangeAt(0);
-    let n = r.startContainer;
-    let ed = n;
-    
-    while (ed && !ed.classList?.contains('wysiwyg-content')) ed = ed.parentNode;
-    if (!ed?.contains(n)) return;
-    
-    // BACKSPACE
-    if (e.key === 'Backspace') {
-        let block = n;
-        while (block && block !== ed) {
-            if (block.nodeType === 1) {
-                if (block.tagName === 'PRE') {
-                    const isEmpty = block.textContent.trim() === '';
-                    const isAtStart = r.startOffset === 0 && (
-                        r.startContainer === block ||
-                        (r.startContainer.nodeType === 3 && r.startContainer.parentNode === block)
-                    );
-                    
-                    if (isEmpty || isAtStart) {
-                        e.preventDefault();
-                        const prev = block.previousSibling;
-                        if (prev && (prev.tagName === 'DIV' || prev.tagName === 'P') && 
-                            (prev.innerHTML === '<br>' || prev.textContent.trim() === '')) {
-                            prev.remove();
-                        }
-                        
-                        const div = document.createElement('div');
-                        div.innerHTML = block.textContent || '<br>';
-                        block.parentNode.insertBefore(div, block);
-                        block.remove();
-                        
-                        r.setStart(div, 0);
-                        r.collapse(true);
-                        s.removeAllRanges();
-                        s.addRange(r);
-                        wysiwygSyncContent(ed);
-                        return;
-                    }
-                }
-                
-                if (block.tagName === 'BLOCKQUOTE') {
-                    const innerDiv = block.querySelector('div');
-                    if (innerDiv) {
-                        const isEmpty = innerDiv.textContent.trim() === '';
+        const s = window.getSelection();
+        if (!s.rangeCount) return;
+        const r = s.getRangeAt(0);
+        let n = r.startContainer;
+        let ed = n;
+
+        while (ed && !ed.classList?.contains('wysiwyg-content')) ed = ed.parentNode;
+        if (!ed?.contains(n)) return;
+
+        if (e.key === 'Backspace') {
+            let block = n;
+            while (block && block !== ed) {
+                if (block.nodeType === 1) {
+                    if (block.tagName === 'PRE') {
+                        const isEmpty = block.textContent.trim() === '';
                         const isAtStart = r.startOffset === 0 && (
-                            r.startContainer === innerDiv ||
-                            (r.startContainer.nodeType === 3 && r.startContainer.parentNode === innerDiv && !r.startContainer.previousSibling)
+                            r.startContainer === block ||
+                            (r.startContainer.nodeType === 3 && r.startContainer.parentNode === block)
                         );
-                        
+
                         if (isEmpty || isAtStart) {
                             e.preventDefault();
                             const prev = block.previousSibling;
-                            if (prev && (prev.tagName === 'DIV' || prev.tagName === 'P') && 
+                            if (prev && (prev.tagName === 'DIV' || prev.tagName === 'P') &&
                                 (prev.innerHTML === '<br>' || prev.textContent.trim() === '')) {
                                 prev.remove();
                             }
-                            
+
                             const div = document.createElement('div');
-                            div.innerHTML = innerDiv.innerHTML || '<br>';
+                            div.innerHTML = block.textContent || '<br>';
                             block.parentNode.insertBefore(div, block);
                             block.remove();
-                            
+
                             r.setStart(div, 0);
                             r.collapse(true);
                             s.removeAllRanges();
@@ -1803,125 +1961,165 @@
                             return;
                         }
                     }
-                }
-            }
-            block = block.parentNode;
-        }
-        return;
-    }
-    
-    // ENTER
-    if (e.key !== 'Enter') return;
-    
-    let b = n;
-    while (b && b !== ed) {
-        if (b.nodeType === 1) {
-            if (/^H[1-6]$/.test(b.tagName)) {
-                e.preventDefault();
 
-                let cursorOffset = r.startOffset;
-                let container = r.startContainer;
-                
-                if (container === b) {
-                    if (cursorOffset === 0) {
-                        const div = document.createElement('div');
-                        div.innerHTML = '<br>';
-                        b.parentNode.insertBefore(div, b);
-                        r.setStart(div, 0);
-                        r.collapse(true);
-                        s.removeAllRanges();
-                        s.addRange(r);
-                        wysiwygSyncContent(ed);
-                        return;
-                    }
-                }
-                
-                if (container.nodeType === 3) {
-                    let currentNode = container;
-                    let isFirst = cursorOffset === 0;
-                    
-                    while (currentNode.previousSibling) {
-                        const prev = currentNode.previousSibling;
-                        if (prev.nodeType === 3 && prev.textContent.length > 0) {
-                            isFirst = false;
-                            break;
-                        } else if (prev.nodeType === 1) {
-                            isFirst = false;
-                            break;
+                    if (block.tagName === 'BLOCKQUOTE') {
+                        const innerDiv = block.querySelector('div');
+                        if (innerDiv) {
+                            const isEmpty = innerDiv.textContent.trim() === '';
+                            const isAtStart = r.startOffset === 0 && (
+                                r.startContainer === innerDiv ||
+                                (r.startContainer.nodeType === 3 && r.startContainer.parentNode ===
+                                    innerDiv && !r.startContainer.previousSibling)
+                            );
+
+                            if (isEmpty || isAtStart) {
+                                e.preventDefault();
+                                const prev = block.previousSibling;
+                                if (prev && (prev.tagName === 'DIV' || prev.tagName === 'P') &&
+                                    (prev.innerHTML === '<br>' || prev.textContent.trim() === '')) {
+                                    prev.remove();
+                                }
+
+                                const div = document.createElement('div');
+                                div.innerHTML = innerDiv.innerHTML || '<br>';
+                                block.parentNode.insertBefore(div, block);
+                                block.remove();
+
+                                r.setStart(div, 0);
+                                r.collapse(true);
+                                s.removeAllRanges();
+                                s.addRange(r);
+                                wysiwygSyncContent(ed);
+                                return;
+                            }
                         }
-                        currentNode = prev;
-                    }
-                    
-                    if (isFirst) {
-                        const div = document.createElement('div');
-                        div.innerHTML = '<br>';
-                        b.parentNode.insertBefore(div, b);
-                        r.setStart(div, 0);
-                        r.collapse(true);
-                        s.removeAllRanges();
-                        s.addRange(r);
-                        wysiwygSyncContent(ed);
-                        return;
                     }
                 }
-                
-                const div = document.createElement('div');
-                div.innerHTML = '<br>';
-                b.parentNode.insertBefore(div, b.nextSibling);
-                r.setStart(div, 0);
-                r.collapse(true);
-                s.removeAllRanges();
-                s.addRange(r);
-                wysiwygSyncContent(ed);
-                return;
+                block = block.parentNode;
             }
-            
-            if (b.tagName === 'PRE') {
-                e.preventDefault();
-                const isEmpty = b.textContent.trim() === '';
-                
-                if (isEmpty) {
+            return;
+        }
+
+        if (e.key !== 'Enter') return;
+
+        let b = n;
+        while (b && b !== ed) {
+            if (b.nodeType === 1) {
+                if (/^H[1-6]$/.test(b.tagName)) {
+                    e.preventDefault();
+
+                    let cursorOffset = r.startOffset;
+                    let container = r.startContainer;
+
+                    if (container === b) {
+                        if (cursorOffset === 0) {
+                            const div = document.createElement('div');
+                            div.innerHTML = '<br>';
+                            b.parentNode.insertBefore(div, b);
+                            r.setStart(div, 0);
+                            r.collapse(true);
+                            s.removeAllRanges();
+                            s.addRange(r);
+                            wysiwygSyncContent(ed);
+                            return;
+                        }
+                    }
+
+                    if (container.nodeType === 3) {
+                        let currentNode = container;
+                        let isFirst = cursorOffset === 0;
+
+                        while (currentNode.previousSibling) {
+                            const prev = currentNode.previousSibling;
+                            if (prev.nodeType === 3 && prev.textContent.length > 0) {
+                                isFirst = false;
+                                break;
+                            } else if (prev.nodeType === 1) {
+                                isFirst = false;
+                                break;
+                            }
+                            currentNode = prev;
+                        }
+
+                        if (isFirst) {
+                            const div = document.createElement('div');
+                            div.innerHTML = '<br>';
+                            b.parentNode.insertBefore(div, b);
+                            r.setStart(div, 0);
+                            r.collapse(true);
+                            s.removeAllRanges();
+                            s.addRange(r);
+                            wysiwygSyncContent(ed);
+                            return;
+                        }
+                    }
+
                     const div = document.createElement('div');
                     div.innerHTML = '<br>';
-                    b.parentNode.insertBefore(div, b);
-                    b.remove();
-                    
+                    b.parentNode.insertBefore(div, b.nextSibling);
                     r.setStart(div, 0);
                     r.collapse(true);
                     s.removeAllRanges();
                     s.addRange(r);
-                } else {
-                    r.deleteContents();
-                    r.insertNode(document.createTextNode('\n'));
-                    r.collapse(false);
-                    s.removeAllRanges();
-                    s.addRange(r);
+                    wysiwygSyncContent(ed);
+                    return;
                 }
-                
-                wysiwygSyncContent(ed);
-                return;
-            }
-            
-            if (b.tagName === 'BLOCKQUOTE') {
-                e.preventDefault();
-                const innerDiv = b.querySelector('div');
-                
-                if (innerDiv) {
-                    const isEmpty = innerDiv.textContent.trim() === '';
-                    
+
+                if (b.tagName === 'PRE') {
+                    e.preventDefault();
+                    const isEmpty = b.textContent.trim() === '';
+
                     if (isEmpty) {
-                        const newDiv = document.createElement('div');
-                        newDiv.innerHTML = '<br>';
-                        b.parentNode.insertBefore(newDiv, b.nextSibling);
-                        
-                        r.setStart(newDiv, 0);
+                        const div = document.createElement('div');
+                        div.innerHTML = '<br>';
+                        b.parentNode.insertBefore(div, b);
+                        b.remove();
+
+                        r.setStart(div, 0);
                         r.collapse(true);
                         s.removeAllRanges();
                         s.addRange(r);
-                        
-                        innerDiv.remove();
-                        if (!b.textContent.trim()) {
-                            b.remove();
+                    } else {
+                        r.deleteContents();
+                        r.insertNode(document.createTextNode('\n'));
+                        r.collapse(false);
+                        s.removeAllRanges();
+                        s.addRange(r);
+                    }
+
+                    wysiwygSyncContent(ed);
+                    return;
+                }
+
+                if (b.tagName === 'BLOCKQUOTE') {
+                    e.preventDefault();
+                    const innerDiv = b.querySelector('div');
+
+                    if (innerDiv) {
+                        const isEmpty = innerDiv.textContent.trim() === '';
+
+                        if (isEmpty) {
+                            const newDiv = document.createElement('div');
+                            newDiv.innerHTML = '<br>';
+                            b.parentNode.insertBefore(newDiv, b.nextSibling);
+
+                            r.setStart(newDiv, 0);
+                            r.collapse(true);
+                            s.removeAllRanges();
+                            s.addRange(r);
+
+                            innerDiv.remove();
+                            if (!b.textContent.trim()) {
+                                b.remove();
+                            }
+                        } else {
+                            const d = document.createElement('div');
+                            d.innerHTML = '<br>';
+                            r.insertNode(d);
+                            r.setStart(d, 0);
+                            r.collapse(true);
+                            s.removeAllRanges();
+                            s.addRange(r);
                         }
                     } else {
                         const d = document.createElement('div');
@@ -1932,23 +2130,14 @@
                         s.removeAllRanges();
                         s.addRange(r);
                     }
-                } else {
-                    const d = document.createElement('div');
-                    d.innerHTML = '<br>';
-                    r.insertNode(d);
-                    r.setStart(d, 0);
-                    r.collapse(true);
-                    s.removeAllRanges();
-                    s.addRange(r);
+
+                    wysiwygSyncContent(ed);
+                    return;
                 }
-                
-                wysiwygSyncContent(ed);
-                return;
             }
+            b = b.parentNode;
         }
-        b = b.parentNode;
-    }
-});
+    });
 
     document.addEventListener('keyup', e => {
         if (e.key === 'Backspace' || e.key === 'Delete') {
