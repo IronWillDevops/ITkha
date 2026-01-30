@@ -582,7 +582,6 @@
         container.querySelectorAll('[data-i18n]').forEach(el => {
             el.textContent = t(el.getAttribute('data-i18n'));
         });
-
         container.querySelectorAll('[data-i18n-title]').forEach(el => {
             el.title = t(el.getAttribute('data-i18n-title'));
         });
