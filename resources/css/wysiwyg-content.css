@@ -271,6 +271,99 @@
 }
 
 /* ============================================
+   SPOILER STYLES
+   ============================================ */
+.wysiwyg-spoiler {
+    margin: 1rem 0;
+    border: 1px solid var(--wysiwyg-border);
+    border-radius: var(--wysiwyg-radius-sm);
+    background: var(--wysiwyg-card);
+    overflow: hidden;
+    position: relative;
+}
+
+.wysiwyg-spoiler summary {
+    padding: 0.75rem 3rem 0.75rem 1rem;
+    background: var(--wysiwyg-accent);
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: var(--wysiwyg-foreground);
+    transition: background var(--wysiwyg-transition-fast);
+}
+
+.wysiwyg-spoiler summary:hover {
+    background: var(--wysiwyg-border);
+}
+
+.wysiwyg-spoiler summary::marker,
+.wysiwyg-spoiler summary::-webkit-details-marker {
+    display: none;
+}
+
+.wysiwyg-spoiler summary::before {
+    content: '▶';
+    margin-right: 0.5rem;
+    transition: transform var(--wysiwyg-transition-fast);
+    display: inline-block;
+    color: var(--wysiwyg-primary);
+}
+
+.wysiwyg-spoiler[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.wysiwyg-spoiler-title {
+    flex: 1;
+}
+
+/* Контейнер для кнопки редактирования */
+.wysiwyg-spoiler-edit-container {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    z-index: 1;
+}
+
+.wysiwyg-spoiler-edit-btn {
+    padding: 0.25rem 0.5rem;
+    background: var(--wysiwyg-card);
+    border: 1px solid var(--wysiwyg-border);
+    border-radius: var(--wysiwyg-radius-xs);
+    color: var(--wysiwyg-muted);
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all var(--wysiwyg-transition-fast);
+    opacity: 0;
+}
+
+.wysiwyg-spoiler:hover .wysiwyg-spoiler-edit-btn {
+    opacity: 1;
+}
+
+.wysiwyg-spoiler-edit-btn:hover {
+    background: var(--wysiwyg-primary);
+    color: white;
+    border-color: var(--wysiwyg-primary);
+}
+
+.wysiwyg-spoiler-content {
+    padding: 1rem;
+    border-top: 1px solid var(--wysiwyg-border);
+}
+
+/* Скрыть кнопку редактирования вне редактора */
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-spoiler-edit-container {
+    display: none !important;
+}
+
+/* Убрать курсор на summary вне редактора */
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-spoiler summary {
+    cursor: pointer;
+}
+/* ============================================
    TABLE STYLES
    ============================================ */
 .wysiwyg-table-wrapper {
