@@ -13,9 +13,11 @@
 @php
     $editorId = $id ?? 'editor-' . Str::random(8);
     $cleanValue = trim($value);
+
     if (empty($cleanValue)) {
         $cleanValue = '<div><br></div>';
     }
+
 @endphp
 <div class="wysiwyg w-full" data-wysiwyg-id="{{ $editorId }}" data-locale="{{ $locale }}"
     data-save-images-as="{{ $saveImagesAs }}" data-upload-url="{{ route('admin.wysiwyg.upload') }}"
@@ -538,7 +540,8 @@
             UL: 'list',
             OL: 'numberedListBlock',
             LI: 'listItem',
-            TABLE: 'tableBlock'
+            TABLE: 'tableBlock',
+            SPOILER: 'spoilerBlock'
         },
         align: {
             left: 'left',
@@ -734,21 +737,38 @@
         if (s.rangeCount) {
             let n = s.getRangeAt(0).startContainer;
             while (n && n !== ed && n.nodeType !== 1) n = n.parentNode;
+
+            // Проверяем таблицу (она имеет приоритет)
+            let checkNode = n;
+            while (checkNode && checkNode !== ed) {
+                if (checkNode.nodeName === 'TABLE') {
+                    c.querySelector('.wysiwyg-current-block span').textContent = t('tableBlock');
+                    return;
+                }
+                checkNode = checkNode.parentNode;
+            }
+
+            // Проверяем обычные блоки (в том числе внутри спойлера)
             while (n && n !== ed) {
                 if (n.nodeType === 1 && WC.blocks.includes(n.nodeName)) {
                     const blockKey = WC.names[n.nodeName] || 'text';
                     c.querySelector('.wysiwyg-current-block span').textContent = t(blockKey);
-                    break;
-                }
-                if (n.nodeName === 'TABLE') {
-                    c.querySelector('.wysiwyg-current-block span').textContent = t('tableBlock');
-                    break;
-                }
-                if (n.classList && n.classList.contains('wysiwyg-spoiler')) {
-                    c.querySelector('.wysiwyg-current-block span').textContent = t('spoilerBlock');
-                    break;
+                    return;
                 }
                 n = n.parentNode;
+            }
+
+            // Если не нашли ни таблицу, ни обычный блок, проверяем спойлер
+            checkNode = s.getRangeAt(0).startContainer;
+            while (checkNode && checkNode !== ed && checkNode.nodeType !== 1) checkNode = checkNode.parentNode;
+
+            while (checkNode && checkNode !== ed) {
+                if (checkNode.nodeType === 1 && checkNode.classList && checkNode.classList.contains(
+                    'wysiwyg-spoiler')) {
+                    c.querySelector('.wysiwyg-current-block span').textContent = t('spoilerBlock');
+                    return;
+                }
+                checkNode = checkNode.parentNode;
             }
         }
     }
@@ -949,7 +969,17 @@
 
         const summary = document.createElement('summary');
         summary.contentEditable = 'false';
-        summary.innerHTML = `<span class="wysiwyg-spoiler-title">${title}</span>`;
+
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'wysiwyg-spoiler-title';
+        titleSpan.textContent = title;
+
+        summary.appendChild(titleSpan);
+
+        // Создаем контейнер для кнопки вне summary
+        const editBtnContainer = document.createElement('div');
+        editBtnContainer.className = 'wysiwyg-spoiler-edit-container';
+        editBtnContainer.contentEditable = 'false';
 
         const editBtn = document.createElement('button');
         editBtn.type = 'button';
@@ -957,14 +987,13 @@
         editBtn.innerHTML = '<i class="fa-solid fa-cog"></i>';
         editBtn.setAttribute('data-spoiler-edit', 'true');
 
-        // Додаємо обробник безпосередньо до кнопки
         editBtn.onclick = function(event) {
             event.preventDefault();
             event.stopPropagation();
             wysiwygEditSpoiler(wrapper);
         };
 
-        summary.appendChild(editBtn);
+        editBtnContainer.appendChild(editBtn);
 
         const content = document.createElement('div');
         content.className = 'wysiwyg-spoiler-content';
@@ -972,6 +1001,7 @@
         content.innerHTML = '<div><br></div>';
 
         wrapper.appendChild(summary);
+        wrapper.appendChild(editBtnContainer);
         wrapper.appendChild(content);
 
         return wrapper;
@@ -1835,6 +1865,7 @@
 
         document.querySelectorAll('.wysiwyg').forEach(container => {
             const ed = container.querySelector('.wysiwyg-content');
+
             const locale = container.getAttribute('data-locale') || 'en';
             const saveAs = container.getAttribute('data-save-images-as') || 'server';
 
@@ -1863,7 +1894,6 @@
 
             // Ініціалізуємо спойлери
             ed.querySelectorAll('.wysiwyg-spoiler').forEach(spoiler => {
-                spoiler.removeAttribute('open');
 
                 // Знаходимо кнопку редагування і додаємо обробник
                 const editBtn = spoiler.querySelector('[data-spoiler-edit]');

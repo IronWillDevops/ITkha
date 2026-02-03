@@ -22,8 +22,6 @@ trait HasMedia
         return $this->mediaByCollection($collection)->first();
     }
 
-
-
     /**
      * Получить URL первого media из collection
      */

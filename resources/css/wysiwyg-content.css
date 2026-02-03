@@ -279,20 +279,19 @@
     border-radius: var(--wysiwyg-radius-sm);
     background: var(--wysiwyg-card);
     overflow: hidden;
+    position: relative;
 }
 
 .wysiwyg-spoiler summary {
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 3rem 0.75rem 1rem;
     background: var(--wysiwyg-accent);
     cursor: pointer;
     user-select: none;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     font-weight: 500;
     color: var(--wysiwyg-foreground);
     transition: background var(--wysiwyg-transition-fast);
-    position: relative;
 }
 
 .wysiwyg-spoiler summary:hover {
@@ -320,20 +319,27 @@
     flex: 1;
 }
 
+/* Контейнер для кнопки редактирования */
+.wysiwyg-spoiler-edit-container {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    z-index: 1;
+}
+
 .wysiwyg-spoiler-edit-btn {
     padding: 0.25rem 0.5rem;
-    background: transparent;
+    background: var(--wysiwyg-card);
     border: 1px solid var(--wysiwyg-border);
     border-radius: var(--wysiwyg-radius-xs);
     color: var(--wysiwyg-muted);
     cursor: pointer;
     font-size: 0.75rem;
-    margin-left: 0.5rem;
     transition: all var(--wysiwyg-transition-fast);
     opacity: 0;
 }
 
-.wysiwyg-spoiler summary:hover .wysiwyg-spoiler-edit-btn {
+.wysiwyg-spoiler:hover .wysiwyg-spoiler-edit-btn {
     opacity: 1;
 }
 
@@ -349,7 +355,7 @@
 }
 
 /* Скрыть кнопку редактирования вне редактора */
-.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-spoiler-edit-btn {
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-spoiler-edit-container {
     display: none !important;
 }
 
@@ -357,7 +363,6 @@
 .wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-spoiler summary {
     cursor: pointer;
 }
-
 /* ============================================
    TABLE STYLES
    ============================================ */
