@@ -17,7 +17,7 @@ class VerifyEmailController extends Controller
         $expires = $request->query('expires'); // timestamp из URL
         
         if ($expires && now()->timestamp > (int)$expires) {
-            dd("TTL");
+           
             abort(403, __('public/auth/verify.messages.invalid_or_expired_link'));
         }
 
