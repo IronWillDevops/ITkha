@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\VerifyEmailNotification;
 use App\Models\Traits\HasMedia;
 use App\Models\Traits\LogsActivity;
+use App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -131,7 +132,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new VerifyEmailNotification($this));
     }
-
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+    
 
     public function profile()
     {
