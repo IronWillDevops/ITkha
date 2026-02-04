@@ -31,7 +31,7 @@ class StoreRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:255'],
             'role_id' => ['required', 'exists:roles,id'],
-            'email_verified_at' => ['required', 'boolean'],
+            'email_verified_at' => ['nullable', 'boolean'],
             'status' => ['required', Rule::in(array_column(UserStatus::cases(), 'value'))],
         ];
     }
@@ -74,7 +74,6 @@ class StoreRequest extends FormRequest
             'role_id.required' => __('validation.required'),
             'role_id.exists' => __('validation.exists'),
 
-            'email_verified_at.required' => __('validation.required'),
             'email_verified_at.boolean' => __('validation.boolean'),
 
             'status.required' => __('validation.required'),

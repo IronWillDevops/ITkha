@@ -50,7 +50,7 @@ class UpdateRequest extends FormRequest
             'role_id' => ['required', 'exists:roles,id'],
             'password' => ['nullable', 'string', 'min:8', 'max:255'],
 
-            'email_verified_at' => ['required', 'boolean'],
+            'email_verified_at' => ['nullable', 'boolean'],
             'status' => ['required', Rule::in(array_column(UserStatus::cases(), 'value'))],
 
             // Profile
@@ -101,7 +101,6 @@ class UpdateRequest extends FormRequest
             'role_id.required' => __('validation.required'),
             'role_id.exists' => __('validation.exists'),
 
-            'email_verified_at.required' => __('validation.required'),
             'email_verified_at.boolean' => __('validation.boolean'),
 
             'status.required' => __('validation.required'),
