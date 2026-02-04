@@ -12,6 +12,6 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-         return z('public.auth.reverification.index');
+         return view('public.auth.reverification.index');
     }
 }
