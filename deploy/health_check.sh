@@ -96,7 +96,7 @@ echo -e "${BLUE}[5] Storage Permissions:${RESET}"
 STORAGE_WRITABLE=true
 
 for dir in "storage/logs" "storage/framework/cache" "storage/framework/sessions" "storage/framework/views" "bootstrap/cache"; do
-    if [ -w "$APP_DIR/$dir" ]; then
+    if sudo -u $WEB_USER test -w "$APP_DIR/$dir"; then
         echo -e "   ${GREEN}✓${RESET} $dir is writable"
     else
         echo -e "   ${RED}✗${RESET} $dir is not writable"
@@ -123,6 +123,8 @@ if [ -L "$APP_DIR/public/storage" ]; then
         echo -e "   ${YELLOW}⚠${RESET} Storage link exists but points to wrong location"
         echo -e "       Expected: $APP_DIR/storage/app/public"
         echo -e "       Actual: $TARGET"
+
+        echo -e "       Run: php artisan storage:link"
     fi
 else
     echo -e "   ${RED}✗${RESET} Storage symbolic link does not exist"
