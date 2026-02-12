@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Setting\Info;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Support\ByteFormatter;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -42,10 +43,10 @@ class IndexController extends Controller
                     'uptime' => $this->getUptime(),
                     'cpu_cores' => $this->getCpuCores(),
                     'load_average' => function_exists('sys_getloadavg') ? sys_getloadavg() : null,
-                    'memory_usage' => $this->bytesToHuman(memory_get_usage(true)),
-                    'memory_peak' => $this->bytesToHuman(memory_get_peak_usage(true)),
-                    'disk_free' => $this->bytesToHuman(disk_free_space('/') ?: 0),
-                    'disk_total' => $this->bytesToHuman(disk_total_space('/') ?: 0),
+                    'memory_usage' => ByteFormatter::format(memory_get_usage(true)),
+                    'memory_peak' => ByteFormatter::format(memory_get_peak_usage(true)),
+                    'disk_free' => ByteFormatter::format(disk_free_space('/') ?: 0),
+                    'disk_total' => ByteFormatter::format(disk_total_space('/') ?: 0),
                 ],
                 'services' => [
                     'database' => $this->getDatabaseStatus(),
@@ -62,13 +63,7 @@ class IndexController extends Controller
         return view('admin.setting.info.index', compact('info'));
     }
 
-    protected function bytesToHuman($bytes, $decimals = 2)
-    {
-        $size = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
-        if ($bytes <= 0) return '0 B';
-        $factor = floor((strlen($bytes) - 1) / 3);
-        return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . ' ' . $size[$factor];
-    }
+ 
 
     protected function getCpuCores()
     {
