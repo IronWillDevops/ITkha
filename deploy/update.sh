@@ -8,7 +8,7 @@ PHP_BIN="php"
 COMPOSER_BIN="composer"
 WEB_USER="www-data"
 WEB_GROUP="www-data"
-DEPLOY_USER="deploy"  # укажи реального деплой-пользователя, если другой
+DEPLOY_USER="deploy"
 
 # Color definitions
 GREEN='\033[0;32m'
@@ -21,7 +21,7 @@ cd $APP_DIR || exit
 # ==========================================
 # 0. Initialize variables
 # ==========================================
-TOTAL_STEPS=12
+TOTAL_STEPS=13
 CURRENT_STEP=0
 
 increment_step() {
@@ -52,7 +52,18 @@ echo -e "[${YELLOW}INFO${RESET}] The site is in maintenance mode."
 echo -e "[${GREEN}ACCESS KEY${RESET}]: $RANDOM_KEY"
 
 # ==========================================
-# STEP 1. Update source code from Git
+# STEP 1. Stop queue worker service (if exists)
+# ==========================================
+increment_step "Stopping queue worker service..."
+if systemctl is-active --quiet laravel-queue.service; then
+    sudo systemctl stop laravel-queue.service
+    success_step "Queue worker service stopped."
+else
+    echo -e "[${YELLOW}INFO${RESET}] Queue worker service not running."
+fi
+
+# ==========================================
+# STEP 2. Update source code from Git
 # ==========================================
 increment_step "Updating repository..."
 cd $APP_DIR || { error_step "Application directory not found."; exit 1; }
@@ -68,10 +79,8 @@ else
 fi
 
 # ==========================================
-# STEP 2. Fix permissions BEFORE build
+# STEP 3. Fix permissions BEFORE build
 # ==========================================
-# Чтобы PHP мог удалять favicon и писать в public
-
 increment_step "Fixing permissions for public directory..."
 if sudo chown -R $WEB_USER:$WEB_GROUP public && \
    sudo chmod -R 775 public; then
@@ -82,7 +91,7 @@ else
 fi
 
 # ==========================================
-# STEP 3. Update PHP dependencies
+# STEP 4. Update PHP dependencies
 # ==========================================
 increment_step "Updating Composer dependencies..."
 $COMPOSER_BIN install --no-interaction --prefer-dist --optimize-autoloader > /dev/null 2>&1
@@ -94,7 +103,7 @@ else
 fi
 
 # ==========================================
-# STEP 4. Create storage symbolic link
+# STEP 5. Create storage symbolic link
 # ==========================================
 increment_step "Creating storage symbolic link..."
 
@@ -115,7 +124,7 @@ else
 fi
 
 # ==========================================
-# STEP 5. Update NPM dependencies (if exists)
+# STEP 6. Update NPM dependencies (if exists)
 # ==========================================
 if [ -f "package.json" ]; then
   increment_step "Updating NPM dependencies..."
@@ -128,7 +137,7 @@ if [ -f "package.json" ]; then
 fi
 
 # ==========================================
-# STEP 6. Run migrations
+# STEP 7. Run migrations
 # ==========================================
 increment_step "Running database migrations..."
 $PHP_BIN artisan migrate --force > /dev/null 2>&1
@@ -140,7 +149,7 @@ else
 fi
 
 # ==========================================
-# STEP 7. Clear and rebuild caches
+# STEP 8. Clear and rebuild caches
 # ==========================================
 increment_step "Clearing and rebuilding caches..."
 $PHP_BIN artisan optimize:clear > /dev/null 2>&1
@@ -154,7 +163,7 @@ else
 fi
 
 # ==========================================
-# STEP 8. Set correct storage permissions
+# STEP 9. Set correct storage permissions
 # ==========================================
 increment_step "Setting storage/bootstrap permissions..."
 if sudo chown -R $WEB_USER:$WEB_GROUP storage bootstrap/cache && \
@@ -166,10 +175,10 @@ else
 fi
 
 # ==========================================
-# STEP 9. Restart PHP-FPM
+# STEP 10. Restart PHP-FPM
 # ==========================================
 increment_step "Restarting PHP-FPM..."
-for version in 8.3; do
+for version in 8.3 8.2 8.1 7.4; do
   if systemctl is-active --quiet php${version}-fpm; then
     sudo systemctl restart php${version}-fpm > /dev/null 2>&1
     ACTIVE_VERSION=$version
@@ -179,23 +188,47 @@ for version in 8.3; do
 done
 
 # ==========================================
-# STEP 10. Check queue worker
+# STEP 11. Restart queue worker service
 # ==========================================
-increment_step "Checking queue worker status..."
-if ! ps aux | grep -v grep | grep "queue:work" > /dev/null; then
-  nohup $PHP_BIN artisan queue:work --daemon > /dev/null 2>&1 &
-  success_step "Queue worker started."
+increment_step "Restarting queue worker service..."
+if systemctl list-unit-files | grep -q "laravel-queue.service"; then
+    sudo systemctl daemon-reload
+    sudo systemctl restart laravel-queue.service
+    
+    if systemctl is-active --quiet laravel-queue.service; then
+        success_step "Queue worker service restarted successfully."
+    else
+        error_step "Queue worker service failed to start. Check: sudo systemctl status laravel-queue"
+    fi
 else
-  success_step "Queue worker is already running."
+    error_step "Queue worker service not found. Run 2_deploy_post_migrate.sh to set it up."
 fi
 
 # ==========================================
-# STEP 11. Bring site up
+# STEP 12. Restart queued jobs
+# ==========================================
+increment_step "Restarting queued jobs..."
+$PHP_BIN artisan queue:restart > /dev/null 2>&1
+success_step "Queue jobs restarted."
+
+# ==========================================
+# STEP 13. Bring site up
 # ==========================================
 increment_step "Finishing..."
 $PHP_BIN artisan up
+
+echo ""
+echo -e "==========================================="
+echo -e "🚀 ${GREEN}Update completed successfully!${RESET}"
+echo -e "==========================================="
 if [ -n "$ACTIVE_VERSION" ]; then
-  success_step "PHP-FPM restarted (version ${ACTIVE_VERSION})."
+  echo -e "✓ PHP-FPM restarted (version ${ACTIVE_VERSION})"
 fi
-success_step "Code updated from branch: $BRANCH."
-success_step "Path: $APP_DIR."
+echo -e "✓ Code updated from branch: $BRANCH"
+echo -e "✓ Path: $APP_DIR"
+echo ""
+echo -e "📊 Service Status:"
+echo -e "   Queue Worker: $(systemctl is-active laravel-queue.service 2>/dev/null || echo 'not configured')"
+echo -e "   Check logs: sudo tail -f /var/log/laravel-queue.log"
+echo ""
+echo -e "==========================================="

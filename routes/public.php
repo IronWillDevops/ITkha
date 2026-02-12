@@ -15,8 +15,8 @@ Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
 
 
 Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\VerifyEmailController::class)
-    ->middleware(['signed'])
     ->name('verification.verify');
+    
 Route::get('/captcha', App\Http\Controllers\Public\Auth\Captcha\CaptchaController::class)->name('captcha.generate');
 
 Route::get('/locale/{locale}', App\Http\Controllers\Public\Language\LocaleController::class)
