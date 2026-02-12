@@ -6,4 +6,4 @@
 
 @section('title', 'Forbidden')
 @section('code', '403')
-@section('message', 'You do not have permission to view this page.')
+@section('message',  $exception->getMessage() ?? 'You do not have permission to view this page.')
