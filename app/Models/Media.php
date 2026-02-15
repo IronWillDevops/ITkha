@@ -29,18 +29,6 @@ class Media extends Model
         return \Storage::disk($this->disk)->url($this->path);
     }
 
-    public function getHumanSizeAttribute(): string
-    {
-        $units = ['B', 'KB', 'MB', 'GB'];
-        $size = $this->size;
-
-        for ($i = 0; $size >= 1024 && $i < 3; $i++) {
-            $size /= 1024;
-        }
-
-        return round($size, 2) . ' ' . $units[$i];
-    }
-
     /**
      * Проверка является ли файл изображением
      */
