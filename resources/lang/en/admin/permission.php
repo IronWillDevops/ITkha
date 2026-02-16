@@ -69,4 +69,13 @@ return [
         'update' => 'Update settings',
         'delete' => 'Delete settings',
     ],
+
+    'backup' => [
+        'label' => 'Backup Management',
+        'view' => 'View backups',
+        'create' => 'Create backups',
+        'download' => 'Download backups',
+        'restore' => 'Restore backups',
+        'delete' => 'Delete backups',
+    ],
 ];

@@ -8,27 +8,35 @@ use Illuminate\View\Component;
 
 class TableActions extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public $type;
-    public $route;
-    public $method;
-    public $icon;
-    public $label;
+    public string $type;
+    public string $route;
+    public ?string $method;
+    public string $icon;
+    public string $label;
+    public string $variant;
+    public bool $confirm;
+    public ?string $confirmMessage;
 
-    public function __construct($route, $icon, $label, $type = 'link', $method = null)
-    {
+    public function __construct(
+        string $route,
+        string $icon,
+        string $label,
+        string $type = 'link',
+        string $variant = 'default',
+        bool $confirm = false,
+        ?string $method = null,
+        ?string $confirmMessage = null
+    ) {
         $this->type = $type;
         $this->route = $route;
-        $this->method = $method ?? 'POST';
+        $this->method = $method;
         $this->icon = $icon;
         $this->label = $label;
+        $this->variant = $variant;
+        $this->confirm = $confirm;
+        $this->confirmMessage = $confirmMessage ?? __('admin/common.messages.confirm_delete');
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.form.table-actions');

@@ -43,6 +43,7 @@ return [
                     'general'    => ['title' => 'General'],
                     'user'    => ['title' => 'Users'],
                     'comment' => ['title' => 'Comments'],
+                    'backup'  => ['title' => 'Backup Management'],
                 ],
             ],
             'additional' => [

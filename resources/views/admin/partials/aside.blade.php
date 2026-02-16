@@ -110,7 +110,7 @@
             @endpermission
 
             {{-- Settings --}}
-            @anypermission(['setting.update', 'setting.view'])
+            @anypermission(['setting.update', 'setting.view', 'backup.view'])
             <li>
                 <details class="group" data-id="settings">
                     <summary
@@ -146,6 +146,16 @@
                                     <i class="fa-solid fa-comments"></i>
                                     <span
                                         class="hover:underline">{{ __('admin/sidebar.setting.sections.main.entities.comment.title') }}</span>
+                                </a>
+                            </li>
+                        @endpermission
+                        @permission('backup.view')
+                            <li>
+                                <a href="{{ route('admin.setting.backup.index') }}"
+                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    <i class="fas fa-database"></i>
+                                    <span
+                                        class="hover:underline">{{ __('admin/sidebar.setting.sections.main.entities.backup.title') }}</span>
                                 </a>
                             </li>
                         @endpermission

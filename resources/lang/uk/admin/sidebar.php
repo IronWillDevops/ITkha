@@ -43,6 +43,7 @@ return [
                     'general' => ['title' => 'Загальні'],
                     'user'    => ['title' => 'Користувачі'],
                     'comment' => ['title' => 'Коментарі'],
+                    'backup'  => ['title' => 'Управління бекапами'],
                 ],
             ],
             'additional' => [

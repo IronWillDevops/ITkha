@@ -23,9 +23,10 @@ class RolePermissionSeeder extends Seeder
             'comment'   => ['view', 'create', 'update', 'delete'],
             'user'      => ['view', 'create', 'update', 'delete'],
             'role'      => ['view', 'create', 'update', 'delete'],
-            'contact'   => ['view',  'update',],
+            'contact'   => ['view', 'update'],
             'log'       => ['view'],
             'setting'   => ['access', 'view', 'create', 'update', 'delete'],
+            'backup'    => ['view', 'create', 'download', 'restore', 'delete'],
         ];
 
         foreach ($modules as $module => $actions) {
