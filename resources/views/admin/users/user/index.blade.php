@@ -11,7 +11,7 @@
         route="{{ route('admin.user.create') }}" 
         icon="fa-solid fa-plus"
         label="{{ __('admin/common.buttons.create') }}" variant="primary"/> 
-    />
+    
 </div>
 
 <x-form.table
