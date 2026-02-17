@@ -140,7 +140,7 @@ fi
 # STEP 7. Run migrations
 # ==========================================
 increment_step "Running database migrations..."
-$PHP_BIN artisan migrate --force > /dev/null 2>&1
+$PHP_BIN artisan migrate --force --seed > /dev/null 2>&1
 if [ $? -eq 0 ]; then
   success_step "Database migrations completed."
 else
