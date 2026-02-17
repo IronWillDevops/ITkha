@@ -11,7 +11,7 @@ class CreateController extends Controller
     public function __invoke(BackupService $backupService): RedirectResponse
     {
         try {
-            $filename = $backupService->createBackup();
+            $backupService->createBackup();
 
             return redirect()
                 ->route('admin.setting.backup.index')->with('success', __('admin/settings/backup.messages.created'));

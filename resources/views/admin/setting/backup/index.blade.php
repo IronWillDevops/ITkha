@@ -5,17 +5,40 @@
 @endsection
 
 @section('admin.content')
-
+    {{-- Create Backup Section --}}
     <div class="flex items-center justify-between mb-6">
         <x-form.table-actions type='form' route="{{ route('admin.setting.backup.create') }}" icon="fa-solid fa-plus"
             label="{{ __('admin/common.buttons.create') }}" variant="primary" />
     </div>
+    {{-- Upload Backup Section --}}
+    <details class="group mb-6" data-id="setting.backup" >
+        <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring">
+            <span class="text-xl font-semibold">{{ __('admin/settings/backup.sections.upload') }}</span>
+        </summary>
+        <section class="bg-card text-card-foreground rounded-lg shadow-sm p-6">
+            <form action="{{ route('admin.setting.backup.upload') }}" method="POST" enctype="multipart/form-data"
+                class="space-y-4">
+                @csrf
 
 
+                {{-- File Input --}}
+                <x-form.file name="filename" label="{{ __('admin/settings/backup.fields.backup_file') }}" accept=".zip"
+                    :required="true" />
+                <p class="text-sm text-muted-foreground">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    {{ __('admin/settings/backup.upload.help') }}
+                </p>
+                <x-form.submit label="{{ __('admin/common.buttons.upload') }}" icon="fa-solid fa-upload" />
+
+            </form>
+        </section>
+    </details>
+
+<x-public.ui.separator/>
 
     {{-- Backups List --}}
     <div class="bg-card text-card-foreground rounded-lg shadow-sm p-6">
-                @if (count($backups) > 0)
+        @if (count($backups) > 0)
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead class="border-b">
@@ -44,7 +67,9 @@
                                     </div>
                                 </td>
                                 <td class="py-3 px-4">
-                                    <span class="text-sm text-muted-foreground">{{ formatBytes($backup['size']) }}</span>
+                                    <span class="text-sm text-muted-foreground">
+                                        {{ formatBytes($backup['size']) }}
+                                    </span>
                                 </td>
                                 <td class="py-3 px-4">
                                     <span class="text-sm text-muted-foreground">
@@ -56,32 +81,34 @@
                                         {{-- Download --}}
                                         <a href="{{ route('admin.setting.backup.download', ['filename' => $backup['filename']]) }}"
                                             class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-primary text-primary-foreground hover:bg-primary/90"
-                                            title="{{ __('admin/common.buttons.save') }}">
+                                            title="{{ __('admin/common.buttons.download') }}">
                                             <i class="fas fa-download"></i>
                                         </a>
 
                                         {{-- Restore --}}
                                         <form action="{{ route('admin.setting.backup.restore') }}" method="POST"
-                                            class="inline-block">
+                                            class="inline-block"
+                                            onsubmit="return confirm('{{ __('admin/settings/backup.confirm.restore') }}');">
                                             @csrf
                                             <input type="hidden" name="filename" value="{{ $backup['filename'] }}">
 
-                                            <button type="submit" class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-background text-background-foreground  hover:bg-accent hover:text-accent-foreground"
+                                            <button type="submit"
+                                                class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-background text-background-foreground hover:bg-accent hover:text-accent-foreground"
                                                 title="{{ __('admin/common.buttons.restore') }}">
                                                 <i class="fas fa-undo"></i>
                                             </button>
                                         </form>
 
-
                                         {{-- Delete --}}
                                         <form action="{{ route('admin.setting.backup.delete') }}" method="POST"
-                                            class="inline-block">
+                                            class="inline-block"
+                                            onsubmit="return confirm('{{ __('admin/settings/backup.confirm.delete') }}');">
                                             @csrf
                                             @method('DELETE')
                                             <input type="hidden" name="filename" value="{{ $backup['filename'] }}">
 
                                             <button type="submit"
-                                                class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-destructive text-destructive-foreground hover:bg-destructive/90 "
+                                                class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-destructive text-destructive-foreground hover:bg-destructive/90"
                                                 title="{{ __('admin/common.buttons.delete') }}">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -96,26 +123,17 @@
         @else
             <div class="text-center py-12">
                 <i class="fas fa-inbox text-muted-foreground text-5xl mb-4"></i>
-                <p class="text-muted-foreground text-lg">{{ __('admin/settings/backup.list.empty') }}</p>
-                <p class="text-muted-foreground text-sm mt-2">{{ __('admin/settings/backup.list.empty_description') }}</p>
+                <p class="text-muted-foreground text-lg">
+                    {{ __('admin/settings/backup.list.empty') }}
+                </p>
+                <p class="text-muted-foreground text-sm mt-2">
+                    {{ __('admin/settings/backup.list.empty_description') }}
+                </p>
             </div>
         @endif
     </div>
 
-    {{-- Hidden Forms --}}
-    <form id="restoreForm" action="{{ route('admin.setting.backup.restore') }}" method="POST" style="display: none;">
-        @csrf
-        <input type="hidden" name="filename" id="restoreFilename">
-    </form>
-
-    <form id="deleteForm" action="{{ route('admin.setting.backup.delete') }}" method="POST" style="display: none;">
-        @csrf
-        @method('DELETE')
-        <input type="hidden" name="filename" id="deleteFilename">
-    </form>
-
 @endsection
-
 
 @php
     function formatBytes($bytes, $precision = 2)

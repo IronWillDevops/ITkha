@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Admin\Setting\Backup;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Setting\Backup\DownloadRequest;
 use App\Services\Admin\BackupService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class DownloadController extends Controller
 {
-    public function __invoke(Request $request, BackupService $backupService): BinaryFileResponse
+    public function __invoke(DownloadRequest $request, BackupService $backupService): BinaryFileResponse
     {
-        $request->validate([
-            'filename' => 'required|string',
-        ]);
 
         try {
-            $filePath = $backupService->downloadBackup($request->filename);
+            $data = $request->validated();
+            $filename = $data['filename'];
+            $filePath = $backupService->downloadBackup($filename);
 
             return response()->download($filePath);
         } catch (\Exception $e) {

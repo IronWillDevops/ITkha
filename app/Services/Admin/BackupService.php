@@ -147,6 +147,98 @@ class BackupService
         return $backupPath;
     }
 
+    public function uploadBackup($file): array
+    {
+        // Валидация файла
+        if (!$file || !$file->isValid()) {
+            throw new \Exception('Invalid file uploaded');
+        }
+
+        // Проверяем расширение
+        if ($file->getClientOriginalExtension() !== 'zip') {
+            throw new \Exception('Only ZIP files are allowed');
+        }
+
+        // Генерируем имя файла если нужно
+        $originalName = $file->getClientOriginalName();
+        $filename = $originalName;
+        
+        // Если файл с таким именем уже существует, добавляем timestamp
+        $backupPath = storage_path("app/{$this->backupPath}");
+        File::ensureDirectoryExists($backupPath);
+        
+        $destinationPath = "{$backupPath}/{$filename}";
+        
+        if (File::exists($destinationPath)) {
+            $filename = pathinfo($originalName, PATHINFO_FILENAME) 
+                . '_' . now()->format('Y-m-d_H-i-s') 
+                . '.' . $file->getClientOriginalExtension();
+            $destinationPath = "{$backupPath}/{$filename}";
+        }
+
+        try {
+            // Используем getRealPath() для получения реального пути к временному файлу
+            $tempFilePath = $file->getRealPath();
+            
+            if (!$tempFilePath || !File::exists($tempFilePath)) {
+                throw new \Exception('Temporary file not found');
+            }
+
+            // Проверяем что это валидный zip архив
+            $zip = new ZipArchive();
+            $zipOpenResult = $zip->open($tempFilePath);
+            
+            if ($zipOpenResult !== true) {
+                // Логируем детальную ошибку
+                $errorMessage = match ($zipOpenResult) {
+                    ZipArchive::ER_NOZIP => 'Not a valid ZIP archive',
+                    ZipArchive::ER_INCONS => 'Inconsistent ZIP archive',
+                    ZipArchive::ER_CRC => 'CRC error',
+                    ZipArchive::ER_OPEN => 'Cannot open file',
+                    ZipArchive::ER_READ => 'Read error',
+                    default => 'Unknown error code: ' . $zipOpenResult,
+                };
+                
+                throw new \Exception('Invalid ZIP archive: ' . $errorMessage);
+            }
+
+            // Проверяем наличие обязательных файлов
+            $hasDatabase = false;
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $filename_in_zip = $zip->getNameIndex($i);
+                if ($filename_in_zip === 'database.sql') {
+                    $hasDatabase = true;
+                    break;
+                }
+            }
+
+            $zip->close();
+
+            if (!$hasDatabase) {
+                throw new \Exception('Backup archive must contain database.sql file');
+            }
+
+            // Перемещаем файл в директорию бекапов
+            // Используем move() вместо File::move() для UploadedFile
+            $file->move($backupPath, $filename);
+
+            return [
+                'success' => true,
+                'filename' => $filename,
+                'path' => $destinationPath,
+                'size' => File::size($destinationPath),
+                'uploaded_at' => now(),
+            ];
+        } catch (\Exception $e) {
+            // Если файл уже был перемещен, удаляем его
+            if (File::exists($destinationPath)) {
+                File::delete($destinationPath);
+            }
+
+            throw $e;
+        }
+    }
+
     protected function backupDatabase(string $path): void
     {
         $database = config('database.default');

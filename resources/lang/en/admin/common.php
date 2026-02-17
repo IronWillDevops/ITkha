@@ -65,6 +65,7 @@ return [
         'send'       => 'Send',
         'cancel'     => 'Cancel',
         'close'      => 'Close',
+        'upload'     => 'Upload',
         'read_more'  => 'Read more',
 
         'search'      => 'Шукати',

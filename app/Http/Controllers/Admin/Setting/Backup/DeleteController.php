@@ -3,20 +3,17 @@
 namespace App\Http\Controllers\Admin\Setting\Backup;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Setting\Backup\DeleteRequest;
 use App\Services\Admin\BackupService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class DeleteController extends Controller
 {
-    public function __invoke(Request $request, BackupService $backupService): RedirectResponse
+    public function __invoke(DeleteRequest $request, BackupService $backupService): RedirectResponse
     {
-        $request->validate([
-            'filename' => 'required|string',
-        ]);
-
         try {
-            $filename = $request->filename;
+            $data = $request->validated();
+            $filename = $data['filename'];
             $backupService->deleteBackup($filename);
 
             return redirect()

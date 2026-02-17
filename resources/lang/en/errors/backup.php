@@ -9,4 +9,7 @@ return [
     'restore' => [
         'failed' => 'Failed to restore the backup.',
     ],
+    'upload'  => [
+        'failed'=> 'Failed to upload backup',
+    ],
 ];
