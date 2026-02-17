@@ -102,6 +102,18 @@ Route::prefix('admin')->name('admin.')
                         Route::get('/', App\Http\Controllers\Admin\Setting\Comment\EditController::class)->name('edit')->middleware('permission:setting.update');
                         Route::patch('/', App\Http\Controllers\Admin\Setting\Comment\UpdateController::class)->name('update')->middleware('permission:setting.update');
                     });
+
+                Route::prefix('backup')
+                    ->name('backup.')
+                    ->group(function () {
+                        Route::get('/', App\Http\Controllers\Admin\Setting\Backup\IndexController::class)->name('index')->middleware('permission:backup.view');
+                        Route::post('/create', App\Http\Controllers\Admin\Setting\Backup\CreateController::class)->name('create')->middleware('permission:backup.create');
+                        Route::post('/restore', App\Http\Controllers\Admin\Setting\Backup\RestoreController::class)->name('restore')->middleware('permission:backup.restore');
+                        Route::get('/download', App\Http\Controllers\Admin\Setting\Backup\DownloadController::class)->name('download')->middleware('permission:backup.download');
+                        Route::post('/upload', App\Http\Controllers\Admin\Setting\Backup\UploadController::class)->name('upload');
+                        Route::delete('/delete', App\Http\Controllers\Admin\Setting\Backup\DeleteController::class)->name('delete')->middleware('permission:backup.delete');
+                    });
+
                 Route::prefix('policy')
                     ->name('policy.')
                     ->group(function () {

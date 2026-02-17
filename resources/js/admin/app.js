@@ -1,1 +1,1 @@
-import './sidebar.js';
+import './details.js';

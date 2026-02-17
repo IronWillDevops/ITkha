@@ -9,7 +9,7 @@
         <x-form.table-actions type='link' route="{{ route('admin.role.edit', $role) }}" icon="fas fa-edit"
             label="{{ __('admin/common.buttons.edit') }}" />
         <x-form.table-actions type='form' method="DELETE" route="{{ route('admin.role.delete', $role) }}"
-            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" />
+            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" variant="destructive" :confirm="true" />
     </div>
 
 
@@ -29,7 +29,7 @@
         </div>
         <span class="font-medium">{{ __('admin/common.fields.description') }}: {{ $role->description }}</span>
     </div>
-    
+
     <div class="border-t border-border pt-4 mb-6">
         {{-- Permissions --}}
 

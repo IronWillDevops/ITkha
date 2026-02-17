@@ -18,7 +18,8 @@
             <h2 class="font-semibold mb-2">{{ __('admin/permission.title') }}</h2>
 
             @foreach ($permissions as $header => $group)
-                <details class="group">
+            
+                <details class="group" data-id="role.{{ $header }}" >
                     <summary class="cursor-pointer mb-4">
                         <span class="text-xl font-semibold">{{ __('admin/permission.' . $header . '.label') }}</span>
                     </summary>

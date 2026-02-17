@@ -5,15 +5,15 @@
 @section('admin.content')
     <div class="flex items-center gap-4 mb-4">
         <x-form.table-actions type='link' route="{{ route('admin.post.edit', $post) }}" icon="fas fa-edit"
-            label="{{ __('admin/common.buttons.edit') }}" />
+            label="{{ __('admin/common.buttons.edit') }}"/>
         <x-form.table-actions type='form' method="DELETE" route="{{ route('admin.post.delete', $post) }}"
-            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" />
+            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" variant="destructive" :confirm="true" />
     </div>
 
     {{-- Основное изображение --}}
-    @if ( $post->singleMedia('main_image'))
+    @if ($post->singleMedia('main_image'))
         <div class="mb-6">
-            <img src="{{  $post->singleMedia('main_image')->url }}" alt="{{ $post->title }}"
+            <img src="{{ $post->singleMedia('main_image')->url }}" alt="{{ $post->title }}"
                 class="w-full max-h-96 object-cover rounded-xl shadow">
         </div>
     @endif
@@ -47,7 +47,7 @@
                 <span class="text-xs text-muted-foreground">-</span>
             @endforelse
         </div>
-        
+
         <div>
             <span class="font-medium">{{ __('admin/common.fields.slug') }}:</span>
             {{ $post->slug }}

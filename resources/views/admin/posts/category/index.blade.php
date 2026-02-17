@@ -5,7 +5,7 @@
 @section('admin.content')
     <div class="flex items-center justify-between mb-6">
         <x-form.table-actions type='link' route="{{ route('admin.category.create') }}" icon="fa-solid fa-plus"
-            label="{{ __('admin/common.buttons.create') }}" />
+            label="{{ __('admin/common.buttons.create') }}" variant="primary"/>
 
     </div>
 

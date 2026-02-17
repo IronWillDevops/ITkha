@@ -9,7 +9,7 @@
         @csrf
         @method('PATCH')
         {{-- Personal Information --}}
-        <details class="group" open>
+        <details class="group" data-id="user.personal">
             <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring">
                 <span class="text-xl font-semibold ">{{ __('admin/user.sections.personal') }}</span>
             </summary>
@@ -67,7 +67,7 @@
         </details>
 
         {{-- Professional Information --}}
-        <details class="group" open>
+        <details class="group" data-id="user.professional">
             <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring">
                 <span class="text-xl font-semibold ">{{ __('admin/user.sections.job') }}</span>
             </summary>
@@ -95,7 +95,7 @@
         </details>
 
         {{-- Social Media --}}
-        <details class="group">
+        <details class="group" data-id="user.social">
             <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring ">
                 <span class="text-xl font-semibold ">{{ __('admin/user.sections.social') }}</span>
             </summary>
@@ -112,7 +112,7 @@
         </details>
 
         {{-- Setting --}}
-        <details class="group">
+        <details class="group" data-id="user.setting">
             <summary class="cursor-pointer mb-4 focus:ring focus:outline-none focus-visible:ring-ring">
                 <span class="text-xl font-semibold ">{{ __('admin/user.sections.setting') }}</span>
             </summary>

@@ -36,6 +36,11 @@ return [
         'version' => 'Version',
         'is_active' => 'Active',
 
+        'file' => [
+            'name' => 'File',
+            'size' => 'Size',
+        ]
+
     ],
 
     'placeholder' => [
@@ -54,11 +59,13 @@ return [
         'accept' => 'Accept',
         'create'     => 'Create',
         'edit'       => 'Edit',
+        'restore'    => 'Restore',
         'delete'     => 'Delete',
         'save'       => 'Save',
         'send'       => 'Send',
         'cancel'     => 'Cancel',
         'close'      => 'Close',
+        'upload'     => 'Upload',
         'read_more'  => 'Read more',
 
         'search'      => 'Шукати',
