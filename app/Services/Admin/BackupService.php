@@ -2,13 +2,11 @@
 
 namespace App\Services\Admin;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use ZipArchive;
-use PDO;
 
 class BackupService
 {
@@ -477,7 +475,7 @@ class BackupService
                         DB::unprepared($trimmedStatement);
                     } catch (\Exception $e) {
                         // Логируем проблемный запрос для отладки
-                        \Log::error('Failed SQL statement: ' . substr($trimmedStatement, 0, 200));
+                        Log::error('Failed SQL statement: ' . substr($trimmedStatement, 0, 200));
                         throw $e;
                     }
                 }

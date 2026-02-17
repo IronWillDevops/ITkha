@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Setting\Backup;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Setting\Backup\UploadRequest;
 use App\Services\Admin\BackupService;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class UploadController extends Controller
@@ -24,7 +25,7 @@ class UploadController extends Controller
                 ->route('admin.setting.backup.index')
                 ->with('success', __('admin/settings/backup.messages.uploaded'));
         } catch (\Exception $e) {
-            \Log::error('Backup upload failed: ' . $e->getMessage());
+            Log::error('Backup upload failed: ' . $e->getMessage());
 
             return redirect()
                 ->route('admin.setting.backup.index')
