@@ -67,7 +67,7 @@
 
 
                 @if ($post->tags && $post->tags->count())
-                    <div class="flex flex-wrap items-center post-tag text-sm  space-x-4">
+                    <div class="flex flex-wrap items-center text-sm gap-x-4 gap-y-2">
                         @foreach ($post->tags as $tag)
                             <span class="border rounded-2xl px-3 py-0.5 mx-3 flex items-center">
                                 <i class="fas fa-tags"></i>
