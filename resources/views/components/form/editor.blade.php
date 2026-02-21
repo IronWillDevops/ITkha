@@ -764,7 +764,7 @@
 
             while (checkNode && checkNode !== ed) {
                 if (checkNode.nodeType === 1 && checkNode.classList && checkNode.classList.contains(
-                    'wysiwyg-spoiler')) {
+                        'wysiwyg-spoiler')) {
                     c.querySelector('.wysiwyg-current-block span').textContent = t('spoilerBlock');
                     return;
                 }
@@ -904,14 +904,10 @@
             b.innerHTML = '<div><br></div>';
         }
 
-        const np = document.createElement('p');
-        np.innerHTML = '<br>';
-
         r.deleteContents();
 
         const fragment = document.createDocumentFragment();
         fragment.appendChild(b);
-        fragment.appendChild(np);
 
         r.insertNode(fragment);
 
