@@ -363,6 +363,7 @@
 .wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-spoiler summary {
     cursor: pointer;
 }
+
 /* ============================================
    TABLE STYLES
    ============================================ */
@@ -451,6 +452,38 @@
     background: var(--wysiwyg-danger);
     color: white;
     border-color: var(--wysiwyg-danger);
+}
+
+/* ============================================
+   ОТКЛЮЧИТЬ РЕДАКТИРОВАНИЕ НА ФРОНТЕНДЕ
+   ============================================ */
+
+/* Запретить редактирование всех contenteditable элементов вне редактора */
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) [contenteditable="true"] {
+    pointer-events: none;
+    cursor: default;
+    outline: none !important;
+    caret-color: transparent;
+    -webkit-user-modify: read-only;
+    user-modify: read-only;
+}
+
+/* Вернуть pointer-events для ссылок и вложений */
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) a,
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-file-attachment {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* Убрать hover/focus стили у ячеек таблицы на фронтенде */
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-table td:focus,
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-table th:focus {
+    outline: none !important;
+}
+
+/* Убрать кнопку редактирования спойлера на фронтенде */
+.wysiwyg-content:not(.wysiwyg .wysiwyg-content) .wysiwyg-spoiler-edit-container {
+    display: none !important;
 }
 
 /* ============================================
