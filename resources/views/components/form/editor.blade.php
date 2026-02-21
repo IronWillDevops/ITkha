@@ -570,10 +570,25 @@
         uploadedMediaId: null,
         uploadType: null
     };
+    // ДОБАВИТЬ после объявления WC:
+    const WCEditors = new Map(); // editorId → config
 
-    function t(key, params = {}) {
-        const locale = WC.locale || 'en';
-        const translations = WYSIWYG_I18N[locale] || WYSIWYG_I18N.en;
+    // ДОБАВИТЬ вспомогательную функцию:
+    function getEditorConfig(ed) {
+        return WCEditors.get(ed?.id) ?? {
+            locale: 'en',
+            saveImagesAs: 'server',
+            uploadUrl: '/admin/wysiwyg/upload',
+            deleteUrl: '/admin/wysiwyg/delete',
+            modelType: 'App\\Models\\User',
+            modelId: null
+        };
+    }
+
+
+    function t(key, params = {}, locale = null) {
+        const loc = locale ?? (WC.editor ? getEditorConfig(WC.editor).locale : 'en');
+        const translations = WYSIWYG_I18N[loc] || WYSIWYG_I18N.en;
         let text = translations[key] || WYSIWYG_I18N.en[key] || key;
         Object.keys(params).forEach(k => {
             text = text.replace(`{${k}}`, params[k]);
@@ -581,12 +596,12 @@
         return text;
     }
 
-    function applyI18n(container) {
+    function applyI18nWithLocale(container, locale) {
         container.querySelectorAll('[data-i18n]').forEach(el => {
-            el.textContent = t(el.getAttribute('data-i18n'));
+            el.textContent = t(el.getAttribute('data-i18n'), {}, locale);
         });
         container.querySelectorAll('[data-i18n-title]').forEach(el => {
-            el.title = t(el.getAttribute('data-i18n-title'));
+            el.title = t(el.getAttribute('data-i18n-title'), {}, locale);
         });
     }
 
@@ -642,14 +657,80 @@
         });
     }
 
-    async function uploadFileToServer(file) {
+    function sanitizePastedHtml(html) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Удаляем опасные теги полностью
+        ['script', 'style', 'iframe', 'object', 'embed', 'form', 'input'].forEach(tag => {
+            doc.querySelectorAll(tag).forEach(el => el.remove());
+        });
+
+        const allowed = new Set([
+            'P', 'BR', 'B', 'STRONG', 'I', 'EM', 'U', 'S', 'STRIKE',
+            'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
+            'UL', 'OL', 'LI',
+            'A', 'IMG',
+            'TABLE', 'THEAD', 'TBODY', 'TR', 'TD', 'TH',
+            'BLOCKQUOTE', 'PRE', 'CODE',
+            'DIV', 'SPAN', 'HR', 'FIGURE', 'FIGCAPTION',
+            'SUP', 'SUB'
+        ]);
+
+        const allowedAttrs = {
+            'A': ['href', 'target'],
+            'IMG': ['src', 'alt', 'width', 'height'],
+            'TD': ['colspan', 'rowspan'],
+            'TH': ['colspan', 'rowspan'],
+            '*': ['class', 'style']
+        };
+
+        function cleanNode(node) {
+            if (node.nodeType === Node.TEXT_NODE) return;
+            if (node.nodeType !== Node.ELEMENT_NODE) {
+                node.remove();
+                return;
+            }
+
+            if (!allowed.has(node.tagName)) {
+                // Не удаляем элемент, а разворачиваем — сохраняем текст внутри
+                const parent = node.parentNode;
+                while (node.firstChild) parent.insertBefore(node.firstChild, node);
+                parent.removeChild(node);
+                return;
+            }
+
+            // Чистим атрибуты
+            const permitted = [
+                ...(allowedAttrs[node.tagName] || []),
+                ...(allowedAttrs['*'] || [])
+            ];
+            Array.from(node.attributes).forEach(attr => {
+                if (!permitted.includes(attr.name)) {
+                    node.removeAttribute(attr.name);
+                }
+                // Защита от javascript: в href
+                if (attr.name === 'href' && /^\s*javascript:/i.test(attr.value)) {
+                    node.removeAttribute('href');
+                }
+            });
+
+            Array.from(node.childNodes).forEach(cleanNode);
+        }
+
+        Array.from(doc.body.childNodes).forEach(cleanNode);
+        return doc.body.innerHTML;
+    }
+
+    async function uploadFileToServer(file, ed) {
+        const cfg = getEditorConfig(ed);
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('model_type', WC.modelType || 'App\\Models\\User');
-        formData.append('model_id', WC.modelId || '');
+        formData.append('model_type', cfg.modelType);
+        formData.append('model_id', cfg.modelId || '');
 
         try {
-            const response = await fetch(WC.uploadUrl, {
+            const response = await fetch(cfg.uploadUrl, {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': WC.csrfToken,
@@ -1498,7 +1579,8 @@
             prv: 1
         });
 
-        if (WC.saveImagesAs === 'server') {
+        const cfg = getEditorConfig(WC.editor);
+        if (cfg.saveImagesAs === 'server') {
             const modalBody = document.querySelector('.wysiwyg-modal-body');
             const loadingMsg = document.createElement('div');
             loadingMsg.className = 'wysiwyg-loading-message';
@@ -1583,6 +1665,36 @@
                 tbl: 0,
                 del: 0,
                 delMedia: 1,
+                delTable: 0,
+                delSpoiler: 0,
+                spoilerTitle: 0,
+                prv: 1
+            });
+        } else {
+            WC.mode = 'file-edit';
+            const a = wrapper.querySelector('a.wysiwyg-file-attachment');
+            const nameEl = a?.querySelector('.wysiwyg-file-name');
+
+            document.getElementById('wysiwygModalText').value = nameEl?.textContent || '';
+            document.getElementById('modalTextLabel').textContent = t('fileName') || 'File name';
+
+            const inf = document.getElementById('wysiwygModalFileInfo');
+            inf.style.display = 'flex';
+            inf.querySelector('span').textContent = nameEl?.textContent || '';
+            document.getElementById('wysiwygModalPreview').style.display = 'block';
+            document.getElementById('wysiwygModalImagePreview').style.display = 'none';
+
+            const mediaId = a?.dataset.mediaId || null;
+            WC.uploadedMediaId = mediaId;
+
+            showM('editFile', {
+                url: 0,
+                txt: 1, // поле для имени файла
+                tgt: 0,
+                aln: 0,
+                tbl: 0,
+                del: 0,
+                delMedia: 1, // кнопка удаления
                 delTable: 0,
                 delSpoiler: 0,
                 spoilerTitle: 0,
@@ -1718,6 +1830,22 @@
             } else if (capEl) capEl.remove();
         }
 
+        if (WC.mode === 'file-edit') {
+            const w = WC.mediaWrapper;
+            if (!w) return;
+
+            const a = w.querySelector('a.wysiwyg-file-attachment');
+            if (!a) return;
+
+            // Обновляем имя файла если пользователь изменил
+            const newName = document.getElementById('wysiwygModalText').value.trim();
+            if (newName) {
+                const nameEl = a.querySelector('.wysiwyg-file-name');
+                if (nameEl) nameEl.textContent = newName;
+                a.download = newName;
+            }
+        }
+
         if (WC.mode === 'image') {
             const cap = document.getElementById('wysiwygModalText').value.trim(),
                 al = document.querySelector('.wysiwyg-align-btn.active')?.dataset.align || 'left',
@@ -1735,12 +1863,11 @@
 
             const img = document.createElement('img');
 
-            if (WC.saveImagesAs === 'server' && WC.uploadedMediaUrl) {
+            const cfg = getEditorConfig(ed);
+            if (cfg.saveImagesAs === 'server' && WC.uploadedMediaUrl) {
                 img.src = WC.uploadedMediaUrl;
-                if (WC.uploadedMediaId) {
-                    img.dataset.mediaId = WC.uploadedMediaId;
-                }
-            } else if (WC.saveImagesAs === 'base64') {
+                if (WC.uploadedMediaId) img.dataset.mediaId = WC.uploadedMediaId;
+            } else if (cfg.saveImagesAs === 'base64') { // ← было WC.saveImagesAs
                 img.src = await fileToBase64(WC.file);
             } else {
                 img.src = URL.createObjectURL(WC.file);
@@ -1776,11 +1903,10 @@
 
             const a = document.createElement('a');
 
-            if (WC.saveImagesAs === 'server' && WC.uploadedMediaUrl) {
+            const cfg = getEditorConfig(ed); // добавить если ещё нет
+            if (cfg.saveImagesAs === 'server' && WC.uploadedMediaUrl) { // ← было WC.saveImagesAs
                 a.href = WC.uploadedMediaUrl;
-                if (WC.uploadedMediaId) {
-                    a.dataset.mediaId = WC.uploadedMediaId;
-                }
+                if (WC.uploadedMediaId) a.dataset.mediaId = WC.uploadedMediaId;
             } else {
                 a.href = URL.createObjectURL(f);
             }
@@ -1826,10 +1952,10 @@
 
         const mediaElement = w.querySelector('img') || w.querySelector('a');
         const mediaId = mediaElement?.dataset.mediaId;
-
-        if (mediaId && WC.csrfToken && WC.deleteUrl) {
+        const cfg = getEditorConfig(WC.editor);
+        if (mediaId && WC.csrfToken && cfg.deleteUrl) {
             try {
-                await fetch(WC.deleteUrl, {
+                await fetch(cfg.deleteUrl, {
                     method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': WC.csrfToken,
@@ -1861,22 +1987,50 @@
 
         document.querySelectorAll('.wysiwyg').forEach(container => {
             const ed = container.querySelector('.wysiwyg-content');
-
             const locale = container.getAttribute('data-locale') || 'en';
             const saveAs = container.getAttribute('data-save-images-as') || 'server';
 
-            WC.locale = locale;
-            WC.saveImagesAs = saveAs;
-            WC.uploadUrl = container.getAttribute('data-upload-url') || '/admin/wysiwyg/upload';
-            WC.deleteUrl = container.getAttribute('data-delete-url') || '/admin/wysiwyg/delete';
-            WC.modelType = container.getAttribute('data-model-type') || 'App\\Models\\User';
-            WC.modelId = container.getAttribute('data-model-id') || null;
+            // Сохраняем конфиг для конкретного редактора
+            WCEditors.set(ed.id, {
+                locale,
+                saveImagesAs: saveAs,
+                uploadUrl: container.getAttribute('data-upload-url') ||
+                    '/admin/wysiwyg/upload',
+                deleteUrl: container.getAttribute('data-delete-url') ||
+                    '/admin/wysiwyg/delete',
+                modelType: container.getAttribute('data-model-type') ||
+                    'App\\Models\\User',
+                modelId: container.getAttribute('data-model-id') || null
+            });
 
-            applyI18n(container);
-            applyI18n(document.getElementById('wysiwygUniversalModal'));
+            // Для i18n передаём locale явно
+            applyI18nWithLocale(container, locale);
+            applyI18nWithLocale(document.getElementById('wysiwygUniversalModal'), locale);
 
             const h = container.querySelector('input[type="hidden"][data-wysiwyg-hidden]');
             if (h) h.value = ed.innerHTML;
+            // Санитизация при вставке
+            ed.addEventListener('paste', function(e) {
+                e.preventDefault();
+
+                const clipboardData = e.clipboardData || window.clipboardData;
+
+                if (clipboardData.types.includes('text/html')) {
+                    const rawHtml = clipboardData.getData('text/html');
+                    const clean = sanitizePastedHtml(rawHtml);
+                    document.execCommand('insertHTML', false, clean);
+                } else {
+                    // Обычный текст — вставляем без HTML
+                    const text = clipboardData.getData('text/plain')
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/\n/g, '<br>');
+                    document.execCommand('insertHTML', false, text);
+                }
+
+                wysiwygSyncContent(ed);
+            });
 
             // Ініціалізуємо зображення
             ed.querySelectorAll('.wysiwyg-image-wrapper').forEach(w => {
@@ -1886,6 +2040,128 @@
                         wysiwygEditMedia(this, true);
                     }
                 };
+            });
+
+            // Drag-and-drop изображений
+            ed.addEventListener('dragover', function(e) {
+                e.preventDefault();
+            });
+
+            ed.addEventListener('drop', async function(e) {
+                const files = e.dataTransfer?.files;
+                if (!files || files.length === 0) return;
+
+                const file = files[0];
+
+                // Только картинки
+                if (!file.type.startsWith('image/')) return;
+
+                e.preventDefault();
+
+                WC.editor = ed;
+                WC.file = file;
+                WC.mode = 'image';
+                WC.uploadType = 'image';
+
+                // Запоминаем место куда дропнули
+                const range = document.caretRangeFromPoint?.(e.clientX, e.clientY) ??
+                    document.createRange();
+                WC.range = range;
+
+                const cfg = getEditorConfig(ed);
+
+                if (cfg.saveImagesAs === 'server') {
+                    try {
+                        // Показываем индикатор загрузки
+                        const loadingDiv = document.createElement('div');
+                        loadingDiv.className = 'wysiwyg-loading-message';
+                        loadingDiv.innerHTML =
+                            '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...';
+                        ed.appendChild(loadingDiv);
+
+                        const result = await uploadFileToServer(file);
+                        WC.uploadedMediaUrl = result.url;
+                        WC.uploadedMediaId = result.mediaId;
+
+                        loadingDiv.remove();
+
+                        // Строим figure и вставляем в место дропа
+                        const figure = document.createElement('figure');
+                        figure.className = 'wysiwyg-image-wrapper align-left';
+                        figure.contentEditable = 'false';
+                        figure.onclick = function() {
+                            const wysiwygEditor = this.closest('.wysiwyg');
+                            if (wysiwygEditor) wysiwygEditMedia(this, true);
+                        };
+
+                        const img = document.createElement('img');
+                        img.src = result.url;
+                        img.alt = 'Image';
+                        img.dataset.mediaId = result.mediaId;
+                        figure.appendChild(img);
+
+                        const s = window.getSelection();
+                        s.removeAllRanges();
+                        s.addRange(range);
+
+                        const r = s.getRangeAt(0);
+                        r.deleteContents();
+                        r.insertNode(figure);
+
+                        // Добавляем пустой параграф после картинки
+                        const p = document.createElement('p');
+                        p.innerHTML = '<br>';
+                        figure.parentNode.insertBefore(p, figure.nextSibling);
+
+                        // Ставим курсор после картинки
+                        r.setStart(p, 0);
+                        r.collapse(true);
+                        s.removeAllRanges();
+                        s.addRange(r);
+
+                        wysiwygSyncContent(ed);
+
+                    } catch (err) {
+                        console.error('Drop upload failed:', err);
+                        alert('Failed to upload image. Please try again.');
+                    }
+
+                } else if (cfg.saveImagesAs === 'base64') {
+                    // Для base64 — конвертируем и вставляем сразу
+                    const base64 = await fileToBase64(file);
+
+                    const figure = document.createElement('figure');
+                    figure.className = 'wysiwyg-image-wrapper align-left';
+                    figure.contentEditable = 'false';
+                    figure.onclick = function() {
+                        const wysiwygEditor = this.closest('.wysiwyg');
+                        if (wysiwygEditor) wysiwygEditMedia(this, true);
+                    };
+
+                    const img = document.createElement('img');
+                    img.src = base64;
+                    img.alt = 'Image';
+                    figure.appendChild(img);
+
+                    const s = window.getSelection();
+                    s.removeAllRanges();
+                    s.addRange(range);
+
+                    const r = s.getRangeAt(0);
+                    r.deleteContents();
+                    r.insertNode(figure);
+
+                    const p = document.createElement('p');
+                    p.innerHTML = '<br>';
+                    figure.parentNode.insertBefore(p, figure.nextSibling);
+
+                    r.setStart(p, 0);
+                    r.collapse(true);
+                    s.removeAllRanges();
+                    s.addRange(r);
+
+                    wysiwygSyncContent(ed);
+                }
             });
 
             // Ініціалізуємо спойлери
@@ -1913,7 +2189,8 @@
             if (e.target.closest('.wysiwyg-align-btn')) {
                 const b = e.target.closest('.wysiwyg-align-btn'),
                     c = b.closest('.wysiwyg-align-buttons');
-                c.querySelectorAll('.wysiwyg-align-btn').forEach(x => x.classList.remove('active'));
+                c.querySelectorAll('.wysiwyg-align-btn').forEach(x => x.classList.remove(
+                    'active'));
                 b.classList.add('active');
             }
 
@@ -1954,7 +2231,49 @@
 
         while (ed && !ed.classList?.contains('wysiwyg-content')) ed = ed.parentNode;
         if (!ed?.contains(n)) return;
+        if (e.key === 'Tab') {
+            // Проверяем, находимся ли мы в ячейке таблицы
+            let cellNode = r.startContainer;
+            while (cellNode && cellNode !== ed) {
+                if (cellNode.nodeName === 'TD' || cellNode.nodeName === 'TH') break;
+                cellNode = cellNode.parentNode;
+            }
 
+            if (cellNode && (cellNode.nodeName === 'TD' || cellNode.nodeName === 'TH')) {
+                e.preventDefault();
+
+                const table = cellNode.closest('table');
+                const cells = Array.from(table.querySelectorAll('td, th'));
+                const currentIndex = cells.indexOf(cellNode);
+
+                if (e.shiftKey) {
+                    // Shift+Tab — предыдущая ячейка
+                    const prevCell = cells[currentIndex - 1];
+                    if (prevCell) setCaret(prevCell);
+                } else {
+                    // Tab — следующая ячейка
+                    const nextCell = cells[currentIndex + 1];
+                    if (nextCell) {
+                        setCaret(nextCell);
+                    } else {
+                        // Последняя ячейка — добавляем новую строку
+                        const row = cellNode.closest('tr');
+                        const colCount = row.querySelectorAll('td, th').length;
+                        const newRow = document.createElement('tr');
+                        for (let i = 0; i < colCount; i++) {
+                            const cell = document.createElement('td');
+                            cell.contentEditable = 'true';
+                            cell.innerHTML = '<br>';
+                            newRow.appendChild(cell);
+                        }
+                        table.querySelector('tbody').appendChild(newRow);
+                        setCaret(newRow.firstChild);
+                        wysiwygSyncContent(ed);
+                    }
+                }
+                return;
+            }
+        }
         if (e.key === 'Backspace') {
             let block = n;
             while (block && block !== ed) {
@@ -1963,7 +2282,8 @@
                         const isEmpty = block.textContent.trim() === '';
                         const isAtStart = r.startOffset === 0 && (
                             r.startContainer === block ||
-                            (r.startContainer.nodeType === 3 && r.startContainer.parentNode === block)
+                            (r.startContainer.nodeType === 3 && r.startContainer.parentNode ===
+                                block)
                         );
 
                         if (isEmpty || isAtStart) {
@@ -2177,6 +2497,15 @@
             if (ed) {
                 ensureEditorStructure(ed);
                 wysiwygSyncContent(ed);
+            }
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('wysiwygUniversalModal');
+            if (modal && modal.style.display === 'flex') {
+                wysiwygCloseUniversalModal();
             }
         }
     });
