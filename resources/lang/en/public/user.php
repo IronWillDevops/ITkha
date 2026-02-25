@@ -2,7 +2,10 @@
 
 return [
     'title' => '',
-    'fields' => [],
+    'fields' => [
+        'current_session' => 'Current session',
+        'last_activity'   => 'Last activity',
+    ],
     'placeholder' => [],
 
     'sections' => [
@@ -10,6 +13,11 @@ return [
         'job_title' => 'Professional Information',
         'social' => 'Social Networks',
         'security' => 'Security',
+        'sessions' => 'Sessions',
+    ],
+
+    'general' => [
+        'no_information' => 'No information available',
     ],
 
     'buttons' => [
@@ -30,10 +38,15 @@ return [
             'title' => 'Profile Settings',
             'description' => 'Change first name, last name etc.',
         ],
+
+        'logout'                => 'Logout',
     ],
     'messages' => [
         'update_profile_success' => 'Your profile has been updated successfully.',
         'update_password_success' => 'Your password has been updated successfully.',
         'unexpected_error' => 'An unexpected error occurred. Please try again.',
+        'session_terminated'        => 'Session terminated.',
+        'logged_out_session_deleted' => 'You have been logged out because your session was terminated.',
+
     ],
 ];

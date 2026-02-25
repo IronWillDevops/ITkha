@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Public\UserProfile;
+namespace App\Http\Requests\Public\User\Settings\Security;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 use Illuminate\Validation\Rules\Password;
 
-class UpdatePasswordRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
