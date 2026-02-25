@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Public\User;
+namespace App\Http\Controllers\Public\User\Settings\Personal;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Public\UserProfile\UpdateRequest;
 use App\Models\User;
 use App\Services\MediaService;
+use App\Http\Requests\Public\User\Settings\Personal\UpdateRequest;
 use Exception;
-use Illuminate\Support\Facades\Storage;
 
 class UpdateController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(UpdateRequest $request, User $user,MediaService $mediaService)
+    public function __invoke(UpdateRequest $request, User $user, MediaService $mediaService)
     {
         try {
             $data = $request->validated();
@@ -26,7 +25,7 @@ class UpdateController extends Controller
             ]);
 
             // Обробка аватара (необов’язкове поле)
-                if ($request->hasFile('avatar')) {
+            if ($request->hasFile('avatar')) {
                 $mediaService->replaceSingle(
                     $user,
                     $request->file('avatar'),
@@ -51,7 +50,7 @@ class UpdateController extends Controller
 
             return redirect()->back()->with('success', __('public/user.messages.update_profile_success'));
         } catch (Exception $ex) {
-            
+
             return redirect()->back()->with('error', __('public/user.messages.unexpected_error'));
         }
     }

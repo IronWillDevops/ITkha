@@ -1,22 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Public\User;
+namespace App\Http\Controllers\Public\User\Settings\Security;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Public\UserProfile\UpdatePasswordRequest;
+use App\Http\Requests\Public\User\Settings\Security\UpdateRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-class UpdatePasswordController extends Controller
+class UpdateController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(UpdatePasswordRequest $request)
+    public function __invoke(UpdateRequest $request,User $user)
     {
         try {
             $data = $request->validated();
+
             $user = Auth::user();
 
             $user->update([

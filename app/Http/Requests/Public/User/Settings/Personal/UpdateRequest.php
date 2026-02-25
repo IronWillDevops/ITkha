@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Public\UserProfile;
+namespace App\Http\Requests\Public\User\Settings\Personal;
 
 use App\Rules\Public\GitHubUrl;
 use App\Rules\Public\LinkedInUrl;

@@ -1,4 +1,4 @@
-<div class="min-w-3xs flex flex-col gap-6 ">
+<div class="sticky top-6  min-w-3xs flex flex-col gap-6 ">
     <div class=" bg-card text-card-foreground border border-border  shadow  p-4 rounded-lg">
         <h3 class="text-xl font-semibold mb-4">
             <i class="icon fa fa-newspaper"></i>

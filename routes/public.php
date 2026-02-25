@@ -16,7 +16,7 @@ Route::post('logout', App\Http\Controllers\Admin\Auth\DeleteController::class)
 
 Route::get('/email/verify/{id}/{hash}', App\Http\Controllers\Public\Auth\Verify\VerifyEmailController::class)
     ->name('verification.verify');
-    
+
 Route::get('/captcha', App\Http\Controllers\Public\Auth\Captcha\CaptchaController::class)->name('captcha.generate');
 
 Route::get('/locale/{locale}', App\Http\Controllers\Public\Language\LocaleController::class)
@@ -58,7 +58,6 @@ Route::prefix('/auth')
     });
 
 
-
 Route::prefix('/')
     ->name('public.')
     ->group(function () {
@@ -98,15 +97,40 @@ Route::prefix('/')
             ->name('user.')
             ->group(function () {
                 Route::get('/{user}', App\Http\Controllers\Public\User\ShowController::class)->name('show');
-                Route::get('/{user}/liked', App\Http\Controllers\Public\User\LikedPostsController::class)->name('show.like');
-                Route::get('/{user}/favorite', App\Http\Controllers\Public\User\FavoritePostsController::class)->name('show.favorite');
-                Route::get('/{user}/edit', App\Http\Controllers\Public\User\EditController::class)->middleware('auth')->name('edit');
-                Route::patch('/{user}', App\Http\Controllers\Public\User\UpdateController::class)->middleware('auth')->name('update');
-                Route::patch('/{user}/password', App\Http\Controllers\Public\User\UpdatePasswordController::class)->middleware('auth')->name('password.update');
+                // // Пости користувача
+
+                Route::get('/{user}/liked', App\Http\Controllers\Public\User\LikedController::class)->middleware('owner')->name('show.liked');
+                Route::get('/{user}/favorites', App\Http\Controllers\Public\User\FavoritesController::class)->middleware('owner')->name('show.favorites');
+
+                Route::prefix('/{user}/settings')
+                    ->name('settings.')
+                    ->middleware('owner')
+                    ->group(function () {
+
+                        Route::prefix('/personal')
+                            ->name('personal.')
+                            ->group(function () {
+                                Route::get('/',  App\Http\Controllers\Public\User\Settings\Personal\IndexController::class)->name('index');
+                                Route::patch('/',  App\Http\Controllers\Public\User\Settings\Personal\UpdateController::class)->name('update');
+                            });
+                        Route::prefix('/security')
+                            ->name('security.')
+                            ->group(function () {
+                                Route::get('/',  App\Http\Controllers\Public\User\Settings\Security\IndexController::class)->name('index');
+                                Route::patch('/',  App\Http\Controllers\Public\User\Settings\Security\UpdateController::class)->name('update');
+                            });
+
+                        Route::prefix('/session')
+                            ->name('session.')
+                            ->group(function () {
+                                Route::get('/',  App\Http\Controllers\Public\User\Settings\Session\IndexController::class)->name('index');
+                                Route::delete('/{session}',  App\Http\Controllers\Public\User\Settings\Session\DeleteController::class)->name('delete');
+                            });
+                    });
             });
     });
 // public
-Route::get('/policy',App\Http\Controllers\Public\Policy\ShowController::class)->name('policy.show');
+Route::get('/policy', App\Http\Controllers\Public\Policy\ShowController::class)->name('policy.show');
 Route::post('/policy/accept', App\Http\Controllers\Public\Policy\AcceptController::class)
     ->middleware('auth')
     ->name('policy.accept');

@@ -2,7 +2,10 @@
 
 return [
     'title' => '',
-    'fields' => [],
+    'fields' => [
+        'current_session' => 'Поточна сесія',
+        'last_activity'   => 'Остання активність',
+    ],
     'placeholder' => [],
 
     'sections' => [
@@ -10,6 +13,11 @@ return [
         'job_title'  => 'Професійна інформація',
         'social'     => 'Соціальні мережі',
         'security'   => 'Безпека',
+        'sessions' => 'Сессії',
+    ],
+
+    'general' => [
+        'no_information' => 'Інформація відсутня',
     ],
 
     'buttons' => [
@@ -34,11 +42,14 @@ return [
             'title'       => 'Налаштування профілю',
             'description' => 'Змініть ім’я, прізвище тощо',
         ],
+        'logout'                => 'Вийти',
     ],
 
     'messages' => [
         'update_profile_success'  => 'Ваш профіль успішно оновлено.',
         'update_password_success' => 'Ваш пароль успішно оновлено.',
         'unexpected_error'        => 'Сталася непередбачена помилка. Будь ласка, спробуйте ще раз.',
+        'session_terminated'       => 'Сесію завершено.',
+          'logged_out_session_deleted' => 'Ви були розлогінені через завершення сесії.',
     ],
 ];
