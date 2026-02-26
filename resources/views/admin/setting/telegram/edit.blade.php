@@ -11,7 +11,8 @@
 
         {{-- Разрешить комментарии под постами --}}
         <x-form.check-box name="telegram_enabled" label="{{ __('admin/settings/telegram.fields.enabled') }}"
-            :checked="$telegramEnabled" />
+            :checked="$settings['telegram_enabled']" />
+
 
         {{-- Telegram Token --}}
         <x-form.password name="telegram_token" label="{{ __('admin/settings/telegram.fields.token') }}"
@@ -22,7 +23,7 @@
             placeholder="{{ __('admin/settings/telegram.placeholder.chatid') }}" :required='false' />
 
         <x-form.check-box name="telegram_send_without_sound"
-            label="{{ __('admin/settings/telegram.fields.send_without_sound') }}" :checked="$telegramSendWithoutSound" />
+            label="{{ __('admin/settings/telegram.fields.send_without_sound') }}" :checked="$settings['telegram_send_without_sound']" />
         @php
             $placeholder =
                 "<b>{{ title }}</b>\n\nCategory: {{ category }}\nTags: {{ tags }}\n\n{{ excerpt }}";
@@ -51,16 +52,16 @@
             @endforeach
         </div>
         <x-form.area name="telegram_template" label="{{ __('admin/settings/telegram.fields.template') }}"
-            :placeholder="$placeholder" :value="$telegramTemplate" />
+            :placeholder="$placeholder" :value="$settings['telegram_template']" />
 
         <x-form.input name="telegram_message_limit" min="10" max="750" type="number"
             label="{{ __('admin/settings/telegram.fields.message_limit') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.message_limit') }}" icon="fa-solid fa-heading"
-            :value="$telegramMessageLimit" />
+            :value="$settings['telegram_message_limit']" />
 
         <x-form.input name="telegram_button_text" label="{{ __('admin/settings/telegram.fields.button_text') }}"
             placeholder="{{ __('admin/settings/telegram.placeholder.button_text') }}" icon="fa-solid fa-heading"
-            :value="$telegramButtonText" />
+            :value="$settings['telegram_button_text']" />
 
         <div class="flex space-x-3">
 

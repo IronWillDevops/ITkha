@@ -13,11 +13,9 @@ class CreateController extends BaseController
 
     $roles = Role::all();
     $status = UserStatus::cases();
-    $user_default_status = Setting::get('user_default_status');
-    $user_default_role = Setting::get('user_default_role');
-    $user_require_email_verification = (bool)Setting::get('user_require_email_verification');
+    $settings = Setting::allSettings();
 
 
-    return view('admin.users.user.create', compact('roles', 'status','user_default_status','user_default_role', 'user_require_email_verification'));
+    return view('admin.users.user.create', compact('roles', 'status', 'settings'));
   }
 }

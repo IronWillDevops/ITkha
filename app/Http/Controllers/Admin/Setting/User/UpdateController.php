@@ -18,9 +18,11 @@ class UpdateController extends Controller
         try {
             $data = $request->validated();
 
-            Setting::set('user_default_status', $data['user_default_status']);
-            Setting::set('user_default_role', $data['user_default_role']);
-            Setting::set('user_require_email_verification', (bool) $data['user_require_email_verification']);
+            Setting::setMany([
+                'user_default_status' => $data['user_default_status'] ?? null,
+                'user_default_role' => $data['user_default_role'] ?? null,
+                'user_require_email_verification' => (bool) ($data['user_require_email_verification'] ?? false),
+            ]);
 
             return redirect()
                 ->route('admin.setting.user.edit')

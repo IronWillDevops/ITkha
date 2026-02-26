@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use App\Services\Public\SeoService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -24,23 +25,28 @@ class SeoServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
+            static $seoCache = null; // вычисляется один раз за запрос
 
-            $url = url()->current();
+            if ($seoCache === null) {
+                $url = url()->current();
+                $settings = Setting::allSettings(); // один вызов
 
-            // fallback: website
-            $seo = SeoService::website(
-                setting('site_name', config('app.name')),
-                setting('site_description', 'Default description'),
-                asset('favicon.ico'),
-                $url
-            );
+                $seoCache = SeoService::website(
+                    $settings['site_name'] ?? config('app.name'),
+                    $settings['site_description'] ?? 'Default description',
+                    asset('favicon.ico'),
+                    $url
+                )->toArray();
+            }
 
-            // Пост
+            $seo = $seoCache;
+
+            // Пост — переопределяем если нужно
             if (
                 Route::currentRouteName() === 'public.post.show'
                 && $view->offsetExists('post')
             ) {
-                $seo = SeoService::article($view->getData()['post'], $url);
+                $seo = SeoService::article($view->getData()['post'], url()->current())->toArray();
             }
 
             // Пользователь
@@ -48,10 +54,10 @@ class SeoServiceProvider extends ServiceProvider
                 Route::currentRouteName() === 'public.user.show'
                 && $view->offsetExists('user')
             ) {
-                $seo = SeoService::profile($view->getData()['user'], $url);
+                $seo = SeoService::profile($view->getData()['user'], url()->current())->toArray();
             }
 
-            $view->with('seo', $seo->toArray());
+            $view->with('seo', $seo);
         });
     }
 }

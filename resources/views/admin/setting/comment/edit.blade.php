@@ -11,15 +11,15 @@
 
         {{-- Разрешить комментарии под постами --}}
         <x-form.check-box name="comments_enabled" label="{{ __('admin/settings/comment.fields.enabled') }}"
-            :checked="$commentsEnabled" />
+            :checked="$settings['comments_enabled']" />
 
         {{-- Автоматическое одобрение --}}
         <x-form.check-box name="comments_auto_approve" label="{{ __('admin/settings/comment.fields.approve') }}"
-            :checked="$autoApprove" />
+            :checked="$settings['comments_auto_approve']" />
 
         {{-- Запрещённые слова --}}
         <x-form.area name="comments_filter_words" label="{{ __('admin/settings/comment.fields.filter_words') }}"
-            placeholder="{{ __('admin/settings/comment.placeholder.filter_words') }}" :value="$filterWords" min="0"
+            placeholder="{{ __('admin/settings/comment.placeholder.filter_words') }}" :value="$settings['comments_filter_words']" min="0"
             max="65000"  />
 
         {{-- Политика по ссылкам --}}
@@ -28,7 +28,7 @@
                 ['value' => 'allow', 'label' => __('admin/settings/comment.fields.links_allow')],
                 ['value' => 'remove', 'label' => __('admin/settings/comment.fields.links_remove')],
                 ['value' => 'reject', 'label' => __('admin/settings/comment.fields.links_reject')],
-            ]" value-field="value" label-field="label" value="{{ $linksPolicy }}" />
+            ]" value-field="value" label-field="label" :value="$settings['comments_links_policy']" />
 
         <div class="flex space-x-3">
 

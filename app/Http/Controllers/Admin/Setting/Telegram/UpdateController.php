@@ -16,32 +16,25 @@ class UpdateController extends Controller
     {
         try {
             $data = $request->validated();
-            Setting::set('telegram_enabled', $data['telegram_enabled']);
 
-            if ($data['telegram_token']) {
-                Setting::set('telegram_token', $data['telegram_token']);
-            }
-            if ($data['telegram_chatid']) {
-                Setting::set('telegram_chat_id', $data['telegram_chatid']);
-            }
+            Setting::setMany([
+                'telegram_enabled' => (bool) ($data['telegram_enabled'] ?? false),
 
-            if ($data['telegram_template']) {
-                Setting::set('telegram_template', $data['telegram_template']);
-            }
+                'telegram_token' => $data['telegram_token'] ?? null,
+                'telegram_chat_id' => $data['telegram_chatid'] ?? null,
+                'telegram_template' => $data['telegram_template'] ?? null,
 
-            if ($data['telegram_message_limit']) {
-                Setting::set('telegram_message_limit', $data['telegram_message_limit']);
-            }
-            if ($data['telegram_button_text']) {
-                Setting::set('telegram_button_text', $data['telegram_button_text']);
-            }
-            Setting::set(
-                'telegram_send_without_sound',
-                (int) ($data['telegram_send_without_sound'] ?? 0)
-            );
+                // ВАЖНО: сохраняем даже если 0
+                'telegram_message_limit' => $data['telegram_message_limit'] ?? 0,
+
+                'telegram_button_text' => $data['telegram_button_text'] ?? null,
+
+                'telegram_send_without_sound' =>
+                (int) ($data['telegram_send_without_sound'] ?? 0),
+            ]);
             return redirect()->route('admin.setting.telegram.edit')->with('success', __('admin/common.messages.settings_saved'));
         } catch (Exception $ex) {
-            
+
             logger()->error('Setting update failed', ['exception' => $ex]);
             return redirect()->back()->with('error', __('errors/setting.update.failed'));
         }
