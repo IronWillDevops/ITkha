@@ -41,15 +41,15 @@
 
             {{-- Role --}}
             <x-form.select name="role_id" label="{{ __('admin/common.fields.role') }}" :options="$roles"
-                value-field="id" label-field="title" :value="$user_default_role" />
+                value-field="id" label-field="title" :value="$settings['user_default_role']" />
 
             {{-- Статус --}}
             <x-form.select name="status" label="{{ __('admin/common.fields.status') }}" :options="$status"
-                value-field="value" label-field="value" :value="$user_default_status" />
+                value-field="value" label-field="value" :value="$settings['user_default_status']" />
 
             {{-- Is Verify --}}
             <x-form.check-box name="email_verified_at" label="{{ __('admin/user.fields.verified') }}"
-                :checked="$user_require_email_verification" />
+                :checked="$settings['user_require_email_verification']" />
 
         </div>
 

@@ -2,17 +2,14 @@
     <div class="ml-{{ $level ?? 0 }} border border-border p-2 rounded-lg mt-4 ">
         <div class="flex justify-between items-center mb-2">
             <div class="flex items-center gap-2">
-                @if ($comment->user->singleMedia('avatar'))
-                    <img id="userMenuButton" type="button" data-dropdown-toggle="userDropdown"
-                        data-dropdown-placement="bottom-start"
-                        class="relative inline-flex items-center justify-center w-10 h-10 object-cover rounded-full border border-border"
-                        src="{{ asset('storage/' . $comment->user->singleMedia('avatar')) }}" data-filename="image.png"
-                        alt="{{ $comment->user->name }}">
+                @if (Auth::user()->singleMedia('avatar'))
+                    <img class="w-10 h-10 object-cover rounded-full border border-input"
+                        src="{{ Auth::user()->singleMedia('avatar')->url }}" alt="{{ Auth::user()->first_name }}">
                 @else
-                    <div id="userMenuButton"
-                        class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full border border-border">
+                    <div
+                        class="hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
                         <span class="font-medium">
-                            {{ $comment->user->getInitial() }}
+                            {{ Auth::user()->getInitial() }}
                         </span>
                     </div>
                 @endif

@@ -21,9 +21,9 @@ class CommentService
         }
 
         $body = $data['body'];
-
+        $settings = Setting::allSettings();
         // Фильтрация запрещённых слов
-        $filterWords = array_filter(array_map('trim', explode(',', Setting::get('comments_filter_words') ?? '')));
+        $filterWords = array_filter(array_map('trim', explode(',', $settings['comments_filter_words'] )));
         foreach ($filterWords as $word) {
             if ($word !== '' && str_contains(mb_strtolower($body), mb_strtolower($word))) {
                 return Redirect::back()->withInput()->with('error', __('public/comment.messages.contains_prohibited_words'));
@@ -31,7 +31,7 @@ class CommentService
         }
 
         // Проверка ссылок
-        $linkPolicy = Setting::get('comments_links_policy');
+        $linkPolicy = $settings['comments_links_policy'];
         if ($linkPolicy === 'reject' && preg_match('/https?:\/\//', $body)) {
             return Redirect::back()->withInput()->with('error', __('public/comment.messages.links_not_allowed'));
         }
@@ -45,7 +45,7 @@ class CommentService
         }
 
         // Статус
-        $status = (int)Setting::get('comments_auto_approve', 0)
+        $status = (int)$settings['comments_auto_approve'] 
             ? CommentStatus::APPROVED
             : CommentStatus::PENDING;
 

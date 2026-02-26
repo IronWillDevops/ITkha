@@ -17,18 +17,16 @@ class UpdateController extends Controller
     {
         try {
             $data = $request->validated();
-
-
-            Setting::set('comments_enabled', (bool)$data['comments_enabled']);
-            Setting::set('comments_auto_approve', (bool)$data['comments_auto_approve']);
-            Setting::set('comments_filter_words', $data['comments_filter_words']);
-            Setting::set('comments_links_policy', $data['comments_links_policy']);
-
+            Setting::setMany([
+                'comments_enabled'      => (bool)($data['comments_enabled'] ?? false),
+                'comments_auto_approve' => (bool)($data['comments_auto_approve'] ?? false),
+                'comments_filter_words' => $data['comments_filter_words'],
+                'comments_links_policy' => $data['comments_links_policy'],
+            ]);
             return redirect()
                 ->route('admin.setting.comment.edit')
                 ->with('success',  __('admin/common.messages.settings_saved'));
         } catch (Exception $ex) {
-            
             logger()->error('Setting update failed', ['exception' => $ex]);
             return redirect()->back()->with('error', __('errors/setting.update.failed'));
         }
