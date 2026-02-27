@@ -28,10 +28,17 @@ class SecureHeaders
         );
 
         // Базовий безпечний CSP
-        $response->headers->set(
-            'Content-Security-Policy',
-            "default-src 'self'; img-src 'self' data:; object-src 'none'; frame-ancestors 'self';"
-        );
+        $csp = implode(' ', [
+            "default-src 'self';",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval';",
+            "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;",
+            "font-src 'self' https://cdnjs.cloudflare.com data:;",
+            "img-src 'self' data:;",
+            "object-src 'none';",
+            "frame-ancestors 'self';",
+        ]);
+
+        $response->headers->set('Content-Security-Policy', $csp);
 
         // HSTS тільки для HTTPS
         if ($request->isSecure()) {
