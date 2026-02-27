@@ -40,7 +40,6 @@ class SecureHeaders
                 'max-age=31536000; includeSubDomains'
             );
         }
-
         return $response;
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\LocaleMiddleware;
+use App\Http\Middleware\SecureHeaders;
 use App\Http\Middleware\ShareCookieConsent;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -24,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             LocaleMiddleware::class,
             ShareCookieConsent::class,
             EnsurePolicyAccepted::class,
+            SecureHeaders::class,
         ]);
         $middleware->alias([
             'owner'=>\App\Http\Middleware\IsProfileOwner::class,
