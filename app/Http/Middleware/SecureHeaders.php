@@ -37,7 +37,6 @@ class SecureHeaders
             "object-src 'none';",
             "frame-ancestors 'self';",
         ]);
-
         $response->headers->set('Content-Security-Policy', $csp);
 
         // HSTS тільки для HTTPS
