@@ -26,9 +26,14 @@ class SidebarUpdate extends Component
 
         // Кешируем весь релизный ответ, а не только версию
         $releaseData = Cache::remember('latest_release_data', 60000, function () {
-            $response = Http::get('https://api.github.com/repos/IronWillDevops/ITkha/releases/latest');
-            if ($response->ok()) {
-                return $response->json();
+            try {
+                $response = Http::timeout(5)->get('https://api.github.com/repos/IronWillDevops/ITkha/releases/latest');
+                if ($response->ok()) {
+                    return $response->json();
+                }
+            } catch (\Exception $e) {
+                // Логируем, но не крашим приложение
+                \Log::warning('GitHub API unavailable: ' . $e->getMessage());
             }
             return null;
         });
