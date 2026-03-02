@@ -128,6 +128,19 @@ Route::prefix('/')
                             });
                     });
             });
+
+        Route::name('sitemap.')
+            ->group(function () {
+                Route::get('/sitemap.xml', App\Http\Controllers\Public\Sitemap\IndexController::class)
+                    ->name('index');
+
+                Route::get('/sitemap/{type}-{page}.xml', App\Http\Controllers\Public\Sitemap\SectionController::class)
+                    ->where(['type' => 'posts|users', 'page' => '[0-9]+'])
+                    ->name('section');
+
+                Route::get('/sitemap/pages.xml', App\Http\Controllers\Public\Sitemap\PagesController::class)
+                    ->name('pages');
+            });
     });
 // public
 Route::get('/policy', App\Http\Controllers\Public\Policy\ShowController::class)->name('policy.show');
