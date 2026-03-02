@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /login
+Disallow: /auth/register
+Disallow: /storage
+
+Allow: /
+
+Sitemap: /sitemap.xml
