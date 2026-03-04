@@ -1,26 +1,25 @@
 <div class="mb-4">
-    @if ($label)
-        <label for="{{ $name }}" class="block text-sm font-medium mb-1">
-            {{ $label }}
-            @if ($required)
-                <span class="text-destructive">*</span>
-            @endif
-        </label>
-    @endif
+    <label for="{{ $name }}" class="block text-sm font-medium mb-1">
+        {{ $label }}
+        @if ($required)
+            <span class="text-danger">*</span>
+        @endif
+    </label>
 
     <div class="relative mb-2">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
             <i class="{{ $icon }}"></i>
         </div>
 
-        <input type="datetime-local" id="{{ $name }}" name="{{ $name }}" value="{{ $value }}"
-            placeholder="{{ $placeholder }}"
-            class="w-full caret-primary border border-input rounded-lg px-3 py-2 ps-10 p-2.5
-                   focus:ring focus:outline-none focus-visible:ring-ring"
-            {{ $required ? 'required' : '' }}>
+        <input type="datetime-local" id="{{ $name }}" name="{{ $name }}"
+            value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}"
+            class="w-full max-w-full text-sm caret-primary border border-input rounded-lg px-3 py-2 ps-10 p-2.5 focus:ring focus:outline-none focus-visible:ring-ring"
+            {{ $required ? 'required' : '' }}
+            onclick="this.showPicker()"
+            onchange="this.blur()">
     </div>
 
     @error($name)
-        <p class="text-sm text-error mt-1">{{ $message }}</p>
+        <p class="text-sm text-danger mt-1">{{ $message }}</p>
     @enderror
 </div>

@@ -2,7 +2,7 @@
     <label for="{{ $name }}" class="block text-sm font-medium mb-1">
         {{ $label }}
         @if ($required)
-            <span class="text-destructive">*</span>
+            <span class="text-danger">*</span>
         @endif
     </label>
     <div class="relative mb-2">
@@ -13,7 +13,7 @@
             {{ $readonly ? 'readonly' : '' }}>{{ old($name, $value) }}</textarea>
     </div>
     @error($name)
-        <p class="text-sm text-error mt-1">{{ $message }}</p>
+        <p class="text-sm text-danger mt-1">{{ $message }}</p>
     @enderror
     <div id="message-count" class="mt-4 text-xs text-muted-foreground text-right">0 / {{ $max }}</div>
 </div>
@@ -26,9 +26,9 @@
 
         if (currentLength > maxLength) {
             countElement.classList.remove('text-muted-foreground');
-            countElement.classList.add('text-error');
+            countElement.classList.add('text-danger');
         } else {
-            countElement.classList.remove('text-error');
+            countElement.classList.remove('text-danger');
             countElement.classList.add('text-muted-foreground');
         }
     }

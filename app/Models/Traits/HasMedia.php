@@ -22,17 +22,11 @@ trait HasMedia
         return $this->mediaByCollection($collection)->first();
     }
 
-    /**
-     * Получить URL первого media из collection
-     */
     public function firstMediaUrl(string $collection, ?string $default = null): ?string
     {
         return $this->firstMedia($collection)?->url ?? $default;
     }
 
-    /**
-     * Проверить наличие media в collection
-     */
     public function hasMedia(string $collection): bool
     {
         return $this->media()
@@ -40,17 +34,11 @@ trait HasMedia
             ->exists();
     }
 
-    /**
-     * Получить общий размер всех media модели
-     */
     public function getTotalMediaSize(): int
     {
         return $this->media()->sum('size');
     }
 
-    /**
-     * Получить общий размер media в collection
-     */
     public function getMediaSizeByCollection(string $collection): int
     {
         return $this->media()

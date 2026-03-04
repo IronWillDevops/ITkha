@@ -17,7 +17,7 @@ class SettingsSeeder extends Seeder
             //Site
             ['key' => 'site_name', 'default' => 'Example'],
             ['key' => 'site_description', 'default' => 'A professional IT platform featuring technical articles, analytical insights, and practical solutions for developers and system administrators.'],
-            ['key' => 'site_keywords', 'default' => 'blog, news, articles, technology, web, development, programming, IT, analytics, platform'],
+            ['key' => 'site_keywords', 'default' => null],
 
             //Comment
             ['key' => 'comments_enabled', 'default' => '1'],
@@ -46,9 +46,9 @@ class SettingsSeeder extends Seeder
             ['key' => 'telegram_message_limit', 'default' => '450'],
             ['key' => 'telegram_button_text', 'default' => 'Read more...'],
 
-            ['key' => 'site_email', 'default' => 'admin@example.com'],
-            ['key' => 'site_phone', 'default' => '+1 234 567 890'],
-            ['key' => 'site_address', 'default' => 'Kyiv, Ukraine'],
+            ['key' => 'site_email', 'default' => null],
+            ['key' => 'site_phone', 'default' => null],
+            ['key' => 'site_address', 'default' => null],
 
 
         ];

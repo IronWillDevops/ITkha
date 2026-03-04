@@ -5,4 +5,5 @@ return [
     App\Providers\EventServiceProvider::class,
     App\Providers\PublicRouteServiceProvider::class,
     App\Providers\SeoServiceProvider::class,
+    App\Providers\ViewServiceProvider::class,
 ];

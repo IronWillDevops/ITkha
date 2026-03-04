@@ -21,7 +21,7 @@
         </div>
         <div class="mt-2">
             <a href="{{ route('public.post.index') }}"
-                class="border-border border bg-destructive text-destructive-foreground hover:bg-destructive/80 focus:ring focus:outline-none focus-visible:ring-ring px-3 py-2 rounded  flex items-center justify-center h-10 "
+                class="border-border border bg-danger text-danger-foreground hover:bg-danger/80 focus:ring focus:outline-none focus-visible:ring-ring px-3 py-2 rounded  flex items-center justify-center h-10 "
                 title="{{ __('public/filter.buttons.reset') }}">
                 <i class="fa fa-times"></i>
             </a>
@@ -30,7 +30,7 @@
 
     <div>
         @error('search')
-            <p class="text-error">{{ $message }}</p>
+            <p class="text-danger">{{ $message }}</p>
         @enderror
     </div>
 
@@ -47,7 +47,7 @@
                 // Загальний стиль для всіх елементів фільтра
                 $filterItemClasses = 'border-border border rounded-2xl px-3 py-1 flex items-center space-x-2';
                 $filterItemHover =
-                    'hover:text-error/80 font-semibold focus:ring focus:outline-none focus-visible:ring-ring';
+                    'hover:text-danger/80 font-semibold focus:ring focus:outline-none focus-visible:ring-ring';
             @endphp
 
             {{-- search --}}

@@ -20,7 +20,7 @@
             {{ __('public/cookie.buttons.accept') }}
         </button>
         <button id="declineCookiesBtn"
-                class="bg-destructive border-input text-destructive-foreground hover:bg-destructive/80 hover:text-destructive-foreground focus:ring focus:outline-none focus-visible:ring-ring rounded-sm font-medium text-sm px-5 py-2.5 text-center">
+                class="bg-danger border-input text-danger-foreground hover:bg-danger/80 hover:text-danger-foreground focus:ring focus:outline-none focus-visible:ring-ring rounded-sm font-medium text-sm px-5 py-2.5 text-center">
             {{ __('public/cookie.buttons.decline') }}
         </button>
     </div>

@@ -22,7 +22,7 @@
                          <div class="flex flex-wrap items-center text-sm gap-x-4 gap-y-2 pt-2 mt-auto">
 
                              <span class="inline-flex items-center">
-                                 <i class="fa fa-tag "></i>
+                                 <i class="fa fa-folder-open "></i>
                                  <span class="font-medium ml-2">{{ $post->category->title ?? '-' }}</span>
                              </span>
 

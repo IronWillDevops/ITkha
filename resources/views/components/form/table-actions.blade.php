@@ -5,7 +5,7 @@
 
     $variants = [
         'default' => 'bg-background hover:bg-accent hover:text-accent-foreground',
-        'destructive' => 'bg-destructive text-destructive-foreground hover:bg-destructive/80',
+        'danger' => 'bg-danger text-danger-foreground hover:bg-danger/80',
         'primary' => 'bg-primary text-primary-foreground hover:bg-primary/90',
     ];
 
