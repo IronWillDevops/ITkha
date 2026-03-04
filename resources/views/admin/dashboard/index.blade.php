@@ -13,7 +13,7 @@
             description="{{ $postCount }}" link="{{ route('admin.post.index') }}"
             linkText="{{ __('admin/common.buttons.read_more') }}" />
 
-        <x-admin.dashboard-widget title="{{ __('admin/category.title') }}" icon="fa-solid fa-tag"
+        <x-admin.dashboard-widget title="{{ __('admin/category.title') }}" icon="fa-solid fa-folder-open"
             description="{{ $categoryCount }}" link="{{ route('admin.category.index') }}"
             linkText="{{ __('admin/common.buttons.read_more') }}" />
 

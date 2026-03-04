@@ -23,8 +23,8 @@
     --muted-foreground: #202020;
     --accent: #ededed;
     --accent-foreground: #202020;
-    --destructive: #ca3214;
-    --destructive-foreground: #fcfcfc;
+    --danger: #ca3214;
+    --danger-foreground: #fcfcfc;
     --border: #d3d3d3;
     --input: #d3d3d3;
     --ring: #72e3ad;
@@ -43,7 +43,6 @@
     --sidebar-ring: #72e3ad;
 
     --success: #006239;
-    --error: #b91c1c;
 
     --font-sans: Outfit, sans-serif;
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -77,8 +76,9 @@
     --muted-foreground: #c0c0c0;
     --accent: #313131;
     --accent-foreground: #e2e8f0;
-    --destructive: #ff6347;
-    --destructive-foreground: #121212;
+    --danger: #ff6347;
+    --danger-foreground: #121212;
+    
     --border: #292929;
     --input: #242424;
     --ring: #4ade80;
@@ -96,8 +96,6 @@
     --sidebar-border: #292929;
     --sidebar-ring: #4ade80;
 
-    --success: #4ade80;
-    --error: #ff6347;
 }
 
 @theme inline {
@@ -115,8 +113,8 @@
     --color-muted-foreground: var(--muted-foreground);
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
-    --color-destructive: var(--destructive);
-    --color-destructive-foreground: var(--destructive-foreground);
+    --color-danger: var(--danger);
+    --color-danger-foreground: var(--danger-foreground);
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -134,7 +132,7 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-success: var(--success);
-    --color-error: var(--error);
+    --color-error: var(--danger);
 
 
     --font-sans: var(--font-sans);
@@ -172,8 +170,6 @@ body {
 
 @layer components {
     @layer utilities {
-
-
         @keyframes slide-in-bottom {
             from {
                 transform: translateY(100%);
@@ -185,11 +181,9 @@ body {
                 opacity: 1;
             }
         }
-
         .animate-slide-in-bottom {
             animation: slide-in-bottom 0.3s ease-out forwards;
         }
-
         @keyframes like-pop {
             0% {
                 transform: scale(1);
@@ -203,17 +197,25 @@ body {
                 transform: scale(1);
             }
         }
-
         .animate-like {
             animation: like-pop 0.3s ease-in-out;
         }
 
-
     }
+    
 }
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
     -webkit-text-fill-color: var(--color-foreground) !important;
     transition: background-color 9999s ease-in-out 0s;
+}
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
 }

@@ -1,6 +1,6 @@
 <div class="mb-4">
     <label for="{{ $name }}" class="block text-sm font-medium mb-1">
-        {{ __('public/common.fields.captcha') }} <span class="text-destructive">*</span>
+        {{ __('public/common.fields.captcha') }} <span class="text-danger">*</span>
     </label>
     <div class="relative mb-2">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -15,6 +15,6 @@
         onclick="this.src='{{ route('captcha.generate') }}?'+Math.random()" style="cursor:pointer;">
     <small class="text-sm text-muted-foreground">{{ __('public/common.fields.captcha_reload') }}</small>
     @error($name)
-        <p class="text-sm text-error mt-1">{{ $message }}</p>
+        <p class="text-sm text-danger mt-1">{{ $message }}</p>
     @enderror
 </div>

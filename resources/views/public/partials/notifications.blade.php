@@ -20,15 +20,15 @@
         @if (session('error'))
             <div
                 class="toast bottom-4 right-4 max-w-sm w-full bg-card border border-error rounded-xl shadow-lg flex items-start p-4 gap-3 text-card-foreground z-50 transition-transform duration-300 ease-in-out animate-slide-in-bottom">
-                <i class="fa-solid fa-circle-xmark text-error text-xl mt-1"></i>
+                <i class="fa-solid fa-circle-xmark text-danger text-xl mt-1"></i>
 
                 <div class="flex-1">
-                    <div class=" text-error font-semibold text-sm mb-1">Error</div>
+                    <div class=" text-danger font-semibold text-sm mb-1">Error</div>
                     <p class="text-sm text-muted-foreground">{{ session('error') }}
                     </p>
                 </div>
 
-                <button class="cursor-pointer transition-colors duration-200 text-lg text-error hover:text-error/80" aria-label="Close"
+                <button class="cursor-pointer transition-colors duration-200 text-lg text-danger hover:text-danger/80" aria-label="Close"
                     onclick="this.parentElement.remove()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>

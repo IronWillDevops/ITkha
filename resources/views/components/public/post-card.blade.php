@@ -13,7 +13,7 @@
             {{-- Левая часть: --}}
             @if ($post->category)
                 <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1">
-                    <i class="fas fa-tag mr-1"></i>
+                    <i class="fas fa-folder-open mr-1"></i>
                     <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}"
                         class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
                         {{ $post->category->title }}

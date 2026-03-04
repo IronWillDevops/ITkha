@@ -9,7 +9,7 @@
         <x-form.table-actions type='link' route="{{ route('admin.comment.edit', $comment->id) }}" icon="fas fa-edit"
             label="{{ __('admin/common.buttons.edit') }}" />
         <x-form.table-actions type='form' method="DELETE" route="{{ route('admin.comment.delete', $comment->id) }}"
-            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" variant="destructive" :confirm="true" />
+            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" variant="danger" :confirm="true" />
     </div>
 
     {{-- Метаданные --}}

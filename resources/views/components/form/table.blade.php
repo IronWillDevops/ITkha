@@ -37,7 +37,7 @@
 
             @if (request('search') || request('sort_field'))
                 <a href="{{ url()->current() }}"
-                    class="px-4 py-2 bg-destructive text-destructive-foreground rounded-lg flex items-center">
+                    class="px-4 py-2 bg-danger text-danger-foreground rounded-lg flex items-center">
                     <i class="fa fa-times"></i>
                 </a>
             @endif
@@ -135,7 +135,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/80">
+                                                class="p-2 bg-danger text-danger-foreground rounded-lg hover:bg-danger/80">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -208,7 +208,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button
-                                    class="p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/80">
+                                    class="p-2 bg-danger text-danger-foreground rounded-lg hover:bg-danger/80">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form>

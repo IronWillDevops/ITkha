@@ -112,7 +112,7 @@
                                         <input type="hidden" name="filename" value="{{ $backup['filename'] }}">
 
                                         <button type="submit"
-                                            class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                            class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-danger text-danger-foreground hover:bg-danger/90"
                                             title="{{ __('admin/common.buttons.delete') }}">
                                             <i class="fas fa-trash"></i>
                                         </button>

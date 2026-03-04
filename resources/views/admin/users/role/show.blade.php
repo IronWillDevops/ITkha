@@ -9,7 +9,7 @@
         <x-form.table-actions type='link' route="{{ route('admin.role.edit', $role) }}" icon="fas fa-edit"
             label="{{ __('admin/common.buttons.edit') }}" />
         <x-form.table-actions type='form' method="DELETE" route="{{ route('admin.role.delete', $role) }}"
-            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" variant="destructive" :confirm="true" />
+            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" variant="danger" :confirm="true" />
     </div>
 
 
@@ -45,7 +45,7 @@
                                 @if ($role->permissions->contains($permission->id))
                                     <i class="fas fa-check text-success"></i>
                                 @else
-                                    <i class="fas fa-times text-error"></i>
+                                    <i class="fas fa-times text-danger"></i>
                                 @endif
                                 <span>{{ __('admin/permission.' . $permission->key) }}</span>
                             </li>

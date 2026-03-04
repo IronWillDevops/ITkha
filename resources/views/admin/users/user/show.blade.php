@@ -9,7 +9,7 @@
         <x-form.table-actions type='link' route="{{ route('admin.user.edit', $user) }}" icon="fas fa-edit"
             label="{{ __('admin/common.buttons.edit') }}" />
         <x-form.table-actions type='form' method="DELETE" route="{{ route('admin.user.delete', $user) }}"
-            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" variant="destructive" :confirm="true" />
+            icon="fas fa-trash-alt" label="{{ __('admin/common.buttons.delete') }}" variant="danger" :confirm="true" />
     </div>
 
     {{-- Personal --}}
@@ -48,7 +48,7 @@
                         ({{ __('admin/user.messages.verified') }})
                     </span>
                 @else
-                    <span class="ml-1 text-xs text-error">
+                    <span class="ml-1 text-xs text-danger">
                         ({{ __('admin/user.messages.not_verified') }})
                     </span>
                 @endif

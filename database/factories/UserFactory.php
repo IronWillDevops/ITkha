@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,23 +25,34 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->firstName(),
-            'last_name'=>fake()->lastName(),
-            'login' => fake()->userName(), // <--- Обязательное поле
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'first_name' => $this->faker->firstName(),
+            'login' => $this->faker->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => null,
+            'password' => Hash::make('password'),
+            'status' => UserStatus::ACTIVE->value,
             'remember_token' => Str::random(10),
-            'status' => \App\Enums\UserStatus::ACTIVE->value,
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
+    public function active(): static
+    {
+        return $this->state(fn() => [
+            'status' => UserStatus::ACTIVE->value,
+            'email_verified_at' => now(),
+        ]);
+    }
+
+    public function inactive(): static
+    {
+        return $this->state(fn() => [
+            'status' => UserStatus::INACTIVE->value,
+        ]);
+    }
+
     public function unverified(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn() => [
             'email_verified_at' => null,
         ]);
     }

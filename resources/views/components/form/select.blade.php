@@ -2,7 +2,7 @@
     <label for="{{ $name }}" class="block text-sm font-medium mb-1">
         {{ $label }}
         @if ($required)
-            <span class="text-destructive">*</span>
+            <span class="text-danger">*</span>
         @endif
     </label>
 
@@ -23,6 +23,6 @@
     </select>
 
     @error($name)
-        <p class="text-sm text-error mt-1">{{ $message }}</p>
+        <p class="text-sm text-danger mt-1">{{ $message }}</p>
     @enderror
 </div>

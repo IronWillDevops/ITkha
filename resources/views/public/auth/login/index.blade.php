@@ -21,7 +21,7 @@
                     placeholder="{{ __('public/common.placeholder.password') }}" icon="fas fa-solid fa-lock" />
 
                 @error('error')
-                    <p class="text-error ">{{ $message }}</p>
+                    <p class="text-danger ">{{ $message }}</p>
                 @enderror
 
                 <div class="mb-4 flex justify-between">

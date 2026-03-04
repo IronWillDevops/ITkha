@@ -30,7 +30,7 @@
                     <span>|</span>
 
                     <span class="inline-flex items-center">
-                        <i class="fas fa-tag "></i>
+                        <i class="fas fa-folder-open "></i>
                         <span class="font-medium ml-2">{{ $post->category->title }}</span>
                     </span>
 

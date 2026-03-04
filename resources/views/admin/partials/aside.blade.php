@@ -37,7 +37,7 @@
                                 <li>
                                     <a href="{{ route('admin.category.index') }}"
                                         class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                                        <i class="fa-solid fa-tag"></i>
+                                        <i class="fa-solid fa-folder-open"></i>
                                         <span class="hover:underline">{{ __('admin/sidebar.post.category.title') }}</span>
                                     </a>
                                 </li>
