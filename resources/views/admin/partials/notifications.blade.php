@@ -6,11 +6,11 @@
                 <i class="fa-solid fa-circle-check text-success text-xl mt-1"></i>
 
                 <div class="flex-1">
-                    <div class=" text-success font-semibold text-sm mb-1">Success</div>
+                    <div class="text-success font-semibold text-sm mb-1">Success</div>
                     <p class="text-sm text-muted-foreground">{{ session('success') }}</p>
                 </div>
 
-                <button class="cursor-pointer transition-colors duration-200 text-lg text-success hover:text-success/80"
+                <button class="btn btn-shimmer duration-200"
                     aria-label="Close" onclick="this.parentElement.remove()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -28,12 +28,12 @@
                     </p>
                 </div>
 
-                <button class="cursor-pointer transition-colors duration-200 text-lg text-danger hover:text-danger/80"
+                <button class="btn btn-danger btn-shimmer duration-200"
                     aria-label="Close" onclick="this.parentElement.remove()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-        @endif
+        @endif 
     </div>
 @endif
 

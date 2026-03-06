@@ -11,7 +11,7 @@
                     <div class="mb-4 flex flex-col ">
                         <span class="text-xs text-muted-foreground">{{ $post->created_at->format('d/m/Y') }}</span>
                         <a href="{{ route('public.post.show', $post) }}"
-                            class=" hover:underline focus:ring focus:outline-none focus-visible:ring-ring">{{ $post->title }}</a>
+                            class="link">{{ $post->title }}</a>
                     </div>
                 </li>
             @endforeach
@@ -33,8 +33,7 @@
                 <div class="flex flex-wrap gap-2">
                     @foreach ($categories as $category)
                         <a href="{{ route('public.post.index', ['search' => $category->title]) }}"
-                            class="px-3 py-1 text-sm border border-border rounded-full 
-                              hover:bg-primary/80 hover:text-primary-foreground transition flex items-center gap-1">
+                            class="link-tag">
                             <span>{{ $category->title }}</span>
                         </a>
                     @endforeach
@@ -55,7 +54,7 @@
                 <div class="flex flex-wrap gap-2">
                     @foreach ($tags as $tag)
                         <a href="{{ route('public.post.index', ['search' => $tag->title]) }}"
-                            class="px-3 py-1 text-sm border border-border rounded-full hover:bg-primary/80 hover:text-primary-foreground transition">
+                            class="link-tag">
                             {{ $tag->title }}
                         </a>
                     @endforeach
@@ -79,7 +78,7 @@
                             <span
                                 class="text-xs text-muted-foreground">{{ $comment->created_at->diffForHumans() }}</span>
                             <a href="{{ route('public.post.show', $comment->post) }}"
-                                class=" hover:underline focus:ring focus:outline-none focus-visible:ring-ring break-all">{{ Str::limit(strip_tags(html_entity_decode($comment->body)), 50) }}</a>
+                                class="link break-all">{{ Str::limit(strip_tags(html_entity_decode($comment->body)), 50) }}</a>
                         </div>
                     </li>
                 @endforeach

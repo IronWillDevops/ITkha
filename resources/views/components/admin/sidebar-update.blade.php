@@ -12,7 +12,7 @@
                      <p class="text-xs text-muted-foreground">
                          {{ __('admin/update.current_latest', ['current' => $currentVersion, 'latest' => $latestVersion]) }}
                      </p>
-                     <p class="text-xs link link-hover underline">{{ __('admin/update.view_on_github') }}</p>
+                     <p class="text-xs link">{{ __('admin/update.view_on_github') }}</p>
                  </div>
              </div>
          </a>

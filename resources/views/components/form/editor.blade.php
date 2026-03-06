@@ -24,28 +24,28 @@
     data-delete-url="{{ route('admin.wysiwyg.delete') }}" data-model-type="{{ $modelType }}"
     data-model-id="{{ $modelId }}">
     <div class="wysiwyg-toolbar flex flex-wrap items-center gap-1">
-        <button type="button" onclick="wysiwygFormat(event, 'undo')" data-i18n-title="undo" title="Undo">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'undo')" data-i18n-title="undo" title="Undo">
             <i class="fa-solid fa-rotate-left"></i>
         </button>
-        <button type="button" onclick="wysiwygFormat(event, 'redo')" data-i18n-title="redo" title="Redo">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'redo')" data-i18n-title="redo" title="Redo">
             <i class="fa-solid fa-rotate-right"></i>
         </button>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygFormat(event, 'bold')" data-i18n-title="bold" title="Bold">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'bold')" data-i18n-title="bold" title="Bold">
             <i class="fa-solid fa-bold"></i>
         </button>
-        <button type="button" onclick="wysiwygFormat(event, 'italic')" data-i18n-title="italic" title="Italic">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'italic')" data-i18n-title="italic" title="Italic">
             <i class="fa-solid fa-italic"></i>
         </button>
-        <button type="button" onclick="wysiwygFormat(event, 'underline')" data-i18n-title="underline"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'underline')" data-i18n-title="underline"
             title="Underline">
             <i class="fa-solid fa-underline"></i>
         </button>
-        <button type="button" onclick="wysiwygFormat(event, 'strikethrough')" data-i18n-title="strikethrough"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'strikethrough')" data-i18n-title="strikethrough"
             title="Strikethrough">
             <i class="fa-solid fa-strikethrough"></i>
         </button>
-        <button type="button" onclick="wysiwygHighlightText(event)" data-i18n-title="highlight" title="Highlight">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygHighlightText(event)" data-i18n-title="highlight" title="Highlight">
             <i class="fa-solid fa-highlighter"></i>
         </button>
         <span class="wysiwyg-divider"></span>
@@ -60,85 +60,85 @@
             <option value="H6">H6</option>
         </select>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygFormat(event, 'insertUnorderedList')" data-i18n-title="bulletList"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'insertUnorderedList')" data-i18n-title="bulletList"
             title="Bullet List">
             <i class="fa-solid fa-list-ul"></i>
         </button>
-        <button type="button" onclick="wysiwygFormat(event, 'insertOrderedList')" data-i18n-title="numberedList"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'insertOrderedList')" data-i18n-title="numberedList"
             title="Numbered List">
             <i class="fa-solid fa-list-ol"></i>
         </button>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygIndent(event, 'outdent')" data-i18n-title="outdent" title="Outdent">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygIndent(event, 'outdent')" data-i18n-title="outdent" title="Outdent">
             <i class="fa-solid fa-outdent"></i>
         </button>
-        <button type="button" onclick="wysiwygIndent(event, 'indent')" data-i18n-title="indent" title="Indent">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygIndent(event, 'indent')" data-i18n-title="indent" title="Indent">
             <i class="fa-solid fa-indent"></i>
         </button>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygAlignText(event, 'left')" data-i18n-title="alignLeft" title="Align Left">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygAlignText(event, 'left')" data-i18n-title="alignLeft" title="Align Left">
             <i class="fa-solid fa-align-left"></i>
         </button>
-        <button type="button" onclick="wysiwygAlignText(event, 'center')" data-i18n-title="alignCenter"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygAlignText(event, 'center')" data-i18n-title="alignCenter"
             title="Align Center">
             <i class="fa-solid fa-align-center"></i>
         </button>
-        <button type="button" onclick="wysiwygAlignText(event, 'right')" data-i18n-title="alignRight"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygAlignText(event, 'right')" data-i18n-title="alignRight"
             title="Align Right">
             <i class="fa-solid fa-align-right"></i>
         </button>
-        <button type="button" onclick="wysiwygAlignText(event, 'justify')" data-i18n-title="alignJustify"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygAlignText(event, 'justify')" data-i18n-title="alignJustify"
             title="Justify">
             <i class="fa-solid fa-align-justify"></i>
         </button>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygToggleScript(event, 'superscript')" data-i18n-title="superscript"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygToggleScript(event, 'superscript')" data-i18n-title="superscript"
             title="Superscript">
             <i class="fa-solid fa-superscript"></i>
         </button>
-        <button type="button" onclick="wysiwygToggleScript(event, 'subscript')" data-i18n-title="subscript"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygToggleScript(event, 'subscript')" data-i18n-title="subscript"
             title="Subscript">
             <i class="fa-solid fa-subscript"></i>
         </button>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygInsertBlock(event, 'code')" data-i18n-title="code"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygInsertBlock(event, 'code')" data-i18n-title="code"
             title="Code Block">
             <i class="fa-solid fa-code"></i>
         </button>
-        <button type="button" onclick="wysiwygInsertBlock(event, 'note')" data-i18n-title="note"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygInsertBlock(event, 'note')" data-i18n-title="note"
             title="Note Block">
             <i class="fa-solid fa-quote-left"></i>
         </button>
-        <button type="button" onclick="wysiwygInsertSpoiler(event)" data-i18n-title="spoiler" title="Spoiler">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygInsertSpoiler(event)" data-i18n-title="spoiler" title="Spoiler">
             <i class="fa-solid fa-eye-slash"></i>
         </button>
-        <button type="button" onclick="wysiwygInsertHR(event)" data-i18n-title="horizontalRule"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygInsertHR(event)" data-i18n-title="horizontalRule"
             title="Horizontal Line">
             <i class="fa-solid fa-minus"></i>
         </button>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygOpenTableModal(event)" data-i18n-title="table" title="Insert Table">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygOpenTableModal(event)" data-i18n-title="table" title="Insert Table">
             <i class="fa-solid fa-table"></i>
         </button>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygOpenLinkModal(event)" data-i18n-title="link" title="Insert Link">
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygOpenLinkModal(event)" data-i18n-title="link" title="Insert Link">
             <i class="fa-solid fa-link"></i>
         </button>
-        <button type="button" onclick="wysiwygOpenFileUpload(event, 'image')" data-i18n-title="imageFile"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygOpenFileUpload(event, 'image')" data-i18n-title="imageFile"
             title="Insert Image">
             <i class="fa-solid fa-image"></i>
         </button>
-        <button type="button" onclick="wysiwygOpenFileUpload(event, 'file')" data-i18n-title="file"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygOpenFileUpload(event, 'file')" data-i18n-title="file"
             title="Insert File">
             <i class="fa-solid fa-file"></i>
         </button>
-        <button type="button" onclick="wysiwygFormat(event, 'removeFormat')" data-i18n-title="clearFormat"
+        <button type="button" class="btn btn-shimmer" onclick="wysiwygFormat(event, 'removeFormat')" data-i18n-title="clearFormat"
             title="Clear Format">
             <i class="fa-solid fa-eraser"></i>
         </button>
         <span class="wysiwyg-divider"></span>
-        <button type="button" onclick="wysiwygClearAll(event)" data-i18n-title="clearAll"
-            class="wysiwyg-danger-btn" title="Clear All">
+        <button type="button" class="btn btn-danger btn-shimmer" onclick="wysiwygClearAll(event)" data-i18n-title="clearAll"
+             title="Clear All">
             <i class="fa-solid fa-trash"></i>
         </button>
     </div>
@@ -211,11 +211,11 @@
             <div class="wysiwyg-form-group" id="modalAlignGroup" style="display:none;">
                 <label data-i18n="alignment">Alignment</label>
                 <div class="wysiwyg-align-buttons">
-                    <button type="button" class="wysiwyg-align-btn active" data-align="left"
+                    <button type="button" class="btn btn-shimmer w-full itey active" data-align="left"
                         data-i18n="left">Left</button>
-                    <button type="button" class="wysiwyg-align-btn" data-align="center"
+                    <button type="button" class="btn btn-shimmer w-full itey" data-align="center"
                         data-i18n="center">Center</button>
-                    <button type="button" class="wysiwyg-align-btn" data-align="right"
+                    <button type="button" class="btn btn-shimmer w-full itey" data-align="right"
                         data-i18n="right">Right</button>
                 </div>
             </div>
@@ -237,34 +237,34 @@
                 </label>
             </div>
             <div class="wysiwyg-form-group" id="modalDeleteGroup" style="display:none;">
-                <button type="button" class="wysiwyg-btn wysiwyg-danger-btn" onclick="wysiwygDeleteLink()"
+                <button type="button" class="btn btn-danger btn-shimmer" onclick="wysiwygDeleteLink()"
                     data-i18n="deleteLink">
                     Delete link
                 </button>
             </div>
             <div class="wysiwyg-form-group" id="modalDeleteMediaGroup" style="display:none;">
-                <button type="button" class="wysiwyg-btn wysiwyg-danger-btn" onclick="wysiwygDeleteMedia()"
+                <button type="button" class="btn btn-danger btn-shimmer" onclick="wysiwygDeleteMedia()"
                     data-i18n="deleteMedia">
                     Delete media
                 </button>
             </div>
             <div class="wysiwyg-form-group" id="modalDeleteTableGroup" style="display:none;">
-                <button type="button" class="wysiwyg-btn wysiwyg-danger-btn" onclick="wysiwygDeleteTable()"
+                <button type="button" class="btn btn-danger btn-shimmer" onclick="wysiwygDeleteTable()"
                     data-i18n="deleteTable">
                     Delete table
                 </button>
             </div>
             <div class="wysiwyg-form-group" id="modalDeleteSpoilerGroup" style="display:none;">
-                <button type="button" class="wysiwyg-btn wysiwyg-danger-btn" onclick="wysiwygDeleteSpoiler()"
+                <button type="button" class="btn btn-danger btn-shimmer" onclick="wysiwygDeleteSpoiler()"
                     data-i18n="deleteSpoiler">
                     Delete spoiler
                 </button>
             </div>
         </div>
         <div class="wysiwyg-modal-footer">
-            <button type="button" class="wysiwyg-btn wysiwyg-btn-secondary" onclick="wysiwygCloseUniversalModal()"
+            <button type="button" class="btn btn-shimmer" onclick="wysiwygCloseUniversalModal()"
                 data-i18n="cancel">Cancel</button>
-            <button type="button" class="wysiwyg-btn wysiwyg-btn-primary" onclick="wysiwygApplyUniversal()"
+            <button type="button" class="btn btn-primary btn-shimmer" onclick="wysiwygApplyUniversal()"
                 data-i18n="apply">Apply</button>
         </div>
     </div>
@@ -858,11 +858,11 @@
         if (!ed) return;
         const c = ed.closest('.wysiwyg');
         if (!c) return;
-        c.querySelectorAll('.wysiwyg-toolbar button').forEach(b => b.classList.remove('active'));
+        c.querySelectorAll('.wysiwyg-toolbar button').forEach(b => b.classList.remove('btn-primary'));
         ['bold', 'italic', 'underline', 'strikethrough', 'insertUnorderedList', 'insertOrderedList'].forEach(cmd => {
             if (document.queryCommandState(cmd)) {
                 const b = c.querySelector(`[onclick*="'${cmd}'"]`);
-                if (b) b.classList.add('active');
+                if (b) b.classList.add('btn-primary');
             }
         });
         const s = window.getSelection();
@@ -871,9 +871,9 @@
         while (n && n !== ed) {
             if (n.nodeType === 1) {
                 if (n.nodeName === 'SUP') c.querySelector('[onclick*="wysiwygToggleScript"][onclick*="superscript"]')
-                    ?.classList.add('active');
+                    ?.classList.add('btn-primary');
                 if (n.nodeName === 'SUB') c.querySelector('[onclick*="wysiwygToggleScript"][onclick*="subscript"]')
-                    ?.classList.add('active');
+                    ?.classList.add('btn-primary');
             }
             n = n.parentNode;
         }
@@ -887,21 +887,21 @@
             if ((n.nodeName === 'BLOCKQUOTE' || n.nodeName === 'PRE') && n.querySelector('div'))
                 al = window.getComputedStyle(n.querySelector('div')).textAlign;
             const ma = WC.align[al];
-            if (ma) c.querySelector(`[onclick*="wysiwygAlignText"][onclick*="'${ma}'"]`)?.classList.add('active');
+            if (ma) c.querySelector(`[onclick*="wysiwygAlignText"][onclick*="'${ma}'"]`)?.classList.add('btn-primary');
         }
-        if (findP(s.anchorNode, 'A', ed)) c.querySelector('[onclick*="wysiwygOpenLinkModal"]')?.classList.add('active');
+        if (findP(s.anchorNode, 'A', ed)) c.querySelector('[onclick*="wysiwygOpenLinkModal"]')?.classList.add('btn-primary');
         if (findP(s.anchorNode, 'PRE', ed)?.hasAttribute('data-code'))
-            c.querySelector('[onclick*="wysiwygInsertBlock"][onclick*="code"]')?.classList.add('active');
+            c.querySelector('[onclick*="wysiwygInsertBlock"][onclick*="code"]')?.classList.add('btn-primary');
         if (findP(s.anchorNode, 'BLOCKQUOTE', ed))
-            c.querySelector('[onclick*="wysiwygInsertBlock"][onclick*="note"]')?.classList.add('active');
+            c.querySelector('[onclick*="wysiwygInsertBlock"][onclick*="note"]')?.classList.add('btn-primary');
         if (isInside(s.getRangeAt(0), n => {
                 const bg = window.getComputedStyle(n).backgroundColor;
                 return bg === 'rgb(255, 255, 0)' || bg === 'yellow';
-            }, ed)) c.querySelector('[onclick*="wysiwygHighlightText"]')?.classList.add('active');
+            }, ed)) c.querySelector('[onclick*="wysiwygHighlightText"]')?.classList.add('btn-primary');
 
         // Check if inside spoiler
         if (isInside(s.getRangeAt(0), n => n.classList && n.classList.contains('wysiwyg-spoiler'), ed)) {
-            c.querySelector('[onclick*="wysiwygInsertSpoiler"]')?.classList.add('active');
+            c.querySelector('[onclick*="wysiwygInsertSpoiler"]')?.classList.add('btn-primary');
         }
     }
 
@@ -1654,8 +1654,8 @@
             prvImg.style.display = 'block';
             inf.style.display = 'none';
             prv.style.display = 'block';
-            document.querySelectorAll('.wysiwyg-align-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector(`.wysiwyg-align-btn[data-align="${align}"]`)?.classList.add('active');
+            document.querySelectorAll('.btn .btn-shimmer').forEach(b => b.classList.remove('btn-primary'));
+            document.querySelector(`.btn .btn-shimmer[data-align="${align}"]`)?.classList.add('btn-primary');
             WC.uploadedMediaId = img.dataset.mediaId || null;
             showM('editImage', {
                 url: 0,
@@ -1817,7 +1817,7 @@
             const w = WC.mediaWrapper;
             if (!w) return;
             const cap = document.getElementById('wysiwygModalText').value.trim();
-            const al = document.querySelector('.wysiwyg-align-btn.active')?.dataset.align || 'left';
+            const al = document.querySelector('.btn .btn-shimmer .btn-primary')?.dataset.align || 'left';
             w.className = `wysiwyg-image-wrapper align-${al}`;
             let capEl = w.querySelector('.wysiwyg-image-caption');
             if (cap) {
@@ -1848,7 +1848,7 @@
 
         if (WC.mode === 'image') {
             const cap = document.getElementById('wysiwygModalText').value.trim(),
-                al = document.querySelector('.wysiwyg-align-btn.active')?.dataset.align || 'left',
+                al = document.querySelector('.btn .btn-shimmer .btn-primary')?.dataset.align || 'left',
                 w = document.createElement('figure');
 
             w.className = `wysiwyg-image-wrapper align-${al}`;
@@ -2186,12 +2186,12 @@
 
         // Глобальний обробник для кнопок вирівнювання
         document.addEventListener('click', e => {
-            if (e.target.closest('.wysiwyg-align-btn')) {
-                const b = e.target.closest('.wysiwyg-align-btn'),
+            if (e.target.closest('.btn .btn-shimmer')) {
+                const b = e.target.closest('.btn .btn-shimmer'),
                     c = b.closest('.wysiwyg-align-buttons');
-                c.querySelectorAll('.wysiwyg-align-btn').forEach(x => x.classList.remove(
-                    'active'));
-                b.classList.add('active');
+                c.querySelectorAll('.btn .btn-shimmer').forEach(x => x.classList.remove(
+                    'btn-primary'));
+                b.classList.add('btn-primary');
             }
 
             // Глобальний обробник для кнопок редагування спойлерів

@@ -38,7 +38,7 @@
             <!-- User action cards (1 col on mobile, 2 cols on md+) -->
             <div class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 ">
                 <a href="{{ route('public.user.show', $user) }}" rel="noopener noreferrer"
-                    class="{{ Route::currentRouteName() == 'public.user.show' ? 'bg-primary hover:bg-primary/80 text-primary-foreground' : 'bg-background hover:bg-accent hover:text-accent-foreground' }} border border-input  focus-visible:ring-ring rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
+                    class="{{ Route::currentRouteName() == 'public.user.show' ? 'btn-primary' : '' }}  btn btn-shimmer rounded-md flex items-center gap-4 p-4">
                     <i class="fas fa-pen text-xl"></i>
                     <div>
                         <p class="text-sm font-semibold">{{ __('public/user.buttons.my_post.title') }}</p>
@@ -48,7 +48,7 @@
                 </a>
 
                 <a href="{{ route('public.user.show.liked', $user) }}" rel="noopener noreferrer"
-                    class="{{ Route::currentRouteName() == 'public.user.show.liked' ? 'bg-primary hover:bg-primary/80 text-primary-foreground' : 'bg-background hover:bg-accent hover:text-accent-foreground' }} border border-input  focus-visible:ring-ring rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
+                    class="{{ Route::currentRouteName() == 'public.user.show.liked' ? 'btn-primary' : '' }} btn btn-shimmer rounded-md flex items-center gap-4 p-4">
                     <i class="fas fa-heart text-xl"></i>
                     <div>
                         <p class="text-sm font-semibold">{{ __('public/user.buttons.liked_post.title') }}
@@ -58,7 +58,7 @@
                     </div>
                 </a>
                 <a href="{{ route('public.user.show.favorites', $user) }}" rel="noopener noreferrer"
-                    class="{{ Route::currentRouteName() == 'public.user.show.favorites' ? 'bg-primary hover:bg-primary/80 text-primary-foreground' : 'bg-background hover:bg-accent hover:text-accent-foreground' }} border border-input  focus-visible:ring-ring rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
+                    class="{{ Route::currentRouteName() == 'public.user.show.favorites' ? 'btn-primary' : '' }} btn btn-shimmer rounded-md flex items-center gap-4 p-4">
                     <i class="fas fa-bookmark text-xl"></i>
                     <div>
                         <p class="text-sm font-semibold">
@@ -71,7 +71,7 @@
                 </a>
 
                 <a href="{{ route('public.user.settings.personal.index', $user) }}" rel="noopener noreferrer"
-                    class="{{ request()->routeIs('public.user.settings.*') == 'public.user.settings.*' ? 'bg-primary hover:bg-primary/80 text-primary-foreground' : 'bg-background hover:bg-accent hover:text-accent-foreground' }} border border-input  focus-visible:ring-ring rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
+                    class="{{ request()->routeIs('public.user.settings.*') == 'public.user.settings.*' ? 'btn-primary' : '' }} btn btn-shimmer rounded-md flex items-center gap-4 p-4">
                     <i class="fas fa-cog text-xl"></i>
                     <div>
                         <p class="text-sm font-semibold">{{ __('public/user.buttons.edit_profile.title') }}
@@ -90,17 +90,17 @@
                 <h3 class="text-lg font-semibold mb-2">{{ __('public/user.buttons.edit_profile.title') }}</h3>
 
                 <a href="{{ route('public.user.settings.personal.index', $user) }}"
-                    class="{{ Route::currentRouteName() == 'public.user.settings.personal.index' ? 'bg-primary hover:bg-primary/80 text-primary-foreground' : 'bg-background hover:bg-accent hover:text-accent-foreground' }} border border-input rounded-md flex items-center gap-4 p-3">
+                    class="{{ Route::currentRouteName() == 'public.user.settings.personal.index' ? 'btn-primary' : '' }} flex btn btn-shimmer gap-4 p-4">
                     <i class="fas fa-user-cog"></i>
                     <span>{{ __('public/user.sections.personal') }}</span>
                 </a>
                 <a href="{{ route('public.user.settings.security.index', $user) }}"
-                    class="{{ Route::currentRouteName() == 'public.user.settings.security.index' ? 'bg-primary hover:bg-primary/80 text-primary-foreground' : 'bg-background hover:bg-accent hover:text-accent-foreground' }} border border-input rounded-md flex items-center gap-4 p-3">
+                    class="{{ Route::currentRouteName() == 'public.user.settings.security.index' ? 'btn-primary' : '' }} flex btn btn-shimmer gap-4 p-4">
                     <i class="fas fa-shield-alt"></i>
                     <span>{{ __('public/user.sections.security') }}</span>
                 </a>
                 <a href="{{ route('public.user.settings.session.index', $user) }}"
-                    class="{{ Route::currentRouteName() == 'public.user.settings.session.index' ? 'bg-primary hover:bg-primary/80 text-primary-foreground' : 'bg-background hover:bg-accent hover:text-accent-foreground' }} border border-input rounded-md flex items-center gap-4 p-3">
+                    class="{{ Route::currentRouteName() == 'public.user.settings.session.index' ? 'btn-primary' : '' }} flex btn btn-shimmer gap-4 p-4">
                     <i class="fas fa-desktop"></i>
                     <span>{{ __('public/user.sections.sessions') }}</span>
                 </a>

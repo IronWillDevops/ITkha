@@ -34,17 +34,10 @@
 
         {{-- Ссылка --}}
         <a href="{{ $link }}"
-            class="inline-flex items-center gap-1.5 text-sm font-medium
-                   focus:ring focus:outline-none focus-visible:ring-ring
-                   mt-auto w-fit
-                   transition-all duration-200
-                   group/link">
-            <i class="fas fa-link text-xs opacity-70 group-hover/link:opacity-100 transition-opacity duration-200"></i>
+            class="link">
+            <i class="fas fa-link "></i>
             <span>{{ $linkText }}</span>
-            <i
-                class="fas fa-arrow-right text-xs
-                      translate-x-0 group-hover/link:translate-x-1
-                      transition-transform duration-200 opacity-0 group-hover/link:opacity-100"></i>
+            
         </a>
 
     </div>

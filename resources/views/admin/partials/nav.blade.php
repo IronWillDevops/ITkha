@@ -20,7 +20,7 @@
             <div class="flex items-center space-x-2 md:space-x-2">
                 {{-- Кнопка смены темы --}}
                 <button id="theme-toggle" type="button"
-                    class="bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-lg focus:ring focus:outline-none focus-visible:ring-ring text-sm p-2"
+                    class="btn btn-shimmer"
                     aria-label="Change theme">
                     <div id="theme-toggle-dark-icon"><i class="fas fa-moon hidden fa-lg"></i></div>
                     <div id="theme-toggle-light-icon"><i class="fas fa-sun hidden fa-lg"></i></div>
@@ -34,7 +34,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
-                                    class="block py-2 px-3 bg-background border-input hover:bg-accent hover:text-accent-foreground rounded-sm focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5  cursor-pointer">
+                                    class="btn btn-shimmer">
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                     <span>{{ __('admin/header.fields.logout') }}</span>
                                 </button>
@@ -50,7 +50,7 @@
 
                 {{-- Кнопка бургер-меню (только мобильные) --}}
                 <button data-collapse-toggle="navbar-default" type="button"
-                    class="bg-background border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg focus:ring focus:outline-none focus-visible:ring-ring md:hidden"
+                    class="btn btn-shimmer md:hidden"
                     aria-controls="navbar-default" aria-expanded="false">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
@@ -64,7 +64,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                class="w-full text-left block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer">
+                                class="btn btn-shimmer w-full">
                                 <span>{{ __('admin/header.fields.logout') }}</span>
                             </button>
                         </form>

@@ -30,7 +30,7 @@
             <div class="mb-4">
                 <p class="mt-4  text-right text-sm text-muted-foreground">
                     {{ __('public/common.links.remember_your_password') }}
-                    <a href="{{ route('login') }}" class="hover:underline">{{ __('public/common.links.login') }}</a>
+                    <a href="{{ route('login') }}" class="link">{{ __('public/common.links.login') }}</a>
                 </p>
             </div>
 

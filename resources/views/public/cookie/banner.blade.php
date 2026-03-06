@@ -7,7 +7,7 @@
         <i class="fas fa-cookie-bite text-primary"></i>
         <div class="text-sm">
             {{ __('public/cookie.message') }}
-            <a href="#" class="underline text-primary hover:text-primary/80">
+            <a href="#" class="link">
                 {{ __('public/cookie.more') }}
             </a>
         </div>
@@ -16,11 +16,11 @@
     <!-- Кнопки -->
     <div class="flex gap-2 flex-shrink-0">
         <button id="acceptCookiesBtn"
-                class="bg-primary border-input text-foreground hover:bg-primary/80 hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring rounded-sm font-medium text-sm px-5 py-2.5 text-center">
+                class="btn btn-primary btn-shimmer">
             {{ __('public/cookie.buttons.accept') }}
         </button>
         <button id="declineCookiesBtn"
-                class="bg-danger border-input text-danger-foreground hover:bg-danger/80 hover:text-danger-foreground focus:ring focus:outline-none focus-visible:ring-ring rounded-sm font-medium text-sm px-5 py-2.5 text-center">
+                class="btn btn-danger btn-shimmer">
             {{ __('public/cookie.buttons.decline') }}
         </button>
     </div>

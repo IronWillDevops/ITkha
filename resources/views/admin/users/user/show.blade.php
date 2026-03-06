@@ -107,7 +107,7 @@
                 <span class="font-medium">Website:</span>
                 @if ($user->profile?->website)
                     <a href="{{ $user->profile?->website }}" target="_blank"
-                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                        class="link">
                         {{ $user->profile?->website }}
                     </a>
                 @else
@@ -118,7 +118,7 @@
                 <span class="font-medium">GitHub:</span>
                 @if ($user->profile?->github)
                     <a href="{{ $user->profile?->github }}" target="_blank"
-                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                        class="link">
                         {{ $user->profile?->github }}
                     </a>
                 @else
@@ -129,7 +129,7 @@
                 <span class="font-medium">LinkedIn:</span>
                 @if ($user->profile?->linkedin)
                     <a href="{{ $user->profile?->linkedin }}" target="_blank"
-                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                        class="link">
                         {{ $user->profile?->linkedin }}
                     </a>
                 @else

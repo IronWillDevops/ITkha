@@ -10,7 +10,7 @@
             <x-form.table-actions type='link' route="{{ route('admin.setting.footerlink.edit', $link->id) }}"
                 icon="fas fa-edit" label="{{ __('admin/common.buttons.edit') }}" />
             <x-form.table-actions type='form' method="DELETE"
-                route="{{ route('admin.setting.footerlink.delete', $link->id) }}" icon="fas fa-trash-alt"
+                route="{{ route('admin.setting.footerlink.delete', $link->id) }}" icon="fas fa-trash-alt" variant="danger"
                 label="{{ __('admin/common.buttons.delete') }}" />
 
             
@@ -29,7 +29,7 @@
             <div>
                 <span class="font-medium">{{ __('admin/common.fields.url') }}:</span>
                 <a href="{{ $link->url }}" target="_blank"
-                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">{{ $link->url }}</a>
+                    class="link">{{ $link->url }}</a>
             </div>
             <div>
                 <span class="font-medium">{{ __('admin/common.fields.created_at') }}:</span>

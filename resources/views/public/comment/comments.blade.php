@@ -7,7 +7,7 @@
                         src="{{ Auth::user()->singleMedia('avatar')->url }}" alt="{{ Auth::user()->first_name }}">
                 @else
                     <div
-                        class="hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
+                        class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
                         <span class="font-medium">
                             {{ Auth::user()->getInitial() }}
                         </span>
@@ -15,7 +15,7 @@
                 @endif
 
                 <strong>
-                    <a href="{{ route('public.user.show', $comment->user) }}" class="hover:underline font-medium">
+                    <a href="{{ route('public.user.show', $comment->user) }}" class="link">
                         {{ $comment->user->login }}
                     </a>
                 </strong>
@@ -26,7 +26,7 @@
                 {{ $comment->created_at->diffForHumans() }}
                 @if (Auth::check() && Auth::user()->hasPermission('comment.update'))
                     <a href="{{ route('admin.comment.edit', $comment->id) }}"
-                        class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
+                        class="btn btn-primary btn-shimmer">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
                 @endif
@@ -38,7 +38,7 @@
 
         @auth
             <a href="#comment-form"
-                class="flex items-center gap-2 rounded-sm bg-background border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 focus:ring focus:outline-none focus-visible:ring-ring w-64"
+                class="btn btn-shimmer"
                 onclick="moveForm({{ $comment->id }}, '{{ $comment->user->login }}', this)">
                 <i class="fa-solid fa-reply"></i> {{ __('public/comment.buttons.reply') }}
             </a>

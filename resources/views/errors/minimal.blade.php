@@ -18,7 +18,7 @@
     @include('public.partials.navbar')
     <main class="flex-grow container mx-auto px-4 py-6">
         <div class="h-full lg:flex-row gap-6">
-            <div class="mt-8 grid bg-card text-card-foreground border border-border rounded-lg gap-6">
+            <div class="grid bg-card text-card-foreground border border-border rounded-lg gap-6">
                 <div class="flex flex-col items-center justify-center py-20 px-6 rounded-md">
                     {{-- Если передали секцию icon — выводим её, иначе дефолт --}}
                     <div class="fa-4x mb-4">
@@ -31,7 +31,7 @@
                     <h2 class="text-2xl font-semibold ">@yield('code') - @yield('title')</h2>
                     <span class="text-secondary-foreground mt-2">@yield('message')</span>
 
-                    <a href="{{ route('public.post.index') }}" class="inline-block mt-2 px-6 py-2 rounded transition hover:underline">
+                    <a href="{{ route('public.post.index') }}" class="btn btn-shimmer mt-2">
                         <i class="fas fa-home"></i><span class='ml-2'>Return to home page</span>
                     </a>
                 </div>
@@ -41,6 +41,5 @@
     @include('public.partials.footer')
     @stack('scripts')
 </body>
-
 
 </html>

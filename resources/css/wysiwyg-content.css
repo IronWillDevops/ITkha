@@ -101,7 +101,7 @@
     width: 2rem;
     height: 2rem;
     border: none;
-    background: transparent;
+    /* background: transparent; */
     border-radius: var(--wysiwyg-radius-sm);
     color: var(--wysiwyg-muted);
     cursor: pointer;
@@ -112,12 +112,12 @@
 }
 
 .wysiwyg-toolbar button:hover {
-    background: var(--wysiwyg-accent);
+    /* background: var(--wysiwyg-accent); */
     color: var(--wysiwyg-foreground);
 }
 
 .wysiwyg-toolbar button.active {
-    background: var(--wysiwyg-primary);
+    /* background: var(--wysiwyg-primary); */
     color: white;
 }
 
@@ -811,41 +811,6 @@ figcaption.wysiwyg-image-caption,
 .wysiwyg-input:focus {
     outline: none;
     border-color: var(--wysiwyg-ring);
-}
-
-/* Modal Buttons */
-.wysiwyg-btn {
-    padding: var(--wysiwyg-space-2) var(--wysiwyg-space-4);
-    border-radius: var(--wysiwyg-radius-sm);
-    font-size: 0.875rem;
-    cursor: pointer;
-    border: none;
-    transition: all var(--wysiwyg-transition-fast);
-    font-weight: 500;
-}
-
-.wysiwyg-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.wysiwyg-btn-primary {
-    background: var(--wysiwyg-primary);
-    color: white;
-}
-
-.wysiwyg-btn-primary:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wysiwyg-primary) 90%, black);
-}
-
-.wysiwyg-btn-secondary {
-    background: var(--wysiwyg-accent);
-    color: var(--wysiwyg-foreground);
-    border: 1px solid var(--wysiwyg-border);
-}
-
-.wysiwyg-btn-secondary:hover {
-    background: var(--wysiwyg-border);
 }
 
 /* Alignment Buttons */

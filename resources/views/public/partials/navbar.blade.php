@@ -5,7 +5,7 @@
             <div class="flex items-center space-x-2">
                 {{-- Логотип --}}
                 <a href="{{ route('public.post.index') }}"
-                    class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
+                    class="btn-shimmer block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
                     <span
                         class="text-2xl font-semibold whitespace-nowrap">{{ setting('site_name', config('app.name')) }}</span>
                 </a>
@@ -15,7 +15,7 @@
             <div class="flex items-center space-x-2 md:space-x-2">
                 {{-- Кнопка смены темы --}}
                 <button id="theme-toggle" type="button"
-                    class="bg-background border border-input hover:bg-accent hover:text-accent-foreground rounded-lg focus:ring focus:outline-none focus-visible:ring-ring text-sm p-2"
+                    class="btn btn-shimmer"
                     aria-label="Change theme">
                     <div id="theme-toggle-dark-icon"><i class="fas fa-moon hidden fa-lg"></i></div>
                     <div id="theme-toggle-light-icon"><i class="fas fa-sun hidden fa-lg"></i></div>
@@ -25,14 +25,14 @@
                 <ul class="hidden md:flex font-medium items-center space-x-2">
                     <li class="flex items-center">
                         <a href="{{ route('public.pages.contact.index') }}"
-                            class="block px-3 py-2 rounded-md bg-background hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
+                            class="btn btn-shimmer">
                             {{ __('public/header.fields.contact') }}
                         </a>
                     </li>
                     @guest
                         <li class="flex items-center">
                             <a href="{{ route('login') }}"
-                                class="block px-3 py-2 rounded-md bg-background hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
+                                class="btn btn-shimmer">
                                 {{ __('public/header.fields.login') }}
                             </a>
                         </li>
@@ -43,15 +43,15 @@
                 @auth
                     <div class="hidden md:block relative">
                         <button id="userMenuButton" type="button"
-                            class="bg-background border border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring"
+                            class="btn btn-shimmer rounded-full"
                             aria-label="User menu">
                             @if (Auth::user()->singleMedia('avatar'))
-                                <img class="w-10 h-10 object-cover rounded-full border border-input"
+                                <img class="w-5 h-5 inline-flex items-center justify-center text-lg"
                                     src="{{ Auth::user()->singleMedia('avatar')->url }}"
                                     alt="{{ Auth::user()->first_name }}">
                             @else
                                 <div
-                                    class="hover:bg-accent hover:text-accent-foreground relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
+                                    class="w-5 h-5 inline-flex items-center justify-center text-lg">
                                     <span class="font-medium">
                                         {{ Auth::user()->getInitial() }}
                                     </span>
@@ -67,13 +67,13 @@
                                 {{ Auth::user()->login }}
                             </div>
                             <a href="{{ route('public.user.show', Auth::user()) }}"
-                                class="block p-2 hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
+                                class="btn btn-shimmer w-full">
                                 {{ __('public/header.fields.profile') }}
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
-                                    class="w-full text-left block p-2 hover:bg-accent hover:text-accent-foreground cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="btn btn-shimmer w-full">
                                     {{ __('public/header.fields.logout') }}
                                 </button>
                             </form>
@@ -83,7 +83,7 @@
 
                 {{-- Кнопка бургер-меню (только мобильные) --}}
                 <button data-collapse-toggle="navbar-default" type="button"
-                    class="bg-background border border-input hover:bg-accent hover:text-accent-foreground inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg focus:ring focus:outline-none focus-visible:ring-ring md:hidden"
+                    class="btn btn-shimmer w-10 h-10 md:hidden"
                     aria-controls="navbar-default" aria-expanded="false">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
@@ -94,7 +94,7 @@
                 <ul class="font-medium flex flex-col border-t border-input pt-3 space-y-2">
                     <li>
                         <a href="{{ route('public.pages.contact.index') }}"
-                            class="block py-2 px-3 rounded-md  hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
+                            class="btn btn-shimmer w-full">
                             {{ __('public/header.fields.contact') }}
                         </a>
                     </li>
@@ -102,7 +102,7 @@
                     @auth
                         <li>
                             <a href="{{ route('public.user.show', Auth::user()) }}"
-                                class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
+                                class="btn btn-shimmer w-full">
                                 {{ __('public/header.fields.profile') }}
                             </a>
                         </li>
@@ -110,7 +110,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
-                                    class="w-full text-left block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring cursor-pointer">
+                                    class="btn btn-shimmer w-full">
                                     {{ __('public/header.fields.logout') }}
                                 </button>
                             </form>
@@ -120,7 +120,7 @@
                     @guest
                         <li>
                             <a href="{{ route('login') }}"
-                                class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring">
+                                class="btn btn-shimmer w-full">
                                 {{ __('public/header.fields.login') }}
                             </a>
                         </li>

@@ -24,10 +24,10 @@
                     <p class="text-danger ">{{ $message }}</p>
                 @enderror
 
-                <div class="mb-4 flex justify-between">
+                <div class="mb-4 flex justify-between items-center">
                     <x-form.check-box  name="remember" label="{{ __('public/auth/login.fields.remember_me') }}" />
                     <a href="{{ route('public.auth.forgot.password.index') }}"
-                        class="text-sm text-muted-foreground hover:underline">{{ __('public/common.links.forgot') }}
+                        class="text-sm text-muted-foreground link">{{ __('public/common.links.forgot') }}
 
                     </a>
                 </div>
@@ -39,7 +39,7 @@
             <p class="mt-4 text-right text-sm text-muted-foreground">
                 {{ __('public/common.links.dont_have_account') }}
                 <a href="{{ route('public.auth.register.index') }}"
-                    class="hover:underline">{{ __('public/common.links.register') }}</a>
+                    class="link">{{ __('public/common.links.register') }}</a>
             </p>
         </div>
     </div>

@@ -11,15 +11,14 @@
         <div class="flex justify-between items-center ">
 
             {{-- Левая часть: --}}
-            @if ($post->category)
-                <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1">
-                    <i class="fas fa-folder-open mr-1"></i>
-                    <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}"
-                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
-                        {{ $post->category->title }}
-                    </a>
-                </span>
-            @endif
+
+            <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1">
+                <i class="fas fa-folder-open mr-1"></i>
+                <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}"
+                    class="link">
+                    {{ $post->category->title }}
+                </a>
+            </span>
 
             {{-- Правая часть: Update_at Edit_post --}}
             <div class="flex items-center space-x-4 ">
@@ -34,8 +33,7 @@
                 {{-- Edit --}}
                 @if (Auth::check() && Auth::user()->hasPermission('post.update'))
                     <div class="flex items-center">
-                        <a href="{{ route('admin.post.edit', $post) }}"
-                            class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
+                        <a href="{{ route('admin.post.edit', $post) }}" class="btn btn-primary btn-shimmer">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                     </div>
@@ -49,7 +47,7 @@
         <div class="flex-grow">
             <h4 class="mb-2 text-card-foreground text-xl font-semibold">
                 <a href="{{ route('public.post.show', $post) }}"
-                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                    class="link">
                     {!! highlight($post->title, request('search')) !!}
                 </a>
             </h4>
@@ -66,7 +64,7 @@
                     <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1  ">
                         <i class="fas fa-tags mr-1"></i>
                         <a href="{{ route('public.post.index', ['search' => $tag->title]) }}"
-                            class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                            class="link">
                             {{ $tag->title }}
                         </a>
                     </span>
@@ -80,8 +78,7 @@
         <div class="flex justify-between items-center text-muted-foreground flex-wrap gap-4 ">
 
             {{-- Левая часть: ссылка "Read more" --}}
-            <a href="{{ route('public.post.show', $post) }}"
-                class="bg-background border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring font-semibold p-2 rounded-sm flex items-center focus:ring focus:outline-none ">
+            <a href="{{ route('public.post.show', $post) }}" class="btn btn-shimmer">
                 {{ __('public/post.buttons.read_more') }}
                 <i class="fas fa-link ml-2"></i>
             </a>
@@ -93,7 +90,7 @@
                 <div class="flex items-center">
                     <i class="fas fa-user mr-1"></i>
                     <a href="{{ route('public.user.show', $post->author) }}"
-                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                        class="link">
                         <span>{!! highlight($post->author->login ?? 'Unknown', request('search')) !!}</span>
                     </a>
                 </div>

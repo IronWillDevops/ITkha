@@ -6,25 +6,25 @@
     <ul class="flex flex-col md:flex-row gap-2">
         <li>
             <a href="{{ route('admin.index') }}"
-               class="flex items-center gap-2 rounded-sm bg-background border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 focus:ring focus:outline-none focus-visible:ring-ring">
+               class="btn btn-shimmer">
                 <i class="fa fa-tachometer-alt" aria-hidden="true"></i> {{ __('admin/dashboard.title') }}
             </a>
         </li>
         <li>
             <a href="{{ route('admin.post.index') }}"
-               class="flex items-center gap-2 rounded-sm bg-background border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 focus:ring focus:outline-none focus-visible:ring-ring">
+               class="btn btn-shimmer">
                 <i class="fa fa-newspaper" aria-hidden="true"></i> {{ __('admin/post.title') }}
             </a>
         </li>
         <li>
             <a href="{{ route('admin.user.index') }}"
-               class="flex items-center gap-2 rounded-sm bg-background border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 focus:ring focus:outline-none focus-visible:ring-ring">
+               class="btn btn-shimmer">
                 <i class="fa fa-users" aria-hidden="true"></i> {{ __('admin/user.title') }}
             </a>
         </li>
         <li>
             <a href="{{ route('admin.setting.logsactivity.index') }}"
-               class="flex items-center gap-2 rounded-sm bg-background border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 focus:ring focus:outline-none focus-visible:ring-ring">
+               class="btn btn-shimmer">
                 <i class="fa fa-history" aria-hidden="true"></i> {{ __('admin/settings/log.title') }}
             </a> 
         </li>

@@ -41,22 +41,22 @@
 
                  @if ($user->profile?->github)
                      <a href="{{ $user->profile?->github }}" target="_blank"
-                         class="bg-background border border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
-                         <i class="fab fa-github"></i> GitHub
+                         class="btn btn-shimmer gap-4 p-4">
+                         <i class="fab fa-github"></i>GitHub
                      </a>
                  @endif
 
                  @if ($user->profile?->linkedin)
                      <a href="{{ $user->profile?->linkedin }}" target="_blank"
-                         class="bg-background border border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
-                         <i class="fab fa-linkedin"></i> LinkedIn
+                         class="btn btn-shimmer gap-4 p-4">
+                         <i class="fab fa-linkedin"></i>LinkedIn
                      </a>
                  @endif
 
                  @if ($user->profile?->website)
                      <a href="{{ $user->profile?->website }}" target="_blank"
-                         class="bg-background border border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring  rounded-md flex items-center focus:ring focus:outline-none gap-4 p-4">
-                         <i class="fas fa-link"></i> Website
+                         class="btn btn-shimmer gap-4 p-4">
+                         <i class="fas fa-link"></i>Website
                      </a>
                  @endif
 

@@ -31,13 +31,13 @@
             <input type="hidden" name="sort_field" value="{{ $sortField }}">
             <input type="hidden" name="sort_direction" value="{{ $sortDirection }}">
 
-            <button class="px-4 py-2 bg-primary text-primary-foreground rounded-lg shadow hover:bg-primary/90">
+            <button class="btn btn-primary btn-shimmer">
                 {{ __('admin/common.buttons.search') }}
             </button>
 
             @if (request('search') || request('sort_field'))
                 <a href="{{ url()->current() }}"
-                    class="px-4 py-2 bg-danger text-danger-foreground rounded-lg flex items-center">
+                    class="px-4 py-2 btn btn-danger btn-shimmer">
                     <i class="fa fa-times"></i>
                 </a>
             @endif
@@ -67,7 +67,7 @@
                         <th class="px-4 py-3 text-left text-sm font-semibold truncate">
                             @if ($sortable)
                                 <a href="{{ url()->current() . '?' . http_build_query($query) }}"
-                                    class="flex items-center gap-1 truncate hover:underline">
+                                    class="link">
                                     <span class="truncate">{{ $label }}</span>
                                     <span class="shrink-0 opacity-70">{!! sortIcon($isActive, $sortDirection) !!}</span>
                                 </a>
@@ -115,7 +115,7 @@
                                     @if ($showView)
                                         <a href="{{ route('public.' . $modelRoute . '.show', $item) }}"
                                             onclick="event.stopPropagation()"
-                                            class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                            class="btn btn-shimmer">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                     @endif
@@ -123,7 +123,7 @@
                                     @if ($showEdit)
                                         <a href="{{ route('admin.' . $modelRoute . '.edit', $item) }}"
                                             onclick="event.stopPropagation()"
-                                            class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                            class="btn btn-shimmer">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     @endif
@@ -135,7 +135,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="p-2 bg-danger text-danger-foreground rounded-lg hover:bg-danger/80">
+                                                class="btn btn-danger btn-shimmer">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -192,13 +192,13 @@
                     <div class="flex justify-end gap-2 p-3 border-t">
                         @if ($showView)
                             <a href="{{ route('public.' . $modelRoute . '.show', $item) }}"
-                                class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                class="p-2 btn btn-primary btn-shimmer">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                         @endif
                         @if ($showEdit)
                             <a href="{{ route('admin.' . $modelRoute . '.edit', $item) }}"
-                                class="p-2 bg-background border rounded-lg hover:bg-muted">
+                                class="p-2 btn btn-shimmer">
                                 <i class="fas fa-edit"></i>
                             </a>
                         @endif
@@ -208,7 +208,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button
-                                    class="p-2 bg-danger text-danger-foreground rounded-lg hover:bg-danger/80">
+                                    class="p-2 btn btn-danger btn-shimmer">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form>

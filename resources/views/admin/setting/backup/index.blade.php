@@ -84,7 +84,7 @@
                                 <div class="flex items-center justify-end space-x-2">
                                     {{-- Download --}}
                                     <a href="{{ route('admin.setting.backup.download', ['filename' => $backup['filename']]) }}"
-                                        class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-primary text-primary-foreground hover:bg-primary/90"
+                                        class="btn btn-primary btn-shimmer"
                                         title="{{ __('admin/common.buttons.save') }}">
                                         <i class="fas fa-download"></i>
                                     </a>
@@ -97,7 +97,7 @@
                                         <input type="hidden" name="filename" value="{{ $backup['filename'] }}">
 
                                         <button type="submit"
-                                            class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-background text-background-foreground hover:bg-accent hover:text-accent-foreground"
+                                            class="btn btn-shimmer"
                                             title="{{ __('admin/common.buttons.restore') }}">
                                             <i class="fas fa-undo"></i>
                                         </button>
@@ -112,7 +112,7 @@
                                         <input type="hidden" name="filename" value="{{ $backup['filename'] }}">
 
                                         <button type="submit"
-                                            class="inline-flex items-center text-sm cursor-pointer rounded-md p-2 bg-danger text-danger-foreground hover:bg-danger/90"
+                                            class="btn btn-danger btn-shimmer"
                                             title="{{ __('admin/common.buttons.delete') }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
