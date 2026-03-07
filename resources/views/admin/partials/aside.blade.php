@@ -7,9 +7,9 @@
             @permission('post.view')
                 <li>
                     <a href="{{ route('admin.index') }}"
-                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                         <i class="fas fa-tachometer-alt"></i>
-                        <span class="hover:underline">{{ __('admin/sidebar.dashboard.title') }}</span>
+                        <span class="link">{{ __('admin/sidebar.dashboard.title') }}</span>
                     </a>
                 </li>
             @endpermission
@@ -19,44 +19,44 @@
                 <li>
                     <details class="group" data-id="posts" open>
                         <summary
-                            class="cursor-pointer hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                            class="cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring">
                             <i class="fa-solid fa-newspaper"></i>
-                            <span class="hover:underline">{{ __('admin/sidebar.post.title') }}</span>
+                            <span class="link">{{ __('admin/sidebar.post.title') }}</span>
                         </summary>
                         <ul class="pl-8 pt-2 space-y-2">
                             @permission('post.view')
                                 <li>
                                     <a href="{{ route('admin.post.index') }}"
-                                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                                         <i class="fa-solid fa-newspaper"></i>
-                                        <span class="hover:underline">{{ __('admin/sidebar.post.post.title') }}</span>
+                                        <span class="link">{{ __('admin/sidebar.post.post.title') }}</span>
                                     </a>
                                 </li>
                             @endpermission
                             @permission('category.view')
                                 <li>
                                     <a href="{{ route('admin.category.index') }}"
-                                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                                         <i class="fa-solid fa-folder-open"></i>
-                                        <span class="hover:underline">{{ __('admin/sidebar.post.category.title') }}</span>
+                                        <span class="link">{{ __('admin/sidebar.post.category.title') }}</span>
                                     </a>
                                 </li>
                             @endpermission
                             @permission('tag.view')
                                 <li>
                                     <a href="{{ route('admin.tag.index') }}"
-                                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                                         <i class="fa-solid fa-tags"></i>
-                                        <span class="hover:underline">{{ __('admin/sidebar.post.tag.title') }}</span>
+                                        <span class="link">{{ __('admin/sidebar.post.tag.title') }}</span>
                                     </a>
                                 </li>
                             @endpermission
                             @permission('comment.view')
                                 <li>
                                     <a href="{{ route('admin.comment.index') }}"
-                                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                                         <i class="fa-solid fa-comments"></i>
-                                        <span class="hover:underline">{{ __('admin/sidebar.post.comment.title') }}</span>
+                                        <span class="link">{{ __('admin/sidebar.post.comment.title') }}</span>
                                     </a>
                                 </li>
                             @endpermission
@@ -70,26 +70,26 @@
                 <li>
                     <details class="group" data-id="users">
                         <summary
-                            class="cursor-pointer hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                            class="cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring">
                             <i class="fa-solid fa-users"></i>
-                            <span class="hover:underline">{{ __('admin/sidebar.user.title') }}</span>
+                            <span class="link">{{ __('admin/sidebar.user.title') }}</span>
                         </summary>
                         <ul class="pl-8 pt-2 space-y-2">
                             @permission('user.view')
                                 <li>
                                     <a href="{{ route('admin.user.index') }}"
-                                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                                         <i class="fa-solid fa-users"></i>
-                                        <span class="hover:underline">{{ __('admin/sidebar.user.user.title') }}</span>
+                                        <span class="link">{{ __('admin/sidebar.user.user.title') }}</span>
                                     </a>
                                 </li>
                             @endpermission
                             @permission('role.view')
                                 <li>
                                     <a href="{{ route('admin.role.index') }}"
-                                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                                         <i class="fas fa-user-plus"></i>
-                                        <span class="hover:underline">{{ __('admin/sidebar.user.role.title') }}</span>
+                                        <span class="link">{{ __('admin/sidebar.user.role.title') }}</span>
                                     </a>
                                 </li>
                             @endpermission
@@ -102,9 +102,9 @@
             @permission('contact.view')
                 <li>
                     <a href="{{ route('admin.contact.index') }}"
-                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                         <i class="fa-solid fa-envelope"></i>
-                        <span class="hover:underline">{{ __('admin/sidebar.contact.title') }}</span>
+                        <span class="link">{{ __('admin/sidebar.contact.title') }}</span>
                     </a>
                 </li>
             @endpermission
@@ -114,9 +114,9 @@
             <li>
                 <details class="group" data-id="settings">
                     <summary
-                        class="cursor-pointer hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                        class="cursor-pointer focus:ring focus:outline-none focus-visible:ring-ring">
                         <i class="fas fa-cog"></i>
-                        <span class="hover:underline">{{ __('admin/sidebar.setting.title') }}</span>
+                        <span class="link">{{ __('admin/sidebar.setting.title') }}</span>
                     </summary>
 
                     {{-- Main settings --}}
@@ -126,36 +126,32 @@
                         @permission('setting.update')
                             <li>
                                 <a href="{{ route('admin.setting.site.edit') }}"
-                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     <i class="fa-solid fa-globe"></i>
-                                    <span
-                                        class="hover:underline">{{ __('admin/sidebar.setting.sections.main.entities.general.title') }}</span>
+                                    <span class="link">{{ __('admin/sidebar.setting.sections.main.entities.general.title') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.setting.user.edit') }}"
-                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     <i class="fa-solid fa-users"></i>
-                                    <span
-                                        class="hover:underline">{{ __('admin/sidebar.setting.sections.main.entities.user.title') }}</span>
+                                    <span class="link">{{ __('admin/sidebar.setting.sections.main.entities.user.title') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.setting.comment.edit') }}"
-                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     <i class="fa-solid fa-comments"></i>
-                                    <span
-                                        class="hover:underline">{{ __('admin/sidebar.setting.sections.main.entities.comment.title') }}</span>
+                                    <span class="link">{{ __('admin/sidebar.setting.sections.main.entities.comment.title') }}</span>
                                 </a>
                             </li>
                         @endpermission
                         @permission('backup.view')
                             <li>
                                 <a href="{{ route('admin.setting.backup.index') }}"
-                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     <i class="fas fa-database"></i>
-                                    <span
-                                        class="hover:underline">{{ __('admin/sidebar.setting.sections.main.entities.backup.title') }}</span>
+                                    <span class="link">{{ __('admin/sidebar.setting.sections.main.entities.backup.title') }}</span>
                                 </a>
                             </li>
                         @endpermission
@@ -168,36 +164,33 @@
                         @permission('setting.view')
                             <li>
                                 <a href="{{ route('admin.setting.policy.index') }}"
-                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     <i class="fa-solid fa-shield"></i>
-                                    <span class="hover:underline">
+                                    <span class="link">
                                         {{ __('admin/sidebar.setting.sections.additional.entities.policy.title') }}
                                     </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.setting.footerlink.index') }}"
-                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     <i class="fas fa-cog"></i>
-                                    <span
-                                        class="hover:underline">{{ __('admin/sidebar.setting.sections.additional.entities.footerlink.title') }}</span>
+                                    <span class="link">{{ __('admin/sidebar.setting.sections.additional.entities.footerlink.title') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.setting.info.index') }}"
-                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     <i class="fas fa-server"></i>
-                                    <span
-                                        class="hover:underline">{{ __('admin/sidebar.setting.sections.additional.entities.info.title') }}</span>
+                                    <span class="link">{{ __('admin/sidebar.setting.sections.additional.entities.info.title') }}</span>
                                 </a>
                             </li>
                             @permission('log.view')
                                 <li>
                                     <a href="{{ route('admin.setting.logsactivity.index') }}"
-                                        class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                        class="focus:ring focus:outline-none focus-visible:ring-ring">
                                         <i class="fa fa-history"></i>
-                                        <span
-                                            class="hover:underline">{{ __('admin/sidebar.setting.sections.additional.entities.log.title') }}</span>
+                                        <span class="link">{{ __('admin/sidebar.setting.sections.additional.entities.log.title') }}</span>
                                     </a>
                                 </li>
                             @endpermission
@@ -211,10 +204,9 @@
                                 {{ __('admin/sidebar.setting.sections.integrations.title') }}</li>
                             <li>
                                 <a href="{{ route('admin.setting.telegram.edit') }}"
-                                    class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                                    class="focus:ring focus:outline-none focus-visible:ring-ring">
                                     <i class="fa-brands fa-telegram"></i>
-                                    <span
-                                        class="hover:underline">{{ __('admin/sidebar.setting.sections.integrations.entities.telegram.title') }}</span>
+                                    <span class="link">{{ __('admin/sidebar.setting.sections.integrations.entities.telegram.title') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -226,9 +218,9 @@
         {{-- Icons --}}
         <li>
             <a href="https://fontawesome.com/" target="_blank"
-                class="hover:underline focus:ring focus:outline-none focus-visible:ring-ring">
+                class="focus:ring focus:outline-none focus-visible:ring-ring">
                 <i class="fa-solid fa-icons"></i>
-                <span class="hover:underline">{{ __('admin/sidebar.icon.title') }}</span>
+                <span class="link">{{ __('admin/sidebar.icon.title') }}</span>
             </a>
         </li>
 

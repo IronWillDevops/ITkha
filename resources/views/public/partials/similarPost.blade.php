@@ -10,10 +10,10 @@
                              <img src="{{  $post->singleMedia('main_image')->url }}" alt="post-image"
                                  class="w-full h-full object-cover  " />
                          </a>
-                     @endif
+                     @endif 
                      <div class="p-4 flex flex-col flex-grow">
                          <h3 class=" font-bold mb-2 text-card-foreground ">
-                             <a href="{{ route('public.post.show', $post) }}" class="hover:underline  focus:ring focus:outline-none focus-visible:ring-ring">
+                             <a href="{{ route('public.post.show', $post) }}" class="link">
                                  {{ $post->title }}
                              </a>
                          </h3>
@@ -29,7 +29,7 @@
                              <span class="inline-flex items-center">
                                  <i class="fa fa-user "></i>
                                  <a href="{{ route('public.user.show', $post->author) ?? '#' }}"
-                                     class="hover:underline font-medium ml-2  focus:ring focus:outline-none focus-visible:ring-ring">
+                                     class="link ml-2">
                                      {{ $post->author->login ?? 'Author' }}
                                  </a>
                              </span>

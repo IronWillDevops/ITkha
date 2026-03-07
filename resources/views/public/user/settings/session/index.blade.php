@@ -61,7 +61,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" title="{{ __('public/user.buttons.logout') }}"
-                                            class="w-10 h-10 bg-danger text-danger-foreground rounded-lg hover:bg-danger/80">
+                                            class="btn btn-danger btn-shimmer rounded-lg">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>

@@ -25,7 +25,7 @@
         <div>
             <span class="font-medium">{{ __('admin/common.fields.author') }}:</span>
             <a href="{{ route('admin.user.show', $comment->user) }}"
-                class="hover:underline">{{ $comment->user->login }}</a>
+                class="link">{{ $comment->user->login }}</a>
         </div>
         <div>
             <span class="font-medium">{{ __('admin/common.fields.created_at') }}:</span>

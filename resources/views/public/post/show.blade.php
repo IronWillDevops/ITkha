@@ -15,7 +15,7 @@
                 <h1 class="text-card-foreground text-3xl font-bold">{{ $post->title }}
                     @if (Auth::check() && Auth::user()->hasPermission('post.update'))
                         <a href="{{ route('admin.post.edit', $post) }}"
-                            class="text-primary hover:text-primary/80 focus:ring focus:outline-none focus-visible:ring-ring">
+                            class="btn btn-primary btn-shimmer">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                     @endif
@@ -39,7 +39,7 @@
                     <span class="inline-flex items-center">
                         <i class="fa fa-user "></i>
                         <a href="{{ route('public.user.show', $post->author) }}"
-                            class="hover:underline ml-2 focus:ring focus:outline-none focus-visible:ring-ring">
+                            class="link ml-2">
                             {{ $post->author->login }}
                         </a>
                     </span>

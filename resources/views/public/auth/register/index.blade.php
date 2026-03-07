@@ -51,20 +51,20 @@
                     $policyLink =
                         '<a href="' .
                         route('policy.show') .
-                        '" class="underline hover:text-primary" target="_blank">' .
+                        '" class="link" target="_blank">' .
                         __('public/common.fields.policy_title') .
                         '</a>';
                 @endphp
                 <x-form.check-box name="accept_policy" :label="__('public/common.fields.policy_accept', ['link' => $policyLink])" :required="true" />
 
                 {{-- Submit --}}
-                <x-form.submit label="{{ __('public/auth/register.buttons.submit') }}" @class(['w-full']) />
+                <x-form.submit label="{{ __('public/auth/register.buttons.submit') }}" @class(['w-full','mt-4']) />
 
             </form>
 
             <p @class(['mt-4', 'text-right', 'text-sm', 'text-muted-foreground'])>
                 {{ __('public/common.links.already_have_an_account') }}
-                <a href="{{ route('login') }}" @class(['hover:underline'])>{{ __('public/common.links.login') }}</a>
+                <a href="{{ route('login') }}" class="link">{{ __('public/common.links.login') }}</a>
             </p>
         </div>
     </div>

@@ -10,7 +10,7 @@
     <div id="reply-to-info" class="my-2 hidden text-sm">
         {{ __('public/comment.labels.reply_to') }} <span id="reply-author" class="font-semibold"></span>
         <button type="button" onclick="cancelReply()"
-            class="hover:underline cursor-pointer">{{ __('public/comment.labels.reply_to_cancel') }}</button>
+            class="link">{{ __('public/comment.labels.reply_to_cancel') }}</button>
     </div>
 
     <x-form.area name="body" label="{{ __('public/comment.fields.write_comment') }}"

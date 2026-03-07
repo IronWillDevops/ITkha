@@ -78,7 +78,7 @@
     --accent-foreground: #e2e8f0;
     --danger: #ff6347;
     --danger-foreground: #121212;
-    
+
     --border: #292929;
     --input: #242424;
     --ring: #4ade80;
@@ -169,40 +169,161 @@ body {
 
 
 @layer components {
-    @layer utilities {
-        @keyframes slide-in-bottom {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0%);
-                opacity: 1;
-            }
-        }
-        .animate-slide-in-bottom {
-            animation: slide-in-bottom 0.3s ease-out forwards;
-        }
-        @keyframes like-pop {
-            0% {
-                transform: scale(1);
-            }
-
-            40% {
-                transform: scale(1.3);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-        .animate-like {
-            animation: like-pop 0.3s ease-in-out;
-        }
-
+    .btn {
+        @apply inline-flex items-center gap-2 bg-background text-foreground hover:bg-background/80 border border-input focus:ring focus:outline-none focus-visible:ring-ring rounded-sm font-medium text-sm px-2.5 py-2.5 cursor-pointer;
     }
-    
+
+    .btn-primary {
+        @apply bg-primary text-primary-foreground hover:bg-primary/80;
+    }
+
+    .btn-danger {
+        @apply bg-danger text-danger-foreground hover:bg-danger/80;
+    }
+
+    .pagination-item {
+        @apply w-8 h-8 flex items-center justify-center border border-input bg-background text-foreground font-semibold rounded-sm focus:outline-none focus:ring focus-visible:ring-ring transition-colors duration-150 cursor-pointer;
+    }
+
+    .pagination-item-active {
+        @apply bg-primary text-primary-foreground border-primary;
+    }
+
+    .pagination-item-inactive {
+        @apply hover:bg-accent hover:text-accent-foreground;
+    }
+
+    .pagination-item-disabled {
+        @apply opacity-40 cursor-not-allowed pointer-events-none;
+    }
+
+    .btn-shimmer {
+        @apply relative overflow-hidden;
+    }
+
+    .btn-shimmer::after {
+        content: '';
+        @apply absolute inset-0 bg-white/20;
+        transform: translateX(-110%) skewX(12deg);
+        transition: transform 0.4s ease;
+    }
+
+    .btn-shimmer:hover::after {
+        transform: translateX(100%) skewX(12deg);
+    }
+}
+
+@layer utilities {
+    @keyframes slide-in-bottom {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+
+    .animate-slide-in-bottom {
+        animation: slide-in-bottom 0.3s ease-out forwards;
+    }
+
+    @keyframes like-pop {
+        0% {
+            transform: scale(1);
+        }
+
+        40% {
+            transform: scale(1.3);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .animate-like {
+        animation: like-pop 0.3s ease-in-out;
+    }
+
+
+    @keyframes underline-sweep {
+        from {
+            transform: scaleX(0);
+            transform-origin: left center;
+        }
+
+        to {
+            transform: scaleX(1);
+            transform-origin: left center;
+        }
+    }
+
+    .animate-underline {
+        animation: underline-sweep 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    /* ─── Link fade-up (появление группы ссылок) ────────────────── */
+    @keyframes link-fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-link-fade-up {
+        animation: link-fade-up 0.35s ease-out forwards;
+    }
+
+  .link {
+        @apply relative inline-block transition-colors duration-200;
+        text-decoration: none;
+    }
+
+    .link::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--primary);
+        transform: scaleX(0);
+        transform-origin: right center;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .link:hover::after {
+        transform: scaleX(1);
+        transform-origin: left center;
+    }
+
+    /* ─── Tag / badge links ──────────────────────────────────────── */
+   
+    .link-tag {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-medium
+               bg-accent text-accent-foreground border border-border
+               transition-all duration-200 cursor-pointer;
+        text-decoration: none;
+    }
+
+    .link-tag:hover {
+        @apply bg-primary/15 text-primary border-primary/40;
+        transform: scale(1.05);
+    }
+
+    /* ─── Focus state (доступность) ─────────────────────────────── */
+    .link:focus-visible,
+    .link-tag:focus-visible {
+        @apply outline-none ring-2 ring-ring ring-offset-1 ring-offset-background rounded-sm;
+    }
 }
 
 input:-webkit-autofill {
@@ -210,9 +331,11 @@ input:-webkit-autofill {
     -webkit-text-fill-color: var(--color-foreground) !important;
     transition: background-color 9999s ease-in-out 0s;
 }
+
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     display: none;
 }
+
 select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
