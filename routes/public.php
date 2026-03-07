@@ -97,7 +97,7 @@ Route::prefix('/')
             ->name('user.')
             ->group(function () {
                 Route::get('/{user}', App\Http\Controllers\Public\User\ShowController::class)->name('show');
-                // // Пости користувача
+                // Пости користувача
 
                 Route::get('/{user}/liked', App\Http\Controllers\Public\User\LikedController::class)->middleware('owner')->name('show.liked');
                 Route::get('/{user}/favorites', App\Http\Controllers\Public\User\FavoritesController::class)->middleware('owner')->name('show.favorites');

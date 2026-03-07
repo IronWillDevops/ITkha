@@ -1,5 +1,4 @@
-<div
-    class="relative overflow-hidden flex w-full flex-col md:flex-row bg-card text-muted-foreground shadow-sm border border-border hover:shadow-md rounded-lg">
+<div class="relative overflow-hidden flex w-full flex-col md:flex-row bg-card text-muted-foreground shadow-sm border border-border hover:shadow-md rounded-lg">
 
     @if ($post->singleMedia('main_image'))
         <div class="relative md:w-2/5 shrink-0 overflow-hidden aspect-[3/2]">
@@ -8,54 +7,49 @@
         </div>
     @endif
     <div class="p-6 w-full flex flex-col h-full overflow-hidden">
-        <div class="flex justify-between items-center ">
+       <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
-            {{-- Левая часть: --}}
+    {{-- Category --}}
+    <span class="inline-flex items-center bg-secondary text-secondary-foreground rounded-full px-3 py-1 w-fit">
+        <i class="fas fa-folder-open mr-1"></i>
+        <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}" class="link">
+            {{ $post->category->title }}
+        </a>
+    </span>
 
-            <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1">
-                <i class="fas fa-folder-open mr-1"></i>
-                <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}"
-                    class="link">
-                    {{ $post->category->title }}
-                </a>
-            </span>
+    {{-- Right block --}}
+    <div class="flex items-center gap-3 text-sm text-muted-foreground">
 
-            {{-- Правая часть: Update_at Edit_post --}}
-            <div class="flex items-center space-x-4 ">
-                {{-- Update_at --}}
-                <div class="flex items-center">
-                    <div class="inline-flex items-center space-x-1">
-                        <i class="fas fa-calendar-day"></i>
-                        <span>{{ $post->created_at->format('d.m.Y H:i') }}</span>
-                    </div>
-                </div>
-
-                {{-- Edit --}}
-                @if (Auth::check() && Auth::user()->hasPermission('post.update'))
-                    <div class="flex items-center">
-                        <a href="{{ route('admin.post.edit', $post) }}" class="btn btn-primary btn-shimmer">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
-                    </div>
-                @endif
-            </div>
+        {{-- Date --}}
+        <div class="inline-flex items-center gap-1">
+            <i class="fas fa-calendar-day"></i>
+            <span>{{ $post->created_at->format('d.m.Y H:i') }}</span>
         </div>
+
+        {{-- Edit --}}
+        @if (Auth::check() && Auth::user()->hasPermission('post.update'))
+            <a href="{{ route('admin.post.edit', $post) }}"
+               class="btn btn-primary btn-shimmer h-8 px-2 sm:px-3">
+                <i class="fas fa-pencil-alt text-xs"></i>
+                <span class="hidden sm:inline">Edit</span>
+            </a>
+        @endif
+
+    </div>
+
+</div>
 
         <x-public.ui.separator />
 
-
         <div class="flex-grow">
             <h4 class="mb-2 text-card-foreground text-xl font-semibold">
-                <a href="{{ route('public.post.show', $post) }}"
-                    class="link">
+                <a href="{{ route('public.post.show', $post) }}" class="link">
                     {!! highlight($post->title, request('search')) !!}
                 </a>
             </h4>
-
             <p class="mb-4 text-muted-foreground leading-normal font-light break-words break-all overflow-hidden">
                 {!! highlight(Str::limit(strip_tags(html_entity_decode($post->content)), 450), request('search')) !!}
             </p>
-
         </div>
 
         @if ($post->tags && $post->tags->count())
@@ -63,8 +57,7 @@
                 @foreach ($post->tags as $tag)
                     <span class="inline-block bg-secondary text-secondary-foreground rounded-full px-3 py-1  ">
                         <i class="fas fa-tags mr-1"></i>
-                        <a href="{{ route('public.post.index', ['search' => $tag->title]) }}"
-                            class="link">
+                        <a href="{{ route('public.post.index', ['search' => $tag->title]) }}" class="link">
                             {{ $tag->title }}
                         </a>
                     </span>
@@ -72,25 +65,20 @@
             </div>
         @endif
 
-
         <x-public.ui.separator />
 
         <div class="flex justify-between items-center text-muted-foreground flex-wrap gap-4 ">
-
             {{-- Левая часть: ссылка "Read more" --}}
             <a href="{{ route('public.post.show', $post) }}" class="btn btn-shimmer">
                 {{ __('public/post.buttons.read_more') }}
                 <i class="fas fa-link ml-2"></i>
             </a>
-
             {{-- Правая часть: автор, просмотры и лайки --}}
             <div class="flex items-center space-x-4">
-
                 {{-- Автор --}}
                 <div class="flex items-center">
                     <i class="fas fa-user mr-1"></i>
-                    <a href="{{ route('public.user.show', $post->author) }}"
-                        class="link">
+                    <a href="{{ route('public.user.show', $post->author) }}" class="link">
                         <span>{!! highlight($post->author->login ?? 'Unknown', request('search')) !!}</span>
                     </a>
                 </div>
@@ -99,16 +87,13 @@
                     <i class="far fa-comment mr-1"></i>
                     <span>{{ $post->allApprovedComments->count() }}</span>
                 </div>
-
                 {{-- View --}}
                 <div class="flex items-center">
                     <i class="fas fa-eye mr-1"></i>
                     <span>{{ Number::abbreviate($post->getActualViewsAttribute()) ?? 0 }}</span>
                 </div>
-
                 {{-- bookmark --}}
                 <livewire:public.favorite-button :post="$post" :key="'post-' . $post->id" />
-
                 {{-- Likes --}}
                 <livewire:public.post-like-button :post="$post" :key="'post-like-' . $post->id" />
             </div>

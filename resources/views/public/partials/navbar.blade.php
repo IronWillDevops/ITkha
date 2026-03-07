@@ -6,8 +6,7 @@
                 {{-- Логотип --}}
                 <a href="{{ route('public.post.index') }}"
                     class="btn-shimmer block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
-                    <span
-                        class="text-2xl font-semibold whitespace-nowrap">{{ setting('site_name', config('app.name')) }}</span>
+                    <span class="text-2xl font-semibold whitespace-nowrap">{{ setting('site_name', config('app.name')) }}</span>
                 </a>
             </div>
 
@@ -17,8 +16,12 @@
                 <button id="theme-toggle" type="button"
                     class="btn btn-shimmer"
                     aria-label="Change theme">
-                    <div id="theme-toggle-dark-icon"><i class="fas fa-moon hidden fa-lg"></i></div>
-                    <div id="theme-toggle-light-icon"><i class="fas fa-sun hidden fa-lg"></i></div>
+                    <div id="theme-toggle-dark-icon">
+                        <i class="fas fa-moon hidden fa-lg"></i>
+                    </div>
+                    <div id="theme-toggle-light-icon">
+                        <i class="fas fa-sun hidden fa-lg"></i>
+                    </div>
                 </button>
 
                 {{-- Основное меню (только на больших экранах) --}}
@@ -57,9 +60,8 @@
                                     </span>
                                 </div>
                             @endif
-
                         </button>
-
+                        
                         {{-- Выпадающее меню --}}
                         <div id="userDropdown"
                             class="absolute right-0 mt-2 hidden w-44 bg-card border border-input rounded-lg shadow-md z-50 text-sm">
