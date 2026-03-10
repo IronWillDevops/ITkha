@@ -5,7 +5,7 @@
             <div class="flex items-center space-x-2">
                 {{-- Логотип --}}
                 <a href="{{ route('admin.index') }}"
-                    class="block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
+                    class="btn-shimmer block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
                     <span class="text-2xl font-semibold whitespace-nowrap leading-none">
                         Admin Panel | {{ setting('site_name', config('app.name')) }}
                     </span>
@@ -34,7 +34,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
-                                    class="btn btn-shimmer">
+                                    class="btn  btn-danger btn-shimmer">
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                     <span>{{ __('admin/header.fields.logout') }}</span>
                                 </button>
@@ -43,14 +43,9 @@
                     @endauth
 
                 </ul>
-
-                {{-- Иконка пользователя вместо аватара --}}
-
-
-
                 {{-- Кнопка бургер-меню (только мобильные) --}}
                 <button data-collapse-toggle="navbar-default" type="button"
-                    class="btn btn-shimmer md:hidden"
+                    class="btn btn-shimmer w-10 h-10 md:hidden"
                     aria-controls="navbar-default" aria-expanded="false">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
@@ -64,7 +59,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                class="btn btn-shimmer w-full">
+                                class="btn btn-danger btn-shimmer w-full">
                                 <span>{{ __('admin/header.fields.logout') }}</span>
                             </button>
                         </form>

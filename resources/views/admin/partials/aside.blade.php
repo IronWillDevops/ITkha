@@ -2,7 +2,6 @@
     <div
         class="p-4 flex flex-col flex-grow justify-between bg-card text-card-foreground border border-border shadow rounded-lg">
         <ul class="space-y-2 p-2">
-
             <!-- Dashboard -->
             @permission('post.view')
                 <li>
@@ -13,7 +12,6 @@
                     </a>
                 </li>
             @endpermission
-
             {{-- Posts --}}
             @anypermission(['post.view', 'category.view', 'tag.view', 'comment.view'])
                 <li>
@@ -64,7 +62,6 @@
                     </details>
                 </li>
             @endanypermission
-
             {{-- Users --}}
             @anypermission(['user.view', 'role.view'])
                 <li>
@@ -97,7 +94,6 @@
                     </details>
                 </li>
             @endanypermission
-
             {{-- Contacts --}}
             @permission('contact.view')
                 <li>
@@ -108,7 +104,6 @@
                     </a>
                 </li>
             @endpermission
-
             {{-- Settings --}}
             @anypermission(['setting.update', 'setting.view', 'backup.view'])
             <li>
@@ -118,7 +113,6 @@
                         <i class="fas fa-cog"></i>
                         <span class="link">{{ __('admin/sidebar.setting.title') }}</span>
                     </summary>
-
                     {{-- Main settings --}}
                     <ul class="pl-8 pt-2 space-y-2">
                         <li class="font-semibold text-sm text-muted-foreground">
@@ -156,7 +150,6 @@
                             </li>
                         @endpermission
                     </ul>
-
                     {{-- Additional settings --}}
                     <ul class="pl-8 pt-2 space-y-2 mt-2">
                         <li class="font-semibold text-sm text-muted-foreground">
@@ -196,7 +189,6 @@
                             @endpermission
                         @endpermission
                     </ul>
-
                     {{-- Integrations --}}
                     @permission('setting.update')
                         <ul class="pl-8 pt-2 space-y-2 mt-2">
@@ -214,7 +206,6 @@
                 </details>
             </li>
         @endpermission
-
         {{-- Icons --}}
         <li>
             <a href="https://fontawesome.com/" target="_blank"
@@ -232,9 +223,9 @@
 
 {{-- User Profile --}}
 <div
-    class="bg-card text-card-foreground hover:bg-accent hover:text-accent-foreground border border-border shadow hover:shadow-md rounded-lg p-4 mt-4">
+    class="btn-shimmer bg-card text-card-foreground hover:bg-accent hover:text-accent-foreground border border-border shadow hover:shadow-md rounded-lg p-4 mt-4">
     <a href="{{ route('admin.user.show', Auth::user()) }}"
-        class="flex items-center space-x-4 focus:ring focus:outline-none focus-visible:ring-ring ">
+        class=" flex items-center space-x-4 focus:ring focus:outline-none focus-visible:ring-ring ">
         @if (Auth::user()->singleMedia('avatar'))
             <img id="userMenuButton" type="button" data-dropdown-toggle="userDropdown"
                 data-dropdown-placement="bottom-start"

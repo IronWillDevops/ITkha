@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('parent_id')->nullable()->constrained('comments')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Новая миграция
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->nullOnDelete();
             $table->text('body');
-            $table->enum('status',array_column(CommentStatus::cases(), 'value') )->default('pending');
+            $table->enum('status', array_column(CommentStatus::cases(), 'value'))->default('pending');
 
             $table->softDeletes();
             $table->timestamps();

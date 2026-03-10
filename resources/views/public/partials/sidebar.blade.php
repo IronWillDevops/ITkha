@@ -77,7 +77,7 @@
                         <div class="mb-4 flex flex-col ">
                             <span
                                 class="text-xs text-muted-foreground">{{ $comment->created_at->diffForHumans() }}</span>
-                            <a href="{{ route('public.post.show', $comment->post) }}"
+                            <a href="{{ route('public.post.show', $comment->post) }}#comment-{{ $comment->id }}"
                                 class="link break-all">{{ Str::limit(strip_tags(html_entity_decode($comment->body)), 50) }}</a>
                         </div>
                     </li>

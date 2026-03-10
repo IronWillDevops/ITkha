@@ -14,8 +14,7 @@
             <div class="p-6 space-y-6">
                 <h1 class="text-card-foreground text-3xl font-bold">{{ $post->title }}
                     @if (Auth::check() && Auth::user()->hasPermission('post.update'))
-                        <a href="{{ route('admin.post.edit', $post) }}"
-                            class="btn btn-primary btn-shimmer">
+                        <a href="{{ route('admin.post.edit', $post) }}" class="btn btn-primary btn-shimmer">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                     @endif
@@ -31,15 +30,17 @@
 
                     <span class="inline-flex items-center">
                         <i class="fas fa-folder-open "></i>
-                        <span class="font-medium ml-2">{{ $post->category->title }}</span>
+                        <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}" class="link ml-2">
+                            {{ $post->category->title }}
+                        </a>
+                        {{-- <span class="font-medium ml-2">{{ $post->category->title }}</span> --}}
                     </span>
 
                     <span>|</span>
 
                     <span class="inline-flex items-center">
                         <i class="fa fa-user "></i>
-                        <a href="{{ route('public.user.show', $post->author) }}"
-                            class="link ml-2">
+                        <a href="{{ route('public.user.show', $post->author) }}" class="link ml-2">
                             {{ $post->author->login }}
                         </a>
                     </span>

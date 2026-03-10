@@ -6,16 +6,15 @@
                 {{-- Логотип --}}
                 <a href="{{ route('public.post.index') }}"
                     class="btn-shimmer block py-2 px-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:ring focus:outline-none focus-visible:ring-ring md:p-1.5">
-                    <span class="text-2xl font-semibold whitespace-nowrap">{{ setting('site_name', config('app.name')) }}</span>
+                    <span
+                        class="text-2xl font-semibold whitespace-nowrap">{{ setting('site_name', config('app.name')) }}</span>
                 </a>
             </div>
 
             {{-- Правая часть --}}
             <div class="flex items-center space-x-2 md:space-x-2">
                 {{-- Кнопка смены темы --}}
-                <button id="theme-toggle" type="button"
-                    class="btn btn-shimmer"
-                    aria-label="Change theme">
+                <button id="theme-toggle" type="button" class="btn btn-shimmer" aria-label="Change theme">
                     <div id="theme-toggle-dark-icon">
                         <i class="fas fa-moon hidden fa-lg"></i>
                     </div>
@@ -27,15 +26,13 @@
                 {{-- Основное меню (только на больших экранах) --}}
                 <ul class="hidden md:flex font-medium items-center space-x-2">
                     <li class="flex items-center">
-                        <a href="{{ route('public.pages.contact.index') }}"
-                            class="btn btn-shimmer">
+                        <a href="{{ route('public.pages.contact.index') }}" class="btn btn-shimmer">
                             {{ __('public/header.fields.contact') }}
                         </a>
                     </li>
                     @guest
                         <li class="flex items-center">
-                            <a href="{{ route('login') }}"
-                                class="btn btn-shimmer">
+                            <a href="{{ route('login') }}" class="btn btn-shimmer">
                                 {{ __('public/header.fields.login') }}
                             </a>
                         </li>
@@ -46,36 +43,34 @@
                 @auth
                     <div class="hidden md:block relative">
                         <button id="userMenuButton" type="button"
-                            class="btn btn-shimmer rounded-full"
+                            class="btn btn-shimmer rounded-full p-0 w-10 h-10 overflow-hidden flex items-center justify-center"
                             aria-label="User menu">
+
                             @if (Auth::user()->singleMedia('avatar'))
-                                <img class="w-5 h-5 inline-flex items-center justify-center text-lg"
-                                    src="{{ Auth::user()->singleMedia('avatar')->url }}"
+                                <img class="w-full h-full object-cover" src="{{ Auth::user()->singleMedia('avatar')->url }}"
                                     alt="{{ Auth::user()->first_name }}">
                             @else
-                                <div
-                                    class="w-5 h-5 inline-flex items-center justify-center text-lg">
+                                <div class="flex items-center justify-center w-full h-full text-lg">
                                     <span class="font-medium">
                                         {{ Auth::user()->getInitial() }}
                                     </span>
                                 </div>
                             @endif
+
                         </button>
-                        
+
                         {{-- Выпадающее меню --}}
                         <div id="userDropdown"
                             class="absolute right-0 mt-2 hidden w-44 bg-card border border-input rounded-lg shadow-md z-50 text-sm">
                             <div class="p-2 font-medium truncate border-b border-input">
                                 {{ Auth::user()->login }}
                             </div>
-                            <a href="{{ route('public.user.show', Auth::user()) }}"
-                                class="btn btn-shimmer w-full">
+                            <a href="{{ route('public.user.show', Auth::user()) }}" class="btn btn-shimmer w-full">
                                 {{ __('public/header.fields.profile') }}
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit"
-                                    class="btn btn-shimmer w-full">
+                                <button type="submit" class="btn btn-danger btn-shimmer w-full">
                                     {{ __('public/header.fields.logout') }}
                                 </button>
                             </form>
@@ -84,8 +79,7 @@
                 @endauth
 
                 {{-- Кнопка бургер-меню (только мобильные) --}}
-                <button data-collapse-toggle="navbar-default" type="button"
-                    class="btn btn-shimmer w-10 h-10 md:hidden"
+                <button data-collapse-toggle="navbar-default" type="button" class="btn btn-shimmer w-10 h-10 md:hidden"
                     aria-controls="navbar-default" aria-expanded="false">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
@@ -95,24 +89,21 @@
             <div class="hidden w-full md:hidden mt-3" id="navbar-default">
                 <ul class="font-medium flex flex-col border-t border-input pt-3 space-y-2">
                     <li>
-                        <a href="{{ route('public.pages.contact.index') }}"
-                            class="btn btn-shimmer w-full">
+                        <a href="{{ route('public.pages.contact.index') }}" class="btn btn-shimmer w-full">
                             {{ __('public/header.fields.contact') }}
                         </a>
                     </li>
 
                     @auth
                         <li>
-                            <a href="{{ route('public.user.show', Auth::user()) }}"
-                                class="btn btn-shimmer w-full">
+                            <a href="{{ route('public.user.show', Auth::user()) }}" class="btn btn-shimmer w-full">
                                 {{ __('public/header.fields.profile') }}
                             </a>
                         </li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit"
-                                    class="btn btn-shimmer w-full">
+                                <button type="submit" class="btn btn-danger btn-shimmer w-full">
                                     {{ __('public/header.fields.logout') }}
                                 </button>
                             </form>
@@ -121,8 +112,7 @@
 
                     @guest
                         <li>
-                            <a href="{{ route('login') }}"
-                                class="btn btn-shimmer w-full">
+                            <a href="{{ route('login') }}" class="btn btn-shimmer w-full">
                                 {{ __('public/header.fields.login') }}
                             </a>
                         </li>

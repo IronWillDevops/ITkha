@@ -1,17 +1,14 @@
 @foreach ($comments as $comment)
-    <div class="ml-{{ $level ?? 0 }} border border-border p-2 rounded-lg mt-4 ">
+    <div id="comment-{{ $comment->id }}" class="ml-{{ $level ?? 0 }} border border-border p-2 rounded-lg mt-4">
         <div class="flex justify-between items-center mb-2">
             <div class="flex items-center gap-2">
-
                 @if ($comment->user->singleMedia('avatar'))
                     <img class="w-10 h-10 object-cover rounded-full border border-input"
                         src="{{ $comment->user->singleMedia('avatar')->url }}" alt="{{ $comment->user->first_name }}">
                 @else
                     <div
                         class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full focus:ring focus:outline-none focus-visible:ring-ring border border-input">
-                        <span class="font-medium">
-                            {{ $comment->user->getInitial() }}
-                        </span>
+                        <span class="font-medium">{{ $comment->user->getInitial() }}</span>
                     </div>
                 @endif
 
@@ -30,20 +27,25 @@
                     </a>
                 @endif
             </small>
-
         </div>
+        @if (!$comment->isVisible())
+            <p class="mb-2 p-2 text-muted-foreground break-all">{{ __('public/comment.messages.comment_unavailable') }}</p>
+            {{-- Тело комментария --}}
+        @else
+            <p class="mb-2 p-2 text-muted-foreground break-all ">{{ $comment->body }}</p>
 
-        <p class="mb-2 text-muted-foreground break-all">{{ $comment->body }}</p>
-
-        @auth
-            <a href="#comment-form" class="btn btn-shimmer"
-                onclick="moveForm({{ $comment->id }}, '{{ $comment->user->login }}', this)">
-                <i class="fa-solid fa-reply"></i> {{ __('public/comment.buttons.reply') }}
-            </a>
-        @endauth
+            {{-- Кнопка ответить --}}
+            @auth 
+                <a href="#comment-form" class="btn btn-shimmer"
+                    onclick="moveForm({{ $comment->id }}, '{{ $comment->user->login }}', this)">
+                    <i class="fa-solid fa-reply"></i> {{ __('public/comment.buttons.reply') }}
+                </a>
+            @endauth
+        @endif
 
         <div id="comment-{{ $comment->id }}"></div>
 
+        {{-- Дочерние всегда показываем --}}
         @if ($comment->children->isNotEmpty())
             @include('public.comment.comments', [
                 'comments' => $comment->children,

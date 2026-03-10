@@ -1,4 +1,5 @@
-<div class="relative overflow-hidden flex w-full flex-col md:flex-row bg-card text-muted-foreground shadow-sm border border-border hover:shadow-md rounded-lg">
+<div
+    class="relative overflow-hidden flex w-full flex-col md:flex-row bg-card text-muted-foreground shadow-sm border border-border hover:shadow-md rounded-lg">
 
     @if ($post->singleMedia('main_image'))
         <div class="relative md:w-2/5 shrink-0 overflow-hidden aspect-[3/2]">
@@ -7,37 +8,34 @@
         </div>
     @endif
     <div class="p-6 w-full flex flex-col h-full overflow-hidden">
-       <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
-    {{-- Category --}}
-    <span class="inline-flex items-center bg-secondary text-secondary-foreground rounded-full px-3 py-1 w-fit">
-        <i class="fas fa-folder-open mr-1"></i>
-        <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}" class="link">
-            {{ $post->category->title }}
-        </a>
-    </span>
+            {{-- Category --}}
+            <span class="inline-flex items-center bg-secondary text-secondary-foreground rounded-full px-3 py-1 w-fit">
+                <i class="fas fa-folder-open mr-1"></i>
+                <a href="{{ route('public.post.index', ['search' => $post->category->title]) }}" class="link">
+                    {{ $post->category->title }}
+                </a>
+            </span>
 
-    {{-- Right block --}}
-    <div class="flex items-center gap-3 text-sm text-muted-foreground">
+            {{-- Right block --}}
+            <div class="flex items-center gap-3 text-sm text-muted-foreground">
 
-        {{-- Date --}}
-        <div class="inline-flex items-center gap-1">
-            <i class="fas fa-calendar-day"></i>
-            <span>{{ $post->created_at->format('d.m.Y H:i') }}</span>
+                {{-- Date --}}
+                <div class="inline-flex items-center gap-1">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>{{ $post->created_at->format('d.m.Y H:i') }}</span>
+                </div>
+
+                {{-- Edit --}}
+                @if (Auth::check() && Auth::user()->hasPermission('post.update'))
+                    <a href="{{ route('admin.post.edit', $post) }}"
+                        class="btn btn-primary btn-shimmer h-8 px-2 sm:px-3">
+                        <i class="fas fa-pencil-alt text-xs"></i>
+                    </a>
+                @endif
+            </div>
         </div>
-
-        {{-- Edit --}}
-        @if (Auth::check() && Auth::user()->hasPermission('post.update'))
-            <a href="{{ route('admin.post.edit', $post) }}"
-               class="btn btn-primary btn-shimmer h-8 px-2 sm:px-3">
-                <i class="fas fa-pencil-alt text-xs"></i>
-                <span class="hidden sm:inline">Edit</span>
-            </a>
-        @endif
-
-    </div>
-
-</div>
 
         <x-public.ui.separator />
 
