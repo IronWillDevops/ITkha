@@ -12,7 +12,6 @@
         @foreach ($posts as $post)
             <x-public.post-card :post="$post"/>
         @endforeach
-
     </div>
 
     <div class="flex justify-center mt-6">

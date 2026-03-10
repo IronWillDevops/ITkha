@@ -18,6 +18,7 @@ class ViewServiceProvider extends ServiceProvider
                 'sidebar.categories',
                 now()->addHour(),
                 fn() => Category::query()
+                    ->has('posts')
                     ->limit(5)
                     ->withCount('posts')
                     ->orderBy('title')
@@ -28,6 +29,7 @@ class ViewServiceProvider extends ServiceProvider
                 'sidebar.tags',
                 now()->addHour(),
                 fn() => Tag::query()
+                    ->has('posts')
                     ->withCount('posts')
                     ->orderByDesc('posts_count')
                     ->limit(10)

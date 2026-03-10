@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -18,12 +19,15 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
 
-        $postCount = Post::count();
-        $categoryCount = Category::count();
-        $tagCount = Tag::count();
-        $userCount = User::count();
-        $logCount = ActivityLog::count();
+        $data = [
+            'postCount' => Post::count(),
+            'categoryCount' => Category::count(),
+            'tagCount' => Tag::count(),
+            'userCount' => User::count(),
+            'commentCount' => Comment::count(),
+            'logCount' => ActivityLog::count(),
+        ];
 
-        return view('admin.dashboard.index', compact('postCount', 'categoryCount', 'tagCount', 'userCount','logCount'));
+        return view('admin.dashboard.index', $data);
     }
 }

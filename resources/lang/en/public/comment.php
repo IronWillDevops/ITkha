@@ -2,11 +2,11 @@
 
 return [
     'fields' => [
-        'write_comment'         => 'Your comment',
+        'write_comment' => 'Your comment',
     ],
 
     'placeholder' => [
-        'write_comment'         => 'Write your comment...',
+        'write_comment' => 'Write your comment...',
     ],
 
     'labels' => [
@@ -18,15 +18,16 @@ return [
     ],
 
     'buttons' => [
-        'submit'     => 'Send',
-        'reply'      => 'Reply',
+        'submit' => 'Submit',
+        'reply'  => 'Reply',
     ],
 
     'messages' => [
-        'comment_added'                 => 'Your comment has been added successfully.',
-        'contains_prohibited_words'     => 'Comment contains prohibited words.',
-        'links_not_allowed'             => 'Comments containing links are not allowed.',
-        'auth_required'                 => 'Commenting is available to authorized users only.',
-        'comment_cannot_be_empty'       => 'Comment cannot be empty.',
+        'comment_added'              => 'Your comment has been successfully added.',
+        'contains_prohibited_words'  => 'Your comment contains prohibited words.',
+        'links_not_allowed'          => 'Comments with links are not allowed.',
+        'auth_required'              => 'You must be logged in to leave a comment.',
+        'comment_cannot_be_empty'    => 'Comment cannot be empty.',
+        'comment_unavailable'        => 'Comment is unavailable.',
     ],
 ];

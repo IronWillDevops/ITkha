@@ -13,17 +13,17 @@ class CommentService
 {
     public function handle(array $data)
     {
-
         $post = Post::findOrFail($data['post_id']);
 
-        if (! $post->comments_enabled) {
+        if (!$post->comments_enabled) {
             abort(403, __('public/comment.labels.comments_disabled'));
         }
 
-        $body = $data['body'];
+        $body     = $data['body'];
         $settings = Setting::allSettings();
+
         // Фильтрация запрещённых слов
-        $filterWords = array_filter(array_map('trim', explode(',', $settings['comments_filter_words'] )));
+        $filterWords = array_filter(array_map('trim', explode(',', $settings['comments_filter_words'])));
         foreach ($filterWords as $word) {
             if ($word !== '' && str_contains(mb_strtolower($body), mb_strtolower($word))) {
                 return Redirect::back()->withInput()->with('error', __('public/comment.messages.contains_prohibited_words'));
@@ -45,18 +45,24 @@ class CommentService
         }
 
         // Статус
-        $status = (int)$settings['comments_auto_approve'] 
+        $status = (int)$settings['comments_auto_approve']
             ? CommentStatus::APPROVED
             : CommentStatus::PENDING;
 
         Comment::create([
-            'post_id' => $data['post_id'],
-            'user_id' => Auth::id(),
-            'body' => $body,
+            'post_id'   => $data['post_id'],
+            'user_id'   => Auth::id(),
+            'body'      => $body,
             'parent_id' => $data['parent_id'] ?? null,
-            'status' => $status,
+            'status'    => $status,
         ]);
+
         return Redirect::back()->with('success', __('public/comment.messages.comment_added'));
+    }
+
+    public function delete(Comment $comment): void
+    {
+        $comment->softDeleteWithChildren();
     }
 
     public function latestComment(int $limit = 5)

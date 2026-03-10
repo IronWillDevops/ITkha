@@ -42,7 +42,7 @@ class SettingsSeeder extends Seeder
 {{excerpt}}
 
 {{ tags }} 
-<a href="{{ author_url }}">{{ author }}</a> - {{ data }}'],
+<a href="{{ url }}">{{ title }}</a> - {{ data }}'],
             ['key' => 'telegram_message_limit', 'default' => '450'],
             ['key' => 'telegram_button_text', 'default' => 'Read more...'],
 

@@ -16,41 +16,42 @@ class ShowController extends Controller
 
   public function __invoke(Post $post, PostService $postService, CommentService $commentService)
   {
-
-    $postId = $post->id;
-    // Используем объектный метод
+    $postId  = $post->id;
     $postKey = $post->cacheKey();
 
     $post = Post::cacheGet($postKey, function () use ($postId) {
       return Post::where('id', $postId)
         ->where('status', PostStatus::PUBLISHED->value)
         ->with([
-          'comments' => fn($query) => $query->approved()->whereNull('parent_id')->with([
-            'children' => fn($q) => $q->approved()->with('user'),
-            'user'
-          ])
+          'comments' => fn($query) => $query
+            ->approved()
+            ->whereNull('parent_id')
+            ->with([
+              'children' => fn($q) => $q->approved()->with('user'),
+              'user'
+            ])
         ])
         ->first();
     });
 
     if (!$post) {
-      // Обработка случая, когда пост не найден, например, редирект на 404 или на страницу с ошибкой
       abort(404);
     }
 
     $post->load([
-      'comments' => fn($query) => $query->approved()->whereNull('parent_id')->with([
-        'children' => fn($q) => $q->approved()->with('user'),
-        'user'
-      ])
+      'comments' => fn($query) => $query
+        ->approved()
+        ->whereNull('parent_id')
+        ->with([
+          'children' => fn($q) => $q->approved()->with('user'),
+          'user'
+        ])
     ]);
 
-
-
+    // ─── Счётчик просмотров ───────────────────────────────────
     $viewKey = "post:views:{$post->id}";
     if (!session()->has($viewKey)) {
-
-      if (\App\Models\Post::isRedisAvailable()) {
+      if (Post::isRedisAvailable()) {
         try {
           Post::incrementCacheCounter($viewKey);
         } catch (\Throwable $e) {
@@ -58,15 +59,13 @@ class ShowController extends Controller
           $post->increment('views');
         }
       } else {
-        // Redis недоступен — сразу инкрементируем БД
         $post->increment('views');
       }
-
       session()->put($viewKey, true);
     }
 
-    $popularPosts = $postService->popularPosts();
-    $similarPosts = $postService->similarPosts($post);
+    $popularPosts  = $postService->popularPosts();
+    $similarPosts  = $postService->similarPosts($post);
     $latestComment = $commentService->latestComment();
 
     return view('public.post.show', compact('post', 'popularPosts', 'similarPosts', 'latestComment'));

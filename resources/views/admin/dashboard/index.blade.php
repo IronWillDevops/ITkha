@@ -20,7 +20,11 @@
         <x-admin.dashboard-widget title="{{ __('admin/tag.title') }}" icon="fa-solid fa-tags"
             description="{{ $tagCount }}" link="{{ route('admin.tag.index') }}"
             linkText="{{ __('admin/common.buttons.read_more') }}" />
-            
+
+        <x-admin.dashboard-widget title="{{ __('admin/comment.title') }}" icon="fa-solid fa-comments"
+            description="{{ $commentCount }}" link="{{ route('admin.comment.index') }}"
+            linkText="{{ __('admin/common.buttons.read_more') }}" />
+
         <x-admin.dashboard-widget title="{{ __('admin/log.title') }}" icon="fa-solid fa-history"
             description="{{ $logCount }}" link="{{ route('admin.setting.logsactivity.index') }}"
             linkText="{{ __('admin/common.buttons.read_more') }}" />
